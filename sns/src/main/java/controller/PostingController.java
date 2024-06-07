@@ -28,14 +28,9 @@ public class PostingController {
 	
 	@PostMapping("/postingSave")
 	public String postingSave(@ModelAttribute PostVO pvo, MultipartFile[] file) throws Exception {
-		System.out.println(file);
 		String[] fileName = fileDataUtil.fileUpload(file);
 		pvo.setFilename(fileName);
-		System.out.println(pvo.getCont());
-		for(String f : pvo.getFilename()) {
-			System.out.println(f);
-		}
-//		pservice.insertPost(pvo);
+		pservice.insertPost(pvo);
 		return "redirect:main";
 	}
 }

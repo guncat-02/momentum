@@ -44,7 +44,11 @@ body {
 
 #menu a:hover {
     transition-duration: 250ms;
-    filter: drop-shadow(0px 0px 3px #ff00bf);
+    color: #ff00bf;
+}
+
+#menu svg {
+    color: #00f7ff;
 }
 
 /* 내가 팔로우하는 유저 목록 간단히 보여주는 table의 div */
@@ -62,6 +66,5 @@ body {
 
 #simplefollowtable table,tr,th,td {
     padding: 5px 0px;
-    /* 영역 확인 용도 */
     /* border: 1px solid red; */
 }

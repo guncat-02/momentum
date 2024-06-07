@@ -3,11 +3,14 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="dao.IF_PostingDao">
+<mapper namespace="dao.IF_PostingDAO">
 
 	<insert id="insertPost" parameterType="vo.PostVO">
-		<!-- 글번호 시퀀스(미정), 아이디, 리포스트 글번호, 내용, 조회수(default: 0) -->
-		insert into post values (post_no.nextval, #{id}, #{re_no}, #{cont}, default)
+		insert into postTest values (seTest.nextval, null, 'nuit0204', #{cont}, 0, #{privacy}, default)
+	</insert>
+	
+	<insert id="insertAttach" parameterType="String">
+		insert into attachTest values ((select max(no) from postTest), #{fileName})
 	</insert>
 	
 </mapper>

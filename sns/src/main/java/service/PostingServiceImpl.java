@@ -16,6 +16,9 @@ public class PostingServiceImpl implements IF_PostingService{
 	@Override
 	public void insertPost(PostVO pvo) throws Exception {
 		pdao.insertPost(pvo);
+		for (String fileName : pvo.getFilename()) {
+			pdao.insertAttach(fileName);
+		}
 	}
 
 }
