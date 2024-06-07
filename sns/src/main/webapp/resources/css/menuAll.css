@@ -1,0 +1,70 @@
+body {
+    width: auto;
+    /* height: 100%; */
+    margin: 0px;
+    -webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+/* SNS 로고 div */
+#menulogo {
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+/* 메뉴 div */
+#menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    min-height: 500px;
+    text-align: center;
+}
+
+/* 메뉴의 a태그 */
+#menu a {
+    display: block;
+    width: fit-content;
+    height: fit-content;
+    margin-top: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 23px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bolder;
+    text-decoration: none;
+}
+
+#menu a:last-child {
+    margin-bottom: 30px;
+}
+
+#menu a:hover {
+    transition-duration: 250ms;
+    color: #ff00bf;
+}
+
+#menu svg {
+    color: #00f7ff;
+}
+
+/* 내가 팔로우하는 유저 목록 간단히 보여주는 table의 div */
+#simplefollowtable {
+    display: block;
+    width: 100%;
+    height: fit-content;
+}
+
+#simplefollowtable table {
+    width: 100%;
+    height: fit-content;
+    border-collapse: collapse;
+}
+
+#simplefollowtable table,tr,th,td {
+    padding: 5px 0px;
+    /* border: 1px solid red; */
+}
