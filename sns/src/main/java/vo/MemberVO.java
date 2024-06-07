@@ -8,7 +8,6 @@ public class MemberVO {
 	private String pass; //비밀번호
 	private String name; //이름
 	private String b_date; //생년월일
-	
 	private List<ProfileVO> profileList; //프로필
 	
 	@Override
@@ -34,6 +33,9 @@ public class MemberVO {
 	}
 	
 	//setter
+	public void setProfileList(List<ProfileVO> profileList) {
+		this.profileList = profileList;
+	}
 	public void setId(String id) {
 		this.id = id;
 	}
@@ -45,8 +47,5 @@ public class MemberVO {
 	}
 	public void setB_date(String b_date) {
 		this.b_date = b_date;
-	}
-	public void setProfileList(List<ProfileVO> profileList) {
-		this.profileList = profileList;
 	}
 }
