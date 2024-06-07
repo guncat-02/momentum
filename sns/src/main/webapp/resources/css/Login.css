@@ -118,7 +118,6 @@ body {
     text-decoration-line: none;
 }
 
-
 .logintxt:-webkit-autofill, .proText:-webkit-autofill:hover, .proText:-webkit-autofill:focus, .proText:-webkit-autofill:active{
     -webkit-text-fill-color: #ffffff;
     -webkit-box-shadow: 0 0 0 1000px transparent inset;

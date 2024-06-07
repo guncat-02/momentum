@@ -48,7 +48,7 @@
                             <td colspan="2">
                                 <span class="radioWord">공개</span>
                                 <input type="radio" name="privacy" value="1" class="proChk">
-                                <span style="margin-left: 20px;" class="radioWord">미공개</span>
+                                <span style="margin-left: 20px;" class="radioWord">비공개</span>
                                 <input type="radio" name="privacy" value="0" class="proChk">
                             </td>
                         </tr>
