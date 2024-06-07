@@ -7,7 +7,7 @@ public class ProfileVO {
 	private String photo; //프로필 사진
 	private String tel; //전화번호
 	private String email; //이메일
-	private String vio; //한 줄 소개
+	private String bio; //한 줄 소개
 	private int privacy; //공개 여부
 	
 	//getter
@@ -23,8 +23,8 @@ public class ProfileVO {
 	public String getEmail() {
 		return email;
 	}
-	public String getVio() {
-		return vio;
+	public String getBio() {
+		return bio;
 	}
 	public int getPrivacy() {
 		return privacy;
@@ -43,8 +43,8 @@ public class ProfileVO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public void setVio(String vio) {
-		this.vio = vio;
+	public void setBio(String bio) {
+		this.bio = bio;
 	}
 	
 	//전화번호에 - 추가
