@@ -20,4 +20,9 @@ public class PostingDAOImpl implements IF_PostingDAO{
 		sql.insert(mapperQuery+".insertPost", pvo);
 	}
 
+	@Override
+	public void insertAttach(String fileName) throws Exception {
+		sql.insert(mapperQuery+".insertAttach", fileName);
+	}
+
 }
