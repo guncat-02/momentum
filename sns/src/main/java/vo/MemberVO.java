@@ -10,6 +10,11 @@ public class MemberVO {
 	private String b_date; //생년월일
 	private List<ProfileVO> profileList; //프로필
 	
+	@Override
+	public String toString() {
+		return "MemberVO [id=" + id + ", pass=" + pass + ", name=" + name + ", b_date=" + b_date + "]";
+	}
+	
 	//getter
 	public String getId() {
 		return id;
@@ -21,7 +26,6 @@ public class MemberVO {
 		return name;
 	}
 	public String getB_date() {
-		b_date = b_date.replaceAll("/", ".");
 		return b_date;
 	}
 	public List<ProfileVO> getProfileList() {
@@ -29,9 +33,6 @@ public class MemberVO {
 	}
 	
 	//setter
-	public void setProfileList(List<ProfileVO> profileList) {
-		this.profileList = profileList;
-	}
 	public void setId(String id) {
 		this.id = id;
 	}
@@ -43,5 +44,8 @@ public class MemberVO {
 	}
 	public void setB_date(String b_date) {
 		this.b_date = b_date;
+	}
+	public void setProfileList(List<ProfileVO> profileList) {
+		this.profileList = profileList;
 	}
 }
