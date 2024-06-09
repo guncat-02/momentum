@@ -1,10 +1,19 @@
 package service;
 
+import java.util.List;
+
 import vo.FollowVO;
+import vo.ProfileVO;
 
 public interface IF_FollowListService {
-
-	public FollowVO selectFollowers(FollowVO fvo) throws Exception;
 	
-	public FollowVO selectFollowings(FollowVO fvo) throws Exception;
+	public List<ProfileVO> getInterFollowersProfile(String followId) throws Exception;
+	
+	public List<ProfileVO> getFollowersProfile(String followId) throws Exception;
+	
+	public List<ProfileVO> getFollowingsProfile(String id) throws Exception;
+	
+	public void unfollow(FollowVO fvo) throws Exception;
+	
+	public void follow(FollowVO fvo) throws Exception;
 }
