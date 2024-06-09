@@ -1,0 +1,196 @@
+body {
+    width: auto;
+    margin: 0px;
+    overflow-y: auto;
+    -webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+/* 메뉴바, 메인 div 포함하는 전체 div */
+#all {
+    display: flex;
+    justify-content: left;
+}
+
+/* 왼쪽 메뉴 바 */
+#menuall {
+    display: block;
+    width: 240px;
+    height: 100vmin;
+    position: sticky;
+    top: 0;
+    border-right: 1px solid #00f7ff;
+    box-shadow: 3px 0px 7px 0px #41c4c4;
+    overflow-y: auto;
+}
+
+/* 주요 컨텐츠 */
+#main {
+    display: block;
+    width: 100%;
+    height: fit-content;
+    padding: 15px;
+}
+
+/* 화면 왼쪽 상단 CREATE 텍스트 */
+#cur-title {
+    display: block;
+    height: fit-content;
+    margin-top: 65px;
+    margin-left: 50px;
+    font-size: 25px;
+}
+
+
+
+
+/* 글 작성, 사진 등록 전체 영역 */
+#create-post {
+    display: block;
+    margin: 32px auto 0px auto;
+    padding: 5px;
+    width: 90%;
+    min-height: 60vmin;
+    border-radius: 15px;
+    position: relative;
+    border: 3px solid #ff00bf;
+}
+
+/* 글 작성 영역 */
+#create-post-cont {
+    width: 99.5%;
+    background-color: transparent;
+    border: none;
+    border-radius: 15px 15px 0px 0px / 15px 15px 0px 0px;
+    resize: none;
+    font-size: 23px;
+}
+
+
+
+/* 글 작성 영역 클릭했을 때 디자인 바뀌지 않도록 */
+#create-post-cont:focus {
+    outline: none;
+}
+
+/* 글 작성 영역 스크롤바 숨김 */
+#create-post-cont::-webkit-scrollbar {
+    background-color: transparent;
+}
+
+/* 사진 표시되는 영역 div */
+#create-post-attach {
+    display: flex;
+    justify-content: left;
+    width: 99.5%;
+    height: fit-content;
+    padding: 0px;
+}
+
+
+
+/* 사진 더하는 영역 div */
+#attach-add {
+    display: inline-block;
+    text-align: center;
+    width: fit-content;
+    height: fit-content;
+    padding-top: 10px;
+    padding-left: 10px;
+    font-size: 25px;
+    position: absolute;
+    bottom: 11px;
+}
+#attach-add:hover {
+    cursor: pointer;
+}
+
+/* 사진 더하는 영역의 input file 디자인 */
+#attach-add label {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    cursor: pointer;
+}
+#attach-add label input[type=file] {
+    display: none;
+}
+#attach-add label svg {
+    color: #00f7ff;
+}
+
+/* 추가된 각 사진 영역 div */
+.create-post-attach-one {
+    display: inline-block;
+    text-align: center;
+    width: 19.7%;
+    height: 200px;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+}
+
+/* 추가된 사진 영역의 img */
+.create-post-attach-one img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 95%;
+    height: 100%;
+    border-radius: 15px;
+}
+
+/* 사진 오른쪽 위 삭제 버튼 */
+.delAttach {
+    position: absolute;
+    z-index: 1;
+    top: 10px;
+    right: 15px;
+    border-radius: 100px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    border: none;
+}
+.delAttach:hover {
+    cursor: pointer;
+}
+
+/* 글 작성 영역 아래 div */
+#bottom {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    height: fit-content;
+    margin: 0px auto;
+}
+
+/* 게시물 공개 여부 세팅 */
+#privacy-setting {
+    display: inline-block;
+    width: fit-content;
+    height: fit-content;
+    margin-top: 10px;
+}
+/* input radio label */
+.privacy-label {
+    margin-left: 15px;
+}
+.privacy-label input[type=radio] {
+    accent-color: #00f7ff;
+}
+
+/* button */
+#postbtn {
+    display: flex;
+    width: fit-content;
+    height: fit-content;
+    border: none;
+    font-size: 15px;
+}
+#postbtn:hover {
+	cursor: pointer;
+}
