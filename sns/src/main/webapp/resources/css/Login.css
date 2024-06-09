@@ -1,0 +1,129 @@
+@charset "UTF-8";
+
+body {
+	background: black;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none
+	
+}
+.logo-box {
+    width:100px;
+    height:100px;
+    overflow:hidden;
+    margin:0 auto;
+    margin: 10px
+}
+
+.image-thumbnail {
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+#loginbox {
+    display: block;
+    width : 600px;
+    height: 500px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -300px;
+    margin-top: -250px;
+    background-color: #000000;
+	box-shadow: -5px -5px 10px;
+	border : 2px solid #00f7ff;
+	filter: drop-shadow(-1px -1px 3px #41c4c4);
+}
+
+#wel {
+    font-size: 70px;
+    color: #00f7ff;
+    position: relative;
+    left: 12%;
+	-webkit-text-stroke: 1px black;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    top: 30px;
+    text-shadow: #ff00bf 3px 3px;
+	font-weight: bolder;
+}
+
+#Loginnwel {
+	position: relative;
+	font-size: 30px;
+	right: 200px;
+    -webkit-text-stroke: 1px #00f7ff;
+	top: 90px;
+}
+#id {
+    padding-top:  100px;
+    margin-bottom: 10px;
+    padding-left: 95px;
+}
+#pw {
+    padding-left: 95px;
+    margin-bottom: 30px;
+}
+#logbut {
+    padding-left: 95px;
+    
+}
+#jointext{
+    padding-left: 95px;
+    padding-top: 20px;
+}
+.logintxt {
+	background-color: #1E1F22;
+	width: 400px;
+	height: 35px;
+	color: #B1B5BC;
+	margin-top: 5px;
+	border: 1px solid #ff00bf;
+	background-color:transparent;
+	
+}
+
+.loginlabel {
+   color: #ffffff;
+	font-weight:900;
+}
+
+#loginbut {
+    width: 410px;
+	height: 40px;
+	color: #00f7ff;
+	background-color: #000000;
+	cursor: pointer;
+	border: 1px solid #00f7ff;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+	box-shadow: 0px 7px 0px 0px #1e1f22;
+	border-radius: 5px;
+}
+#loginbut:active {
+	position: relative;
+	top: 2px;
+	box-shadow: none;
+}
+
+#joinlink {
+    -webkit-text-stroke: 1px #ffffff;
+	padding-left : 5px;
+}
+#joinlink:hover {
+    -webkit-text-stroke: 1px #00f7ff;
+}
+
+.alink {
+    text-decoration-line: none;
+}
+
+
+.logintxt:-webkit-autofill, .proText:-webkit-autofill:hover, .proText:-webkit-autofill:focus, .proText:-webkit-autofill:active{
+    -webkit-text-fill-color: #ffffff;
+    -webkit-box-shadow: 0 0 0 1000px transparent inset;
+    box-shadow: 0 0 0 1000px transparent inset;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bolder;
+    transition: background-color 5000s ease-in-out 0s;
+}
