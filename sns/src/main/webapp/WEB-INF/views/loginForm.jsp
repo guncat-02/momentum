@@ -33,15 +33,12 @@
 
 <script>
 $(document).ready(function() {
-	let temp = $("#loginfail").val();
-	console.log(temp+"sfggf");
-    let message = "${ param.msg }";
-    temp = message;
-    console.log(temp);
-    if(temp != "") {
-        alert("${ param.msg }");
-    }else {
-    }
+	
+	let message = "${ msg }"; // msg
+	console.log(message+"dad")
+	if(message != "") {
+		alert("${ msg }");
+	}
 })
 </script>
 </html>
