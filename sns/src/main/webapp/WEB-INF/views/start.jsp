@@ -16,7 +16,7 @@
 <script>
     window.onload = function() {
         window.setTimeout(function() {
-            location.href = "/sns/login";
+            location.href = "/sns/loginpage";
         }, 1000)
     }
 </script>

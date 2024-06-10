@@ -47,6 +47,6 @@ public class ProfileController {
 			pVO.setPhoto(upload.fileUpload(photo)[0]);
 		}
 		pServe.insert(pVO);
-		return null;
+		return "redirect:/main";
 	}
 }

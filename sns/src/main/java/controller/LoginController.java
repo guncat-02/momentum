@@ -64,7 +64,7 @@ public class LoginController {
 		}
 		
 		
-		return "redirect:/test";
+		return "redirect:/main";
 	}
 
 			
@@ -97,7 +97,7 @@ public class LoginController {
 
 
 		jservice.inputMember(mvo); //컨트롤러는 서비스 단한테 저장서비스를 지시
-		return "redirect:loginpage"; // 매핑에 대한 이름
+		return "redirect:/profile"; // 매핑에 대한 이름
 	}
 
 	@RequestMapping(value="/chkid", method = RequestMethod.GET)
