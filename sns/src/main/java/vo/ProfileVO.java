@@ -1,7 +1,7 @@
 package vo;
 
 public class ProfileVO {
-	private String id; //아이디 (임의 추가)
+	private String id; //아이디
 	private String nickName; //닉네임
 	private String photo; //프로필 사진
 	private String tel; //전화번호
@@ -62,7 +62,7 @@ public class ProfileVO {
 			}
 			telNum += tel.charAt(i);
 		}
-		this.tel = tel;
+		this.tel = telNum;
 	}
 	
 	//전화번호에 - 제거

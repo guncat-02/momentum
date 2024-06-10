@@ -30,9 +30,16 @@ public class FollowListController {
 	public String followList(Model model) throws Exception {
 		
 		// 매개변수 "hello"는 Session 에 로그인한 사용자의 id 정보이다.
-		List<ProfileVO> interFollowers = fservice.getInterFollowersProfile("hello");	// 나의 맞팔 팔로워
-		List<ProfileVO> followers = fservice.getFollowersProfile("hello");				// 나의 맞팔 X 팔로워
-		List<ProfileVO> followings = fservice.getFollowingsProfile("hello");			// 나의 팔로윙
+		List<ProfileVO> interFollowers = fservice.getInterFollowersProfile("brian332");	// 나의 맞팔 팔로워
+		List<ProfileVO> followers = fservice.getFollowersProfile("brian332");				// 나의 맞팔 X 팔로워
+		List<ProfileVO> followings = fservice.getFollowingsProfile("brian332");			// 나의 팔로윙
+		
+		System.out.println("followings");
+		for (ProfileVO pvo : followings) {
+			System.out.println(pvo.toString());
+		}
+		
+		
 		
 		model.addAttribute("interFollowersProfile", interFollowers);
 		model.addAttribute("followersProfile", followers);

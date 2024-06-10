@@ -46,10 +46,18 @@
 	                        <tr>
 	                            <td class="followList-photo">
 	                                <div>
-	                                    <img src="">
+	                                	<c:choose>
+	                                	<c:when test="${empty prof.photo}">
+	                                		<img src="./resources/img/프로필.png">
+	                                	</c:when>
+	                                    <c:otherwise>
+	                                    	<img src="download?filename=${prof.photo }">
+                                    	</c:otherwise>
+                                    	</c:choose>
 	                                </div>
 	                            </td>
 	                            <td class="followList-nickname">
+	                            	<input type="hidden" value="${prof.privacy}">
 	                                ${prof.nickName }
 	                            </td>
 	                            <td class="followList-id">
@@ -69,7 +77,14 @@
 	                        <tr>
 	                            <td class="followList-photo">
 	                                <div>
-	                                    <img src="">
+	                                    <c:choose>
+	                                	<c:when test="${empty prof.photo}">
+	                                		<img src="./resources/img/프로필.png">
+	                                	</c:when>
+	                                    <c:otherwise>
+	                                    	<img src="download?filename=${prof.photo }">
+                                    	</c:otherwise>
+                                    	</c:choose>
 	                                </div>
 	                            </td>
 	                            <td class="followList-nickname">
@@ -90,7 +105,14 @@
 	                        <tr>
 	                            <td class="followList-photo">
 	                                <div>
-	                                    <img src="">
+	                                    <c:choose>
+	                                	<c:when test="${empty prof.photo}">
+	                                		<img src="./resources/img/프로필.png">
+	                                	</c:when>
+	                                    <c:otherwise>
+	                                    	<img src="download?filename=${prof.photo }">
+                                    	</c:otherwise>
+                                    	</c:choose>
 	                                </div>
 	                            </td>
 	                            <td class="followList-nickname">
@@ -169,7 +191,7 @@
 	        type: 'get',
 	        data: {
 	        	// id는 session에서 가져온다
-	        	id: 'hello',
+	        	id: 'brian332',
 	            followId: $.trim(btn.closest('tr').children('.followList-id').text())
 	        },
 	        success: function () {
@@ -199,7 +221,7 @@
 	        type: 'get',
 	        data: {
 	        	// id는 session에서 가져온다
-	        	id: 'hello',
+	        	id: 'brian332',
 	        	followId: $.trim(btn.closest('tr').children('.followList-id').text())
 	        },
 	        success: function () {
