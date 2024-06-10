@@ -38,7 +38,7 @@
 				<span class="loginlabel">이메일 </span><span class="essential">*</span><br> <input type="text" name="email" placeholder="이메일 입력" class="emailInput"><span id="em">@</span> <input class="box" id="domain-txt" type="text"> <select class="box" id="domain-list">
 					<option value="type">직접 입력</option>
 					<option value="naver.com">naver.com</option>
-					<option value="google.com">gmail.com</option>
+					<option value="gmail.com">gmail.com</option>
 					<option value="hanmail.net">hanmail.net</option>
 					<option value="nate.com">nate.com</option>
 					<option value="kakao.com">kakao.com</option>

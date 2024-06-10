@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import service.IF_JoinService;
 import service.IF_LoginService;
@@ -28,38 +30,32 @@ public class LoginController {
 	IF_LoginService lservice;
 	
 	@GetMapping("/loginpage")
-	public String loginpage() throws Exception {
-
+	public String loginpage(Model model) throws Exception {
+		
 		return "loginForm";
 	}
 	
 	@PostMapping("loginchk")
-	public String login(@RequestParam("id")String id, @RequestParam("pass")String pass, HttpSession session,Model model) throws Exception {
+	public String login(@RequestParam("id")String id, @RequestParam("pass")String pass, HttpSession session,RedirectAttributes rt) throws Exception {
 		if(chkdup(id)=="true") {
 			System.out.println("id 없음");
-			model.addAttribute("msg","존재하지않는 아이디입니다.");
-			return "redirect:/loginpage";
+			rt.addFlashAttribute("msg", "존재하지않는 아이디입니다.");
+			return "redirect:loginpage";
 		};
 		MemberVO mvo = lservice.loginser(id);
 		if(mvo != null) {
 			if(mvo.getPass().equals(pass)) {
-				//로그인 성공
-				//세션처리
-				// 이때 서버는 쿠키를 만들고 세션영역을 쿠키로 구분이 가능하다. 
-				// 클라이언트는 접속시 쿠키값을 서버에 전송하고, 서버에서는 쿠키값을 참고하여 세션에서 등록 된 변수값을 가져온다.
-				if(session.getAttribute("userid") != null) {// 쓰레기 있다면
-					session.removeAttribute("userid");   // 지워라
-					session.removeAttribute("username");   // 지워라
-					session.removeAttribute("grade");   // 지워라
+				if(session.getAttribute("userid") != null) {
+					session.removeAttribute("userid");  
+					session.removeAttribute("username");  
 				}
 				session.setAttribute("userid", mvo.getId());
 				session.setAttribute("username", mvo.getName());
-				session.setAttribute("grade", "vip");
 				
 			}else {
 				System.out.println("비밀번호 일치 x");
-				model.addAttribute("msg","비밀번호가 일치하지 않습니다.");
-				return "redirect:/loginpage";
+				rt.addFlashAttribute("msg", "비밀번호가 일치하지 않습니다.");
+				return "redirect:loginpage";
 			}
 		}
 		
@@ -106,4 +102,5 @@ public class LoginController {
 		
 		return jservice.chkid(nowid);
 	}
+	
 }
