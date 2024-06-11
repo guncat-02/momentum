@@ -15,7 +15,6 @@
     crossorigin="anonymous" referrerpolicy="no-referrer">
 </script>
 <link id="theme-setting" rel="stylesheet" href="./resources/css/dark_theme.css">
-<input type="hidden" id="cur-theme" value="0">
 
 <body class="theme">
     <div id="all">
@@ -25,24 +24,111 @@
         <div id="main">
             <div id="followList">
                 <table>
-                	<%-- <c:forEach> --%>
-	                    <tr>
-	                        <td class="followList-photo">
-	                            <div>
-	                                <img src="../4297e3fa-661e-446c-81da-071cb32b8271.png">
-	                            </div>
-	                        </td>
-	                        <td class="followList-username">
-	                            <h2>CRAYON</h2>
-	                        </td>
-	                        <td class="followList-btn">
-	                            <button type="button" class="following-btn theme">
-	                                <b>FOLLOWING</b>
-	                            </button>
-	                            <input type="hidden" class="followed" value="1">
-	                        </td>
-	                    </tr>
-                    <%-- </c:forEach> --%>
+                    <thead>
+                        <tr>
+                            <td colspan="2">
+                                <label id="type-followings">
+                                    <h3>FOLLOWINGS</h3>
+                                    <!--내가 팔로우하는 사람 목록-->
+                                </label>
+                            </td>
+                            <td colspan="2" width="50%">
+                                <label style="color: grey" id="type-followers">
+                                    <h3>FOLLOWERS</h3>
+                                    <!--나를 팔로우하는 사람 목록-->
+                                </label>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody id="followingsList">
+                    	<c:forEach items="${followingsProfile }" var="prof">
+	                        <tr>
+	                            <td class="followList-photo">
+	                                <div>
+	                                	<c:choose>
+	                                	<c:when test="${empty prof.photo}">
+	                                		<img src="./resources/img/프로필.png">
+	                                	</c:when>
+	                                    <c:otherwise>
+	                                    	<img src="download?filename=${prof.photo }">
+                                    	</c:otherwise>
+                                    	</c:choose>
+	                                </div>
+	                            </td>
+	                            <td class="followList-nickname">
+	                            	<input type="hidden" value="${prof.privacy}">
+	                                ${prof.nickName }
+	                            </td>
+	                            <td class="followList-id">
+	                                ${prof.id }
+	                            </td>
+	                            <td class="followList-btn">
+	                                <button type="button" class="theme btn-followed" value="1">
+	                                	<!--0: 언팔로우, 1: 팔로우-->
+	                                    <b>FOLLOWING</b>
+	                                </button>
+	                            </td>
+	                        </tr>
+                        </c:forEach>
+                    </tbody>
+                    <tbody id="allFollowersList" style="display: none;">
+                    	<c:forEach items="${interFollowersProfile }" var="prof">
+	                        <tr>
+	                            <td class="followList-photo">
+	                                <div>
+	                                    <c:choose>
+	                                	<c:when test="${empty prof.photo}">
+	                                		<img src="./resources/img/프로필.png">
+	                                	</c:when>
+	                                    <c:otherwise>
+	                                    	<img src="download?filename=${prof.photo }">
+                                    	</c:otherwise>
+                                    	</c:choose>
+	                                </div>
+	                            </td>
+	                            <td class="followList-nickname">
+	                                ${prof.nickName }
+	                            </td>
+	                            <td class="followList-id">
+	                                ${prof.id }
+	                            </td>
+	                            <td class="followList-btn">
+	                                <button type="button" class="theme btn-followed" value="1">
+		                                <!--0: 언팔로우, 1: 팔로우-->
+	                                    <b>FOLLOWING</b>
+	                                </button>
+	                            </td>
+	                        </tr>
+                        </c:forEach>
+                        <c:forEach items="${followersProfile }" var="prof">
+	                        <tr>
+	                            <td class="followList-photo">
+	                                <div>
+	                                    <c:choose>
+	                                	<c:when test="${empty prof.photo}">
+	                                		<img src="./resources/img/프로필.png">
+	                                	</c:when>
+	                                    <c:otherwise>
+	                                    	<img src="download?filename=${prof.photo }">
+                                    	</c:otherwise>
+                                    	</c:choose>
+	                                </div>
+	                            </td>
+	                            <td class="followList-nickname">
+	                                ${prof.nickName }
+	                            </td>
+	                            <td class="followList-id">
+	                                ${prof.id }
+	                            </td>
+	                            <td class="followList-btn">
+	                                <button type="button" class="theme btn-notFollowed" value="0">
+		                                <!--0: 언팔로우, 1: 팔로우-->
+	                                    <b>FOLLOW</b>
+	                                </button>
+	                            </td>
+	                        </tr>
+                        </c:forEach>
+                    </tbody>
                 </table>
             </div>
         </div>
@@ -51,31 +137,105 @@
 
 <script>
 
-    // 버튼 클릭 시 팔로윙-팔로우 디자인 변경
-    $('#followList').on('click', '.following-btn', function() {
-        let btn = $(this);
-        let followed = followSwitch(btn);
-        let curBack = $('body').css('background-color');
-        if (followed.val() == 0) {
-            btn.css('background-color', '#00f7ff');
-            btn.css('color', '#000000');
-            btn.children('b').text('FOLLOW');
-        } else {
-            btn.css('background-color', '');
-            btn.css('color', '');
-            btn.children('b').text('FOLLOWING');
-        }
-    });
+	// 화면 로딩 될 때 내가 팔로우 하지 않은 유저의 버튼 디자인 다르게
+	$(document).ready(function() {
+		let btn = $('.btn-notFollowed');
+		btn.css('background-color', '#00f7ff');
+        btn.css('color', '#000000');
+	});
+	
+	// 내가 팔로우하는 유저 목록 볼 때 (FOLLOWINGS)
+	$('#type-followings').on('click', function() {
+		// 테이블 가장 위쪽 followings, followers 글씨 디자인 변경
+		$('#type-followings').css('color', '');
+		$('#type-followers').css('color', 'grey');
+		// 테이블에 보여지는 유저 목록 변경
+		$('#followingsList').css('display', '');
+		$('#allFollowersList').css('display', 'none');
+	});
+	
+	// 나를 팔로우하는 유저 목록 볼 때 (FOLLOWERS)
+	$('#type-followers').on('click', function() {
+		// 테이블 가장 위쪽 followings, followers 글씨 디자인 변경
+		$('#type-followings').css('color', 'grey');
+		$('#type-followers').css('color', '');
+		// 테이블에 보여지는 유저 목록 변경
+		$('#followingsList').css('display', 'none');
+		$('#allFollowersList').css('display', '');
+	});
 
-    // 버튼 눌러서 팔로우 취소, 등록 여부의 input:hidden value 변경
-    function followSwitch(btn) { 
-        let followed = btn.closest('.followList-btn').children('input[type=hidden]');
-        if (followed.val() == 0) {
-            followed.val(1);
-        } else {
-            followed.val(0);
-        }
-        return followed;
-    }
+	
+	//버튼 클릭 시 언팔로우-팔로우 작업
+	$('#followList').on('click', 'button', function () {
+	    let btn = $(this);
+	    // 서버 부하 방지 및 DB 작업의 정확도를 위해 누른 버튼의 마우스 이벤트 발생 차단
+	    btn.css('pointer-events', 'none');
+	    if (btn.val() == 0) { // (팔로우 취소 후 다시) 팔로우 할 때
+	        follow(btn);
+	    } else { // 팔로우 취소 할 때
+			unfollow(btn);
+	    }
+	});
+	function follow(btn) {
+		// 버튼 값 변경
+        btn.val(1);
+    	// 버튼 디자인 변경
+        btn.css('background-color', '');
+        btn.css('color', '');
+        btn.children('b').text('FOLLOWING');
+        
+        // ajax 통해 Request
+	    $.ajax({
+	        url: 'follow',
+	        type: 'get',
+	        data: {
+	        	// id는 session에서 가져온다
+	        	id: 'brian332',
+	            followId: $.trim(btn.closest('tr').children('.followList-id').text())
+	        },
+	        success: function () {
+	        	// 차단한 마우스 이벤트 재활성화
+	        	btn.css('pointer-events', 'auto');
+	        },
+	        error: function () {
+	        	alert('잠시 후 다시 시도해주세요.');
+	        	// 버튼 값 되돌리기
+	            btn.val(0);
+	            // 버튼 디자인 되돌리기
+	            btn.css('background-color', '#00f7ff');
+	            btn.css('color', '#000000');
+	            btn.children('b').text('FOLLOW');
+	        }
+	    });
+	}
+	function unfollow(btn) {
+		
+        btn.val(0);
+        btn.css('background-color', '#00f7ff');
+        btn.css('color', '#000000');
+        btn.children('b').text('FOLLOW');
+        
+	    $.ajax({
+	        url: 'unfollow',
+	        type: 'get',
+	        data: {
+	        	// id는 session에서 가져온다
+	        	id: 'brian332',
+	        	followId: $.trim(btn.closest('tr').children('.followList-id').text())
+	        },
+	        success: function () {
+	        	btn.css('pointer-events', 'auto');
+	        },
+	        error: function () {
+	        	alert('잠시 후 다시 시도해주세요.');
+	            btn.val(1);
+	            btn.css('background-color', '');
+	            btn.css('color', '');
+	            btn.children('b').text('FOLLOWING');
+	        }
+	    });
+	}
+	
+	
 </script>
 </html>

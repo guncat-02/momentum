@@ -1,24 +1,24 @@
 package vo;
 
-import java.util.List;
-
 public class LoveVO {
-	private List<String> no; //좋아요 한 글 번호
-	private List<String> c_no; //좋아요 한 댓글 번호
+	private String no; //좋아요 한 글 번호
+	private String c_no; //좋아요 한 댓글 번호
 	
 	//getter
-	public List<String> getNo() {
+	public String getNo() {
 		return no;
 	}
-	public List<String> getC_no() {
+	public String getC_no() {
 		return c_no;
 	}
 	
 	//setter
-	public void setC_no(List<String> c_no) {
-		this.c_no = c_no;
-	}
-	public void setNo(List<String> no) {
+	public void setNo(String no) {
 		this.no = no;
 	}
+	public void setC_no(String c_no) {
+		this.c_no = c_no;
+	}
+	
+
 }

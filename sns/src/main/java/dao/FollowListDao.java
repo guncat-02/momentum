@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import vo.FollowVO;
+import vo.ProfileVO;
 
 @Repository
 public class FollowListDao implements IF_FollowListDao{
@@ -16,19 +17,30 @@ public class FollowListDao implements IF_FollowListDao{
 	
 	@Inject
 	SqlSession sql;
+
+	@Override
+	public List<ProfileVO> getInterFollowersProfile(String followId) throws Exception {
+		return sql.selectList(mapperQuery+".selectInterFollowersProfile", followId);
+	}
 	
 	@Override
-	public FollowVO selectFollowers(FollowVO fvo) throws Exception {
-		List<String> fList = sql.selectList(mapperQuery+".selectFollowers", fvo.getId().get(0));
-		fvo.setFollowId(fList);
-		return fvo;
+	public List<ProfileVO> getFollowersProfile(String followId) throws Exception {
+		return sql.selectList(mapperQuery+".selectFollowersProfile", followId);
 	}
 
 	@Override
-	public FollowVO selectFollowings(FollowVO fvo) throws Exception {
-		List<String> fList = sql.selectList(mapperQuery+".selectFollowings", fvo.getFollowId().get(0));
-		fvo.setId(fList);
-		return null;
+	public List<ProfileVO> getFollowingsProfile(String id) throws Exception {
+		return sql.selectList(mapperQuery+".selectFollowingsProfile", id);
+	}
+
+	@Override
+	public void unfollow(FollowVO fvo) throws Exception {
+		sql.delete(mapperQuery+".deleteFollowId", fvo);
+	}
+
+	@Override
+	public void follow(FollowVO fvo) throws Exception {
+		sql.insert(mapperQuery+".insertFollowId", fvo);
 	}
 
 }

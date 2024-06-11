@@ -45,6 +45,7 @@ public class ProfileController {
 	public String insert(@ModelAttribute ProfileVO pVO, MultipartFile[] photo) throws Exception {
 		if(photo != null) {
 			pVO.setPhoto(upload.fileUpload(photo)[0]);
+			System.out.println(pVO.getPhoto());
 		}
 		pServe.insert(pVO);
 		return null;
