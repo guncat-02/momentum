@@ -10,9 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import service.IF_FollowListService;
+import service.IF_ProfileService;
 import util.FileDataUtil;
 import vo.FollowVO;
 import vo.ProfileVO;
@@ -26,12 +26,15 @@ public class FollowListController {
 	@Inject
 	IF_FollowListService fservice;
 	
+	@Inject
+	IF_ProfileService pservice;
+	
 	@GetMapping("/followList")
 	public String followList(Model model) throws Exception {
 		
-		// 매개변수 "hello"는 Session 에 로그인한 사용자의 id 정보이다.
+		// 매개변수는 Session에서 가져온다.
 		List<ProfileVO> interFollowers = fservice.getInterFollowersProfile("brian332");	// 나의 맞팔 팔로워
-		List<ProfileVO> followers = fservice.getFollowersProfile("brian332");				// 나의 맞팔 X 팔로워
+		List<ProfileVO> followers = fservice.getFollowersProfile("brian332");			// 나의 맞팔 X 팔로워
 		List<ProfileVO> followings = fservice.getFollowingsProfile("brian332");			// 나의 팔로윙
 		
 		System.out.println("followings");
@@ -39,6 +42,15 @@ public class FollowListController {
 			System.out.println(pvo.toString());
 		}
 		
+		System.out.println("\ninterFollowers");
+		for (ProfileVO pvo : interFollowers) {
+			System.out.println(pvo.toString());
+		}
+		
+		System.out.println("\nfollowers");
+		for (ProfileVO pvo : followers) {
+			System.out.println(pvo.toString());
+		}
 		
 		
 		model.addAttribute("interFollowersProfile", interFollowers);

@@ -195,6 +195,7 @@
 	            followId: $.trim(btn.closest('tr').children('.followList-id').text())
 	        },
 	        success: function () {
+	        	$('#followingsList').append()
 	        	// 차단한 마우스 이벤트 재활성화
 	        	btn.css('pointer-events', 'auto');
 	        },
