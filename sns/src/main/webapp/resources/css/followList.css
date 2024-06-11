@@ -118,9 +118,15 @@ body {
 }
 
 /* nickname, id 표시되는 td */
-.followList-nickname,.followList-id {
+.followList-names {
     padding-left: 15px;
-    font-size: 25px;
+}
+.followList-nickname {
+	font-size: 25px;
+}
+.followList-id {
+	font-size: 15px;
+	margin: auto 0px;
 }
 
 /* follow, following 버튼 표시되는 td */

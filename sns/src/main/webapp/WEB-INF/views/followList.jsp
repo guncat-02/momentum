@@ -24,6 +24,7 @@
         <div id="main">
             <div id="followList">
                 <table>
+                	<input type="hidden" id="listType">
                     <thead>
                         <tr>
                             <td colspan="2">
@@ -41,93 +42,10 @@
                         </tr>
                     </thead>
                     <tbody id="followingsList">
-                    	<c:forEach items="${followingsProfile }" var="prof">
-	                        <tr>
-	                            <td class="followList-photo">
-	                                <div>
-	                                	<c:choose>
-	                                	<c:when test="${empty prof.photo}">
-	                                		<img src="./resources/img/프로필.png">
-	                                	</c:when>
-	                                    <c:otherwise>
-	                                    	<img src="download?filename=${prof.photo }">
-                                    	</c:otherwise>
-                                    	</c:choose>
-	                                </div>
-	                            </td>
-	                            <td class="followList-nickname">
-	                            	<input type="hidden" value="${prof.privacy}">
-	                                ${prof.nickName }
-	                            </td>
-	                            <td class="followList-id">
-	                                ${prof.id }
-	                            </td>
-	                            <td class="followList-btn">
-	                                <button type="button" class="theme btn-followed" value="1">
-	                                	<!--0: 언팔로우, 1: 팔로우-->
-	                                    <b>FOLLOWING</b>
-	                                </button>
-	                            </td>
-	                        </tr>
-                        </c:forEach>
+
                     </tbody>
                     <tbody id="allFollowersList" style="display: none;">
-                    	<c:forEach items="${interFollowersProfile }" var="prof">
-	                        <tr>
-	                            <td class="followList-photo">
-	                                <div>
-	                                    <c:choose>
-	                                	<c:when test="${empty prof.photo}">
-	                                		<img src="./resources/img/프로필.png">
-	                                	</c:when>
-	                                    <c:otherwise>
-	                                    	<img src="download?filename=${prof.photo }">
-                                    	</c:otherwise>
-                                    	</c:choose>
-	                                </div>
-	                            </td>
-	                            <td class="followList-nickname">
-	                                ${prof.nickName }
-	                            </td>
-	                            <td class="followList-id">
-	                                ${prof.id }
-	                            </td>
-	                            <td class="followList-btn">
-	                                <button type="button" class="theme btn-followed" value="1">
-		                                <!--0: 언팔로우, 1: 팔로우-->
-	                                    <b>FOLLOWING</b>
-	                                </button>
-	                            </td>
-	                        </tr>
-                        </c:forEach>
-                        <c:forEach items="${followersProfile }" var="prof">
-	                        <tr>
-	                            <td class="followList-photo">
-	                                <div>
-	                                    <c:choose>
-	                                	<c:when test="${empty prof.photo}">
-	                                		<img src="./resources/img/프로필.png">
-	                                	</c:when>
-	                                    <c:otherwise>
-	                                    	<img src="download?filename=${prof.photo }">
-                                    	</c:otherwise>
-                                    	</c:choose>
-	                                </div>
-	                            </td>
-	                            <td class="followList-nickname">
-	                                ${prof.nickName }
-	                            </td>
-	                            <td class="followList-id">
-	                                ${prof.id }
-	                            </td>
-	                            <td class="followList-btn">
-	                                <button type="button" class="theme btn-notFollowed" value="0">
-		                                <!--0: 언팔로우, 1: 팔로우-->
-	                                    <b>FOLLOW</b>
-	                                </button>
-	                            </td>
-	                        </tr>
-                        </c:forEach>
+                    
                     </tbody>
                 </table>
             </div>
@@ -139,9 +57,9 @@
 
 	// 화면 로딩 될 때 내가 팔로우 하지 않은 유저의 버튼 디자인 다르게
 	$(document).ready(function() {
-		let btn = $('.btn-notFollowed');
-		btn.css('background-color', '#00f7ff');
-        btn.css('color', '#000000');
+		// 추후 값 전달받아서 input:hidden listType에 대입, 값에 따라 보여주는 리스트 다르게 함.
+		getFollowingsList();
+		
 	});
 	
 	// 내가 팔로우하는 유저 목록 볼 때 (FOLLOWINGS)
@@ -152,6 +70,7 @@
 		// 테이블에 보여지는 유저 목록 변경
 		$('#followingsList').css('display', '');
 		$('#allFollowersList').css('display', 'none');
+		getFollowingsList();
 	});
 	
 	// 나를 팔로우하는 유저 목록 볼 때 (FOLLOWERS)
@@ -162,6 +81,7 @@
 		// 테이블에 보여지는 유저 목록 변경
 		$('#followingsList').css('display', 'none');
 		$('#allFollowersList').css('display', '');
+		getAllFollowersList();
 	});
 
 	
@@ -173,7 +93,7 @@
 	    if (btn.val() == 0) { // (팔로우 취소 후 다시) 팔로우 할 때
 	        follow(btn);
 	    } else { // 팔로우 취소 할 때
-			unfollow(btn);
+			followCancel(btn);
 	    }
 	});
 	function follow(btn) {
@@ -184,6 +104,8 @@
         btn.css('color', '');
         btn.children('b').text('FOLLOWING');
         
+        let fId = $.trim(btn.closest('tr').find('.followList-id').text());
+        
         // ajax 통해 Request
 	    $.ajax({
 	        url: 'follow',
@@ -191,9 +113,9 @@
 	        data: {
 	        	// id는 session에서 가져온다
 	        	id: 'brian332',
-	            followId: $.trim(btn.closest('tr').children('.followList-id').text())
+	            followId: fId.substring(1, fId.length-1)
 	        },
-	        success: function () {
+	        success: function (result) {
 	        	// 차단한 마우스 이벤트 재활성화
 	        	btn.css('pointer-events', 'auto');
 	        },
@@ -208,32 +130,167 @@
 	        }
 	    });
 	}
-	function unfollow(btn) {
+	function followCancel(btn) {
 		
-        btn.val(0);
-        btn.css('background-color', '#00f7ff');
-        btn.css('color', '#000000');
-        btn.children('b').text('FOLLOW');
-        
-	    $.ajax({
-	        url: 'unfollow',
-	        type: 'get',
-	        data: {
-	        	// id는 session에서 가져온다
-	        	id: 'brian332',
-	        	followId: $.trim(btn.closest('tr').children('.followList-id').text())
-	        },
-	        success: function () {
-	        	btn.css('pointer-events', 'auto');
-	        },
-	        error: function () {
-	        	alert('잠시 후 다시 시도해주세요.');
-	            btn.val(1);
-	            btn.css('background-color', '');
-	            btn.css('color', '');
-	            btn.children('b').text('FOLLOWING');
-	        }
-	    });
+		let fPriv = btn.closest('tr').find('.followList-privacy').val();
+        let fId = $.trim(btn.closest('tr').find('.followList-id').text());
+		let message = `다시 팔로우하려면 \${fId}에게 팔로우 요청을 다시 보내야 합니다.\n팔로우를 취소하시겠습니까?`;
+		
+		// 계정이 공개 상태이거나, 비공개 계정의 언팔로우에 동의 할 경우
+		if((fPriv == 0 && confirm(message)) || fPriv == 1) {
+			btn.val(0);
+	        btn.css('background-color', '#00f7ff');
+	        btn.css('color', '#000000');
+	        btn.children('b').text('FOLLOW');
+	        
+		    $.ajax({
+		        url: 'followcancel',
+		        type: 'get',
+		        data: {
+		        	// id는 session에서 가져온다
+		        	id: 'brian332',
+		        	followId: fId.substring(1, fId.length-1)
+		        },
+		        success: function (result) {
+		        	btn.css('pointer-events', 'auto');
+		        },
+		        error: function () {
+		        	alert('잠시 후 다시 시도해주세요.');
+		            btn.val(1);
+		            btn.css('background-color', '');
+		            btn.css('color', '');
+		            btn.children('b').text('FOLLOWING');
+		        }
+		    });
+		}
+	}
+	
+	// 내가 팔로우하는 id 목록 출력
+	function getFollowingsList() {
+		$('#followingsList tr').remove();
+		$.ajax({
+			url: 'follow_followings',
+			type: 'get',
+			data: {id : 'brian332'},
+			success: function(result) {
+				let newFollowing;
+		    	let userPhoto;
+		    	for (let f of result) {
+		    		if (f.photo == null) {
+		    			userPhoto = `<img src="./resources/img/프로필.png">`
+		    		} else {
+		    			userPhoto = `<img src="download?filename=\${f.photo}">`
+		    		}
+		    		newFollowing = `<tr>
+		        		<td class="followList-photo">
+		        		<div>
+		        			\${userPhoto}
+		        		</div>
+		        	</td>
+		        	<td class="followList-names" colspan="2">
+		        		<input type="hidden" class="followList-privacy" value="\${f.privacy}">
+		      			<span class="followList-nickname">\${f.nickName}</span>
+		      			<span class="followList-id">(\${f.id })</span>
+		        	</td>
+		        	<td class="followList-btn">
+		        		<button type="button" class="theme" value="1">
+		        			<b>FOLLOWING</b>
+		        		</button>
+		        	</td>
+		        </tr>`
+		        	$('#followingsList').append(newFollowing);
+		    	}
+			},
+			error: function() {
+				alert('잠시 후 다시 시도해주세요.');
+			}
+		});
+	}
+
+	// 나를 팔로우하는 모든 id 출력
+	function getAllFollowersList() {
+		$('#allFollowersList tr').remove();
+		
+		// 나를 팔로우하는 id를 나도 팔로우하는 경우
+		$.ajax({
+			url: 'follow_interfollowers',
+			type: 'get',
+			data: {id : 'brian332'},
+			success: function(result) {
+				let newFollower;
+		    	let userPhoto;
+		    	for (let f of result) {
+		    		if (f.photo == null) {
+		    			userPhoto = `<img src="./resources/img/프로필.png">`
+		    		} else {
+		    			userPhoto = `<img src="download?filename=\${f.photo}">`
+		    		}
+		    		newFollower = `<tr>
+		        		<td class="followList-photo">
+		        		<div>
+		        			\${userPhoto}
+		        		</div>
+		        	</td>
+		        	<td class="followList-names" colspan="2">
+		        		<input type="hidden" class="followList-privacy" value="\${f.privacy}">
+		      			<span class="followList-nickname">\${f.nickName}</span>
+		      			<span class="followList-id">(\${f.id })</span>
+		        	</td>
+		        	<td class="followList-btn">
+		        		<button type="button" class="theme" value="1">
+		        			<b>FOLLOWING</b>
+		        		</button>
+		        	</td>
+		        </tr>`
+		        	$('#allFollowersList').append(newFollower);
+		    	}
+			},
+			error: function() {
+				alert('잠시 후 다시 시도해주세요.');
+			}
+		});
+		
+		// 나를 팔로우하는 id를 나는 팔로우하지 않는 경우
+		$.ajax({
+			url: 'follow_followers',
+			type: 'get',
+			data: {id : 'brian332'},
+			success: function(result) {
+				let newFollower;
+		    	let userPhoto;
+		    	for (let f of result) {
+		    		if (f.photo == null) {
+		    			userPhoto = `<img src="./resources/img/프로필.png">`
+		    		} else {
+		    			userPhoto = `<img src="download?filename=\${f.photo}">`
+		    		}
+		    		newFollower = `<tr>
+		        		<td class="followList-photo">
+		        		<div>
+		        			\${userPhoto}
+		        		</div>
+		        	</td>
+		        	<td class="followList-names" colspan="2">
+		        		<input type="hidden" class="followList-privacy" value="\${f.privacy}">
+		      			<span class="followList-nickname">\${f.nickName}</span>
+		      			<span class="followList-id">(\${f.id })</span>
+		        	</td>
+		        	<td class="followList-btn">
+		        		<button type="button" class="theme btn-notFollowed" value="0">
+		        			<b>FOLLOW</b>
+		        		</button>
+		        	</td>
+		        </tr>`
+		        	$('#allFollowersList').append(newFollower);
+		    	}
+		    	let btn = $('.btn-notFollowed');
+				btn.css('background-color', '#00f7ff');
+				btn.css('color', '#000000');
+			},
+			error: function() {
+				alert('잠시 후 다시 시도해주세요.');
+			}
+		});
 	}
 	
 	

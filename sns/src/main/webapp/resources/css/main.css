@@ -32,13 +32,3 @@ body {
     height: fit-content;
     padding: 15px;
 }
-
-/* 글 작성 창 */
-#postingWindow {
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: #00000050;
-}
