@@ -21,7 +21,7 @@ public class JoinDao implements IF_JoinDao{
 	@Override
 	public String chkid(String id) throws Exception {
 		// TODO Auto-generated method stub
-		if(sqlSession.selectOne(mapperQuery+".chkid", id)==null) {
+		if(sqlSession.selectOne(mapperQuery+".chkid", id) == null) {
 			return "true";
 		}else {
 			return "false";

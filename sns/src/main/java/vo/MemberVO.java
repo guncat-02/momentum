@@ -8,7 +8,6 @@ public class MemberVO {
 	private String pass; //비밀번호
 	private String name; //이름
 	private String b_date; //생년월일
-	
 	private List<ProfileVO> profileList; //프로필
 	
 	@Override

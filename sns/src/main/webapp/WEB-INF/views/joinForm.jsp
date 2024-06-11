@@ -5,14 +5,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document</title>
+<title>Momentum</title>
 <link rel="stylesheet" href="./resources/css/Join.css">
 <link href="https://fonts.googleapis.com/css?family=Poppins:600" rel="stylesheet">
 
 </head>
 
 <body>
-	<form action="JoinMember" method="post" id="form" onsubmit="return chk()">
+	<form action="joinMember" method="post" id="form" onsubmit="return chk()">
 		<div id="Joinbox">
 			<label id="wel">MOMENTUM</label> <label id="joinwel">회원가입</label>
 			<div class="intext">
@@ -270,7 +270,7 @@
 					console.log($("#chkdup").val());
 					alert("중복되지않은 아이디입니다.")
 				}else {
-					alert("충복된 아이디입니다.")
+					alert("중복된 아이디입니다.")
 				}
 				}
 		 })
