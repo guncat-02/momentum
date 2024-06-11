@@ -13,7 +13,7 @@
     crossorigin="anonymous" referrerpolicy="no-referrer">
 </script>
 
-<!--다크 테마 기본 값-->
+
 <link id="theme-setting" rel="stylesheet" href="./resources/css/dark_theme.css">
 <link rel="stylesheet" href="./resources/css/main.css">
 

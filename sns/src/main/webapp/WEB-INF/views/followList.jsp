@@ -15,7 +15,6 @@
     crossorigin="anonymous" referrerpolicy="no-referrer">
 </script>
 <link id="theme-setting" rel="stylesheet" href="./resources/css/dark_theme.css">
-<input type="hidden" id="cur-theme" value="0">
 
 <body class="theme">
     <div id="all">
