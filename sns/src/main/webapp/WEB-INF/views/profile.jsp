@@ -9,8 +9,11 @@
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <body>
+	
 	<input type="hidden" id="chkSave" value="false">
+	
     <form action="profileSave" method="post" onsubmit="return saveProfile()">
+    <input type="hidden" id="takeid" value="${ id }" name = "id">
         <div id="proAll">
             <span id="proTitle">CREATE YOUR PROFILE</span>
             <div id="profile">
@@ -119,6 +122,7 @@
             alert("중복체크가 완료되지 않았습니다.");
             return false;
         }
+        console.log($('#takeid').val());
         return true;
     }
 </script>

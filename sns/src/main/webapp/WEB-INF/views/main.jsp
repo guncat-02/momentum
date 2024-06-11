@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page session="true" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,6 +22,13 @@
 <link rel="stylesheet" href="./resources/css/main.css">
 
 <body class="theme">
+	
+		<%-- <c:if test="${userid != null }">
+			<span> 사용자 정보 <br> ID : ${userid } <br> 이름 : ${username } <br> 닉네임:  ${nickName }</span>
+			<span>로그아웃</span>
+		</c:if> --%>
+		
+
     <div id="all">
         <div id="menuall">
             <%@ include file="menuAll.jsp"%>
@@ -27,17 +36,17 @@
         <div id="main">
             <main>
                 <h1 class="theme-font">HELLO WORLD</h1>
-                <!--테마 변경은 추후 설정 화면에서 제어-->
-                <input type="button" value="themechange" id="btn">
+                
             </main>
         </div>
     </div>
+    
 </body>
 
 <script>
 
     //테마 변경 스크립트. 나중에 설정 화면에서 별도 제어 예정
-    $('#btn').on('click', function () {
+    $('#themebut').on('click', function () {
         themeSwitch();
         if ($('#cur-theme').val() == 0) {
             $('#theme-setting').prop('href', './resources/css/dark_theme.css');

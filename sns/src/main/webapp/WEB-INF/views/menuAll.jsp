@@ -112,6 +112,16 @@
                 </tr>
             </tbody>
         </table>
+        
+        <div id = "addbut">
+				<br>
+                <!--테마 변경은 추후 설정 화면에서 제어-->
+                <input type="button" value="THEME" id="themebut" class = "theme"><br>
+                <a href="/sns/logout"><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-power logoutbut" viewBox="0 0 16 16">
+  				<path d="M7.5 1v7h1V1z"/>
+  				<path d="M3 8.812a5 5 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812"/>
+				</svg></a>
+        </div>
     </div>
 </body>
 

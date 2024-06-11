@@ -15,6 +15,7 @@ public class ProfileService implements IF_ProfileService{
 	//profile table에 insert
 	@Override
 	public void insert(ProfileVO pVO) throws Exception {
+		System.out.println(pVO.getId()+"SER");
 		pDao.insert(pVO);
 	}
 
@@ -23,5 +24,13 @@ public class ProfileService implements IF_ProfileService{
 	public int chk(String nickName) throws Exception {
 		return pDao.chk(nickName);
 	}
+
+	@Override
+	public String matchId(String id) throws Exception {
+		// TODO Auto-generated method stub
+		return pDao.matchId(id);
+	}
+	
+	
 
 }

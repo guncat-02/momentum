@@ -17,6 +17,7 @@ public class ProfileDao implements IF_ProfileDao{
 	//profile table에 insert
 	@Override
 	public void insert(ProfileVO pVO) throws Exception {
+		System.out.println(pVO.getId()+"dao");
 		sql.insert(mapperQuery+".insert", pVO);
 	}
 
@@ -24,5 +25,11 @@ public class ProfileDao implements IF_ProfileDao{
 	@Override
 	public int chk(String nickName) throws Exception {
 		return sql.selectOne(mapperQuery+".chk", nickName);
+	}
+
+	@Override
+	public String matchId(String id) throws Exception {
+		// TODO Auto-generated method stub
+		return sql.selectOne(mapperQuery+".matchId", id);
 	}
 }
