@@ -1,8 +1,7 @@
 package vo;
 
-import java.util.List;
-
 public class ProfileVO {
+	private String id; //아이디
 	private String nickName; //닉네임
 	private String photo; //프로필 사진
 	private String tel; //전화번호
@@ -11,6 +10,9 @@ public class ProfileVO {
 	private int privacy; //공개 여부
 	
 	//getter
+	public String getId() {
+		return id;
+	}
 	public String getNickName() {
 		return nickName;
 	}
@@ -31,6 +33,9 @@ public class ProfileVO {
 	}
 	
 	//setter
+	public void setId(String id) {
+		this.id = id;
+	}
 	public void setPrivacy(int privacy) {
 		this.privacy = privacy;
 	}
@@ -57,7 +62,7 @@ public class ProfileVO {
 			}
 			telNum += tel.charAt(i);
 		}
-		this.tel = tel;
+		this.tel = telNum;
 	}
 	
 	//전화번호에 - 제거
@@ -70,4 +75,10 @@ public class ProfileVO {
 		}
 		return telNum;
 	}
+	@Override
+	public String toString() {
+		return "ProfileVO [id=" + id + ", nickName=" + nickName + ", photo=" + photo + ", tel=" + tel + ", email="
+				+ email + ", bio=" + bio + ", privacy=" + privacy + "]";
+	}
+	
 }
