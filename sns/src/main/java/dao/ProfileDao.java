@@ -31,4 +31,10 @@ public class ProfileDao implements IF_ProfileDao{
 	public ProfileVO select(String id) throws Exception {
 		return sql.selectOne(mapperQuery+".select", id);
 	}
+	
+	//프로필 수정
+	@Override
+	public void update(ProfileVO pVO) throws Exception {
+		sql.update(mapperQuery+".update", pVO);
+	}
 }

@@ -30,4 +30,10 @@ public class ProfileService implements IF_ProfileService{
 		return pDao.select(id);
 	}
 
+	//프로필 수정
+	@Override
+	public void update(ProfileVO pVO) throws Exception {
+		pDao.update(pVO);
+	}
+
 }

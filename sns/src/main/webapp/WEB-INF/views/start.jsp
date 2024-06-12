@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>momentum sns</title>
+<title>momentum</title>
 <link rel="stylesheet" href="./resources/css/start.css">
 </head>
 <body>

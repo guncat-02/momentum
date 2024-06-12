@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import service.IF_FollowListService;
 import service.IF_ProfileService;
 import util.FileDataUtil;
 import vo.ProfileVO;
@@ -19,6 +20,8 @@ import vo.ProfileVO;
 public class ProfileController {
 	@Inject
 	IF_ProfileService pServe;
+	@Inject
+	IF_FollowListService fServe;
 	
 	@Inject
 	FileDataUtil upload;
@@ -55,10 +58,32 @@ public class ProfileController {
 	@GetMapping("/profileShow")
 	public String profileShow(Model model) throws Exception {
 		ProfileVO p = pServe.select("nuit0204");
+		model.addAttribute("profile", p);
+		model.addAttribute("following", fServe.followingSelect("nuit0204"));
+		model.addAttribute("follower", fServe.followerSelect("nuit0204"));
+		return "profileShow";
+	}
+	
+	//프로필 수정
+	@PostMapping("/profileUpdate")
+	public String update(@ModelAttribute ProfileVO pVO, MultipartFile[] myFile) throws Exception {
+		pVO.setId("nuit0204");
+		pVO.setNickName("guncat");
+		if(myFile != null) {
+			pVO.setPhoto(upload.fileUpload(myFile)[0]);
+		}
+		pServe.update(pVO);
+		return "redirect:/profileShow";
+	}
+	
+	//프로필 수정 화면 띄우기
+	@GetMapping("/profileEdit")
+	public String profileEdit(Model model) throws Exception {
+		ProfileVO p = pServe.select("nuit0204");
 		if(p.getPhoto() == null) {
-			p.setPhoto("./resources/img/프로필.png");
+			p.setPhoto("null");
 		}
 		model.addAttribute("profile", p);
-		return "profileShow";
+		return "profileEdit";
 	}
 }

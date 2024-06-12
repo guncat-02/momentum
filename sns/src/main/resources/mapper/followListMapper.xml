@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.IF_FollowListDao">
+	
+	<!-- 나를 팔로우하는 id 중 나도 팔로우하는 id의 profile select -->
+	<select id="selectInterFollowersProfile" parameterType="String" resultType="vo.ProfileVO">
+		select p.* from profileTest p, (
+		select a.id
+		from followTest a, followTest b
+		where a.id = b.followid
+		and a.followid = #{followId}
+		) f
+		where f.id = p.id and p.p_main = 1
+	</select>
+	
+	<!-- 나를 팔로우하는 id 중 나는 팔로우하지 않는 id의 profile select -->
+	<select id="selectFollowersProfile" parameterType="String" resultType="vo.ProfileVO">
+		select p.* from profileTest p, (
+		select a.id
+		from followTest a, followTest b
+		where a.id = b.followid(+)
+		and a.followid = #{followId}
+		and b.followid is null
+		) f
+		where f.id = p.id and p.p_main = 1
+	</select>
+	
+	<!-- 내가 팔로우하는 id의 profile select -->
+	<select id="selectFollowingsProfile" parameterType="String" resultType="vo.ProfileVO">
+		select p.* from profileTest p, followTest f where f.id = #{id} and p.p_main = 1 and f.followid = p.id
+	</select>
+	
+	<!-- 팔로우 취소 -->
+	<delete id="deleteFollowId" parameterType="vo.FollowVO">
+		delete from followTest where id = #{id} and followid = #{followId}
+	</delete>
+	
+	<!-- 팔로우 -->
+	<insert id="insertFollowId" parameterType="vo.FollowVO">
+		insert into followTest values (#{id}, #{followId})
+	</insert>
+	
+	<select id="followingSelect" resultType="int">
+		select count(followId) from followTest where id = #{id}
+	</select>
+	
+	<select id="followerSelect" resultType="int">
+		select count(id) from followTest where followId = #{id}
+	</select>
+</mapper>

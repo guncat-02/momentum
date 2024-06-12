@@ -2,7 +2,7 @@ package dao;
 
 import vo.PostVO;
 
-public interface IF_PostingDAO {
+public interface IF_PostingDao {
 
 	public void insertPost(PostVO pvo) throws Exception;
 	

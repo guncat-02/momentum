@@ -1,6 +1,5 @@
 package vo;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MemberVO {
@@ -8,12 +7,8 @@ public class MemberVO {
 	private String pass; //비밀번호
 	private String name; //이름
 	private String b_date; //생년월일
+	private String email; //이메일
 	private List<ProfileVO> profileList; //프로필
-	
-	@Override
-	public String toString() {
-		return "MemberVO [id=" + id + ", pass=" + pass + ", name=" + name + ", b_date=" + b_date + "]";
-	}
 	
 	//getter
 	public String getId() {
@@ -31,6 +26,10 @@ public class MemberVO {
 	public List<ProfileVO> getProfileList() {
 		return profileList;
 	}
+	public String getEmail() {
+		return email;
+	}
+
 	
 	//setter
 	public void setId(String id) {
@@ -47,5 +46,8 @@ public class MemberVO {
 	}
 	public void setProfileList(List<ProfileVO> profileList) {
 		this.profileList = profileList;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }
