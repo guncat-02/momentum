@@ -36,7 +36,6 @@
 $(document).ready(function() {
 	
 	let message = "${ msg }"; // msg
-	console.log(message+"dad")
 	if(message != "") {
 		alert("${ msg }");
 	}

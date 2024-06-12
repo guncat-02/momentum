@@ -38,10 +38,6 @@
                             <th>TEL</th>
                             <td colspan="2"><input type="text" name="tel" class="proText" placeholder=" - 없이 입력하세요" maxlength="11" pattern="\d*" title="숫자만 입력하실 수 있습니다."></td>
                         </tr style="height: 10%;">
-                        <tr style="height: 10%;">
-                            <th>E-MAIL</th>
-                            <td colspan="2"><input type="text" name="email" class="proText"></td>
-                        </tr>
                         <tr>
                             <th>한 줄 소개</th>
                             <td colspan="2"><textarea name="bio" class="proText" maxlength="50" placeholder="50자 까지 입력 가능합니다."></textarea></td>
