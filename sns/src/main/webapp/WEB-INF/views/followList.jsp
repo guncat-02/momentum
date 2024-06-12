@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="kor">
 
 <head>
     <meta charset="UTF-8">
@@ -30,23 +30,32 @@
                             <td colspan="2">
                                 <label id="type-followings">
                                     <h3>FOLLOWINGS</h3>
-                                    <!--내가 팔로우하는 사람 목록-->
+                                    <!--내가 팔로우하는 사람 보기-->
                                 </label>
                             </td>
                             <td colspan="2" width="50%">
                                 <label style="color: grey" id="type-followers">
                                     <h3>FOLLOWERS</h3>
-                                    <!--나를 팔로우하는 사람 목록-->
+                                    <!--나를 팔로우하는 사람 보기-->
                                 </label>
                             </td>
                         </tr>
                     </thead>
                     <tbody id="followingsList">
-
+                    	<!-- list 가져오는 부분 -->
                     </tbody>
                     <tbody id="allFollowersList" style="display: none;">
-                    
+                    	<!-- list 가져오는 부분 -->
                     </tbody>
+                    <tfoot>
+                    	<tr>
+                    		<td colspan="4">
+		                    	<button type="button">
+		                    		<a href="follow-new"><b>Find new Follow</b></a>
+		                    	</button>
+	                    	</td>
+                    	</tr>
+                    </tfoot>
                 </table>
             </div>
         </div>
@@ -55,11 +64,9 @@
 
 <script>
 
-	// 화면 로딩 될 때 내가 팔로우 하지 않은 유저의 버튼 디자인 다르게
+	// 화면 로딩 될 때 내가 팔로우하는 사람 목록 띄운다
 	$(document).ready(function() {
-		// 추후 값 전달받아서 input:hidden listType에 대입, 값에 따라 보여주는 리스트 다르게 함.
 		getFollowingsList();
-		
 	});
 	
 	// 내가 팔로우하는 유저 목록 볼 때 (FOLLOWINGS)
@@ -102,39 +109,68 @@
     	// 버튼 디자인 변경
         btn.css('background-color', '');
         btn.css('color', '');
-        btn.children('b').text('FOLLOWING');
         
+        
+        let fPriv = btn.closest('tr').find('.followList-privacy').val();
         let fId = $.trim(btn.closest('tr').find('.followList-id').text());
         
         // ajax 통해 Request
-	    $.ajax({
-	        url: 'follow',
-	        type: 'get',
-	        data: {
-	        	// id는 session에서 가져온다
-	        	id: 'brian332',
-	            followId: fId.substring(1, fId.length-1)
-	        },
-	        success: function (result) {
-	        	// 차단한 마우스 이벤트 재활성화
-	        	btn.css('pointer-events', 'auto');
-	        },
-	        error: function () {
-	        	alert('잠시 후 다시 시도해주세요.');
-	        	// 버튼 값 되돌리기
-	            btn.val(0);
-	            // 버튼 디자인 되돌리기
-	            btn.css('background-color', '#00f7ff');
-	            btn.css('color', '#000000');
-	            btn.children('b').text('FOLLOW');
-	        }
-	    });
+        if (fPriv == 0) { // 비공개 계정일 때 팔로우 요청 (기능 구현 중)
+        	btn.children('b').text('REQUESTED');
+        	$.ajax({
+        		url: 'follow_request',
+        		type: 'get',
+        		data: {
+    	        	// id는 session에서 가져온다
+    	        	id: 'brian332',
+    	            followId: fId.substring(1, fId.length-1)
+    	        },
+    	        success: function() {
+    	        	
+    	        },
+    	        error: function() {
+    	        	alert('잠시 후 다시 시도해주세요.');
+    	        	// 버튼 값 되돌리기
+    	            btn.val(0);
+    	            // 버튼 디자인 되돌리기
+    	            btn.css('background-color', '#00f7ff');
+    	            btn.css('color', '#000000');
+    	            btn.children('b').text('FOLLOW');
+    	        }
+        	});
+        } else { // 공개 계정일 때 즉시 팔로우
+        	btn.children('b').text('FOLLOWING');
+        	$.ajax({
+    	        url: 'follow',
+    	        type: 'get',
+    	        data: {
+    	        	// id는 session에서 가져온다
+    	        	id: 'brian332',
+    	            followId: fId.substring(1, fId.length-1)
+    	        },
+    	        success: function (result) {
+    	        	// 차단한 마우스 이벤트 재활성화
+    	        	btn.css('pointer-events', 'auto');
+    	        },
+    	        error: function () {
+    	        	alert('잠시 후 다시 시도해주세요.');
+    	        	// 버튼 값 되돌리기
+    	            btn.val(0);
+    	            // 버튼 디자인 되돌리기
+    	            btn.css('background-color', '#00f7ff');
+    	            btn.css('color', '#000000');
+    	            btn.children('b').text('FOLLOW');
+    	        }
+    	    });
+        }
+        
+	    
 	}
 	function followCancel(btn) {
 		
 		let fPriv = btn.closest('tr').find('.followList-privacy').val();
         let fId = $.trim(btn.closest('tr').find('.followList-id').text());
-		let message = `다시 팔로우하려면 \${fId}에게 팔로우 요청을 다시 보내야 합니다.\n팔로우를 취소하시겠습니까?`;
+		let message = `다시 팔로우하려면 \${fId.substring(1, fId.length-1)}에게 팔로우 요청을 다시 보내야 합니다.\n팔로우를 취소하시겠습니까?`;
 		
 		// 계정이 공개 상태이거나, 비공개 계정의 언팔로우에 동의 할 경우
 		if((fPriv == 0 && confirm(message)) || fPriv == 1) {
@@ -283,6 +319,7 @@
 		        </tr>`
 		        	$('#allFollowersList').append(newFollower);
 		    	}
+		    	// 내가 팔로우하지 않는 경우의 버튼 디자인 변경
 		    	let btn = $('.btn-notFollowed');
 				btn.css('background-color', '#00f7ff');
 				btn.css('color', '#000000');

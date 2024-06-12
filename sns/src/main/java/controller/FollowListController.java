@@ -32,18 +32,7 @@ public class FollowListController {
 	IF_ProfileService pservice;
 	
 	@GetMapping("/followList")
-	public String followList(Model model) throws Exception {
-		
-		// 매개변수는 Session에서 가져온다.
-		List<ProfileVO> interFollowers = fservice.getInterFollowersProfile("brian332");	// 나의 맞팔 팔로워
-		List<ProfileVO> followers = fservice.getFollowersProfile("brian332");			// 나의 맞팔 X 팔로워
-		List<ProfileVO> followings = fservice.getFollowingsProfile("brian332");			// 나의 팔로윙
-		
-		
-		model.addAttribute("interFollowersProfile", interFollowers);
-		model.addAttribute("followersProfile", followers);
-		model.addAttribute("followingsProfile", followings);
-
+	public String followList(Model model) {
 		return "followList";
 	}
 	
@@ -67,10 +56,6 @@ public class FollowListController {
 	@ResponseBody
 	public List<ProfileVO> getFollowers(HttpServletRequest request, HttpServletResponse response,
 			@RequestParam("id") String id) throws Exception {
-		System.out.println("followers");
-		for(ProfileVO p : fservice.getFollowersProfile(id)) {
-			System.out.println(p.toString());
-		}
 		return fservice.getFollowersProfile(id);
 	}
 	
@@ -78,17 +63,13 @@ public class FollowListController {
 	@ResponseBody
 	public List<ProfileVO> getInterFollowers(HttpServletRequest request, HttpServletResponse response,
 			@RequestParam("id") String id) throws Exception {
-		System.out.println("interfollowers");
-		for(ProfileVO p : fservice.getInterFollowersProfile(id)) {
-			System.out.println(p.toString());
-		}
 		return fservice.getInterFollowersProfile(id);
 	}
 	
 	@GetMapping("/follow_followings")
 	@ResponseBody
 	public List<ProfileVO> getFollowings(HttpServletRequest request, HttpServletResponse response,
-			@RequestParam String id) throws Exception {
+			@RequestParam("id") String id) throws Exception {
 		return fservice.getFollowingsProfile(id);
 	}
 	
