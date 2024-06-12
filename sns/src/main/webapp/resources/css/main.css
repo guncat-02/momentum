@@ -42,3 +42,55 @@ body {
     left: 0;
     background-color: #00000050;
 }
+/* yoom에서 추가 */
+#root{
+	margin-left:70px;
+	border
+}
+
+.item-id{
+	margin-top:60px;
+	width:90%;
+	height:40px;
+	border:1px solid violet;
+}
+.item-arc{
+	border-radius:50%;
+	width:40px;
+	height:40px;
+	border:1px solid violet;
+	float:left;
+	overflow: hidden;
+}
+.item-filename{
+	text-align:center;
+	width:90%;
+	height:600px;
+	border:1px solid violet;
+}
+.likeCount{
+	margin-left:30px;
+	width:40%;
+	text-align:left;
+	display:inline-block;
+}
+.viewCount{
+	margin-left:30px;
+	width:40%;
+	text-align:right;
+	display:inline-block;
+}
+.item-heart{
+	
+	width:90%;
+	height:50px;
+	border:1px solid violet;
+}
+.item-cont{
+	width:90%;
+	height:200px;
+	border:1px solid violet;
+}
+
+
+}

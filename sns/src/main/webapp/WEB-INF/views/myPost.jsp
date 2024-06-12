@@ -14,7 +14,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Momentum</title>
 </head>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
     integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
@@ -35,10 +35,10 @@
         <div id="main">
             <main>
             	<div id="top">
-	            	<div id="back_button" style="display:inline-block; width: 15%; heigth:100px;  text-align:center;">
-	            		<h1 style="color:violet"><</h1>
+	            	<div id="back_button">
+	            		<h1><</h1>
 	            	</div>
-	            	<div style="display: inline-block; width: 60%; heigth:100px; text-align:center; ">
+	            	<div id="top_text">
 	            		<h1 class="theme-font" >게시물 자세히보기</h1>
 	            	</div>
                 </div>
@@ -50,8 +50,8 @@
                  
                  
                 <!-- 사용자 닉네임, 프로필사진등 가져와서 쓰기 -->
-                <div id="post_main" style="border:1px solid violet;">
-	                <div style="width:95%; margin-left:30px;">
+                <div id="post_main">
+	                <div id="post_me" >
 		                <div id="pro_radius">
 		                	<img src="./resources/img/프로필.png">
 		                </div>
@@ -61,7 +61,7 @@
 		                	</h3>
 	                	</div>
 	                	
-	                	<div id="showMove" onclick="showSheet()" style="margin-top:10px;">
+	                	<div id="showMove" onclick="showSheet()">
 		                	<h3>
 			                	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
 		  							<path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
@@ -110,15 +110,8 @@
 		                </script>
 	                </div>
 	                <div class="theme-font">
-		                <div 
-		                	style="text-align:center;
-			                		width:100%;
-			                		height:400px;
-			                		">
-		                	<img src="./resources/img/프로필.png"
-		                		style="height:400px;">
-		                		
-		                	
+		                <div id="mytheme">
+		                	<img src="./resources/img/프로필.png">
 		                </div>
 		                <div style="text-align:center;">
 		                <button class="inb"><</button>
@@ -133,15 +126,7 @@
 		                
 		                
 		                </div>
-	                	 <div
-			            style=" width:100%;
-			            		margin-top:20px;
-			            		height:60px;
-			            		border:0.5px solid violet;
-			            		display:inline-block;
-			            		
-			            		
-			            		">
+	                	 <div id="likeField">
 			            		<div style="float:left; margin-left:70%; margin-top:5px;">
 				            		<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"fill="currentColor" class="bi bi-chat-dots-fill" viewBox="0 0 16 16">
 									  <path d="M16 8c0 3.866-3.582 7-8 7a9 9 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7M5 8a1 1 0 1 0-2 0 1 1 0 0 0 2 0m4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0m3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
@@ -161,18 +146,7 @@
 	                	<div 
 	                	style=" border:1px solid violet;
 	                		">
-	                	<textarea id="textField"                	   
-		                	 style="width:83%;
-				                	height:200px;
-				                	border:none;
-				                	background-color:black;
-				                	color:violet;
-				                	outline:none;
-				                	font-size:1.5em;
-				                	font-weight:bold;
-				                	overflow:hidden;
-				                	resize:none;
-			                	"><%=title %><%=body %></textarea> 
+	                	<textarea id="textField"><%=title %><%=body %></textarea> 
 	                	</div>
 	                	
 	                </div>
