@@ -14,13 +14,19 @@ public class JoinService implements IF_JoinService{
 	@Override
 	public void inputMember(MemberVO mvo) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println(mvo.toString());
+		System.out.println(mvo.getEmail());
 		jdao.inputMember(mvo);
 	}
 	@Override
 	public String chkid(String id) throws Exception {
 		// TODO Auto-generated method stub
 		return jdao.chkid(id);
+	}
+	@Override
+	public String chkemail(String id) throws Exception {
+		// TODO Auto-generated method stub
+		System.out.println(jdao.chkemail(id)+"ser");
+		return jdao.chkemail(id);
 	}
 
 }

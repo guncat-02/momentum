@@ -77,6 +77,7 @@
 		domainInputEl.disabled = false
 		}
 	})
+	// 비번 일치 체크
     function chkpw() {
 		let pw = $('#reinpw').val();
 		let pwchk = $('#rechkpw').val();
@@ -87,7 +88,7 @@
 		}
 		return true;
 	}
-	
+	// submit시 유효성 체크
 	function chk() {
 	    
 	    let id = $('#inid').val();
@@ -127,6 +128,7 @@
 	var code = "";
 	 $("#certifybut").click(function() {
 		
+		let id = $('#inid').val();
 		let address = $('.emailInput').val();
 		let domain = $('#domain-txt').val();
 		let email = address + "@" + domain;
@@ -136,15 +138,21 @@
 		}
 		 $.ajax({
 			type:"GET",
-			url:"sendMail.do?email="+email,
+			url:"sendMail.do?email="+email+"&id="+id,
 			cache : false,
 			success:function(data) {
-				alert("인증번호 발송이 완료되었습니다. 입력한 이메일에서 확인 해주십시오.");
-				code = data;
-					 }
+				if(data != "null") {
+					alert("인증번호 발송이 완료되었습니다. 입력한 이메일에서 확인 해주십시오.");
+					code = data;
+					$("#emailhid").val(email);	
+				}else {
+					alert("아이디/이메일이 알맞지 않습니다.");
+				}
+				
+				}
 		 })
 	 });
-	 
+	 // 이메일 인증 체크
 	 $("#chknumbut").click(function() {
 		 if($(".cerInput").val()== "") {
 			 alert("인증번호를 입력해주세요.");

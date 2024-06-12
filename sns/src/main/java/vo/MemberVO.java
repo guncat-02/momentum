@@ -8,6 +8,7 @@ public class MemberVO {
 	private String pass; //비밀번호
 	private String name; //이름
 	private String b_date; //생년월일
+	private String email; //이메일
 	private List<ProfileVO> profileList; //프로필
 	
 	@Override
@@ -28,6 +29,9 @@ public class MemberVO {
 	public String getB_date() {
 		return b_date;
 	}
+	public String getEmail() {
+		return email;
+	}
 	public List<ProfileVO> getProfileList() {
 		return profileList;
 	}
@@ -45,7 +49,14 @@ public class MemberVO {
 	public void setB_date(String b_date) {
 		this.b_date = b_date;
 	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public void setProfileList(List<ProfileVO> profileList) {
 		this.profileList = profileList;
 	}
+
+	
+
+	
 }
