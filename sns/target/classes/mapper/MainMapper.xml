@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.IF_MainDAO">
+	
+	<select id="mainList" resultType="vo.MainVO" parameterType="String">
+		select distinct sumjoin.no , sumjoin.followid ,sumjoin.cont,cjoin.filename,sumjoin.show
+		from
+		    (select ajoin.followid, bjoin.no, bjoin.cont ,bjoin.show
+		    from(select followid from followtest where id=#{id}) ajoin
+		    INNER JOIN posttest bjoin
+		    ON ajoin.followid= bjoin.id
+		    where privacy = 1 ) sumjoin
+		Left OUTER JOIN attachtest cjoin
+		ON sumjoin.no = cjoin.no
+		order by sumjoin.no asc
+	</select>
+	
+</mapper>
+
+
+<!-- select 두번 한번은 내가 팔로우 한 사람의 글 받아오고 다른 한번은 글의 파일네임 받아오기
+<select id="mainList" resultType="vo.MainVO" parameterType="String">
+		select ajoin.followid, bjoin.no, bjoin.cont, bjoin.show
+	    from (select followid from followtest where id = #{id}) ajoin
+	    INNER JOIN posttest bjoin
+	    ON ajoin.followid = bjoin.id
+	    where privacy = 1
+	</select>
+	<select id="getFiles" resultType="String">
+		select filename from attachtest where no = #{no}
+	</select>
+
+ -->
+<!-- 
+		select sumjoin.followid, sumjoin.no, sumjoin.cont, cjoin.filename, sumjoin.show
+		from
+			(select ajoin.followid, bjoin.no, bjoin.cont ,bjoin.show
+			from (select followid from followtest where id=#{id}) ajoin
+			INNER JOIN posttest bjoin
+			ON ajoin.followid= bjoin.id
+			where privacy = 1 ) sumjoin
+		Left OUTER JOIN attachtest cjoin
+		ON sumjoin.no = cjoin.no 
+		order by sumjoin.no asc
+-->
