@@ -88,7 +88,7 @@
         </a>
         <br>
         
-        <a href="setting">
+        <a href="settings">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-gear"
                 viewBox="0 0 16 16">
                 <path
