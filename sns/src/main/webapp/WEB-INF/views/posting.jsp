@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page session="true" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -18,6 +19,12 @@
 <link rel="stylesheet" href="./resources/css/posting.css">
 
 <body class="theme">
+<div>
+		<c:if test="${userid != null }">
+			<span> 사용자 정보 : ${userid } / ${username } / ${nickName }</span>
+			<span><a href="/sns/logout">로그아웃</a></span>
+		</c:if>
+	</div>
     <div id="all">
         <div id="menuall">
             <%@ include file="menuAll.jsp"%>

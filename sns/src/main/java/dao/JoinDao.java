@@ -16,17 +16,26 @@ public class JoinDao implements IF_JoinDao{
 	@Override
 	public void inputMember(MemberVO mvo) throws Exception {
 		// TODO Auto-generated method stub
+		System.out.println(mvo.getEmail());
 		sqlSession.insert(mapperQuery+".inputMember", mvo);
 	}
 	@Override
 	public String chkid(String id) throws Exception {
 		// TODO Auto-generated method stub
-		if(sqlSession.selectOne(mapperQuery+".chkid", id)==null) {
+		if(sqlSession.selectOne(mapperQuery+".chkid", id) == null) {
+			
 			return "true";
 		}else {
 			return "false";
 		}
 		 
+	}
+	@Override
+	public String chkemail(String id) {
+		// TODO Auto-generated method stub
+		String dd = sqlSession.selectOne(mapperQuery+".chkemail", id);
+		return sqlSession.selectOne(mapperQuery+".chkemail", id);
+		
 	}
 
 }

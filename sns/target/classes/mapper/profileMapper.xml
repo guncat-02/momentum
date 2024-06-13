@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.IF_ProfileDao">
 <insert id="insert" parameterType="vo.ProfileVO">
-	insert into profileTest values('nuit0204', #{nickName}, #{photo}, #{tel}, #{bio}, #{privacy}, default)
+	insert into profileTest values(#{id}, #{nickName}, #{photo}, #{tel}, #{bio}, #{privacy}, default)
 </insert>
 <select id="chk" resultType="int">
 	select count(nickname) from profileTest where nickname = #{nickName}
@@ -13,6 +13,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	select * from profileTest where p_main = 1 and id = #{id}
 </select>
 <update id="update" parameterType="vo.ProfileVO">
-	update profileTest set id = #{id}, nickName = #{nickName}, photo = #{photo}, tel = #{tel}, bio = #{bio} where id = #{id}
+	update profileTest set id = #{id}, nickName = #{nickName}, photo = #{photo, jdbcType=VARCHAR}, tel = #{tel, jdbcType=VARCHAR}, bio = #{bio, jdbcType=VARCHAR}, privacy = #{privacy} where id = #{id}
 </update>
+<select id="matchId" resultType="String">
+	select nickName from profileTest where id = #{id} and p_main =1
+</select>
+
 </mapper>

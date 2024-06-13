@@ -9,9 +9,11 @@
     <link id="theme-setting" rel="stylesheet" href="./resources/css/dark_theme.css">
     <link rel="stylesheet" href="./resources/css/profileEdit.css">
 </head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <body class="theme">
-	<input type="hidden" value="${profile.photo}">
-    <form id="editForm" action="profileUpdate" method="post" encType="multipart/form-data">
+	<input type="hidden" value="true" id="editChk">
+    <form id="editForm" action="profileUpdate" method="post" encType="multipart/form-data" onsubmit="return update()">
+    	<input type="hidden" value="${profile.photo}" id="myPhoto" name="photo">
         <header id="back" class="theme">
             <span id="backBtn"><a id="backLocation">&lang;</a></span>
             <div id="myProInfo">
@@ -26,11 +28,11 @@
                 <span>EDIT MY PROFILE</span>
             </div>
             <div id="editImg">
-                <input type="button" name="myPhoto" value="REMOVE IMG" id="removeImg">
+                <input type="button" value="REMOVE IMG" id="removeImg">
                 <div id="editCircle">
                     <img id="editProImg">
                     <label for="proPhoto" id="photoLabel"></label>
-                    <input type="file" id="proPhoto" name="proPhto">
+                    <input type="file" id="proPhoto" name="proPhoto">
                 </div>
             </div>
         </div>
@@ -40,7 +42,7 @@
                 <input type="button" id="editNickChk" value="CHECK">
             </div>
             <div id="editNickCont" class="editCont">
-                <input type="text" name="nick" class="editItem" value="${profile.nickName}" placeholder="${profile.nickName}"  minlength="1" maxlength="8" pattern="^[ㄱ-ㅎ가-힣a-zA-Z\d_]+$" title="한글, 영어, 숫자, 언더바만 사용 가능합니다.">
+                <input type="text" name="nick" class="editItem" value="${profile.nickName}" placeholder="${profile.nickName}"  minlength="1" maxlength="8" pattern="^[ㄱ-ㅎ가-힣a-zA-Z\d_]+$" title="한글, 영어, 숫자, 언더바만 사용 가능합니다." id="editNickWord">
             </div>
         </div>
         <div id="editTel" class="edit">
@@ -48,7 +50,7 @@
                 <span>TEL</span>
             </div>
             <div id="editTelCont" class="editCont">
-                <input type="tel" name="tel" class="editItem" value="${profile.tel}" placeholder="${profile.tel}" maxlength="11" pattern="\d*" title="숫자만 입력하실 수 있습니다.">
+                <input type="tel" name="tel" class="editItem" value="${profile.tel}" placeholder="${profile.tel}" maxlength="13" pattern="(010)-\d{4}-\d{4}" title="전화번호 형식으로 입력해주세요.">
             </div>
         </div>
         <div id="editBio" class="edit">
@@ -80,6 +82,7 @@
     const radio = document.querySelectorAll('.editPrivacyRadio');
     const word = document.querySelectorAll('.privacyWord');
     const base = document.querySelector('#removeImg');
+    const photoValue = document.querySelector('#myPhoto').value;
 
     //form 초기화
     document.querySelector('#cancleBtn').addEventListener('click', () => {
@@ -107,7 +110,7 @@
             word.forEach(e => {
                 e.style.color = "white";
             });
-            word[i].style.color = "#00f7ff";
+            word[i].style.color = "#ff00bf";
         })
     }
 
@@ -119,10 +122,69 @@
         base.disabled = true;
     })
 
-    //이전 페이지로 이동
-    document.querySelector('#backLocation').addEventListener('click', ()=> {
-        history.back();
+    //프로필 불러오기
+    window.onload = function() {
+        const photo = document.querySelector('#myPhoto');
+        if(photo.value != "null") {
+            img.src = "download?filename="+photo.value;
+        } else if(photo.value == "null") {
+            img.src = "./resources/img/프로필.png"
+        }
+        for(let i = 0; i < radio.length; i++) {
+            if(radio[i].value == ${profile.privacy}) {
+                radio[i].checked = true;
+                word[i].style.color = "#ff00bf";
+            }
+        }
+    }
+    
+    //submit을 위한 메서드
+    function update() {
+        const nickChk = document.querySelector('#editChk');
+        if (nickChk.value == "true") {
+            if ((file.value == null || file.value == "") && base.value != "COMPLETE") {
+                document.querySelector('#myPhoto').value = photoValue;
+            } else if (base.value == "COMPLETE") {
+                document.querySelector('#myPhoto').value = "COMPLETE";
+            }
+            return true;
+        }
+        return false;
+    }
+    
+    //닉네임 중복 체크
+    $('#editNickChk').click(function() {
+        if($('#editNickWord').val() == "${profile.nickName}") {
+            alert('기존 NICK NAME과 동일합니다.');
+        } else {
+            $.ajax({
+                url: "profileChk",
+                method: "post",
+                data: {nickName: $('#editNickWord').val()},
+                success: function(result) {
+                    if(result != "null") {
+                        alert("확인되었습니다.");
+                        $('#editChk').val("true");
+                        $('#editNickChk').css("color", "#ff00bf")
+                    } else {
+                        alert("중복된 NICK NAME입니다.")
+                        $('#editChk').val("false");
+                    }
+                },
+                error: function() {
+                	alert('잠시후 다시 시도해주세요.');
+                }
+            })
+        }
+    });
+    
+    //change 시 값 변경
+    $('#editNickWord').change(function() {
+        $('#editChk').val("false");
+        $('#editNickChk').css("color", "#00f7ff");
+        if($('#editNickWord').val() == "${profile.nickName}") {
+            $('#editChk').val("true");
+        }
     })
-
 </script>
 </html>

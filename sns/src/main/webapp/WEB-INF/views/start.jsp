@@ -7,6 +7,7 @@
 <title>momentum</title>
 <link rel="stylesheet" href="./resources/css/start.css">
 </head>
+
 <body>
     <div id="logoPage">
         <span id="logo">M</span>

@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="./resources/css/profileShow.css">
 </head>
 <body class="theme">
+	<input type="hidden" value="${profile.photo}" id="photo">
 	<div id="back" class="theme">
 		<span id="backBtn"><a href="main">&lang;</a></span>
 		<div id="myProInfo">
@@ -39,7 +40,7 @@
 	<div id="myProfile">
 		<div id="myImg">
 			<div id="myImgCircle">
-				<img id="proImg" src="download?filename=${profile.photo}">
+				<img id="proImg">
 			</div>
 		</div>
 		<div id="myInfo">
@@ -87,5 +88,16 @@
             menu.style.display = "block";
         }
     })
+    
+    //프로필 불러오기
+    window.onload = function() {
+        const img = document.querySelector('#proImg');
+        const photo = document.querySelector('#photo');
+        if(photo.value != "null") {
+            img.src = "download?filename="+photo.value;
+        } else if(photo.value == "null") {
+            img.src = "./resources/img/프로필.png"
+        }
+    }
 </script>
 </html>

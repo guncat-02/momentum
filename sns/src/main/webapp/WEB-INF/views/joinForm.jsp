@@ -5,14 +5,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document</title>
+<title>Momentum</title>
 <link rel="stylesheet" href="./resources/css/Join.css">
 <link href="https://fonts.googleapis.com/css?family=Poppins:600" rel="stylesheet">
 
 </head>
 
 <body>
-	<form action="JoinMember" method="post" id="form" onsubmit="return chk()">
+	<form action="joinMember" method="post" id="form" onsubmit="return chk()">
 		<div id="Joinbox">
 			<label id="wel">MOMENTUM</label> <label id="joinwel">회원가입</label>
 			<div class="intext">
@@ -35,14 +35,16 @@
 				<span class="loginlabel namelabel">사용자명 </span><span class="essential">*</span><br> <input type="text" name="name" placeholder="이름을 입력하세요" class="logintxt tt" id="uninput">
 			</div>
 			<div class="intext">
-				<span class="loginlabel">이메일 </span><span class="essential">*</span><br> <input type="text" name="email" placeholder="이메일 입력" class="emailInput"><span id="em">@</span> <input class="box" id="domain-txt" type="text"> <select class="box" id="domain-list">
+				<span class="loginlabel">이메일 </span><span class="essential">*</span><br> <input type="text" placeholder="이메일 입력" class="emailInput"><span id="em">@</span> <input class="box" id="domain-txt" type="text"> <select class="box" id="domain-list">
 					<option value="type">직접 입력</option>
 					<option value="naver.com">naver.com</option>
-					<option value="google.com">gmail.com</option>
+					<option value="gmail.com">gmail.com</option>
 					<option value="hanmail.net">hanmail.net</option>
 					<option value="nate.com">nate.com</option>
 					<option value="kakao.com">kakao.com</option>
-				</select> <input type="text" name="certify" class="cerInput" placeholder="인증번호 6자리"><input type="button" value="인증번호 받기" id="certifybut"><input type="button" value="이메일 인증" id="chknumbut"> <input type="hidden" id="emailDoubleChk" />
+				</select> <input type="text" name="certify" class="cerInput" placeholder="인증번호 6자리"><input type="button" value="인증번호 받기" id="certifybut"><input type="button" value="이메일 인증" id="chknumbut"> 
+				<input type="hidden" id="emailDoubleChk" />
+				<input type = hidden value = "" name = email id = "emailhid">
 			</div>
 			<div class="intext">
 				<span class="loginlabel">생년월일 </span><span class="essential">*</span><br> <select name="year" class="box" id="birth-year" class="tt">
@@ -163,7 +165,7 @@
 		 	 });
 		}
 	});
-		
+	// 비밀번호 일치체크
 	function chkpw() {
 		let pw = $('#pw').val();
 		let pwchk = $('#pwchk').val();
@@ -176,7 +178,7 @@
 		}
 		return true;
 	}
-	
+	// submit 전 유효성 체크
 	function chk() {
 	    var a =  document.querySelectorAll('.tt');
 	    let month;
@@ -231,12 +233,20 @@
 			url:"sendMail.do?email="+email,
 			cache : false,
 			success:function(data) {
-				alert("인증번호 발송이 완료되었습니다. 입력한 이메일에서 확인 해주십시오.");
-				code = data;
-					 }
+				if(data == email) {
+					console.log(data);
+					alert("인증번호 발송이 완료되었습니다. 입력한 이메일에서 확인 해주십시오.");
+					code = data;
+					$("#emailhid").val(email);	
+				}else {
+					alert("중복된 이메일입니다.");
+				}
+				
+				}
 		 })
 	 });
 	 
+	 // 이메일 인증 확인 메소드
 	 $("#chknumbut").click(function() {
 		 if($(".cerInput").val()== "") {
 			 alert("인증번호를 입력해주세요.");
@@ -249,11 +259,14 @@
 			 alert("인증번호가 일치하지 않습니다.");
 		 }
 	 })
+	 
+	 // 아이디 중복체크하고 아이디 변경하면 중복체크 다시 하게 만드는 메소드
 	 $("#idinput").change(function() {
 		 $("#chkdup").val("false");
 		 console.log($("#chkdup").val());
 	 });
 	 
+	 // ajax 사용 아이디 중콕 체크
 	$("#duplication").click(function() {
 		let nowid = $('#idinput').val();
 		if(nowid=="") {
@@ -270,7 +283,7 @@
 					console.log($("#chkdup").val());
 					alert("중복되지않은 아이디입니다.")
 				}else {
-					alert("충복된 아이디입니다.")
+					alert("중복된 아이디입니다.")
 				}
 				}
 		 })

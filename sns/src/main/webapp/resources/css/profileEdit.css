@@ -123,7 +123,7 @@ a {
     font-size: 20px;
 }
 
-.editItemt:-webkit-autofill, .editItem:-webkit-autofill:hover, .editItem:-webkit-autofill:focus, .editItem:-webkit-autofill:active{
+.editItem:-webkit-autofill, .editItem:-webkit-autofill:hover, .editItem:-webkit-autofill:focus, .editItem:-webkit-autofill:active{
     -webkit-text-fill-color: #00f7ff;
     font-size: 20px;
     -webkit-box-shadow: 0 0 0 1000px transparent inset;
@@ -200,7 +200,7 @@ a {
 }
 
 .editPrivacyRadio:checked {
-    accent-color: #00f7ff;
+    accent-color: #ff00bf;
 }
 
 #removeImg {

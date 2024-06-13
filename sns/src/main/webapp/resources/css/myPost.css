@@ -1,0 +1,213 @@
+body {
+    width: auto;
+    margin: 0px;
+    -webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+/* 메뉴바, 메인 div 포함하는 전체 div */
+#all {
+    display: flex;
+    justify-content: left;
+}
+
+/* 왼쪽 메뉴 바 */
+#menuall {
+    display: block;
+    width: 240px;
+    height: 100vmin;
+    position: sticky;
+    top: 0;
+    border-right: 1px solid #00f7ff;
+    box-shadow: 3px 0px 7px 0px #41c4c4;
+    overflow-y: auto;
+}
+
+/* 주요 컨텐츠 */
+#main {
+    display: block;
+    width: 100%;
+    height: fit-content;
+    padding: 15px;
+}
+
+/* 글 작성 창 */
+#postingWindow {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #00000050;
+}
+
+/*yoom 추가 */
+#back_button{
+	display:inline-block;
+	width: 15%;
+	heigth:100px; 
+	text-align:center;
+}
+#back_button h1{
+	color:violet;
+}
+#top_text{
+	display: inline-block;
+	width: 60%;
+	heigth:100px;
+	text-align:center;
+}
+#post_main{
+	border:1px solid violet;
+}
+#post_me{
+	width:95%; margin-left:30px;
+}
+#pro_radius{
+	width: 70px;
+	height: 70px; 
+	border-radius: 70%;
+	border:1px solid violet;
+	overflow: hidden;
+	display:inline-block;
+	
+	
+}
+#pro_radius img{
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+#radius_and{
+	display:inline-block;
+}
+#showMove{
+	width: 60px;
+	height: 60px;
+	float: right; 
+	margin-right:10%;
+	margin-top:10px;
+	border:2px solid violet;
+	background-color:#00f7ff;
+	text-align:center;
+	color:violet;
+	
+}
+#moveSheet {
+	
+	position: fixed;
+    bottom: 0;
+    left: 200px;
+    width: 83%;
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    transition: 1s;
+
+    /* 서서히 나타나는 효과 */
+    visibility: hidden;
+    opacity: 0;
+	
+}
+#moveSheet.active {
+	visibility: visible;
+    opacity: 1;
+	
+}
+.move-options{
+	background-color: #fff;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    /* 세로 컨텐츠가 늘어나는 경우 스크롤이 생기도록 설정 */
+    overflow: auto;
+
+    max-height: 300px;
+    /* 아래에서 위로 나타나는 효과, max-height과 동일하게 작성 */
+    position: relative;
+    bottom: -300px;
+
+    transition: 1s;
+	
+}
+#moveSheet.active .move-options {
+	bottom:0;
+}
+
+.option {
+	color:black;
+	padding: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.option.close{
+	text-align:center;
+	
+}
+.option:hover{
+	background-color:#00f7ff;
+}
+.inb{
+    display: inline-block;
+    border:1px solid #00f7ff;
+    background-color: black;
+    color: #00f7ff;
+    filter: drop-shadow(-1px -1px 3px #41c4c4);
+}
+.inRadio{
+	display:inline-block;
+	margin-top:5px;
+}
+input[type='radio'] {
+    -webkit-appearance: none; /*// 웹킷 브라우저에서 기본 스타일 제거*/
+    -moz-appearance: none; /* 모질라 브라우저에서 기본 스타일 제거 */
+    appearance: none; /* 기본 브라우저에서 기본 스타일 제거*/
+    width: 18px;
+    height: 18px;
+    border: 2px solid #ccc; /*체크되지 않았을 때의 테두리 색상*/
+    border-radius: 50%;
+    outline: none; /* focus 시에 나타나는 기본 스타일 제거*/
+    cursor: pointer;
+}
+/* // 체크될 시에, 변화되는 스타일 설정*/
+input[type='radio']:checked {
+    background-color: #22d3ee; /*// 체크 시 내부 원으로 표시될 색상*/
+    border: 3px solid white; /*// 테두리가 아닌, 테두리와 원 사이의 색상*/
+    box-shadow: 0 0 0 1px #22d3ee; /*// 얘가 테두리가 됨*/
+/*// 그림자로 테두리를 직접 만들어야 함 (퍼지는 정도를 0으로 주면 테두리처럼 보입니다.)
+그림자가 없으면 그냥 설정한 색상이 꽉 찬 원으로만 나옵니다.*/
+}
+#top{
+	border:1px solid violet
+}
+#mytheme{
+	text-align:center;
+	width:100%;
+	height:400px;
+}
+#mytheme img{
+	height:400px;
+}
+#likeField{
+	width:100%;
+	margin-top:20px;
+	height:60px;
+	border:0.5px solid violet;
+	display:inline-block;
+}
+#textField{
+	width:83%;
+	height:200px;
+	border:none;
+	background-color:black;
+	color:violet;
+	outline:none;
+	font-size:1.5em;
+	font-weight:bold;
+	overflow:hidden;
+	resize:none;
+}

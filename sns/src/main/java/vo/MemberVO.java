@@ -10,6 +10,11 @@ public class MemberVO {
 	private String email; //이메일
 	private List<ProfileVO> profileList; //프로필
 	
+	@Override
+	public String toString() {
+		return "MemberVO [id=" + id + ", pass=" + pass + ", name=" + name + ", b_date=" + b_date + "]";
+	}
+	
 	//getter
 	public String getId() {
 		return id;
@@ -23,11 +28,11 @@ public class MemberVO {
 	public String getB_date() {
 		return b_date;
 	}
-	public List<ProfileVO> getProfileList() {
-		return profileList;
-	}
 	public String getEmail() {
 		return email;
+	}
+	public List<ProfileVO> getProfileList() {
+		return profileList;
 	}
 
 	

@@ -9,8 +9,11 @@
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <body>
+	
 	<input type="hidden" id="chkSave" value="false">
-    <form action="profileSave" method="post" onsubmit="return saveProfile()" encType="multipart/form-data">
+	
+    <form action="profileSave" method="post" onsubmit="return saveProfile()">
+    <input type="hidden" id="takeid" value="${ id }" name = "id">
         <div id="proAll">
             <span id="proTitle">CREATE YOUR PROFILE</span>
             <div id="profile">
@@ -34,8 +37,8 @@
                         <tr style="height: 10%;">
                             <th>TEL</th>
                             <td colspan="2"><input type="text" name="tel" class="proText" placeholder=" - 없이 입력하세요" maxlength="11" pattern="\d*" title="숫자만 입력하실 수 있습니다."></td>
-                        </tr style="height: 10%;">
-                        <tr>
+                        </tr>
+                        <tr style="height: 10%;">
                             <th>한 줄 소개</th>
                             <td colspan="2"><textarea name="bio" class="proText" maxlength="50" placeholder="50자 까지 입력 가능합니다."></textarea></td>
                         </tr>
@@ -94,7 +97,7 @@
                         alert("확인되었습니다.");
                         $('#chkSave').val("true");
                     } else {
-                        alert("중복된 아이디입니다.");
+                        alert("중복된 NICK NAME입니다.");
                         $('#chkSave').val("false");
                     }
                 }
@@ -115,6 +118,7 @@
             alert("중복체크가 완료되지 않았습니다.");
             return false;
         }
+        console.log($('#takeid').val());
         return true;
     }
 </script>
