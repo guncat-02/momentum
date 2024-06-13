@@ -10,6 +10,13 @@ public class MainVO {
 	private int privacy; //글 공개 여부
 	private String followId; //팔로우 한 id
 	private String id; //사용자를 팔로우한 id
+	private String p_date;
+	public String getP_date() {
+		return p_date;
+	}
+	public void setP_date(String p_date) {
+		this.p_date = p_date;
+	}
 	public int getNo() {
 		return no;
 	}
@@ -55,7 +62,7 @@ public class MainVO {
 	public String getFollowId() {
 		return followId;
 	}
-	public void setFollowid(String followId) {
+	public void setFollowId(String followId) {
 		this.followId = followId;
 	}
 	public String getId() {

@@ -51,13 +51,14 @@
                  
                 <!-- 사용자 닉네임, 프로필사진등 가져와서 쓰기 -->
                 <div id="post_main">
+                
 	                <div id="post_me" >
 		                <div id="pro_radius">
 		                	<img src="./resources/img/프로필.png">
 		                </div>
 	                	<div id="radius_and">
 		                	<h3>
-		                		username1234567890
+		                		${postingId}
 		                	</h3>
 	                	</div>
 	                	
@@ -111,7 +112,7 @@
 	                </div>
 	                <div class="theme-font">
 		                <div id="mytheme">
-		                	<img src="./resources/img/프로필.png">
+		                	<img src="download?filename=${filename}">
 		                </div>
 		                <div style="text-align:center;">
 		                <button class="inb"><</button>
@@ -146,7 +147,10 @@
 	                	<div 
 	                	style=" border:1px solid violet;
 	                		">
-	                	<textarea id="textField"><%=title %><%=body %></textarea> 
+	                	<textarea id="textField"><%-- <%=title %><%=body %> --%>${cont }</textarea>
+	                		
+	                	
+	                	 
 	                	</div>
 	                	
 	                </div>
@@ -189,7 +193,7 @@
         }
     }
     back_button.addEventListener('click',()=>{
-    	location.href="main";
+    	location.href="main_mintest";
     })
 </script>
 </html>
