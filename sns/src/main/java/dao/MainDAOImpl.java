@@ -22,4 +22,6 @@ public class MainDAOImpl implements IF_MainDAO{
 		return sqlsession.selectList(mapperQuery+".mainList",id);
 	}
 
+	
+
 }

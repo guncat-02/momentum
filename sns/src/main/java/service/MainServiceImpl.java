@@ -18,5 +18,6 @@ public class MainServiceImpl implements IF_MainService{
 		return maindao.mainAll(id);
 	}
 	
+	
 
 }
