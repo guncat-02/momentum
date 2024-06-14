@@ -25,7 +25,8 @@
             <input type ="submit" value ="로그인" id = "loginbut">
         </div>
         <div id = "jointext">
-            <span style="color: #00f7ff;">계정이 필요한가요? </span><a href = "join" class="alink"><span id = "joinlink">가입하기</span></a>
+            <span style="color: #00f7ff;">계정이 필요한가요? </span>&nbsp<a href = "join" class="alink"><span id = "spanlink">가입하기</span></a>
+            &nbsp<a href = "loginFindId" class="alink"><span id = "spanlink">비밀번호 찾기</span></a>
         </div>
     </div>
 	 </form>
@@ -35,10 +36,12 @@
 $(document).ready(function() {
 	
 	let message = "${ msg }"; // msg
-	console.log(message+"dad")
 	if(message != "") {
 		alert("${ msg }");
 	}
 })
+
+
+
 </script>
 </html>

@@ -1,16 +1,17 @@
 package vo;
 
-import java.util.List;
-
 public class ProfileVO {
+	private String id; //아이디
 	private String nickName; //닉네임
 	private String photo; //프로필 사진
 	private String tel; //전화번호
-	private String email; //이메일
-	private String vio; //한 줄 소개
+	private String bio; //한 줄 소개
 	private int privacy; //공개 여부
 	
 	//getter
+	public String getId() {
+		return id;
+	}
 	public String getNickName() {
 		return nickName;
 	}
@@ -20,17 +21,17 @@ public class ProfileVO {
 	public String getTel() {
 		return tel;
 	}
-	public String getEmail() {
-		return email;
-	}
-	public String getVio() {
-		return vio;
+	public String getBio() {
+		return bio;
 	}
 	public int getPrivacy() {
 		return privacy;
 	}
 	
 	//setter
+	public void setId(String id) {
+		this.id = id;
+	}
 	public void setPrivacy(int privacy) {
 		this.privacy = privacy;
 	}
@@ -40,11 +41,8 @@ public class ProfileVO {
 	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public void setVio(String vio) {
-		this.vio = vio;
+	public void setBio(String bio) {
+		this.bio = bio;
 	}
 	
 	//전화번호에 - 추가
@@ -57,7 +55,7 @@ public class ProfileVO {
 			}
 			telNum += tel.charAt(i);
 		}
-		this.tel = tel;
+		this.tel = telNum;
 	}
 	
 	//전화번호에 - 제거
@@ -70,4 +68,5 @@ public class ProfileVO {
 		}
 		return telNum;
 	}
+	
 }
