@@ -43,6 +43,7 @@
                     </ol>
                 </ol>
             </ol>
+            <button type="button" id="settings-back-btn" class="theme">&lang; BACK</button>
         </div>
         <div id="settings-cont">
             this is settings.
@@ -54,6 +55,7 @@
 
 	$(document).ready(function() {
 	    $('#settings-menu label li > h2').css('color', 'grey');
+	    $('#theme-setting').prop('href', localStorage.getItem('curTheme'));
 	});
 	
 	$('#settings-menu label').on('click', function() {
@@ -94,6 +96,10 @@
 	    	}
 	    });
 	});
+	
+	$('#settings-back-btn').on('click', function() {
+        location.href="/sns/main";
+    });
     
 </script>
 </html>

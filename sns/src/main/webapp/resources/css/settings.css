@@ -8,12 +8,10 @@ body {
 }
 
 main {
-    display: flex;
-    justify-content: left;
+    display: grid;
+    grid-template-columns: 1fr 5fr;
 }
 #settings-menu {
-    display: block;
-    width: 240px;
     height: 100vmin;
     position: sticky;
     top: 0;
@@ -23,8 +21,6 @@ main {
     overflow-y: auto;
 }
 #settings-cont {
-    display: block;
-    width: 100%;
     margin: 10px 15px;
 }
 #settings-menu ol {
@@ -47,6 +43,15 @@ main {
 #settings-menu label:hover {
     cursor: pointer;
 }
-#settings-menu li[id^="settings"]:hover {
+#settings-menu li[id^=settings]:hover {
+    cursor: pointer;
+}
+#settings-back-btn {
+    position: absolute;
+    bottom: 20px;
+    left: 10px;
+    border: none;
+    font-size: 25px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     cursor: pointer;
 }

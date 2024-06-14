@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="kor">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
     integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer">
@@ -47,12 +48,6 @@
         padding-top: 15px;
     }
 
-    #member-info-table .cont-title svg {
-        color: rgb(0, 255, 0);
-        margin-top: auto;
-        margin-bottom: auto;
-    }
-
     .member-info-btns {
         width: 15%;
     }
@@ -62,13 +57,15 @@
         height: 30px;
         border-radius: 8px;
         font-weight: bold;
-    }
-
-    .member-info-btns button:hover {
         cursor: pointer;
     }
 
-    input[type=text] {
+    .member-info-btns button:not([class="delete-account"]):hover {
+        transition-duration: 250ms;
+        filter: invert(100%);
+    }
+
+    input[type=text],input[type=password] {
         width: 98.5%;
         height: 25px;
         border-radius: 8px;
@@ -77,7 +74,11 @@
     input[type=text]:-webkit-autofill,
     input[type=text]:-webkit-autofill:hover,
     input[type=text]:-webkit-autofill:focus,
-    input[type=text]:-webkit-autofill:active {
+    input[type=text]:-webkit-autofill:active,
+    input[type=password]:-webkit-autofill,
+    input[type=password]:-webkit-autofill:hover,
+    input[type=password]:-webkit-autofill:focus,
+    input[type=password]:-webkit-autofill:active {
         -webkit-text-fill-color: #00f7ff;
         -webkit-box-shadow: 0 0 0 1000px transparent inset;
         box-shadow: 0 0 0 1000px transparent inset;
@@ -139,6 +140,7 @@
     #popup table .delete-btns td {
         height: 15%;
     }
+
 </style>
 
 <body class="theme">
@@ -173,7 +175,7 @@
                         이름 변경은 비밀번호 인증 절차를 필요로 합니다.
                     </td>
                     <td>
-                        <input type="text" name="pass" id="passtext" class="theme theme-border"
+                        <input type="password" name="pass" id="passtext" class="theme theme-border"
                             placeholder="여기에 비밀번호 입력">
                     </td>
                     <td class="member-info-btns">
@@ -218,7 +220,6 @@
             </tbody>
         </table>
     </div>
-    <!-- 계정 삭제 버튼 클릭 시 뜨는 팝업 창 -->
     <div id="b">
         <div id="popup" class="theme">
             <table>
@@ -229,13 +230,12 @@
                         </th>
                     </tr>
                 </thead>
-                <!-- 팝업 창 첫번째 페이지 -->
                 <tbody class="before-deletion">
                     <tr>
                         <td colspan="2" style="height: 50%;">
-                        	 계정 삭제 시, 프로필과 게시물을 포함한 계정의 모든 정보가<br>
+                            계정 삭제 시, 프로필과 게시물을 포함한 계정의 모든 정보가<br>
                             <span style="color: red;"><u>즉시 삭제</u>되며, 다시 복구 할 수 없습니다.</span><br>
-							또한 MomentumSNS의 모든 기능을 이용 할 수 없게 됩니다.<br><br>
+                            또한 MomentumSNS의 모든 기능을 이용 할 수 없게 됩니다.<br><br>
                             <b>정말 계정을 삭제하시겠습니까?</b>
                         </td>
                     </tr>
@@ -248,12 +248,18 @@
                         </td>
                     </tr>
                 </tbody>
-                <!-- 팝업 창 두번째 페이지 -->
+                <%
+                // Session의 id 및 nickname 값 저장.
+                String id = (String)session.getAttribute("userid");
+                String nickName = (String)session.getAttribute("nickName");
+                %>
                 <tbody class="on-deletion">
                     <tr>
                         <td style="height: 30%;" colspan="2">
                             아래의 문구를 정확히 따라 입력하여 삭제를 완료합니다.<br><br>
-                            <span id="idAndNick">아이디랑 닉네임</span>
+                            <!-- Session에서 가져온 값 활용 -->
+                            <!-- <span id="idAndNick"><%=id %>/<%=nickName %> 계정을 삭제합니다.</span> -->
+                            <span id="idAndNick">brian332/brian332 의 계정을 삭제합니다.</span>
                         </td>
                     </tr>
                     <tr>
@@ -343,16 +349,16 @@
     $('#want-deletion').on('click', function () {
         $('#b').css('display', 'block');
     });
-	// 팝업 창 첫번째 화면의 삭제 버튼 클릭 시 두번째 페이지로 바꾼다
+	// 팝업 창 첫번째 페이지의 삭제 버튼 클릭 시 두번째 페이지로 바꾼다
     $('#before-deletion-confirm-btn').on('click', function () {
         $('.before-deletion').css('display', 'none');
         $('.on-deletion').css('display', '');
     });
-	// 팝업 창 첫번째 화면의 취소 버튼 클릭 시 팝업 창 닫는다
+	// 팝업 창 첫번째 페이지의 취소 버튼 클릭 시 팝업 창 닫는다
     $('#before-deletion-cancel-btn').on('click', function () {
         $('#b').css('display', 'none');
     });
-	// 팝업 창 두번째 화면의 삭제 버튼 클릭 시
+	// 팝업 창 두번째 페이지의 삭제 버튼 클릭 시
 	$('#deletion-confirm-btn').on('click', function() {
 		let input = $('#idnicktext').val();
 		if ($.trim($('#idAndNick').text()) == input) {
@@ -377,7 +383,7 @@
 				}
 			});
 		} else {
-			
+			alert('잘못 입력되었습니다.\n삭제 취소를 원할 경우 \'취소\' 버튼을 눌러주세요.');
 		}
 	});
 	// 팝업 창 두번째 화면의 취소 버튼 클릭 시 input:text 값 지우고 팝업 창 닫는다
