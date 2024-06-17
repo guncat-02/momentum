@@ -9,4 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <select id="chk" resultType="int">
 	select count(nickname) from profileTest where nickname = #{nickName}
 </select>
+<select id="select" resultType="vo.ProfileVO">
+	select * from profileTest where p_main = 1 and id = #{id}
+</select>
 </mapper>

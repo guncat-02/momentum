@@ -25,4 +25,10 @@ public class ProfileDao implements IF_ProfileDao{
 	public int chk(String nickName) throws Exception {
 		return sql.selectOne(mapperQuery+".chk", nickName);
 	}
+	
+	//프로필 정보 불러오기
+	@Override
+	public ProfileVO select(String id) throws Exception {
+		return sql.selectOne(mapperQuery+".select", id);
+	}
 }
