@@ -125,7 +125,6 @@ public class LoginController {
 	
 	@PostMapping("/loginpwupdate")
 	public String updatepw(@ModelAttribute MemberVO mvo) throws Exception {
-		System.out.println(mvo.getId()+ "/" + mvo.getPass());
 		lservice.updatepw(mvo);
 		
 		return "redirect:/loginpage";

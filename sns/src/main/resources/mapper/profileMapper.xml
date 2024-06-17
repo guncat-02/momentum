@@ -9,6 +9,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <select id="chk" resultType="int">
 	select count(nickname) from profileTest where nickname = #{nickName}
 </select>
+<select id="select" resultType="vo.ProfileVO">
+	select * from profileTest where p_main = 1 and id = #{id}
+</select>
+<update id="update" parameterType="vo.ProfileVO">
+	update profileTest set id = #{id}, nickName = #{nickName}, photo = #{photo}, tel = #{tel}, bio = #{bio} where id = #{id}
+</update>
 <select id="matchId" resultType="String">
 	select nickName from profileTest where id = #{id} and p_main =1
 </select>

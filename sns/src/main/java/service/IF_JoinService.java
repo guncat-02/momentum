@@ -10,4 +10,6 @@ public interface IF_JoinService {
 	public String chkid(String id) throws Exception;
 
 	public String chkemail(String id) throws Exception;
+
+	public String chkdupemail(String email);
 }

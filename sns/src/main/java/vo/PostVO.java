@@ -9,7 +9,7 @@ public class PostVO {
 	private String[] filename; //첨부 파일
 	private int privacy; //글 공개 여부
 	private int c_block; //댓글 차단 여부
-	private String p_date;
+	private String p_date; //글 작성일
 	
 	//getter
 	public int getNo() {
@@ -39,6 +39,7 @@ public class PostVO {
 	public String getP_date() {
 		return p_date;
 	}
+	
 	//setter
 	public void setNo(int no) {
 		this.no = no;

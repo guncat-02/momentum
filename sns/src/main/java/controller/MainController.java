@@ -2,8 +2,11 @@ package controller;
 
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import vo.PostVO;
 
 
 
@@ -17,6 +20,14 @@ public class MainController {
 	}
 	@GetMapping("/myPost")
 	public String myPost() throws Exception{
+		return "myPost";
+	}
+	
+	
+	@GetMapping("/myPostShow")
+	public String myPostShow(Model model, PostVO pvo) throws Exception{
+		model.addAttribute("no", pvo.getNo());
+		
 		return "myPost";
 	}
 }

@@ -8,6 +8,11 @@ body {
 }
 
 /* 메뉴바, 메인 div 포함하는 전체 div */
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
 #all {
     display: flex;
     justify-content: left;
@@ -211,3 +216,95 @@ input[type='radio']:checked {
 	overflow:hidden;
 	resize:none;
 }
+
+
+#comments {
+	padding-top : 30px;
+}
+
+
+.comminput {
+	margin-top : 10px;
+	width : 900px;
+	height : 50px;
+	border-radius: 10px;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+	font-size : 15px;
+
+}
+.recomminput{
+	margin-top : 10px;
+	width : 880px;
+	height : 50px;
+	border-radius: 10px;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+	font-size : 15px;
+
+}
+
+.postcommbut {
+	margin-top : 15px;
+	background-color: #000000;
+	cursor: pointer;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+	width: 100px;
+	height: 50px;
+	color: #00f7ff;
+	border: 1px solid #00f7ff;
+	border-radius: 5px;
+	margin-left: 5px;
+	box-shadow: 0px 7px 0px 0px #1e1f22;
+	
+}
+.postcommbut:active {
+	position: relative;
+	top: 2px;
+	box-shadow: none;
+}
+
+.comm_date{
+	font-size : 15px;
+}
+
+
+.comm_id {
+	color : #ff00bf;
+	font-size : 18px;
+}
+
+#ctablediv {
+	margin-top : 20px;
+	border-radius : 5px;
+	border : 1px solid #00f7ff;
+}
+.ctable {
+	display : block;
+	width : 1000px;
+	margin-left :10px;
+	margin-top :10px;
+	border-bottom : 1px solid #00f7ff;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; 
+}
+
+
+
+
+.rctable {
+	display : none;
+	width : 1000px;
+	margin-left :10px;
+	margin-top :10px;
+	border-top : 1px solid #00f7ff;
+	
+}
+
+#commcontents {
+	width : 1000px;
+	height : 5px;
+}
+
+.com_date {
+	margin-right: 800px;
+}
+
+

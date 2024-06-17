@@ -33,8 +33,6 @@ public class MailController {
 		
 		int ran = (int)((Math.random()* (99999 - 10000 + 1)) + 10000);
 		String code = Integer.toString(ran);
-		System.out.println(jservice.chkemail(id)+"dd");
-		System.out.println(email+"ss");
 		if(jservice.chkemail(id).equals(email)) {
 			request.setCharacterEncoding("utf-8");
 			response.setContentType("text/html;charset=utf-8");
@@ -48,6 +46,26 @@ public class MailController {
 		return code;
 	}
 	
+	@RequestMapping(value = "/sendJoinMail.do", method= RequestMethod.GET)
+	@ResponseBody
+	public String sendJoinMail(HttpServletRequest request,HttpServletResponse response, @RequestParam("email") String email) throws Exception
+	{
+		
+		int ran = (int)((Math.random()* (99999 - 10000 + 1)) + 10000);
+		String code = Integer.toString(ran);
+		
+		if(jservice.chkdupemail(email)==null) {
+			request.setCharacterEncoding("utf-8");
+			response.setContentType("text/html;charset=utf-8");
+			mailService.sendMail(email,"Momentum 이메일 인증","인증번호: "+code);
+			
+		}
+		else {
+			code="null";
+		}
+		
+		return code;
+	}
 	
 }
 

@@ -1,6 +1,5 @@
 package vo;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MemberVO {
@@ -35,6 +34,7 @@ public class MemberVO {
 	public List<ProfileVO> getProfileList() {
 		return profileList;
 	}
+
 	
 	//setter
 	public void setId(String id) {
@@ -55,8 +55,7 @@ public class MemberVO {
 	public void setProfileList(List<ProfileVO> profileList) {
 		this.profileList = profileList;
 	}
-
-	
-
-	
+	public void setEmail(String email) {
+		this.email = email;
+	}
 }

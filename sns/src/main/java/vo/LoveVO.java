@@ -1,7 +1,5 @@
 package vo;
 
-import java.util.List;
-
 public class LoveVO {
 	private int no; //좋아요 한 글 번호
 	private int c_no; //좋아요 한 댓글 번호
@@ -21,4 +19,6 @@ public class LoveVO {
 	public void setNo(int no) {
 		this.no = no;
 	}
+	
+
 }
