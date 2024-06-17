@@ -1,12 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page session="true" %>
+
 <% request.setCharacterEncoding("UTF-8");
-	
-	String title = request.getParameter("title");
-	String body = request.getParameter("body");
-	session.setAttribute("title",title);
-	session.setAttribute("body",body);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
@@ -28,7 +25,8 @@
 <!--현재 테마 여부. 0 : 다크, 1 : 라이트-->
 <input type="hidden" id="cur-theme" value="0">
 <link rel="stylesheet" href="./resources/css/main.css">
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <body class="theme">
     <div id="all">
         <div id="menuall">
@@ -36,51 +34,77 @@
         </div>
         <div id="main">
             <main>
-                <h1 class="theme-font">HELLO WORLD</h1>
-                <!--테마 변경은 추후 설정 화면에서 제어-->
+                <h1 class="theme-font">
+                <c:if test="${userid != null }">
+					<span> 사용자 정보 : ${userid } / ${username } / ${grade }</span>
+				</c:if>
+                </h1>
                 <input type="button" value="themechange" id="btn">
+                <div class="theme-font" id="root">
                 <!-- root class에 게시물 들어옵니다 -->
-                <form ><!-- onclick="document.forms['rootForm'].submit();" -->
-                <div class="theme-font" id="root"></div>
-                </form>
-                <!-- 시간나면 loading바 연출은 footer class에서 진행.. 이유는 게시물 최하단에 loading바를 만들 계획이므로.. -->
-                <div class=footer></div>
+	                <c:forEach items="${aList}" var="post" varStatus="postStat">
+		                <div class="postS"  style="border:1px solid violet; display:none;">
+		                 <input type="text" name="id" value="${post.id}" class="id cssid" >
+		                 	<div id="carouselExample${postStat.count }" class="carousel slide num${postStat.count }" >
+								<div class="carousel-inner">
+								    <c:forEach items="${post.filename }" var="file" varStatus="status">
+								    	<c:if test="${status.index == 0 }">
+								    		<div class="carousel-item active">
+										    	<img src="download?filename=${status.current}" class="d-block w-100" alt="...">
+										    </div>
+					        			</c:if>
+					        			<c:if test="${status.index >= 1 }">
+								    		<div class="carousel-item">
+										    	<img src="download?filename=${status.current}" class="d-block w-100" alt="...">
+										    </div>
+					        			</c:if>
+						        		<c:if test="${status.last == true && status.index != 0  }">
+						        			<button class="carousel-control-prev" type="button" data-bs-target="#carouselExample${postStat.count }" data-bs-slide="prev">
+											    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+											    <span class="visually-hidden">Previous</span>
+										  	</button>
+										  	<button class="carousel-control-next" type="button" data-bs-target="#carouselExample${postStat.count }" data-bs-slide="next">
+											    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+											    <span class="visually-hidden">Next</span>
+									  		</button>
+						        		</c:if>
+				        			</c:forEach>
+								</div>
+							</div>
+				        	<form action = "myPost" method = "post" name="form" class="postCss">
+				        		<input type="hidden" name="no" value="${post.no}" class="no" style="background-color:black;">
+				        		<input type="hidden" name="id" value="${post.id}" class="id cssid" >
+				        		<textarea name="cont" class="cont" style="background-color:black;width:90%;height:200px;border:1px solid violet; color:violet;" readonly>${post.cont}</textarea>
+				        		<div class="likeLine">
+					        		<div class="likeCount">
+										likeCount : 0
+					        		</div>
+					        		<div class="viewCount">	
+										<input type="text" name="show" value="${post.show}" class="showCnt">
+					        		</div>
+				        		</div>
+				        		<input type="hidden" name="privacy" value="${post.privacy}" class="privacy">
+				        		<c:forEach items="${post.filename }" var="file" varStatus="status">
+					        		<input type="hidden" name="filename" value="${status.current}" class="filename">
+				        		</c:forEach>
+				        		<c:if test="${userid != null }">
+				        			<input type="hidden" name="myid" value="${userid}" class="myid" style="margin-top:100px; ">
+				        			<input type="hidden" name="myname" value="${username}" class="myname">
+				        			<input type="hidden" name="mygrade" value="${grade}" class="mygrade">
+								</c:if>
+					    	</form>
+					    </div>
+		        	</c:forEach>
+                </div>
+                <!-- 값이 비워져있으나 해당 div를 통해 무한스크롤의 바닥을 감지합니다 지우시면 스크롤시 문제가 발생합니다 -->
+                <div class="footer"></div>
             </main>
         </div>
-        <!-- DB의 값을 attribute로 넘겨줄때 js로 바로 가져와서 넣지 않고 html body안에서 jstl을 통해 한번 받아준 후에
-        	script단에서 innerText로 값을 사용했다.
-        	attribute로 넘겨준 리스트를 바로 script에서 받아오는 것도 가능은 하나, attribute로 넘기는 값의 타입이 리스트기 때문에
-        	리스트에서 값을 다시 꺼내야 하는데 이 과정이 복잡했다..
-        	(promise가 실행되면 5개의 게시물값이 필요한데 script단에서 이때 반복문을 돌리면 소스가 너무 복잡해지는 문제가 생겼다..) 
-        	그렇기 때문에 최종적으로 jstl을 통해 값을 받고 display:none 스타일을 적용시켜 화면에서 값을 숨겼다.
-        	하지만 이 방식은 f12 개발자 도구를 통해 값을 모두 꺼내볼수 있으므로 취약점이 분명히 드러난다 / yoom 작성..-->
-	    <div class="hiQuery theme-font" style="display:none;">
-	        <c:forEach items="${mList}" var="post">
-	        	<form action="myPost" method="post" name="rootForm1">
-	        	<input type="text"  value=" ${post.followId} " name="followId">
-	    		<input type="text"  value=" ${post.no} " name="no">
-	    		<input type="text"  value=" ${post.cont} " name="cont">
-		        	<p class="follow">${post.followId}</p>
-		        	<p class="no">${post.no}</p>
-		        	<p class="postingId">${post.id}</p>
-		        	<p class="cont">${post.cont}</p>
-		        	<p class="showCnt">${post.show}</p>
-		        	<p class="privacy">${post.privacy}</p>
-		        	<p class="p_date">${post.p_date}</p>
-		        	<p class="filename">${post.filename}</p>
-	        	</form>
-	        </c:forEach>
-	        <p class="myLog">${myId }</p>
-	    </div>
-        
-
-        
     </div>
 </body>
 
 <script>
-
-    //테마 변경 스크립트. 나중에 설정 화면에서 별도 제어 예정
+	
     $('#btn').on('click', function () {
         themeSwitch();
         if ($('#cur-theme').val() == 0) {
@@ -97,111 +121,19 @@
             $('#cur-theme').val(0);
         }
     }
+   
 	
     //infinite scroll -start
+    //첫 로드되는 게시물에 click이벤트 적용
    	window.onload=function(){
    		setTimeout(()=>{
-   	   		var target = document.querySelectorAll('.postS');
-   	   		target.forEach((post)=>post.addEventListener("click", function(){
-   	   			
-   	   			if(document.getElementsByClassName("filename")[$(this).index()].innerText!='0'){
-   	   				
-   	   				/* 값이 제대로 담기는지 확인. $(this).index를 통해 클릭한 곳의 인덱스를 반환받는다
-   	   				반환받은 인덱스를 통해 내가 어떤 게시물을 선택했는지 알수 있고 그 게시물의 innerText값을 받아온다.
-   	   				console.log(document.getElementsByClassName("postingId")[$(this).index()].innerText);
-   	   				console.log(document.getElementsByClassName("filename")[$(this).index()].innerText);
-   	   				console.log(document.getElementsByClassName("showCnt")[$(this).index()].innerText);
-   	   				console.log(document.getElementsByClassName("cont")[$(this).index()].innerText);
-   	   				 */
-   	   				 
-   	   				/*
-   	   				 값을 넘겨주는 방식으로 form태그 안에서 submit액션을 통해 post메소드 방식으로 값을 넘기는 것을 채택했다.
-   	   				페이지가 html문서가 변경될 필요가 있으므로 비동기 방식이 아닌 동기방식으로 선택한 것이다..
-   	   				*/
-   	   				
-   	   				
-	   	   			var form=document.createElement("form");
-   	   				 //먼저 createElement를 통해 form을 만든다
-   	   				 //바로 아래에 방금 생성한 form의 속성을 설정해준다
-	   	   			form.setAttribute("charset","UTF-8");
-   	   				 //인코딩 방식을 utf-8로 설정해주고
-	   	   			form.setAttribute("method","Post");
-   	   				 //메소드는 post방식으로 설정한다
-	   	   			form.setAttribute("action","myPost");
-   	   				 //액션으로 이동할 view의 String을 적어준다. 액션요소가 발생하면 contextPath/myPost.jsp로 url이 변경된다(동기방식)
-	   	   			
-   	   				 //form이 만들어졌으니 form태그 안에 들어갈 input Element를 생성한다
-	   	   			var hiddenField = document.createElement("input");
-   	   				 //위에서 form태그의 속성을 설정해준것처럼 Element를 생성하고 나면 아래에 속성을 setAttribute메서드로 정의해준다.
-		   			hiddenField.setAttribute("type","hidden");
-		   			hiddenField.setAttribute("name","postingId");
-		   			hiddenField.setAttribute("value",document.getElementsByClassName("postingId")[$(this).index()].innerText);
-		   			//속성의 설정이 다끝나면 appendChild로 form태그의 자식요소로 넣어준다 append이기때문에 순서대로 들어가게 된다(처음값이 인덱스 0)
-		   			form.appendChild(hiddenField);
-	   	   			
-		   			//넣을 input Element만큼 반복해서 넣어준다.
-		   			var hiddenField = document.createElement("input");
-		   			hiddenField.setAttribute("type","hidden");
-		   			hiddenField.setAttribute("name","filename");
-		   			hiddenField.setAttribute("value",document.getElementsByClassName("filename")[$(this).index()].innerText);
-		   			form.appendChild(hiddenField);
-		   			
-		   			var hiddenField = document.createElement("input");
-		   			hiddenField.setAttribute("type","hidden");
-		   			hiddenField.setAttribute("name","showCnt");
-		   			hiddenField.setAttribute("value",document.getElementsByClassName("showCnt")[$(this).index()].innerText);
-		   			form.appendChild(hiddenField);
-	   	   			
-	   	   			var hiddenField = document.createElement("input");
-	   	   			hiddenField.setAttribute("type","hidden");
-	   	   			hiddenField.setAttribute("name","cont");
-	   	   			hiddenField.setAttribute("value",document.getElementsByClassName("cont")[$(this).index()].innerText);
-	   	   			form.appendChild(hiddenField);
-	   	   			
-	   	   			document.body.appendChild(form);
-	   	   			
-	   	   			form.submit();
-	   	   			//submit()메서드를 호출해 바로 form요소의 submit액션이 일어나도록 한다.
-	   	   			//submit액션이 일어나면서 방금 생성한 form 안의 input Element의 value를 Controller단에서 @RequestMapping을 통해 받아 사용가능해진다
-	   	   			
-   	   			}else{
-   	   				/*
-   	   				console.log(document.getElementsByClassName("postingId")[$(this).index()].innerText);
-   	   				console.log(document.getElementsByClassName("showCnt")[$(this).index()].innerText);
-   	   				console.log(document.getElementsByClassName("cont")[$(this).index()].innerText);
-   	   				*/
-   	   				
-	   	   			var form=document.createElement("form");
-		   				
-	  	   			form.setAttribute("charset","UTF-8");
-	  	   			form.setAttribute("method","Post");
-	  	   			form.setAttribute("action","myPost");
-	
-	  	   			var hiddenField = document.createElement("input");
-		   			hiddenField.setAttribute("type","hidden");
-		   			hiddenField.setAttribute("name","postingId");
-		   			hiddenField.setAttribute("value",document.getElementsByClassName("postingId")[$(this).index()].innerText);
-		   			form.appendChild(hiddenField);
-	  	   			
-		   			var hiddenField = document.createElement("input");
-		   			hiddenField.setAttribute("type","hidden");
-		   			hiddenField.setAttribute("name","showCnt");
-		   			hiddenField.setAttribute("value",document.getElementsByClassName("showCnt")[$(this).index()].innerText);
-		   			form.appendChild(hiddenField);
-	  	   			
-	  	   			var hiddenField = document.createElement("input");
-	  	   			hiddenField.setAttribute("type","hidden");
-	  	   			hiddenField.setAttribute("name","cont");
-	  	   			hiddenField.setAttribute("value",document.getElementsByClassName("cont")[$(this).index()].innerText);
-	  	   			form.appendChild(hiddenField);
-	  	   			
-	  	   			document.body.appendChild(form);
-	  	   			
-	  	   			form.submit();
-  	   			
-   	   			}
-   	   			
-   	   		}));
+   			var target =document.querySelectorAll(".postLoad");
+   			target.forEach((post)=>post.addEventListener("click", function(e){
+				var form = document.getElementsByName("form")[$(this).index()];
+				$(this).find('form').on('click',()=>{
+					form.submit();
+				});
+			})); 
    	   	},1000)
     }
     
@@ -209,12 +141,9 @@
 	const $footer = document.querySelector('.footer')
 	// getList = 5개의 게시글을 비동기적으로 불러오는 함수
 	const getList = (count) => {
-		
 	  return new Promise(resolve => {
-		  
-		  //set Timeout 을 통해 1초후 실행되는 promise를 만듭니다
-	    setTimeout(() => {
-	    	
+		//set Timeout 을 통해 1초후 실행되는 promise를 만듭니다
+		setTimeout(() => {
 	      const data = Array.from({length:5}).map((_,idx)=>{
 	        const no = (count*5)+idx+1
 	        return {no, data: `${no}`}
@@ -224,50 +153,26 @@
 	  })
 	}
 	//cnt변수는 게시물리스트가 순차적으로 새로운 DOM요소로 들어갈수 있게 인덱스의 역할을 해줌
-	//body영역에 만들어진 className이 hiQuery인 div는 display:none으로 설정되어 화면에는 나타나지 않으나
-	//model.attribute로 넘겨준 mList의 값을 c:forEach 반복문으로 저장함
-	
 	var cnt=0;
 	//renderItem = 하나의 게시글을 DOM요소로 변경하는 함수
 	const renderItem = ({id, data}) => {
 		
 	const div = document.createElement('div')
-	div.className="postS"
-	if(document.getElementsByClassName("follow")[cnt]==undefined){
-		//div class="hiQuery"에 저장된 값을 document.getElemetsByClassName("follow")[cnt]를 통해 
+	div.className="postLoad"
+		
+	if(document.getElementsByClassName("postS")[cnt]==undefined){
+		//div class="postS"에 저장된 값을 document.getElementsByClassName("postS")[cnt]를 통해 
 		//다음 게시물이 존재하는지 확인한다. undefined값이 나오면 div를 리턴해 바로 화면에 보여준다 예를들어 총 8개의 게시물이 존재할때
 		//첫 5개는 한번에 화면에 보여지고 다시 5개의 게시물을 DOM에 저장하려고 할때 3개의 게시물이 저장된 이후 바로 return해 화면에 보여준다
     	return div
     }
-	//게시물에 사진 파일이 존재하지 않는 상황을 알기 위해 "filename" 클래스명을 가진 리스트의 innerText값을 확인한다.
-	//document.getElementsByClassName("filename")[cnt].innerText 값이 ''로 나오면 해당 값이 비어있다는 뜻
-	//즉 사진이 업로드되지 않은 게시물 이라는 뜻 이므로 img태그를 넣지 않는다
-	if(document.getElementsByClassName("filename")[cnt].innerText!='' && document.getElementsByClassName("filename")[cnt].innerText!='0'){
-														//사진이 업르드된 게시물
-		div.innerHTML = 
-			
-			  '<div class="item-id"> <div class="item-arc"><img src="./resources/img/프로필.png"style="height:100%; object-fit: cover;"></div> ' + document.getElementsByClassName("postingId")[cnt].innerText + '</div>'
-			  +'<div class="item-filename">'
-			  +'<img src="download?filename='+ document.getElementsByClassName("filename")[cnt].innerText +'" width="100%" height="100%">'+ '</div>'
-			  +'<div class="item-heart"> <form id ="likeForm" name="likeForm" method="get" onsubmit="yoomT(this); return false;"><p class="likeCount"><input type="submit" value="♥"><label for="'+document.getElementsByClassName("showCnt")+'"></label></p></form><p class="viewCount"> 조회수 : '+document.getElementsByClassName("showCnt")[cnt].innerText +' </P></div>'
-			  +'<div class="item-cont">' + document.getElementsByClassName("cont")[cnt].innerText + '</div>'
-			  ;
-			  
-		
-	}else {
-														//사진이 업로드되지 않은 게시물
-		div.innerHTML = 
-			
-			  '<div class="item-id"><div class="item-arc"><img src="./resources/img/프로필.png"style="height:100%; object-fit: cover;"></div>  ' + document.getElementsByClassName("postingId")[cnt].innerText + '</div>'
-			  +'<div class="item-heart"> <p class="likeCount">♥ 좋아요테이블 select Count</p><p class="viewCount"> 조회수 : '+document.getElementsByClassName("showCnt")[cnt].innerText +' </P></div>'
-			  +'<div class="item-cont"> 글밖에 없는 게시물 : ' + document.getElementsByClassName("cont")[cnt].innerText + '</div>'
-			  ;
-		
-	}
+	div.innerHTML = 
+			document.getElementsByClassName("postS")[cnt].innerHTML;
+			$("#carouselExample"+cnt).removeAttr("id");
+			//윗줄 반드시 있어야함.. 비동기 구현을 위해 미리 hidden 으로 숨겨놓은 캐러셀의 아이디를 지워주어야 뒤늦게 만든 캐러셀이 돌아감
 	//div를 return하게 되면 게시물을 5개 불러온 후가 되므로 innerHTML이 된 직후에 cnt값을 ++해줍니다.
 	cnt++;
-    
-	
+			console.log(cnt);
 	return div
 	
 	//만약 return div 후에 cnt++를 하면 첫게시물이 5개, 두번째 게시물이 5개, 3번째 게시물이 5개... 인 화면이 만들어집니다.
@@ -275,7 +180,6 @@
 	
 	let count = 0
 	//fetchMore = $footer에 loading을 해준 후 비동기 방식으로 list를 불러온다
-	
 	//async는 항상 promise를 반환합니다 promis가 아닌 값을 반환 하더라도 이행 상태의 promise(resolved promise)로 값을 감싸 
 	//이행된 promise가 반환 되도록 합니다
 	const fetchMore = async () => {
@@ -283,7 +187,7 @@
 	  //await는 promis가 처리될때 까지 기다립니다
 	  const list = await getList(count ++)
 	  
-	//documentFragment를 이용하여 $app요소 까지 부착한다
+	  //documentFragment를 이용하여 $root요소 까지 부착한다
 	  const frag = document.createDocumentFragment()
 	  list.forEach(item=> {
 	    frag.appendChild(renderItem(item))
@@ -292,80 +196,17 @@
 	  //loading표시를 제거해준다
 	  $footer.classList.remove("loading");
 	  
-	  if(count>=2){
-			 var target = document.querySelectorAll('.postS');
-		   		target.forEach((post)=>post.addEventListener("click", function(){
-		   			
-		   			if(document.getElementsByClassName("filename")[$(this).index()].innerText!='0'){
-	   	   				
-		   	   			var form=document.createElement("form");
-		   	   			form.setAttribute("charset","UTF-8");
-		   	   			form.setAttribute("method","Post");
-		   	   			form.setAttribute("action","myPost");
-	   	   				 
-		   	   			var hiddenField = document.createElement("input");
-			   			hiddenField.setAttribute("type","hidden");
-			   			hiddenField.setAttribute("name","postingId");
-			   			hiddenField.setAttribute("value",document.getElementsByClassName("postingId")[$(this).index()].innerText);
-			   			form.appendChild(hiddenField);
-		   	   			
-			   			var hiddenField = document.createElement("input");
-			   			hiddenField.setAttribute("type","hidden");
-			   			hiddenField.setAttribute("name","filename");
-			   			hiddenField.setAttribute("value",document.getElementsByClassName("filename")[$(this).index()].innerText);
-			   			form.appendChild(hiddenField);
-			   			
-			   			var hiddenField = document.createElement("input");
-			   			hiddenField.setAttribute("type","hidden");
-			   			hiddenField.setAttribute("name","showCnt");
-			   			hiddenField.setAttribute("value",document.getElementsByClassName("showCnt")[$(this).index()].innerText);
-			   			form.appendChild(hiddenField);
-		   	   			
-		   	   			var hiddenField = document.createElement("input");
-		   	   			hiddenField.setAttribute("type","hidden");
-		   	   			hiddenField.setAttribute("name","cont");
-		   	   			hiddenField.setAttribute("value",document.getElementsByClassName("cont")[$(this).index()].innerText);
-		   	   			form.appendChild(hiddenField);
-		   	   			
-		   	   			document.body.appendChild(form);
-		   	   			
-		   	   			form.submit();
-		   	   			
-	   	   			}else{
+	  if(count>=1){
+		  var target =document.querySelectorAll(".postLoad");
+ 			target.forEach((post)=>post.addEventListener("click", function(e){
+				var form = document.getElementsByName("form")[$(this).index()];
 
-		   	   			var form=document.createElement("form");
-		  	   			form.setAttribute("charset","UTF-8");
-		  	   			form.setAttribute("method","Post");
-		  	   			form.setAttribute("action","myPost");
-		
-		  	   			var hiddenField = document.createElement("input");
-			   			hiddenField.setAttribute("type","hidden");
-			   			hiddenField.setAttribute("name","postingId");
-			   			hiddenField.setAttribute("value",document.getElementsByClassName("postingId")[$(this).index()].innerText);
-			   			form.appendChild(hiddenField);
-		  	   			
-			   			var hiddenField = document.createElement("input");
-			   			hiddenField.setAttribute("type","hidden");
-			   			hiddenField.setAttribute("name","showCnt");
-			   			hiddenField.setAttribute("value",document.getElementsByClassName("showCnt")[$(this).index()].innerText);
-			   			form.appendChild(hiddenField);
-		  	   			
-		  	   			var hiddenField = document.createElement("input");
-		  	   			hiddenField.setAttribute("type","hidden");
-		  	   			hiddenField.setAttribute("name","cont");
-		  	   			hiddenField.setAttribute("value",document.getElementsByClassName("cont")[$(this).index()].innerText);
-		  	   			form.appendChild(hiddenField);
-		  	   			
-		  	   			document.body.appendChild(form);
-		  	   			
-		  	   			form.submit();
-	  	   			
-	   	   			}
-		   			
-		   		}));
-		 }
+				$(this).find('form').on('click',()=>{
+					form.submit();
+				});
+			})); 
+		}
 	}
-	
 	const onScroll = (e) => {
 		//clientHeight 는 element의 내부 높이.(내부여백인 padding을 포함, 수평 스크롤바의 높이와 경계선 외부margin을 포함하지 않음)
 	  	//scrollTop은 element최상단과 보여지는 컨텐츠와의 거리를 의미합니다(세로스크롤이 없으면 scrollTop은 항상 0)
@@ -376,16 +217,11 @@
 	  if (clientHeight + scrollTop === scrollHeight) {
 		 //게시물 5개를 더 불러옵니다
 	    fetchMore()
-		 
-	    
 	  }
 	}
 	//첫 5개의 게시물은 스크롤 여부와 상관없이 바로 불러옵니다.
 	fetchMore()
 	//window에서 scroll시 onScroll을 작동하게합니다
 	window.addEventListener('scroll',onScroll)
-	
-	
-    
 </script>
 </html>

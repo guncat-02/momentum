@@ -7,7 +7,8 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import vo.MainVO;
+
+import vo.PostVO;
 
 @Repository
 public class MainDAOImpl implements IF_MainDAO{
@@ -17,9 +18,21 @@ public class MainDAOImpl implements IF_MainDAO{
 	SqlSession sqlsession;
 	
 	@Override
-	public List<MainVO> mainAll(String id) {
+	public List<PostVO> mainAll() {
 		
-		return sqlsession.selectList(mapperQuery+".mainList",id);
+		return sqlsession.selectList(mapperQuery+".mainList");
+	}
+
+	@Override
+	public List<PostVO> attachAll() throws Exception {
+		
+		return sqlsession.selectList(mapperQuery+".attachList");
+	}
+
+	@Override
+	public List<String> postAttach(int no) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlsession.selectList(mapperQuery+".postAttach",no);
 	}
 
 	

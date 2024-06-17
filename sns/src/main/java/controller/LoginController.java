@@ -64,7 +64,7 @@ public class LoginController {
 		}
 		
 		
-		return "redirect:/test";
+		return "redirect:/main_mintest";
 	}
 
 			

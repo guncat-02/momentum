@@ -9,7 +9,13 @@ public class PostVO {
 	private String[] filename; //첨부 파일
 	private int privacy; //글 공개 여부
 	private int c_block; //댓글 차단 여부
-	
+	private String id; //작성자 id
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	//getter
 	public int getNo() {
 		return no;

@@ -2,9 +2,13 @@ package dao;
 
 import java.util.List;
 
-import vo.MainVO;
+
+import vo.PostVO;
 
 public interface IF_MainDAO {
-	public List<MainVO> mainAll(String id) throws Exception;
+	public List<PostVO> mainAll() throws Exception;
+	public List<PostVO> attachAll()throws Exception; 
+	public List<String> postAttach(int no) throws Exception;
+	
 	
 }

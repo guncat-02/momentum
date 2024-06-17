@@ -2,13 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<% request.setCharacterEncoding("UTF-8");
 
-	String title = request.getParameter("title");
-	String body = request.getParameter("body");
-	session.setAttribute("title",title);
-	session.setAttribute("body",body);
-%>
 <html lang="en">
 
 <head>
@@ -20,6 +14,8 @@
     integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer">
 </script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
 <!--다크 테마 기본 값-->
 <link id="theme-setting" rel="stylesheet" href="./resources/css/dark_theme.css">
@@ -42,23 +38,24 @@
 	            		<h1 class="theme-font" >게시물 자세히보기</h1>
 	            	</div>
                 </div>
-                <!--테마 변경은 추후 설정 화면에서 제어 (임시 주석)-->
                 
-                <!-- 
-                <input type="button" value="themechange" id="btn">
-                 -->
-                 
-                 
                 <!-- 사용자 닉네임, 프로필사진등 가져와서 쓰기 -->
                 <div id="post_main">
-                
 	                <div id="post_me" >
 		                <div id="pro_radius">
 		                	<img src="./resources/img/프로필.png">
 		                </div>
 	                	<div id="radius_and">
 		                	<h3>
-		                		${postingId}
+		                		사용자id : ${myid }
+		                		<br>
+		                		사용자이름 : ${myname }
+		                		<br>
+		                		사용자등급 : ${mygrade }
+		                		<br>
+		                		글쓴이 : ${postvo.id}
+		                		<br>
+		                		글번호(table no값) : ${postvo.no}
 		                	</h3>
 	                	</div>
 	                	
@@ -71,6 +68,7 @@
 	                	</div>
 	                	<div class="move-sheet" id="moveSheet" onclick="hideSheet()">
 		                	<div class="move-options">
+		                		
 		                		<div class="option close" onclick="hideSheet()">X</div>
 		                		<div class="option" id="updatePost">
 			                		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -111,59 +109,60 @@
 		                </script>
 	                </div>
 	                <div class="theme-font">
-		                <div id="mytheme">
-		                	<img src="download?filename=${filename}">
-		                </div>
-		                <div style="text-align:center;">
-		                <button class="inb"><</button>
-		                	<form class="inRadio radio_style">	
-			                	<input type="radio" name ="page" value="1" checked>
-			                	<input type="radio" name ="page" value="2" >
-			                	<input type="radio" name ="page" value="3" >
-			                	<input type="radio" name ="page" value="4" >
-			                	<input type="radio" name ="page" value="5" >
-		                	</form>
-		                <button class="inb">></button>
-		                
-		                
+	               	
+	               		<div id="carouselExample" class="carousel slide " >
+								<div class="carousel-inner">
+								    <c:forEach items="${postvo.filename }" var="file" varStatus="status">
+								    	<c:if test="${status.index == 0 }">
+								    		<div class="carousel-item active">
+										    	<img src="download?filename=${status.current}" class="d-block w-100" alt="...">
+										    </div>
+					        			</c:if>
+					        			<c:if test="${status.index >= 1 }">
+								    		<div class="carousel-item">
+										    	<img src="download?filename=${status.current}" class="d-block w-100" alt="...">
+										    </div>
+					        			</c:if>
+						        		<c:if test="${status.last == true && status.index != 0  }">
+						        			<button class="carousel-control-prev" type="button" data-bs-target="#carouselExample${postStat.count }" data-bs-slide="prev">
+											    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+											    <span class="visually-hidden">Previous</span>
+										  	</button>
+										  	<button class="carousel-control-next" type="button" data-bs-target="#carouselExample${postStat.count }" data-bs-slide="next">
+											    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+											    <span class="visually-hidden">Next</span>
+									  		</button>
+						        		</c:if>
+				        			</c:forEach>
+								</div>
+							</div>
+	               	
 		                </div>
 	                	 <div id="likeField">
-			            		<div style="float:left; margin-left:70%; margin-top:5px;">
-				            		<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"fill="currentColor" class="bi bi-chat-dots-fill" viewBox="0 0 16 16">
-									  <path d="M16 8c0 3.866-3.582 7-8 7a9 9 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7M5 8a1 1 0 1 0-2 0 1 1 0 0 0 2 0m4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0m3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
-									</svg>
-			            		</div>
+			            	<div style="float:left; margin-left:70%; margin-top:5px;">
+				            	<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"fill="currentColor" class="bi bi-chat-dots-fill" viewBox="0 0 16 16">
+									 <path d="M16 8c0 3.866-3.582 7-8 7a9 9 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7M5 8a1 1 0 1 0-2 0 1 1 0 0 0 2 0m4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0m3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
+								</svg>
+			            	</div>
 			            		
-								
-			            		<div style="float:right; margin-right:20%; margin-top:7px;">
-			            			<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
-									  <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
-									</svg>
+			            	<div style="float:right; margin-right:20%; margin-top:7px;">
+			            		<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+									 <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
+								</svg>
 			            		
-			            		</div>
-			            		
-			            		
+			            	</div>
 			            </div>
 	                	<div 
-	                	style=" border:1px solid violet;
-	                		">
-	                	<textarea id="textField"><%-- <%=title %><%=body %> --%>${cont }</textarea>
-	                		
-	                	
-	                	 
+	                	style=" border:1px solid violet;">
+	                	<textarea id="textField"><%-- <%=title %><%=body %> --%>${postvo.cont}</textarea>
 	                	</div>
-	                	
 	                </div>
                 </div>
                 
-                <div class="theme-font">
+                <div class="theme-font commentField">
                 	<div>
                 	<br>
                 	댓글 추가작업 예정
-                	<h2>title: <%=title %></h2>
-                	
-                	<p>body: <%=body %></p>
-                	
                 	</div>
                 </div>
                 
