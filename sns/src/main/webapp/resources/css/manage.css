@@ -33,6 +33,8 @@ body {
     width: 100%;
     height: fit-content;
     padding: 15px;
+    text-align : center;
+}
 }
 
 /* 글 작성 창 */
@@ -44,3 +46,14 @@ body {
     left: 0;
     background-color: #00000050;
 }
+
+
+.container{
+      display: grid;
+      grid-template-columns: 100px 100px 100px;
+      grid-template-rows: 200px 200px;
+      border : 1px solid;
+      margin-top : 30px;
+    }
+
+
