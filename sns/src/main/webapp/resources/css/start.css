@@ -1,0 +1,26 @@
+body {
+    margin: 0;
+}
+
+#logoPage {
+    background-color: black;
+    position: relative;
+    display: block;
+    width: 100vw;
+    height: 100vh;    
+}
+
+#logo {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bolder;
+    color: #ff00bf;
+    position: absolute;
+    width: 200px;
+    text-align: center;
+    font-size: 150px;
+    top: 50%;
+    margin-top: -100px;
+    left: 50%;
+    margin-left: -100px;
+    text-shadow: #00f7ff 3px 3px;
+}

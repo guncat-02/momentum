@@ -5,10 +5,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="dao.IF_JoinDao">
 	
 	<insert id="inputMember" parameterType="vo.MemberVO">
-		insert into membertest values (#{id},#{pass},#{name},#{b_date})
+		insert into membertest values (#{id},#{pass},#{name},#{b_date},#{email})
 	</insert>
 	
 	<select id="chkid" parameterType="String" resultType="String">
 		select * from membertest where id = #{id}
+	</select>
+	
+	<select id="chkemail" parameterType="String" resultType="String">
+		select email from membertest where id = #{id}
 	</select>
 </mapper>

@@ -1,0 +1,140 @@
+body {
+    width: auto;
+    margin: 0px;
+    -webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+/* 메뉴바, 메인 div 포함하는 전체 div */
+#all {
+    display: flex;
+    justify-content: left;
+}
+
+/* 왼쪽 메뉴 바 */
+#menuall {
+    display: block;
+    width: 240px;
+    height: 100vmin;
+    position: sticky;
+    top: 0;
+    border-right: 1px solid #00f7ff;
+    box-shadow: 3px 0px 7px 0px #41c4c4;
+    overflow-y: auto;
+}
+
+/* 주요 컨텐츠 */
+#main {
+    display: block;
+    width: 100%;
+    height: fit-content;
+    padding: 15px;
+}
+
+/* 화면 스크롤 바 정의 */
+::-webkit-scrollbar {
+    width: 5px;
+    background-color: transparent
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgb(128, 128, 128);
+    border-radius: 10px;
+}
+
+
+
+
+/* 가운데 테두리 영역 */
+#followList {
+    display: block;
+    width: 90%;
+    min-height: 60vmin;
+    border: 3px solid #ff00bf;
+    border-radius: 15px;
+    margin: 32px auto;
+    padding: 15px;
+}
+
+/* 테두리 내 테이블 */
+#followList table {
+    width: 100%;
+    height: fit-content;
+    border-collapse: collapse;
+}
+
+/* 테이블 가장 위 follow, following 버튼 두개 있는 td */
+#followList table thead td {
+    text-align: center;
+    padding-bottom: 25px;
+}
+#followList table thead label {
+    width: fit-content;
+    height: fit-content;
+    border: none;
+}
+#followList table thead label:hover {
+    cursor: pointer;
+}
+#followList table thead label h3 {
+    font-size: 20px;
+}
+
+/* 유저 목록 뜨는 tbody */
+#followList table tbody tr:not(:last-child) {
+    border-bottom: 1px solid grey;
+}
+
+/* 프로필 사진 표시되는 td */
+.followList-photo {
+    width: 75px;
+    height: 75px;
+    text-align: center;
+    overflow: hidden;
+}
+.followList-photo div {
+    display: inline-block;
+    width: 80%;
+    height: 80%;
+    margin: auto;
+    overflow: hidden;
+    position: relative;
+    /* 프로필 사진 테두리 그라데이션 */
+    border-radius: 50%;
+    border: 2px solid transparent;
+    background-image: linear-gradient(#fff, #fff),
+    linear-gradient(to right, #00f7ff 0%, #ff00bf 100%);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+}
+.followList-photo div img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+}
+
+/* nickname, id 표시되는 td */
+.followList-nickname,.followList-id {
+    padding-left: 15px;
+    font-size: 25px;
+}
+
+/* follow, following 버튼 표시되는 td */
+.followList-btn {
+    width: 20%;
+    text-align: center;
+    font-weight: bold;
+}
+.followList-btn button {
+	border-radius: 15px;
+    width: 75%;
+    height: 50%;
+    border: 2px solid #00f7ff;
+}
+.followList-btn button:hover {
+    cursor: pointer;
+}

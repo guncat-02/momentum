@@ -4,9 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>momentum sns</title>
+<title>momentum</title>
 <link rel="stylesheet" href="./resources/css/start.css">
 </head>
+
 <body>
     <div id="logoPage">
         <span id="logo">M</span>
@@ -16,7 +17,7 @@
 <script>
     window.onload = function() {
         window.setTimeout(function() {
-            location.href = "/sns/login";
+            location.href = "/sns/loginpage";
         }, 1000)
     }
 </script>

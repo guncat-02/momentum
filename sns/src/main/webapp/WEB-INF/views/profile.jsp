@@ -9,15 +9,18 @@
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <body>
+	
 	<input type="hidden" id="chkSave" value="false">
+	
     <form action="profileSave" method="post" onsubmit="return saveProfile()">
+    <input type="hidden" id="takeid" value="${ id }" name = "id">
         <div id="proAll">
             <span id="proTitle">CREATE YOUR PROFILE</span>
             <div id="profile">
                 <div id="proLeft">
                     <div id="proPhoto">
-                        <label for="file" id="fileSelect"><img src="./resources/img/프로필.png" id="profileImg"></label>
-                        <input type="file" name="photo" id="file">
+                        <label for="file" id="fileSelect"><img src="./resources/img/프로필.png" id="profileImg" style="background-color: black;"></label>
+                        <input type="file" name="myPhoto" id="file">
                     </div>
                     <span>* 메인 프로필을 설정하여 게시글을 등록할 수 있습니다.</span>
                     <P>* 프로필 사진 클릭 시 설정할 수 있습니다.</P>
@@ -34,12 +37,8 @@
                         <tr style="height: 10%;">
                             <th>TEL</th>
                             <td colspan="2"><input type="text" name="tel" class="proText" placeholder=" - 없이 입력하세요" maxlength="11" pattern="\d*" title="숫자만 입력하실 수 있습니다."></td>
-                        </tr style="height: 10%;">
-                        <tr style="height: 10%;">
-                            <th>E-MAIL</th>
-                            <td colspan="2"><input type="text" name="email" class="proText"></td>
                         </tr>
-                        <tr>
+                        <tr style="height: 10%;">
                             <th>한 줄 소개</th>
                             <td colspan="2"><textarea name="bio" class="proText" maxlength="50" placeholder="50자 까지 입력 가능합니다."></textarea></td>
                         </tr>
@@ -47,9 +46,9 @@
                             <th>공개 여부</th>
                             <td colspan="2">
                                 <span class="radioWord">공개</span>
-                                <input type="radio" name="privacy" value="1" class="proChk">
+                                <input type="radio" name="privacy" value="1" class="proChk" required>
                                 <span style="margin-left: 20px;" class="radioWord">비공개</span>
-                                <input type="radio" name="privacy" value="0" class="proChk">
+                                <input type="radio" name="privacy" value="0" class="proChk" required>
                             </td>
                         </tr>
                     </table>
@@ -98,7 +97,7 @@
                         alert("확인되었습니다.");
                         $('#chkSave').val("true");
                     } else {
-                        alert("중복된 아이디입니다.");
+                        alert("중복된 NICK NAME입니다.");
                         $('#chkSave').val("false");
                     }
                 }
@@ -114,11 +113,12 @@
     })
 
     //submit을 위한 메서드
-    function saveProfile() {
-        if ($("#chkSave").val() == "false") {
+    function save() {
+        if ($("#chkSave").val().equals("false")) {
             alert("중복체크가 완료되지 않았습니다.");
             return false;
         }
+        console.log($('#takeid').val());
         return true;
     }
 </script>

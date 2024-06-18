@@ -7,4 +7,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="loginchk" resultType="vo.MemberVO" parameterType="String">
 		select * from membertest where id=#{id}
 	</select>
+	
+	<select id="changechkid" resultType="String" parameterType="String">
+		select * from membertest where id=#{id}
+	</select>
+	
+	<update id="updatepw" parameterType="vo.MemberVO">
+		update membertest set pass=#{pass} where id = #{id}
+	</update>
 </mapper>
