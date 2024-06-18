@@ -7,36 +7,38 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
 <link rel="stylesheet" href="./resources/css/Join.css">
+<link href="https://fonts.googleapis.com/css?family=Poppins:600" rel="stylesheet">
 
 </head>
 
 <body>
-	<form action="join" method="post" id="form" onsubmit="return chk()">
+	<form action="JoinMember" method="post" id="form" onsubmit="return chk()">
 		<div id="Joinbox">
-			<label id="wel">Momentum</label> <label id="joinwel">회원가입</label>
+			<label id="wel">MOMENTUM</label> <label id="joinwel">회원가입</label>
 			<div class="intext">
 				<span class="loginlabel idlebel">아이디</span>
-				<p class="arrow_box">영문, 숫자 조합 ,3글자 이상 10글자 이하</p>
-				<span class="essential">*</span><br> <input type="text" name="id" placeholder="아이디를 입력하세요" class="logintxt tt" pattern="^[A-Za-z0-9]{3,10}$" title="영문, 숫자 조합 ,3글자 이상 10글자 이하" id="idinput">
+				<p class="arrow_box">영문, 숫자 조합 ,3글자 이상 10글자 이하</p> <!-- 우효성 -->
+				<span class="essential">*</span><br> <input type="text" name="id" placeholder="아이디를 입력하세요" class="logintxt tt" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{3,10}$" title="영문, 숫자 조합 ,3글자 이상 10글자 이하" id="idinput">
+				<input type="button" value="중복체크" id="duplication"> <input type="hidden" value="false" id="chkdup">
 			</div>
 			<div class="intext">
 				<span class="loginlabel pwlabel">비밀번호</span>
 				<p class="arrow_box">
 					영문, 숫자, 특수기호 1개 이상 포함 조합<br>8자 글자 이상 16글자 이하
 				</p>
-				<span class="essential">*</span><br> <input type="password" name="pw" placeholder="비밀번호를 입력하세요" class="logintxt tt upw" id="pw" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$" title="영문, 숫자, 특수기호 1개 이상 포함 조합 ,8자 글자 이상 16글자 이하">
+				<span class="essential">*</span><br> <input type="password" name="pass" placeholder="비밀번호를 입력하세요" class="logintxt tt upw" id="pw" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$" title="영문, 숫자, 특수기호 1개 이상 포함 조합 ,8자 글자 이상 16글자 이하">
 			</div>
 			<div class="intext">
 				<span class="loginlabel">비밀번호 확인 </span><span class="essential">*</span><br> <input type="password" name="pwchk" placeholder="비밀번호를 한번 더 입력하세요" class="logintxt tt upwchk" id="pwchk">
 			</div>
 			<div class="intext">
-				<span class="loginlabel namelabel">사용자명 </span><span class="essential">*</span><br> <input type="text" name="uname" placeholder="이름을 입력하세요" class="logintxt tt" id="uninput">
+				<span class="loginlabel namelabel">사용자명 </span><span class="essential">*</span><br> <input type="text" name="name" placeholder="이름을 입력하세요" class="logintxt tt" id="uninput">
 			</div>
 			<div class="intext">
 				<span class="loginlabel">이메일 </span><span class="essential">*</span><br> <input type="text" name="email" placeholder="이메일 입력" class="emailInput"><span id="em">@</span> <input class="box" id="domain-txt" type="text"> <select class="box" id="domain-list">
 					<option value="type">직접 입력</option>
 					<option value="naver.com">naver.com</option>
-					<option value="google.com">google.com</option>
+					<option value="google.com">gmail.com</option>
 					<option value="hanmail.net">hanmail.net</option>
 					<option value="nate.com">nate.com</option>
 					<option value="kakao.com">kakao.com</option>
@@ -50,12 +52,13 @@
 				</select> <select name="day" class="box" id="birth-day" class="tt">
 					<option disabled selected>일</option>
 				</select>
+				<input type="hidden" value="" name="b_date" id = "bdate"/>
 			</div>
 			<div class="intext" id="joinbottom">
 				<input type=submit value="회원가입" id="loginbut">
 			</div>
 			<div class="intext">
-				<a href="/sns/" class="alink"><span id="joinlink">이미 계정이 있으신가요?</span></a>
+				<span style="color: #00f7ff">계정이 있으신가요? </span><a href="/sns/loginpage" class="alink"><span id="joinlink">로그인하기</span></a>
 			</div>
 		</div>
 	</form>
@@ -175,7 +178,32 @@
 	}
 	
 	function chk() {
-	     var a =  document.querySelectorAll('.tt');
+	    var a =  document.querySelectorAll('.tt');
+	    let month;
+	    let day;
+	    if($("#birth-month").val()<10) {
+	    	month = "0"+$("#birth-month").val();
+	    } else {
+	    	month = $("#birth-month").val();
+	    }
+	    if($("#birth-day").val()<10) {
+	    	day = "0"+$("#birth-day").val();
+	    } else {
+	    	day = $("#birth-day").val();
+	    }
+	    if($("#chkdup").val()=="false") {
+	    	console.log($("#chkdup").val());
+	    	alert("아이디 중복체크를 해주세요");
+	    	return false;
+	    };
+	    let bdate = $("#birth-year").val() + month + day; 
+	    console.log(bdate);
+	    $("#bdate").val(bdate);
+	    console.log($("#emailDoubleChk").val());
+	    if($("#emailDoubleChk").val()==false) {
+	    	alert("이메일 인증이 필요합니다.")
+	    	return false;
+	    }
 	    for(let i =0; i < a.length; i++) {
 	    	if(a[i].value.trim() == '') {
 	    		alert("필수 입력하세요")
@@ -190,9 +218,14 @@
 	 // 이메일 인증
 	var code = "";
 	 $("#certifybut").click(function() {
+		
 		let address = $('.emailInput').val();
 		let domain = $('#domain-txt').val();
 		let email = address + "@" + domain;
+		if(address=="" || domain=="") {
+			alert("이메일을 입력하세요")
+			return false;
+		}
 		 $.ajax({
 			type:"GET",
 			url:"sendMail.do?email="+email,
@@ -205,14 +238,44 @@
 	 });
 	 
 	 $("#chknumbut").click(function() {
-		 if($(".cerInput").val() == code) {
+		 if($(".cerInput").val()== "") {
+			 alert("인증번호를 입력해주세요.");
+		 }else if($(".cerInput").val() == code) {
 			 alert("인증되었습니다.");
 			 $("#emailDoubleChk").val("true");
-		 }else {
+			 document.querySelector('.cerInput').setAttribute('readonly',true);
+		 }
+		 else {
 			 alert("인증번호가 일치하지 않습니다.");
 		 }
 	 })
-	
+	 $("#idinput").change(function() {
+		 $("#chkdup").val("false");
+		 console.log($("#chkdup").val());
+	 });
+	 
+	$("#duplication").click(function() {
+		let nowid = $('#idinput').val();
+		if(nowid=="") {
+			alert("아이디를 입력해주세요");
+			return false;
+		}
+		 $.ajax({
+			type:"GET",
+			url:"chkid?nowid="+nowid,
+			cache : false,
+			success:function(data) {
+				if(data=="true") {
+					$("#chkdup").val("true");
+					console.log($("#chkdup").val());
+					alert("중복되지않은 아이디입니다.")
+				}else {
+					alert("충복된 아이디입니다.")
+				}
+				}
+		 })
+	 });
+	 
 
 </script>
 

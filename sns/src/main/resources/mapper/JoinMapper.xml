@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.IF_JoinDao">
+	
+	<insert id="inputMember" parameterType="vo.MemberVO">
+		insert into membertest values (#{id},#{pass},#{name},#{b_date})
+	</insert>
+	
+	<select id="chkid" parameterType="String" resultType="String">
+		select * from membertest where id = #{id}
+	</select>
+</mapper>

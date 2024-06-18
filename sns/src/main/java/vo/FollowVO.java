@@ -1,18 +1,20 @@
 package vo;
 
 public class FollowVO {
+	private String followId; //팔로우 한 id
+	private String id; //사용자를 팔로우한 id
 	
-	private String id;	// 나를 팔로우하는 id
-	private String followId;	// 내가 팔로우하는 id
-	
+	//getter
+	public String getFollowId() {
+		return followId;
+	}
 	public String getId() {
 		return id;
 	}
+	
+	//setter
 	public void setId(String id) {
 		this.id = id;
-	}
-	public String getFollowId() {
-		return followId;
 	}
 	public void setFollowId(String followId) {
 		this.followId = followId;

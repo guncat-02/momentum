@@ -7,9 +7,8 @@ public class PostVO {
 	private int show; //조회수
 	private int loveCnt; //좋아요 수
 	private String[] filename; //첨부 파일
-	private int privacy; // 공개 여부
-	private int c_block; // 댓글 차단 여부
-	
+	private int privacy; //글 공개 여부
+	private int c_block; //댓글 차단 여부
 	
 	//getter
 	public int getNo() {
@@ -59,7 +58,6 @@ public class PostVO {
 	public void setPrivacy(int privacy) {
 		this.privacy = privacy;
 	}
-	
 	public void setC_block(int c_block) {
 		this.c_block = c_block;
 	}
