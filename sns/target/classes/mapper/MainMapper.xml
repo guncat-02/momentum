@@ -4,15 +4,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.IF_MainDAO">
 	
-	<select id="mainList" resultType="vo.MainVO" parameterType="String">
-		select distinct a.followid, b.no, b.id, b.cont, b.show, b.privacy, b.p_date, c.filename
-	    from followtest a
-	    right join posttest b
-	    on a.followid = b.id
-	    left join attachtest c
-	    on b.no = c.no
-	    where (a.id=#{id} and b.privacy=1) or (b.id=#{id} and (b.privacy=0 or b.privacy=1))
-	    order by b.no asc
+	<select id="mainList" resultType="vo.PostVO" parameterType="String">
+		select * from posttest where privacy = 1 order by no asc
+	</select>
+	<select id="attachList" resultType="vo.PostVO">
+		select * from attachtest
+	</select>
+	<select id="postAttach" resultType="String">
+		select filename from attachtest where no = #{no}
 	</select>
 </mapper>
 
@@ -74,15 +73,39 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	즉 내가 팔로우한 사람의 게시물만 볼수 있고 게시물의 공개여부가 공개상태여야 한다 where절 a.id=min and b.privacy=1
 	만약 게시물작성자가 나라면 공개여부 비공개글도 볼수있다 where절 b.id=min and (b.privacy=0 or b.privacy=1)
 	
-	select distinct a.followid, b.no, b.id, b.cont, b.show, b.privacy, b.p_date, c.filename
-    from followtest a
-    right join posttest b
-    on a.followid = b.id
-    left join attachtest c
-    on b.no = c.no
-    where (a.id='min' and b.privacy=1) or (b.id='min' and (b.privacy=0 or b.privacy=1))
-    order by b.no asc
-    ;
+		select distinct a.followid, b.no, b.id, b.cont, b.show, b.privacy, b.p_date, c.filename
+	    from followtest a
+	    right join posttest b
+	    on a.followid = b.id
+	    left join attachtest c
+	    on b.no = c.no
+	    where (a.id='min' and b.privacy=1) or (b.id='min' and (b.privacy=0 or b.privacy=1))
+	    order by b.no asc
+	    ;
 
 
  -->
+ <!-- 
+ 
+ 		select distinct a.followid, b.no, b.id, b.cont, b.show, b.privacy, b.p_date, c.filename
+	    from followtest a
+	    right join posttest b
+	    on a.followid = b.id
+	    left join attachtest c
+	    on b.no = c.no
+	    where (a.id=#{id} and b.privacy=1) or (b.id=#{id} and (b.privacy=0 or b.privacy=1))
+	    order by b.no asc
+ 
+  -->
+  <!-- VO를 통일하자.. 결국 쿼리는 두개로 나눠 써야겠다
+ 
+ 		select distinct b.no ,a.followid, b.id, b.cont, b.show, b.privacy, b.p_date
+	    from followtest a
+	    right join (select distinct * from posttest) b
+	    on a.followid = b.id
+	    left join (select no from attachtest group by no) c
+	    on b.no = c.no
+	    where (a.id= #{id} and b.privacy=1) or (b.id= #{id} and (b.privacy=0 or b.privacy=1))
+	    order by b.no asc
+ 
+  -->
