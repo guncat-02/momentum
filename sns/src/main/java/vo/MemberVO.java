@@ -58,9 +58,6 @@ public class MemberVO {
 	public void setProfileList(List<ProfileVO> profileList) {
 		this.profileList = profileList;
 	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
 	public void setAdmin(String admin) {
 		this.admin = admin;
 	}
