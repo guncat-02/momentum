@@ -278,7 +278,7 @@
         }
     }
     back_button.addEventListener('click',()=>{
-    	location.href="main_mintest";
+    	location.href="main";
     })
 	
 	function opencomm() {

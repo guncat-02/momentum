@@ -38,7 +38,7 @@
                             <th>TEL</th>
                             <td colspan="2"><input type="text" name="tel" class="proText" placeholder=" - 없이 입력하세요" maxlength="11" pattern="\d*" title="숫자만 입력하실 수 있습니다."></td>
                         </tr>
-                        <tr style="height: 10%;">
+                        <tr style="height: 70%;">
                             <th>한 줄 소개</th>
                             <td colspan="2"><textarea name="bio" class="proText" maxlength="50" placeholder="50자 까지 입력 가능합니다."></textarea></td>
                         </tr>
@@ -109,16 +109,15 @@
 
     //nickname 값 변경 시 아이디 체크 다시 해야 하는 메서드
     $('#profileNick').change(function () {
-        $('#chkSave').val(false);
+        $('#chkSave').val("false");
     })
 
     //submit을 위한 메서드
-    function save() {
-        if ($("#chkSave").val().equals("false")) {
+    function saveProfile() {
+        if ($("#chkSave").val() == "false") {
             alert("중복체크가 완료되지 않았습니다.");
             return false;
         }
-        console.log($('#takeid').val());
         return true;
     }
 </script>

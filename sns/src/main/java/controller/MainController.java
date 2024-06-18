@@ -21,7 +21,7 @@ public class MainController {
 	@Inject
 	IF_MainService mainSer;
 	
-	@GetMapping("main_mintest")
+	@GetMapping("main")
 	public String mint(Model model,
 			HttpSession session) throws Exception {
 		

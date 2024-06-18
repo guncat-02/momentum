@@ -15,7 +15,7 @@
     <form id="editForm" action="profileUpdate" method="post" encType="multipart/form-data" onsubmit="return update()">
     	<input type="hidden" value="${profile.photo}" id="myPhoto" name="photo">
         <header id="back" class="theme">
-            <span id="backBtn"><a id="backLocation">&lang;</a></span>
+            <span id="backBtn"><a href="profileShow" id="backLocation">&lang;</a></span>
             <div id="myProInfo">
                 <span id="myNick">${profile.nickName}</span>
                 <span class="myDetail">( </span>
@@ -83,6 +83,7 @@
     const word = document.querySelectorAll('.privacyWord');
     const base = document.querySelector('#removeImg');
     const photoValue = document.querySelector('#myPhoto').value;
+    const photo = document.querySelector('#myPhoto');
 
     //form 초기화
     document.querySelector('#cancleBtn').addEventListener('click', () => {
@@ -90,7 +91,11 @@
         base.value = "REMOVE IMG";
         base.disabled = false;
         console.log(file.value)
-        img.src = "./img/20230515_200604.jpg";
+        if(photo.value == "null") {
+        	img.src = "./resources/img/프로필.png";
+        } else {
+        	img.src = "download?filename="+photo.value;
+        }
     })
 
     //img 미리보기
@@ -124,7 +129,6 @@
 
     //프로필 불러오기
     window.onload = function() {
-        const photo = document.querySelector('#myPhoto');
         if(photo.value != "null") {
             img.src = "download?filename="+photo.value;
         } else if(photo.value == "null") {
@@ -148,6 +152,8 @@
                 document.querySelector('#myPhoto').value = "COMPLETE";
             }
             return true;
+        } else {
+        	alert("중복 체크를 해주세요.");
         }
         return false;
     }
