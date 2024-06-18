@@ -8,7 +8,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 
-<html lang="en">
+<html lang="kor">
 
 <head>
     <meta charset="UTF-8">
@@ -20,10 +20,8 @@
     crossorigin="anonymous" referrerpolicy="no-referrer">
 </script>
 
-<!--다크 테마 기본 값-->
+
 <link id="theme-setting" rel="stylesheet" href="./resources/css/dark_theme.css">
-<!--현재 테마 여부. 0 : 다크, 1 : 라이트-->
-<input type="hidden" id="cur-theme" value="0">
 <link rel="stylesheet" href="./resources/css/main.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

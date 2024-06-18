@@ -83,7 +83,7 @@ body {
 }
 
 /* 유저 목록 뜨는 tbody */
-#followList table tbody tr:not(:last-child) {
+#followList table tbody tr {
     border-bottom: 1px solid grey;
 }
 
@@ -118,9 +118,15 @@ body {
 }
 
 /* nickname, id 표시되는 td */
-.followList-nickname,.followList-id {
+.followList-names {
     padding-left: 15px;
-    font-size: 25px;
+}
+.followList-nickname {
+	font-size: 25px;
+}
+.followList-id {
+	font-size: 15px;
+	margin: auto 0px;
 }
 
 /* follow, following 버튼 표시되는 td */
@@ -137,4 +143,26 @@ body {
 }
 .followList-btn button:hover {
     cursor: pointer;
+}
+
+tfoot {
+    text-align: center;
+}
+tfoot button {
+    border-radius: 15px;
+    width: fit-content;
+    height: 38px;
+    border: 2px solid #00f7ff;
+    background-color: #00f7ff;
+}
+tfoot button:hover {
+	cursor: pointer;
+}
+tfoot button a {
+    text-decoration: none;
+    color: #000000;
+}
+tfoot button b {
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+	font-weight: bold;
 }

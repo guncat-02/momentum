@@ -21,6 +21,11 @@ public class MemberVO {
 		return "MemberVO [id=" + id + ", pass=" + pass + ", name=" + name + ", b_date=" + b_date + "]";
 	}
 	
+	@Override
+	public String toString() {
+		return "MemberVO [id=" + id + ", pass=" + pass + ", name=" + name + ", b_date=" + b_date + "]";
+	}
+	
 	//getter
 	public String getId() {
 		return id;
