@@ -1,4 +1,4 @@
-zpackage controller;
+package controller;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
