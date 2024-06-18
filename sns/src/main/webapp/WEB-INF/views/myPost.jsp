@@ -189,7 +189,7 @@
 
 						</div>
 						<div style="border: 1px solid violet;">
-							<textarea id="textField"><%=title %><%=body %></textarea>
+							<textarea id="textField"></textarea>
 						</div>
 
 					</div>
