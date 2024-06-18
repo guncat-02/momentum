@@ -42,7 +42,7 @@
 					<option value="hanmail.net">hanmail.net</option>
 					<option value="nate.com">nate.com</option>
 					<option value="kakao.com">kakao.com</option>
-				</select> <input type="text" name="certify" class="cerInput" placeholder="인증번호 6자리"><input type="button" value="인증번호 받기" id="certifybut"><input type="button" value="이메일 인증" id="chknumbut"> 
+				</select> <input type="password" name="certify" class="cerInput" placeholder="인증번호 6자리"><input type="button" value="인증번호 받기" id="certifybut"><input type="button" value="이메일 인증" id="chknumbut"> 
 				<input type="hidden" id="emailDoubleChk" />
 				<input type = hidden value = "" name = email id = "emailhid">
 			</div>
@@ -221,6 +221,7 @@
 	var code = "";
 	 $("#certifybut").click(function() {
 		
+		let id = $('#inid').val();
 		let address = $('.emailInput').val();
 		let domain = $('#domain-txt').val();
 		let email = address + "@" + domain;
@@ -230,11 +231,10 @@
 		}
 		 $.ajax({
 			type:"GET",
-			url:"sendMail.do?email="+email,
+			url:"sendJoinMail.do?email="+email,
 			cache : false,
 			success:function(data) {
-				if(data == email) {
-					console.log(data);
+				if(data != "null") {
 					alert("인증번호 발송이 완료되었습니다. 입력한 이메일에서 확인 해주십시오.");
 					code = data;
 					$("#emailhid").val(email);	

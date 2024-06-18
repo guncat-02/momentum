@@ -30,15 +30,28 @@
         </div>
     </div>
 	 </form>
+	 
+	 <div id = "selbox">
+	 <label id = "sellabel">ADMIN MENU</label>
+	 <div id = "butbox">
+	 	<a href="manager"><input type="button" value= "ADMIN" class = "custombut"></a><a href="main"><input type="button" value= "USER" class = "custombut2"></a>
+	 </div>
+	 </div>
 </body>
 
 <script>
 $(document).ready(function() {
-	
 	let message = "${ msg }"; // msg
-	if(message != "") {
+	
+	if(message == "manager") {
+		$("#loginbox").css("opacity","0.3");
+		$("#selbox").css("display", "block");
+	}else if(message != "") {
 		alert("${ msg }");
 	}
 })
+
+
+
 </script>
 </html>

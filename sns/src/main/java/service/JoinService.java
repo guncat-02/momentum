@@ -14,7 +14,6 @@ public class JoinService implements IF_JoinService{
 	@Override
 	public void inputMember(MemberVO mvo) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println(mvo.getEmail());
 		jdao.inputMember(mvo);
 	}
 	@Override
@@ -27,6 +26,11 @@ public class JoinService implements IF_JoinService{
 		// TODO Auto-generated method stub
 		System.out.println(jdao.chkemail(id)+"ser");
 		return jdao.chkemail(id);
+	}
+	@Override
+	public String chkdupemail(String email) {
+		// TODO Auto-generated method stub
+		return jdao.chkdupemaip(email);
 	}
 
 }

@@ -1,4 +1,4 @@
-package controller;
+zpackage controller;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -54,6 +54,7 @@ public class ProfileController {
 		if(myPhoto != null) {
 			pVO.setPhoto(upload.fileUpload(myPhoto)[0]);
 		}
+		System.out.println(pVO.getId()+"여기 컨트롤러");
 		pServe.insert(pVO);
 		return "redirect:/main";
 	}

@@ -23,13 +23,13 @@
                 <option value="hanmail.net">hanmail.net</option>
                 <option value="nate.com">nate.com</option>
                 <option value="kakao.com">kakao.com</option>
-            </select> <input type="text" name="certify" class="cerInput" placeholder="인증번호 6자리"><input type="button" value="인증번호 받기" id="certifybut"><input type="button" value="이메일 인증" id="chknumbut"> <input type="hidden" id="emailDoubleChk" />
+            </select> <input type="password" name="certify" class="cerInput" placeholder="인증번호 6자리"><input type="button" value="인증번호 받기" id="certifybut"><input type="button" value="이메일 인증" id="chknumbut"> <input type="hidden" id="emailDoubleChk" />
         </div>
         <div id = "findbut">
             <input type =button value ="비밀번호 찾기" id = "loginbut" onclick = "chk()">
         </div>
         <div id = "jointext">
-            <span style="color: #00f7ff;">계정이 있으신가요? </span>&nbsp<a href = "join" class="alink"><span id = "spanlink">로그인하기</span></a>
+            <span style="color: #00f7ff;">계정이 있으신가요? </span>&nbsp<a href = "loginpage" class="alink"><span id = "spanlink">로그인하기</span></a>
         </div>
     </div>
 
@@ -53,7 +53,7 @@
             <input type ="submit" value ="비밀번호 바꾸기" id = "changebut">
         </div>
         <div id = "jointext">
-            <span style="color: #00f7ff;">계정이 있으신가요? </span>&nbsp<a href = "join" class="alink"><span id = "spanlink">로그인하기</span></a>
+            <span style="color: #00f7ff;">계정이 있으신가요? </span>&nbsp<a href = "loginpage" class="alink"><span id = "spanlink">로그인하기</span></a>
         </div>
     </div>
     </form>
