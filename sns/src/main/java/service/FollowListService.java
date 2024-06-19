@@ -41,4 +41,16 @@ public class FollowListService implements IF_FollowListService{
 		fdao.follow(fvo);
 	}
 
+	//팔로잉 수를 세는 메서드
+	@Override
+	public int followingSelect(String id) throws Exception {
+		return fdao.followingSelect(id);
+	}
+
+	//팔로워 수를 세는 메서드
+	@Override
+	public int followerSelect(String id) throws Exception {
+		return fdao.followerSelect(id);
+	}
+
 }

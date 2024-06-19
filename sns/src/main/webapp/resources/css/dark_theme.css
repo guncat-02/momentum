@@ -14,6 +14,11 @@
     text-shadow: #ff00bf 3px 3px;
     margin: 0px;
 }
+/* 강조 안할 텍스트 */
+.theme-fontx {
+    color: #00f7ff;
+    margin: 0px;
+}
 
 /* 강조할 배경 */
 .theme-back {

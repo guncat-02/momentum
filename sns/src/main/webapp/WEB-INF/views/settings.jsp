@@ -12,7 +12,7 @@
     integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer">
 </script>
-<link id="theme-setting" rel="stylesheet" href="./resources/css/dark_theme.css">
+<link id="theme-setting" rel="stylesheet" href="<%=(String)session.getAttribute("curTheme")%>">
 <body class="theme">
     <main>
         <div id="settings-menu">
@@ -55,7 +55,7 @@
 
 	$(document).ready(function() {
 	    $('#settings-menu label li > h2').css('color', 'grey');
-	    $('#theme-setting').prop('href', localStorage.getItem('curTheme'));
+	    $('#theme-setting').prop('href', sessionStorage.getItem('curTheme'));
 	});
 	
 	$('#settings-menu label').on('click', function() {

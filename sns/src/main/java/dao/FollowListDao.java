@@ -43,4 +43,16 @@ public class FollowListDao implements IF_FollowListDao{
 		sql.insert(mapperQuery+".insertFollowId", fvo);
 	}
 
+	//팔로잉 수를 세는 메서드
+	@Override
+	public int followingSelect(String id) throws Exception {
+		return sql.selectOne(mapperQuery+".followingSelect", id);
+	}
+
+	//팔로우 수를 세는 메서드
+	@Override
+	public int followerSelect(String id) throws Exception {
+		return sql.selectOne(mapperQuery+".followerSelect", id);
+	}
+
 }

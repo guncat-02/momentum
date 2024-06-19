@@ -1,11 +1,13 @@
 package controller;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import service.IF_PostingService;
@@ -27,10 +29,19 @@ public class PostingController {
 	}
 	
 	@PostMapping("/postingSave")
-	public String postingSave(@ModelAttribute PostVO pvo, MultipartFile[] file) throws Exception {
+	public String postingSave(@ModelAttribute PostVO pvo, MultipartFile[] file, HttpSession session) throws Exception {
+		System.out.println(file.length);
+		System.out.println("controller before: "+pvo.toString());
 		String[] fileName = fileDataUtil.fileUpload(file);
 		pvo.setFilename(fileName);
+		System.out.println("controller: "+pvo.toString());
 		pservice.insertPost(pvo);
 		return "redirect:main";
 	}
+	
+	@GetMapping("/c_like")
+	public void c_like(@RequestParam("no") String no) {
+		/* pservice.c_like(no); */
+	}
+	
 }

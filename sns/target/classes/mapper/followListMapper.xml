@@ -41,5 +41,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertFollowId" parameterType="vo.FollowVO">
 		insert into followTest values (#{id}, #{followId})
 	</insert>
-
+	
+	<select id="followingSelect" resultType="int">
+		select count(followId) from followTest where id = #{id}
+	</select>
+	
+	<select id="followerSelect" resultType="int">
+		select count(id) from followTest where followId = #{id}
+	</select>
 </mapper>

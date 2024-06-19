@@ -14,7 +14,7 @@
     integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer">
 </script>
-<link id="theme-setting" rel="stylesheet" href="./resources/css/dark_theme.css">
+<link id="theme-setting" rel="stylesheet" href="<%=(String)session.getAttribute("curTheme")%>">
 
 <body class="theme">
     <div id="all">
@@ -61,9 +61,10 @@
         </div>
     </div>
 </body>
-
 <script>
-
+	
+	const curId = '<%=(String)session.getAttribute("userid")%>';
+	
 	// 화면 로딩 될 때 내가 팔로우하는 사람 목록 띄운다
 	$(document).ready(function() {
 		getFollowingsList();
@@ -122,7 +123,7 @@
         		type: 'get',
         		data: {
     	        	// id는 session에서 가져온다
-    	        	id: 'brian332',
+    	        	id: curId,
     	            followId: fId.substring(1, fId.length-1)
     	        },
     	        success: function() {
@@ -145,7 +146,7 @@
     	        type: 'get',
     	        data: {
     	        	// id는 session에서 가져온다
-    	        	id: 'brian332',
+    	        	id: curId,
     	            followId: fId.substring(1, fId.length-1)
     	        },
     	        success: function (result) {
@@ -184,7 +185,7 @@
 		        type: 'get',
 		        data: {
 		        	// id는 session에서 가져온다
-		        	id: 'brian332',
+		        	id: curId,
 		        	followId: fId.substring(1, fId.length-1)
 		        },
 		        success: function (result) {
@@ -207,7 +208,7 @@
 		$.ajax({
 			url: 'follow_followings',
 			type: 'get',
-			data: {id : 'brian332'},
+			data: {id :curId},
 			success: function(result) {
 				let newFollowing;
 		    	let userPhoto;
@@ -251,7 +252,7 @@
 		$.ajax({
 			url: 'follow_interfollowers',
 			type: 'get',
-			data: {id : 'brian332'},
+			data: {id : curId},
 			success: function(result) {
 				let newFollower;
 		    	let userPhoto;
@@ -290,7 +291,7 @@
 		$.ajax({
 			url: 'follow_followers',
 			type: 'get',
-			data: {id : 'brian332'},
+			data: {id : curId},
 			success: function(result) {
 				let newFollower;
 		    	let userPhoto;

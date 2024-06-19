@@ -15,10 +15,26 @@ public class PostingService implements IF_PostingService{
 	
 	@Override
 	public void insertPost(PostVO pvo) throws Exception {
+		System.out.println("service_postInsert"+pvo.toString());
 		pdao.insertPost(pvo);
 		for (String fileName : pvo.getFilename()) {
+			System.out.println(fileName);
 			pdao.insertAttach(fileName);
 		}
 	}
+
+	@Override
+	public int c_like(String no) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int c_dislike(String no) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	
 
 }

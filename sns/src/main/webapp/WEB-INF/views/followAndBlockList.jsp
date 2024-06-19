@@ -9,14 +9,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<link id="theme-setting" rel="stylesheet" href="./resources/css/dark_theme.css">
-<link rel="stylesheet" href="./resources/css/followAndBlockList.css">
+<%
+String contextPath = request.getContextPath();
+%>
+<link id="theme-setting" rel="stylesheet" href="<%=(String)session.getAttribute("curTheme")%>">
+<link rel="stylesheet" href="<%=contextPath%>/resources/css/followAndBlockList.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
     integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer">
 </script>
 <body class="theme">
-    <span id="fnb-back-btn">&lang; BACK</span>
+    <span id="fnb-back-btn"><a href="/sns/main" class="theme">&lang; BACK</a></span>
     <h1>Follow and Blocked List</h1>
     <div id="fnbList">
         <table>
@@ -47,7 +50,7 @@
 		                        <div class="fnb-img-div">
 		           					<c:choose>
 			           					<c:when test="${empty fProf.photo}">
-			                            	<img src="./resources/img/프로필.png">
+			                            	<img src="<%=contextPath%>/resources/img/프로필.png">
 	                   					</c:when>
 		                            	<c:otherwise>
 		                            		<img src="download?filename=${fProf.photo}">
@@ -56,8 +59,9 @@
 		                        </div>
 		                    </td>
 		                    <td colspan="4" class="fnb-username-td">
-		                        <span class="fnb-nickname">${fProf.nickName}</span> / 
-		                        <span class="fnb-id">${fProf.id}</span>
+		                        <span class="fnb-nickname">${fProf.nickName}</span>
+		                        (<span class="fnb-id">${fProf.id}</span>)
+		                        <input type="hidden" name="privacy" class="priv" value="${fProf.privacy }">
 		                    </td>
 		                    <td class="fnb-btns-td">
 		                        <button type="button" class="fnb-btn fnb-follow-btn theme" value="1">FOLLOWING</button>
@@ -74,7 +78,7 @@
 		                        <div class="fnb-img-div">
 		                  			<c:choose>
 			                        	<c:when test="${empty fProf.photo}">
-			                            	<img src="./resources/img/프로필.png">
+			                            	<img src="<%=contextPath%>/resources/img/프로필.png">
 		                   				</c:when>
 		                            	<c:otherwise>
 		                            		<img src="download?filename=${fProf.photo}">
@@ -83,8 +87,9 @@
 		                        </div>
 		                    </td>
 		                    <td colspan="4" class="fnb-username-td">
-		                        <span class="fnb-nickname">${fProf.nickName}</span> / 
-		                        <span class="fnb-id">${fProf.id}</span>
+		                        <span class="fnb-nickname">${fProf.nickName}</span>
+		                        (<span class="fnb-id">${fProf.id}</span>)
+		                        <input type="hidden" name="privacy" class="priv" value="${fProf.privacy }">
 		                    </td>
 		                    <td class="fnb-btns-td">
 		                        <button type="button" class="fnb-btn fnb-follow-btn theme" value="1">FOLLOWING</button>
@@ -99,7 +104,7 @@
 		                        <div class="fnb-img-div">
 		                			<c:choose>
 			                        	<c:when test="${empty fProf.photo}"> 
-			                            	<img src="./resources/img/프로필.png">
+			                            	<img src="<%=contextPath%>/resources/img/프로필.png">
 		                        		</c:when>
 		                            	<c:otherwise>
 		                            		<img src="download?filename=${fProf.photo}">
@@ -108,8 +113,9 @@
 		                        </div>
 		                    </td>
 		                    <td colspan="4" class="fnb-username-td">
-		                        <span class="fnb-nickname">${fProf.nickName}</span> / 
-		                        <span class="fnb-id">${fProf.id}</span>
+		                        <span class="fnb-nickname">${fProf.nickName}</span>
+		                        (<span class="fnb-id">${fProf.id}</span>)
+		                        <input type="hidden" name="privacy" class="priv" value="${fProf.privacy }">
 		                    </td>
 		                    <td class="fnb-btns-td">
 		                        <button type="button" class="fnb-btn fnb-follow-btn theme" value="0">FOLLOW</button>
@@ -122,11 +128,11 @@
                 <tr>
                     <td class="fnb-img-td">
                         <div class="fnb-img-div">
-                            <img src="../4297e3fa-661e-446c-81da-071cb32b8271.png">
+                            <img src="">
                         </div>
                     </td>
                     <td colspan="4" class="fnb-username-td">
-                        <span class="fnb-nickname">nick</span> / 
+                        <span class="fnb-nickname">nick</span>
                         <span class="fnb-id">id</span>
                     </td>
                     <td class="fnb-btns-td">
@@ -144,12 +150,19 @@
 	// followList.jsp에도 적용 가능할 듯.
 
     $(document).ready(function() {
-        $('#type-allFollowers').css('color', 'grey');
-        $('#type-blocked').css('color', 'grey');
-        $('#allFollowersList').css('display', 'none');
-        $('#blockedList').css('display','none');
-        $('#allFollowersList button[value=0]').css('color', '#000000');
-        $('#allFollowersList button[value=0]').css('background-color', '#00f7ff');
+        let url = window.location.href.split('/');
+        let curList = $.trim(url[url.length-1]);
+        console.log(`curList: \${curList}`);
+		
+        $('label[id^=type-]').css('color', 'grey');
+        $('tbody[id$=List]').css('display', 'none');
+        if (curList != '') {
+        	$(`label[id*=\${curList} i]`).css('color', '')
+        	$(`tbody[id*=\${curList} i]`).css('display', '')
+        } else {
+        	$('#type-followings').css('color', '');
+        	$('#followingsList').css('display', '');
+        }
     });
 
     // FOLLOWINGS FOLLOWERS BLOCKED 글자 누를 때 디자인 및 보이는 리스트 변화
@@ -160,6 +173,29 @@
         $('tbody[id$=List]').css('display', 'none');
         $(`tbody[id*=\${curType} i]`).css('display', '');
     });
+    
+    $('tbody').on('click', '.fnb-btns-td .fnb-follow-btn', function() {
+    	let flag = followSwitch($(this));
+    });
+    
+    
+    function followSwitch(flag) {
+    	if (flag.val() == 0) {
+    		flag.val(1);
+    		flag.text('FOLLOWING');
+    	} else {
+    		flag.val(0);
+    		flag.text('FOLLOW');
+    	}
+    	return flag.val();
+    }
+    
+    
+    
+    
+    
+    
+    
 
 </script>
 </html>

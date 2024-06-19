@@ -3,7 +3,10 @@ package vo;
 public class CommVO {
 	private int c_no; //댓글 번호
 	private int no; //글 번호
+	private int c_like;
+	private int c_dislike;
 	private String c_cont; // 댓글 내용
+	private String c_date; //댓글 날짜
 	
 	//getter
 	public int getC_no() {
@@ -15,6 +18,9 @@ public class CommVO {
 	public String getC_cont() {
 		return c_cont;
 	}
+	public String getC_date() {
+		return c_date;
+	}
 	
 	//setter
 	public void setC_cont(String c_cont) {
@@ -25,5 +31,8 @@ public class CommVO {
 	}
 	public void setNo(int no) {
 		this.no = no;
+	}
+	public void setC_date(String c_date) {
+		this.c_date = c_date;
 	}
 }

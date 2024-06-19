@@ -17,11 +17,13 @@ public class PostingDao implements IF_PostingDao{
 	
 	@Override
 	public void insertPost(PostVO pvo) throws Exception {
+		System.out.println("dao postInsert"+pvo.toString());
 		sql.insert(mapperQuery+".insertPost", pvo);
 	}
 
 	@Override
 	public void insertAttach(String fileName) throws Exception {
+		System.out.println("dao attachInsert"+fileName);
 		sql.insert(mapperQuery+".insertAttach", fileName);
 	}
 

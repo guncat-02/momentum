@@ -18,6 +18,15 @@
         <!--아이콘-->
     </div>
     <div id="menu">
+    
+    	<a href="main">
+    		<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
+  				<path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"/>
+			</svg>
+			<span>HOME</span>
+    	</a>
+    	<br>
+    
         <a href="profileShow">
             <div id="menu-profile-image">
                 <img src="" alt="">
@@ -130,23 +139,20 @@
     </div>
 </body>
 <script>
-	$(document).ready(function() {
-	    if (localStorage.getItem('curTheme') == null) {
-	        localStorage.setItem('curTheme', './resources/css/dark_theme.css');
-	    }
-	    $('#theme-setting').prop('href', localStorage.getItem('curTheme'));
-	});
+
+	// 기존의 document.ready() function 삭제. 유사한 기능을 interceptor postHandle에서 실행.
+
 	$('#theme-change-btn').click(function() {
-	    if (localStorage.getItem('curTheme') == './resources/css/dark_theme.css') {
-	        localStorage.setItem('curTheme', './resources/css/light_theme.css');
+	    if (sessionStorage.getItem('curTheme') == '/sns/resources/css/dark_theme.css') {
+	    	sessionStorage.setItem('curTheme', '/sns/resources/css/light_theme.css');
 	    } else {
-	        localStorage.setItem('curTheme', './resources/css/dark_theme.css');
+	    	sessionStorage.setItem('curTheme', '/sns/resources/css/dark_theme.css');
 	    }
-	    $('#theme-setting').prop('href', localStorage.getItem('curTheme'));
+	    $('#theme-setting').attr('href', sessionStorage.getItem('curTheme'));
 	});
 	
 	$('#menu-logout').click(function() {
-	    localStorage.removeItem('curTheme');
+		sessionStorage.removeItem('curTheme');
 	});
 </script>
 </html>
