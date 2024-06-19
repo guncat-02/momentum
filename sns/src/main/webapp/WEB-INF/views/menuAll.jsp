@@ -141,15 +141,26 @@
 <script>
 
 	// 기존의 document.ready() function 삭제. 유사한 기능을 interceptor postHandle에서 실행.
-
-	$('#theme-change-btn').click(function() {
-	    if (sessionStorage.getItem('curTheme') == '/sns/resources/css/dark_theme.css') {
-	    	sessionStorage.setItem('curTheme', '/sns/resources/css/light_theme.css');
-	    } else {
-	    	sessionStorage.setItem('curTheme', '/sns/resources/css/dark_theme.css');
-	    }
-	    $('#theme-setting').attr('href', sessionStorage.getItem('curTheme'));
+	$(document).ready(function() {
+		
 	});
+	
+	function setCookie(key, value) {
+		let date = new Date();
+		document.cookie = `\${encodeURIComponent(name)}=\${encodeURIComponent(value)};expires=\${date.toUTCString()};path=/`;
+	}
+	
+	function getCookie(key) {
+		let cookies = document.cookie;
+		for (let cookie of cookies.split(';')) {
+			let one = cookie.split('=');
+			if (one[0] == key) {
+				return one[1];
+			}
+		}
+		return null;
+	}
+	
 	
 	$('#menu-logout').click(function() {
 		sessionStorage.removeItem('curTheme');
