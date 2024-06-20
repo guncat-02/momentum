@@ -1,0 +1,15 @@
+package dao;
+
+import java.util.HashMap;
+import java.util.List;
+
+import vo.ProfileVO;
+
+public interface IF_BlockDao {
+
+	public void block(HashMap<String, Object> map) throws Exception;
+	
+	public void unblock(HashMap<String, String> map) throws Exception;
+	
+	public List<ProfileVO> getBlocked(String id) throws Exception;
+}

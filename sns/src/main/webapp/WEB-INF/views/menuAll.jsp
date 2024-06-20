@@ -13,6 +13,7 @@
     integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer">
 </script>
+<script src="/sns/resources/JS/setTheme.js"></script>
 <body>
     <div id="menulogo">
         <!--아이콘-->
@@ -130,7 +131,7 @@
         </table>
     </div>
     <div id="logout">
-        <a href="/sns" id="menu-logout">
+        <a href="logout" id="menu-logout">
         	<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-power" viewBox="0 0 16 16">
   <path d="M7.5 1v7h1V1z"/>
   <path d="M3 8.812a5 5 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812"/>
@@ -140,30 +141,12 @@
 </body>
 <script>
 
-	// 기존의 document.ready() function 삭제. 유사한 기능을 interceptor postHandle에서 실행.
-	$(document).ready(function() {
-		
+	$('#theme-change-btn').on('click', function() {
+		switchTheme();
 	});
 	
-	function setCookie(key, value) {
-		let date = new Date();
-		document.cookie = `\${encodeURIComponent(name)}=\${encodeURIComponent(value)};expires=\${date.toUTCString()};path=/`;
-	}
-	
-	function getCookie(key) {
-		let cookies = document.cookie;
-		for (let cookie of cookies.split(';')) {
-			let one = cookie.split('=');
-			if (one[0] == key) {
-				return one[1];
-			}
-		}
-		return null;
-	}
+
 	
 	
-	$('#menu-logout').click(function() {
-		sessionStorage.removeItem('curTheme');
-	});
 </script>
 </html>

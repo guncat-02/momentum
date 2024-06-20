@@ -64,6 +64,21 @@ public class LoginController {
 
 		if(mvo.getPass().equals(pass)) {
 			
+			// 테마 경로를 쿠키에 저장하고, view에서 활용.
+			// 기존의 cookie가 있을 경우 유효 기간 갱신, 그렇지 않을 경우 생성.
+			// cookie 관련 기능 동작 위해 현재 method에 매개변수로
+			// HttpServletRequest와 HttpServletResponse 추가.
+
+			// 기존 cookie value 저장.
+			String cookieVal = cookieUtil.getCookie(req, "curTheme");
+			if (cookieVal == null) { // 해당 cookie가 없거나 만료되었을 경우.
+				// 새로운 cookie 생성. 기본으로 다크테마 적용.
+				cookieUtil.setCookie(res, "curTheme", "0");
+			} else { // 해당 cookie가 존재할 경우.
+				// 해당 cookie 유효 기간 갱신.
+				cookieUtil.setCookie(res, "curTheme", cookieVal);
+			}
+			
 			if (mvo.getAdmin() != null) {
 				if (session.getAttribute("userid") != null) {
 					session.removeAttribute("userid");
@@ -87,21 +102,6 @@ public class LoginController {
 				session.setAttribute("username", mvo.getName());
 				session.setAttribute("nickName", pServe.matchId(mvo.getId()));
 				
-				// 테마 경로를 쿠키에 저장하고, view에서 활용.
-				// 기존의 cookie가 있을 경우 유효 기간 갱신, 그렇지 않을 경우 생성.
-				// cookie 관련 기능 동작 위해 현재 method에 매개변수로
-				// HttpServletRequest와 HttpServletResponse 추가.
-
-				// 기존 cookie value 저장.
-				String cookieVal = cookieUtil.getCookie(req, "curTheme");
-				if (cookieVal == null) { // 해당 cookie가 없거나 만료되었을 경우.
-					// 새로운 cookie 생성. 기본으로 다크테마 적용.
-					cookieUtil.setCookie(res, "curTheme", "/sns/resources/css/dark_theme.css");
-				} else { // 해당 cookie가 존재할 경우.
-					// 해당 cookie 유효 기간 갱신.
-					cookieUtil.setCookie(res, "curTheme", cookieVal);
-				}
-				// 해당 class의 소스 수정 종료. 24.06.19 우승훈.
 				
 				return "redirect:main";
 			}
@@ -124,7 +124,7 @@ public class LoginController {
 	@GetMapping("logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
-
+		
 		return "redirect:/loginpage";
 	}
 

@@ -11,7 +11,9 @@
 </head>
 <%
 String contextPath = request.getContextPath();
+String id = (String)session.getAttribute("userid");
 %>
+<script src="/sns/resources/JS/setTheme.js"></script>
 <link id="theme-setting" rel="stylesheet" href="/sns/resources/css/dark_theme.css">
 <link rel="stylesheet" href="<%=contextPath%>/resources/css/followAndBlockList.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
@@ -125,29 +127,40 @@ String contextPath = request.getContextPath();
                 </c:forEach>
             </tbody>
             <tbody id="blockedList">
-                <tr>
-                    <td class="fnb-img-td">
-                        <div class="fnb-img-div">
-                            <img src="">
-                        </div>
-                    </td>
-                    <td colspan="4" class="fnb-username-td">
-                        <span class="fnb-nickname">nick</span>
-                        <span class="fnb-id">id</span>
-                    </td>
-                    <td class="fnb-btns-td">
-                        <button type="button" class="fnb-btn fnb-block-btn theme">BLOCKED</button>
-                    </td>
-                </tr>
+                <c:forEach items="${blocked }" var="bProf">
+              		<c:if test="${not empty bProf }">
+		                <tr>
+		                    <td class="fnb-img-td">
+		                        <div class="fnb-img-div">
+		                			<c:choose>
+			                        	<c:when test="${empty bProf.photo}"> 
+			                            	<img src="<%=contextPath%>/resources/img/프로필.png">
+		                        		</c:when>
+		                            	<c:otherwise>
+		                            		<img src="download?filename=${bProf.photo}">
+		                           		</c:otherwise>
+	                           		</c:choose> 
+		                        </div>
+		                    </td>
+		                    <td colspan="4" class="fnb-username-td">
+		                        <span class="fnb-nickname">${bProf.nickName}</span>
+		                        (<span class="fnb-id">${bProf.id}</span>)
+		                        <input type="hidden" name="privacy" class="priv" value="${bProf.privacy }">
+		                    </td>
+		                    <td class="fnb-btns-td">
+		                    	<!-- 0: 차단해제, 1: 차단 -->
+		                        <button type="button" class="fnb-btn fnb-block-btn theme" value="1">BLOCKED</button>
+		                    </td>
+		                </tr>
+	                </c:if>
+                </c:forEach>
             </tbody>
         </table>
     </div>
 </body>
 <script>
-
-	// window.location.href로 url 가져와서 식별자 다르게 한 다음
-	// followings, followers, blocked list 각각 출력하자.
-	// followList.jsp에도 적용 가능할 듯.
+	
+	const curId = '<%=id %>';
 
     $(document).ready(function() {
         let url = window.location.href.split('/');
@@ -169,16 +182,24 @@ String contextPath = request.getContextPath();
     $('label[id^=type-]').on('click', function() {
         $('label[id^=type-]').css('color', 'grey');
         $(this).css('color', '');
-        let curType = $(this).text().substring(5);
+        let curType = $.trim($(this).text().substring(5).toLowerCase());
+        console.log(curType);
+        location.href = `/sns/list_fnb/\${curType}`;
         $('tbody[id$=List]').css('display', 'none');
         $(`tbody[id*=\${curType} i]`).css('display', '');
     });
     
+    // FOLLOWING-FOLLOW 버튼 누를 때 디자인 변화
     $('tbody').on('click', '.fnb-btns-td .fnb-follow-btn', function() {
-    	let flag = followSwitch($(this));
+    	let btn = $(this);
+    	btn.css('pointer-events', 'none');
+    	let flag = followSwitch(btn);
+    	if (flag == 0) {
+    		followCancel(btn);
+    	} else {
+    		follow(btn);
+    	}
     });
-    
-    
     function followSwitch(flag) {
     	if (flag.val() == 0) {
     		flag.val(1);
@@ -190,7 +211,114 @@ String contextPath = request.getContextPath();
     	return flag.val();
     }
     
+    function follow(btn) {
+    	
+    	let fId = $.trim(btn.closest('tr').find('.fnb-id').text());
+    	$.ajax({
+    		url: '/sns/follow',
+    		type: 'get',
+    		data: {
+    			id: curId,
+    			followId: fId
+    		},
+    		success: function(result) {
+    			console.log(result);
+    			btn.css('pointer-events', 'auto');
+    		},
+    		error: function() {
+    			alert('잠시 후 다시 시도해주세요.');
+    			btn.val(0);
+    			btn.text('FOLLOW');
+    		}
+    	});
+    }
+    function followCancel(btn) {
+    	
+    	let fId = $.trim(btn.closest('tr').find('.fnb-id').text());
+
+    	$.ajax({
+    		url: '/sns/followcancel',
+    		type: 'get',
+    		data: {
+    			id: curId,
+    			followId: fId
+    		},
+    		success: function(result) {
+    			console.log(result);
+    			btn.css('pointer-events', 'auto');
+    		},
+    		error: function() {
+    			alert('잠시 후 다시 시도해주세요.');
+    			btn.val(1);
+    			btn.text('FOLLOWING');
+    		}
+    	});
+    	
+    }
     
+    
+    
+    
+    $('tbody').on('click', '.fnb-btns-td .fnb-block-btn', function() {
+    	let btn = $(this);
+    	btn.css('pointer-events', 'none');
+    	let flag = blockSwitch(btn);
+    	if (flag == 0) { // 차단 해제
+    		blockCancel(btn);
+    	} else { // 차단
+    		block(btn);
+    	}
+    });
+    function blockSwitch(flag) {
+    	if (flag.val() == 0) {
+    		flag.val(1);
+    		flag.text('BLOCKED');
+    	} else {
+    		flag.val(0);
+    		flag.text('UNBLOCKED');
+    	}
+    	return flag.val();
+    }
+    function block(btn) {
+    	
+    	let bId = $.trim(btn.closest('tr').find('.fnb-id').text());
+    	let blockReason = prompt('차단 사유를 입력해주세요. 서비스 개선에 도움이 됩니다.', '');
+    	
+    	$.ajax({
+    		url: '/sns/block',
+    		type: 'get',
+    		data: {
+    			blockId: bId,
+    			reason: blockReason
+    		},
+    		success: function() {
+    			btn.css('pointer-events', 'auto');
+    		},
+    		error: function() {
+    			alert('잠시 후 다시 시도해주세요.');
+    			btn.val(0);
+    		}
+    	});
+    }
+    function blockCancel(btn) {
+    	
+    	let bId = $.trim(btn.closest('tr').find('.fnb-id').text());
+    	
+    	$.ajax({
+    		url: '/sns/blockCancel',
+    		type: 'get',
+    		data: {
+    			blockId: bId
+    		},
+    		success: function() {
+    			btn.css('pointer-events', 'auto');
+    		},
+    		error: function() {
+    			alert('잠시 후 다시 시도해주세요.');
+    			btn.val(1);
+    		}
+    	});
+    }
     
     
     

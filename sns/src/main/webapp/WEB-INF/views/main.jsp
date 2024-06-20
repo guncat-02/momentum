@@ -37,7 +37,6 @@
 					<span> 사용자 정보 : ${userid } / ${username } / ${grade }</span>
 				</c:if>
                 </h1>
-                <input type="button" value="themechange" id="btn">
                 <div class="theme-font" id="root">
                 <!-- root class에 게시물 들어옵니다 -->
 	                <c:forEach items="${aList}" var="post" varStatus="postStat">
@@ -102,24 +101,7 @@
 </body>
 
 <script>
-	
-    $('#btn').on('click', function () {
-        themeSwitch();
-        if ($('#cur-theme').val() == 0) {
-            $('#theme-setting').prop('href', './resources/css/dark_theme.css');
-        } else {
-            $('#theme-setting').prop('href', './resources/css/light_theme.css');
-        }
-        $('#postingWindow').css('z-index', 1);
-    });
-    function themeSwitch() {
-        if ($('#cur-theme').val() == 0) {
-            $('#cur-theme').val(1);
-        } else {
-            $('#cur-theme').val(0);
-        }
-    }
-   
+
 	
     //infinite scroll -start
     //첫 로드되는 게시물에 click이벤트 적용

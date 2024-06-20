@@ -8,6 +8,16 @@ public class ProfileVO {
 	private String bio; //한 줄 소개
 	private int privacy; //공개 여부
 	
+	
+	
+	
+	
+	
+	@Override
+	public String toString() {
+		return "ProfileVO [id=" + id + ", nickName=" + nickName + ", photo=" + photo + ", tel=" + tel + ", bio=" + bio
+				+ ", privacy=" + privacy + "]";
+	}
 	//getter
 	public String getId() {
 		return id;

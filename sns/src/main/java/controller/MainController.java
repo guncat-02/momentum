@@ -4,6 +4,7 @@ package controller;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import service.IF_MainService;
+import util.CookieUtil;
 import vo.PostVO;
 
 @Controller
@@ -55,6 +57,7 @@ public class MainController {
 		//model.addAttribute("myattach",myAttach);
 		return "myPost";
 	}
+
 	
 	/*
 	@PostMapping("/main_mintest/id/like")

@@ -7,7 +7,8 @@
 <title>momentum</title>
 <!-- 다크 테마를 기본 값으로-->
 <link id="theme-setting" rel="stylesheet"
-	href="<%=(String)session.getAttribute("curTheme")%>">
+	href="/sns/resources/css/dark_theme.css">
+<script src="/sns/resources/JS/setTheme.js"></script>
 <link rel="stylesheet" href="./resources/css/profileShow.css">
 </head>
 <body class="theme">
