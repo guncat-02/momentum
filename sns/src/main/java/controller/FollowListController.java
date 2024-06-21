@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,8 +32,29 @@ public class FollowListController {
 	@Inject
 	IF_ProfileService pservice;
 	
-	@GetMapping("/followList")
-	public String followList(Model model) {
+	@GetMapping("/followList/*")
+	public String followList(Model model, HttpSession session, HttpServletRequest req,
+			@RequestParam(value = "id", required = false)String reqId) throws Exception {
+		
+		String id;
+		if (reqId != null) {
+			id = reqId;
+		} else {
+			id = (String)session.getAttribute("userid");
+		}
+		// 'followList' 이후의 식별자 판단
+		String[] uri = req.getRequestURI().split("/");
+		String curType = uri[uri.length-1].split("\\?")[0];
+		// followList 이후의 식별자에 따라 DB에서 가져오는 데이터 다르게 함.
+		if (curType.equals("followList") || curType.equals("followings")) {
+			model.addAttribute("followings", fservice.getFollowingsProfile(id));
+		} else if (curType.equals("followers")) {
+			model.addAttribute("interfollowers", fservice.getInterFollowersProfile(id));
+			model.addAttribute("followers", fservice.getFollowersProfile(id));
+		} else { // 이외의 요청의 경우 main으로 돌려보낸다.
+			return "redirect:/main";
+		}
+		model.addAttribute("reqId", id);
 		return "followList";
 	}
 	

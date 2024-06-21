@@ -45,115 +45,135 @@ String id = (String)session.getAttribute("userid");
                 </tr>
             </thead>
             <tbody id="followingsList">
-            	<c:forEach items="${followings }" var="fProf">
-            		<c:if test="${not empty fProf }">
-		                <tr>
-		                    <td class="fnb-img-td">
-		                        <div class="fnb-img-div">
-		           					<c:choose>
-			           					<c:when test="${empty fProf.photo}">
-			                            	<img src="<%=contextPath%>/resources/img/프로필.png">
-	                   					</c:when>
-		                            	<c:otherwise>
-		                            		<img src="download?filename=${fProf.photo}">
-		                           		</c:otherwise>
-	                           		</c:choose> 
-		                        </div>
-		                    </td>
-		                    <td colspan="4" class="fnb-username-td">
-		                        <span class="fnb-nickname">${fProf.nickName}</span>
-		                        (<span class="fnb-id">${fProf.id}</span>)
-		                        <input type="hidden" name="privacy" class="priv" value="${fProf.privacy }">
-		                    </td>
-		                    <td class="fnb-btns-td">
-		                        <button type="button" class="fnb-btn fnb-follow-btn theme" value="1">FOLLOWING</button>
-		                    </td>
-		                </tr>
-	                </c:if>
-                </c:forEach>
+	            <c:if test="${not empty followings }">
+	            	<c:forEach items="${followings }" var="fProf">
+			                <tr>
+			                    <td class="fnb-img-td">
+			                        <div class="fnb-img-div">
+			           					<c:choose>
+				           					<c:when test="${empty fProf.photo}">
+				                            	<img src="<%=contextPath%>/resources/img/프로필.png">
+		                   					</c:when>
+			                            	<c:otherwise>
+			                            		<img src="/download?filename=${fProf.photo}">
+			                           		</c:otherwise>
+		                           		</c:choose> 
+			                        </div>
+			                    </td>
+			                    <td colspan="4" class="fnb-username-td">
+			                    	<c:if test="${fProf.privacy == 0 }">
+			                    		<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-lock" viewBox="0 0 16 16">
+		  									<path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2m3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2M5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1"/>
+										</svg>
+									</c:if>
+			                        <span class="fnb-nickname">${fProf.nickName}</span>
+			                        (<span class="fnb-id">${fProf.id}</span>)
+			                        <input type="hidden" name="privacy" class="priv" value="${fProf.privacy }">
+			                    </td>
+			                    <td class="fnb-btns-td">
+			                        <button type="button" class="fnb-btn fnb-follow-btn theme" value="1">FOLLOWING</button>
+			                    </td>
+			                </tr>
+	                </c:forEach>
+                </c:if>
             </tbody>
             <tbody id="allFollowersList">
-            	<c:forEach items="${interfollowers }" var="fProf">
-            		<c:if test="${not empty fProf }">
-		                <tr>
-		                    <td class="fnb-img-td">
-		                        <div class="fnb-img-div">
-		                  			<c:choose>
-			                        	<c:when test="${empty fProf.photo}">
-			                            	<img src="<%=contextPath%>/resources/img/프로필.png">
-		                   				</c:when>
-		                            	<c:otherwise>
-		                            		<img src="download?filename=${fProf.photo}">
-		                           		</c:otherwise>
-	                           		</c:choose>
-		                        </div>
-		                    </td>
-		                    <td colspan="4" class="fnb-username-td">
-		                        <span class="fnb-nickname">${fProf.nickName}</span>
-		                        (<span class="fnb-id">${fProf.id}</span>)
-		                        <input type="hidden" name="privacy" class="priv" value="${fProf.privacy }">
-		                    </td>
-		                    <td class="fnb-btns-td">
-		                        <button type="button" class="fnb-btn fnb-follow-btn theme" value="1">FOLLOWING</button>
-		                    </td>
-		                </tr>
-	                </c:if>
-                </c:forEach>
-                <c:forEach items="${followers }" var="fProf">
-              		<c:if test="${not empty fProf }">
-		                <tr>
-		                    <td class="fnb-img-td">
-		                        <div class="fnb-img-div">
-		                			<c:choose>
-			                        	<c:when test="${empty fProf.photo}"> 
-			                            	<img src="<%=contextPath%>/resources/img/프로필.png">
-		                        		</c:when>
-		                            	<c:otherwise>
-		                            		<img src="download?filename=${fProf.photo}">
-		                           		</c:otherwise>
-	                           		</c:choose> 
-		                        </div>
-		                    </td>
-		                    <td colspan="4" class="fnb-username-td">
-		                        <span class="fnb-nickname">${fProf.nickName}</span>
-		                        (<span class="fnb-id">${fProf.id}</span>)
-		                        <input type="hidden" name="privacy" class="priv" value="${fProf.privacy }">
-		                    </td>
-		                    <td class="fnb-btns-td">
-		                        <button type="button" class="fnb-btn fnb-follow-btn theme" value="0">FOLLOW</button>
-		                    </td>
-		                </tr>
-	                </c:if>
-                </c:forEach>
+	            <c:if test="${not empty interfollowers }">
+	            	<c:forEach items="${interfollowers }" var="fProf">
+			                <tr>
+			                    <td class="fnb-img-td">
+			                        <div class="fnb-img-div">
+			                  			<c:choose>
+				                        	<c:when test="${empty fProf.photo}">
+				                            	<img src="<%=contextPath%>/resources/img/프로필.png">
+			                   				</c:when>
+			                            	<c:otherwise>
+			                            		<img src="/download?filename=${fProf.photo}">
+			                           		</c:otherwise>
+		                           		</c:choose>
+			                        </div>
+			                    </td>
+			                    <td colspan="4" class="fnb-username-td">
+			                    	<c:if test="${fProf.privacy == 0 }">
+			                    		<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-lock" viewBox="0 0 16 16">
+		  									<path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2m3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2M5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1"/>
+										</svg>
+									</c:if>
+			                        <span class="fnb-nickname">${fProf.nickName}</span>
+			                        (<span class="fnb-id">${fProf.id}</span>)
+			                        <input type="hidden" name="privacy" class="priv" value="${fProf.privacy }">
+			                    </td>
+			                    <td class="fnb-btns-td">
+			                        <button type="button" class="fnb-btn fnb-follow-btn theme" value="1">FOLLOWING</button>
+			                    </td>
+			                </tr>
+	                </c:forEach>
+                </c:if>
+                <c:if test="${not empty followers }">
+	                <c:forEach items="${followers }" var="fProf">
+			                <tr>
+			                    <td class="fnb-img-td">
+			                        <div class="fnb-img-div">
+			                			<c:choose>
+				                        	<c:when test="${empty fProf.photo}"> 
+				                            	<img src="<%=contextPath%>/resources/img/프로필.png">
+			                        		</c:when>
+			                            	<c:otherwise>
+			                            		<img src="/download?filename=${fProf.photo}">
+			                           		</c:otherwise>
+		                           		</c:choose> 
+			                        </div>
+			                    </td>
+			                    <td colspan="4" class="fnb-username-td">
+			                    	<c:if test="${fProf.privacy == 0 }">
+			                    		<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-lock" viewBox="0 0 16 16">
+		  									<path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2m3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2M5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1"/>
+										</svg>
+									</c:if>
+			                        <span class="fnb-nickname">${fProf.nickName}</span>
+			                        (<span class="fnb-id">${fProf.id}</span>)
+			                        <input type="hidden" name="privacy" class="priv" value="${fProf.privacy }">
+			                    </td>
+			                    <td class="fnb-btns-td">
+			                        <button type="button" class="fnb-btn fnb-follow-btn theme" value="0">FOLLOW</button>
+			                    </td>
+			                </tr>
+	                </c:forEach>
+                </c:if>
             </tbody>
             <tbody id="blockedList">
-                <c:forEach items="${blocked }" var="bProf">
-              		<c:if test="${not empty bProf }">
-		                <tr>
-		                    <td class="fnb-img-td">
-		                        <div class="fnb-img-div">
-		                			<c:choose>
-			                        	<c:when test="${empty bProf.photo}"> 
-			                            	<img src="<%=contextPath%>/resources/img/프로필.png">
-		                        		</c:when>
-		                            	<c:otherwise>
-		                            		<img src="download?filename=${bProf.photo}">
-		                           		</c:otherwise>
-	                           		</c:choose> 
-		                        </div>
-		                    </td>
-		                    <td colspan="4" class="fnb-username-td">
-		                        <span class="fnb-nickname">${bProf.nickName}</span>
-		                        (<span class="fnb-id">${bProf.id}</span>)
-		                        <input type="hidden" name="privacy" class="priv" value="${bProf.privacy }">
-		                    </td>
-		                    <td class="fnb-btns-td">
-		                    	<!-- 0: 차단해제, 1: 차단 -->
-		                        <button type="button" class="fnb-btn fnb-block-btn theme" value="1">BLOCKED</button>
-		                    </td>
-		                </tr>
-	                </c:if>
-                </c:forEach>
+            	<c:if test="${not empty blocked }">
+	                <c:forEach items="${blocked }" var="bProf">
+			                <tr>
+			                    <td class="fnb-img-td">
+			                        <div class="fnb-img-div">
+			                			<c:choose>
+				                        	<c:when test="${empty bProf.photo}"> 
+				                            	<img src="<%=contextPath%>/resources/img/프로필.png">
+			                        		</c:when>
+			                            	<c:otherwise>
+			                            		<img src="/download?filename=${bProf.photo}">
+			                           		</c:otherwise>
+		                           		</c:choose> 
+			                        </div>
+			                    </td>
+			                    <td colspan="4" class="fnb-username-td">
+			                    	<c:if test="${bProf.privacy == 0 }">
+			                    		<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-lock" viewBox="0 0 16 16">
+		  									<path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2m3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2M5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1"/>
+										</svg>
+									</c:if>
+			                        <span class="fnb-nickname">${bProf.nickName}</span>
+			                        (<span class="fnb-id">${bProf.id}</span>)
+			                        <input type="hidden" name="privacy" class="priv" value="${bProf.privacy }">
+			                    </td>
+			                    <td class="fnb-btns-td">
+			                    	<!-- 0: 차단해제, 1: 차단 -->
+			                        <button type="button" class="fnb-btn fnb-block-btn theme" value="1">BLOCKED</button>
+			                    </td>
+			                </tr>
+	                </c:forEach>
+                </c:if>
             </tbody>
         </table>
     </div>
@@ -165,13 +185,12 @@ String id = (String)session.getAttribute("userid");
     $(document).ready(function() {
         let url = window.location.href.split('/');
         let curList = $.trim(url[url.length-1]);
-        console.log(`curList: \${curList}`);
 		
         $('label[id^=type-]').css('color', 'grey');
         $('tbody[id$=List]').css('display', 'none');
         if (curList != '') {
-        	$(`label[id*=\${curList} i]`).css('color', '')
-        	$(`tbody[id*=\${curList} i]`).css('display', '')
+        	$(`label[id*=\${curList} i]`).css('color', '');
+        	$(`tbody[id*=\${curList} i]`).css('display', '');
         } else {
         	$('#type-followings').css('color', '');
         	$('#followingsList').css('display', '');
@@ -185,8 +204,6 @@ String id = (String)session.getAttribute("userid");
         let curType = $.trim($(this).text().substring(5).toLowerCase());
         console.log(curType);
         location.href = `/sns/list_fnb/\${curType}`;
-        $('tbody[id$=List]').css('display', 'none');
-        $(`tbody[id*=\${curType} i]`).css('display', '');
     });
     
     // FOLLOWING-FOLLOW 버튼 누를 때 디자인 변화

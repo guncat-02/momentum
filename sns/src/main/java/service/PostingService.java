@@ -1,5 +1,8 @@
 package service;
 
+import java.util.HashMap;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -15,11 +18,12 @@ public class PostingService implements IF_PostingService{
 	
 	@Override
 	public void insertPost(PostVO pvo) throws Exception {
-		System.out.println("service_postInsert"+pvo.toString());
 		pdao.insertPost(pvo);
+		HashMap<String, Object> fileMap = new HashMap<>();
+		fileMap.put("id", pvo.getId());
 		for (String fileName : pvo.getFilename()) {
-			System.out.println(fileName);
-			pdao.insertAttach(fileName);
+			fileMap.put("filename", fileName);
+			pdao.insertAttach(fileMap);
 		}
 	}
 
@@ -33,6 +37,27 @@ public class PostingService implements IF_PostingService{
 	public int c_dislike(String no) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public PostVO selectOnePost(int no) throws Exception {
+		PostVO rePVO = pdao.selectOnePost(no);
+		List<String> files = pdao.selectAttach(no);
+		if (files != null && files.size() != 0) { // 사진 있는 경우
+			rePVO.setFilename(files.toArray(new String[files.size()]));
+		}
+		return rePVO;
+	}
+
+	@Override
+	public void insertRePost(PostVO pvo) throws Exception {
+		pdao.insertRePost(pvo);
+		HashMap<String, Object> fileMap = new HashMap<>();
+		fileMap.put("id", pvo.getId());
+		for (String fileName : pvo.getFilename()) {
+			fileMap.put("filename", fileName);
+			pdao.insertAttach(fileMap);
+		}
 	}
 	
 	

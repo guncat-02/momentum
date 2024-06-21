@@ -65,22 +65,13 @@
 	
 	function test() {
 		let fList = $('.attach-one-div .file');
-		console.log(fList.length);
 		for (let f of fList) {
-			console.log(f.files);
 			if (f.files.length != 0) {
-				f.removeAttribute('disabled')
+				f.removeAttribute('disabled');
 			} else {
-				console.log('theres a file for null');
 				f.setAttribute('disabled', '');
 			}
 		}
-		for (let a of fList) {
-			console.log('start');
-			console.log(a);
-            console.log('end');
-		}
-		confirm('ok');
 		return true;
 	}
 
@@ -144,7 +135,7 @@
         }
         return true;
     }
-    
+ 
     $('#create-post-attach').on('click', '.delAttach', function () {
         $(this).closest('.attach-one-div').remove();
 
@@ -154,10 +145,11 @@
                     파일
                     <input type="file" name="file" class="file">
                 </label>
-            </div>`
+            </div>`;
             $('#create-post-attach').append(newDiv);
         }
     });
 
 </script>
+
 </html>

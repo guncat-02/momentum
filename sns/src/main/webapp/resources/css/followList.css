@@ -144,6 +144,10 @@ body {
 .followList-btn button:hover {
     cursor: pointer;
 }
+.followList-btn button[value="0"] {
+	background-color: #00f7ff;
+	color: #000000;
+}
 
 tfoot {
     text-align: center;
