@@ -34,10 +34,9 @@
             <main>
                 <h1 class="theme-font">
                 <c:if test="${userid != null }">
-					<span> 사용자 정보 : ${userid } / ${username } / ${grade }</span>
+					<span> 사용자 정보 : ${userid } / ${username }</span>
 				</c:if>
                 </h1>
-                <input type="button" value="themechange" id="btn">
                 <div class="theme-font" id="root">
                 <!-- root class에 게시물 들어옵니다 -->
 	                <c:forEach items="${aList}" var="post" varStatus="postStat">
@@ -69,7 +68,7 @@
 				        			</c:forEach>
 								</div>
 							</div>
-				        	<form action = "myPost" method = "post" name="form" class="postCss">
+				        	<form action = "myPost" method = "get" name="form" class="postCss">
 				        		<input type="hidden" name="no" value="${post.no}" class="no" style="background-color:black;">
 				        		<input type="hidden" name="id" value="${post.id}" class="id cssid" >
 				        		<textarea name="cont" class="cont" style="background-color:black;width:90%;height:200px;border:1px solid violet; color:violet;" readonly>${post.cont}</textarea>

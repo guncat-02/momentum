@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="dao.IF_PostingDao">
 
 	<insert id="insertPost" parameterType="vo.PostVO">
-		insert into postTest values (seTest.nextval, null, 'nuit0204', #{cont}, 0, #{privacy}, default)
+		insert into postTest values (seTest.nextval, null, #{id}, #{cont}, 0, #{privacy}, default, default)
 	</insert>
 	
 	<insert id="insertAttach" parameterType="String">
