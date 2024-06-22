@@ -23,18 +23,12 @@ public class ListController {
 	
 	
 	@GetMapping("/list_fnb/*")
-	public String fnbList(Model model, HttpSession session, HttpServletRequest req,
-			@RequestParam(value = "id", required = false)String reqId) throws Exception {
+	public String fnbList(Model model, HttpSession session, HttpServletRequest req) throws Exception {
 		
-		String id;
-		if (reqId != null) {
-			id = reqId;
-		} else {
-			id = (String)session.getAttribute("userid");
-		}
+		String id = (String)session.getAttribute("userid");
 		
 		String[] uri = req.getRequestURI().split("/");
-		String curType = uri[uri.length-1].split("?")[0];
+		String curType = uri[uri.length-1].split("\\?")[0];
 		// list_fnb 이후의 식별자에 따라 DB에서 가져오는 데이터를 다르게 함.
 		if (curType.equals("list_fnb") || curType.equals("followings")) {
 			model.addAttribute("followings", fservice.getFollowingsProfile(id));

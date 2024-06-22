@@ -30,6 +30,11 @@ public class FollowListService implements IF_FollowListService{
 	public List<ProfileVO> getFollowingsProfile(String id) throws Exception {
 		return fdao.getFollowingsProfile(id);
 	}
+	
+	@Override
+	public List<String> getFollowingsId(String id) throws Exception {
+		return fdao.getFollowingsId(id);
+	}
 
 	@Override
 	public void unfollow(FollowVO fvo) throws Exception {

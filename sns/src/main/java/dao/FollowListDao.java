@@ -32,6 +32,11 @@ public class FollowListDao implements IF_FollowListDao{
 	public List<ProfileVO> getFollowingsProfile(String id) throws Exception {
 		return sql.selectList(mapperQuery+".selectFollowingsProfile", id);
 	}
+	
+	@Override
+	public List<String> getFollowingsId(String id) throws Exception {
+		return sql.selectList(mapperQuery+".selectFollowingsId", id);
+	}
 
 	@Override
 	public void unfollow(FollowVO fvo) throws Exception {
