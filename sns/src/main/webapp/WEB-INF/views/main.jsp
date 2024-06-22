@@ -68,7 +68,7 @@
 				        			</c:forEach>
 								</div>
 							</div>
-				        	<form action = "myPost" method = "get" name="form" class="postCss">
+				        	<form action = "myPost" method = "post" name="form" class="postCss">
 				        		<input type="hidden" name="no" value="${post.no}" class="no" style="background-color:black;">
 				        		<input type="hidden" name="id" value="${post.id}" class="id cssid" >
 				        		<textarea name="cont" class="cont" style="background-color:black;width:90%;height:200px;border:1px solid violet; color:violet;" readonly>${post.cont}</textarea>

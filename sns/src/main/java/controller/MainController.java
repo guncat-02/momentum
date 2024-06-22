@@ -35,31 +35,23 @@ public class MainController {
 		return "main";
 	}
 
-	@GetMapping("myPost")
-	public String post(Model model, @ModelAttribute PostVO postvo, @RequestParam(value="order", required = false, defaultValue="likeorder") String order,@RequestParam(value="no", required = false) int no ) throws Exception {
+	@PostMapping("myPost")
+	public String post(Model model, @ModelAttribute PostVO postvo, @RequestParam(value="order", required = false) String order,@RequestParam(value="no", required = false) int no ) throws Exception {
 		
 		// 해당 포스트 글번호의 댓글 리스트 
-		System.out.println(order+"//");
-		if(order.equals("latest")) {
-			model.addAttribute("Commcnt", cser.cntComm(no));
-			model.addAttribute("commlist",cser.CommList(no)); 
-			model.addAttribute("postvo", postvo);
-		}else if(order.equals("likeorder")) {
-			System.out.println("like넘어와");
-			model.addAttribute("Commcnt", cser.cntComm(no));
-			model.addAttribute("commlist",cser.orderlikecomm(no));
-			model.addAttribute("postvo", postvo);
-		}else {
+		
+		
 			model.addAttribute("commlist",cser.CommList(postvo.getNo())); 
 			model.addAttribute("Commcnt", cser.cntComm(postvo.getNo()));
 			model.addAttribute("postvo", postvo);
-		}
-		
+	
 		
 		
 
 		return "myPost";
 	}
+	
+
 
 
 }

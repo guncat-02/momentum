@@ -1,11 +1,15 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -114,6 +118,28 @@ public class CommCotroller {
 			
 		}
 	}
+	@PostMapping("/orderlikecomm2")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> orderlikecomm(@RequestParam("order") String order,
+	                                                         @RequestParam("no") int no) {
+	    Map<String, Object> response = new HashMap<>();
+	    try {
+	        List<CommVO> commlist = new ArrayList<>();
+	        if (order.equals("latest")) {
+	            commlist = cser.CommList(no);
+	        } else {
+	            commlist = cser.orderlikecomm(no);
+	        }
+	        response.put("commlist", commlist);
+	        return ResponseEntity.ok().body(response);
+	    } catch (Exception e) {
+	        response.put("error", "Failed to fetch comments");
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+	    }
+	}
+	
+	
+	
 
 	@PostMapping("/chklike")
 	@ResponseBody
