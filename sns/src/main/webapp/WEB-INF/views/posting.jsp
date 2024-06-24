@@ -24,7 +24,7 @@
             <%@ include file="menuAll.jsp"%>
         </div>
         <div id="main">
-            <form action="postingSave" method="post" encType="multipart/form-data" onsubmit="return test()">
+            <form action="postingSave" method="post" encType="multipart/form-data">
             	<input type="hidden" name="id" value="<%=(String)session.getAttribute("userid") %>">
                 <!--글 작성, 사진 등록 하는 회색 테두리 화면-->
                 <div id="create-post">
@@ -45,13 +45,13 @@
                     <span id="privacy-setting">
                         게시물 공개 여부
                         <label class="privacy-label">
-                            <input type="radio" name="privacy" value="0" required>비공개
+                            <input type="radio" name="privacy" value="0">비공개
                         </label>
                         <label class="privacy-label">
-                            <input type="radio" name="privacy" value="1">공개
+                            <input type="radio" name="privacy" value="1" checked>공개
                         </label>
                     </span>
-                    <button type="submit" id="postbtn" class="theme theme-font">
+                    <button type="button" id="postbtn" class="theme theme-font">
                         <h1>POST ></h1>
                     </button>
                 </div>
@@ -63,18 +63,22 @@
 
 <script>
 	
-	function test() {
-		let fList = $('.attach-one-div .file');
-		for (let f of fList) {
-			if (f.files.length != 0) {
-				f.removeAttribute('disabled');
-			} else {
-				f.setAttribute('disabled', '');
+	$('#postbtn').on('dblclick', function() {
+		document.querySelector('#postbtn').setAttribute('disabled', '');
+		if ($.trim($('#create-post-cont').val()) != '') {
+			let fList = $('.attach-one-div .file');
+			for (let f of fList) {
+				if (f.files.length != 0) {
+					f.removeAttribute('disabled');
+				} else {
+					f.setAttribute('disabled', '');
+				}
 			}
+			$('form').submit();
 		}
-		return true;
-	}
-
+		document.querySelector('#postbtn').removeAttribute('disabled');
+	});
+	
 	$('.privacy-label').on('click', function() {
 	    $('.privacy-label').css('color','');
 	    if ($('#theme-setting').prop('href').indexOf('dark') != -1){
