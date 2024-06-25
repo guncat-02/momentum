@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.IF_ManagerDao">
+
+	<select id="selectAllMembers" resultType="vo.MemberVO">
+		select * from memberTest order by id
+	</select>
+	
+	<select id="selectAllProfiles" resultType="vo.ProfileVO">
+		select * from profileTest order by id
+	</select>
+	
+	<select id="selectAllPosts" resultType="vo.PostVO">
+		select * from postTest order by no
+	</select>
+	
+	<select id="selectAllComms" resultType="vo.CommVO">
+		select * from commTest order by c_no
+	</select>
+	
+	<select id="selectAllAdmins" resultType="vo.MemberVO">
+		select * from memberTest where admin is not null order by id
+	</select>
+
+</mapper>

@@ -34,27 +34,13 @@ public class MainController {
 		return "main";
 	}
 	@PostMapping("myPost")
-	public String post(
-						Model model
-						,@ModelAttribute PostVO postvo
-						,@RequestParam("myid") String myid
-						,@RequestParam("myname") String myname
-						,@RequestParam("mygrade") String mygrade
-						)throws Exception {
+	public String post(Model model, @ModelAttribute PostVO postvo, @RequestParam(value="order", required = false) String order,@RequestParam(value="no", required = false) int no ) throws Exception {
 		
-		model.addAttribute("postvo",postvo) ;
-		model.addAttribute("myid",myid);
-		model.addAttribute("myname",myname);
-		model.addAttribute("mygrade",mygrade);
-		
-		/*
-		 * model.addAttribute("filename", filename); model.addAttribute("showCnt",
-		 * viewCnt); model.addAttribute("cont", content); model.addAttribute("id",
-		 * postname); model.addAttribute("no", no);
-		 */
-		
-		//List<String> myAttach= mainSer.postAttach(no);
-		//model.addAttribute("myattach",myAttach);
+		// 해당 포스트 글번호의 댓글 리스트 
+//			model.addAttribute("commlist",cser.CommList(postvo.getNo())); 
+//			model.addAttribute("Commcnt", cser.cntComm(postvo.getNo()));
+			model.addAttribute("postvo", postvo);
+	
 		return "myPost";
 	}
 
