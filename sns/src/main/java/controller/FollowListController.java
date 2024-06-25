@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -32,28 +34,40 @@ public class FollowListController {
 	@Inject
 	IF_ProfileService pservice;
 	
-	@GetMapping("/followList/*")
+	@GetMapping("/followList/*") // '/sns/followList/'이후 하나의 식별자에 대한 모든 request 받는다.
 	public String followList(Model model, HttpSession session, HttpServletRequest req,
 			@RequestParam(value = "id", required = false)String reqId) throws Exception {
 		
-		String id;
+		String id; // list에 보이는 프로필을 가져올 기준 id
+		String curId = (String)session.getAttribute("userid"); // 현재 session의 id
 		if (reqId != null) {
 			id = reqId;
 		} else {
-			id = (String)session.getAttribute("userid");
+			id = curId;
 		}
+		
 		// 'followList' 이후의 식별자 판단
-		String[] uri = req.getRequestURI().split("/");
-		String curType = uri[uri.length-1].split("\\?")[0];
-		// followList 이후의 식별자에 따라 DB에서 가져오는 데이터 다르게 함.
+		String[] uri = req.getRequestURI().split("/"); // '/'기준으로 uri 나눈다.
+		String curType = uri[uri.length-1].split("\\?")[0]; // '?'기준으로 uri 나눈다. 특수문자 escape 처리.
+		
+		List<ProfileVO> fList;
+		
+		// 'followList' 이후의 식별자에 따라 DB에서 가져오는 데이터 다르게 함.
 		if (curType.equals("followList") || curType.equals("followings")) {
-			model.addAttribute("followings", fservice.getFollowingsProfile(id));
+			fList = fservice.getFollowingsProfile(id);
 		} else if (curType.equals("followers")) {
-			model.addAttribute("interfollowers", fservice.getInterFollowersProfile(id));
-			model.addAttribute("followers", fservice.getFollowersProfile(id));
+			// 하나의 list에 또다른 list 요소를 이어붙이는 방법. Collections.addAll() method.
+			fList = fservice.getInterFollowersProfile(id);
+			Collections.addAll(fList, fservice.getFollowersProfile(id).toArray(new ProfileVO[0]));
 		} else { // 이외의 요청의 경우 main으로 돌려보낸다.
 			return "redirect:/main";
 		}
+		// curId가 팔로우하는 유저 id 저장.
+		// view에서 목록의 유저에 내가 팔로우 하는 유저가 있을 경우와 없을 경우에 따른 버튼 디자인 다르게 한다.
+		List<String> curIdList = fservice.getFollowingsId(curId);
+		
+		model.addAttribute("followFlag", curIdList);
+		model.addAttribute("fList", fList);
 		model.addAttribute("reqId", id);
 		return "followList";
 	}

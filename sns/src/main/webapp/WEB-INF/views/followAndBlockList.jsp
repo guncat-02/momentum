@@ -44,8 +44,8 @@ String id = (String)session.getAttribute("userid");
                     </td>
                 </tr>
             </thead>
-            <tbody id="followingsList">
 	            <c:if test="${not empty followings }">
+            <tbody id="followingsList">
 	            	<c:forEach items="${followings }" var="fProf">
 			                <tr>
 			                    <td class="fnb-img-td">
@@ -75,10 +75,10 @@ String id = (String)session.getAttribute("userid");
 			                    </td>
 			                </tr>
 	                </c:forEach>
-                </c:if>
             </tbody>
-            <tbody id="allFollowersList">
+                </c:if>
 	            <c:if test="${not empty interfollowers }">
+            <tbody id="allFollowersList">
 	            	<c:forEach items="${interfollowers }" var="fProf">
 			                <tr>
 			                    <td class="fnb-img-td">
@@ -139,10 +139,10 @@ String id = (String)session.getAttribute("userid");
 			                    </td>
 			                </tr>
 	                </c:forEach>
-                </c:if>
             </tbody>
-            <tbody id="blockedList">
+                </c:if>
             	<c:if test="${not empty blocked }">
+            <tbody id="blockedList">
 	                <c:forEach items="${blocked }" var="bProf">
 			                <tr>
 			                    <td class="fnb-img-td">
@@ -173,8 +173,8 @@ String id = (String)session.getAttribute("userid");
 			                    </td>
 			                </tr>
 	                </c:forEach>
-                </c:if>
             </tbody>
+                </c:if>
         </table>
     </div>
 </body>
@@ -187,13 +187,10 @@ String id = (String)session.getAttribute("userid");
         let curList = $.trim(url[url.length-1]);
 		
         $('label[id^=type-]').css('color', 'grey');
-        $('tbody[id$=List]').css('display', 'none');
         if (curList != '') {
         	$(`label[id*=\${curList} i]`).css('color', '');
-        	$(`tbody[id*=\${curList} i]`).css('display', '');
         } else {
         	$('#type-followings').css('color', '');
-        	$('#followingsList').css('display', '');
         }
     });
 
