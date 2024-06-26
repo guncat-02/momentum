@@ -7,7 +7,6 @@ body {
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
-    height: 100000px;
 }
 
 #back {
@@ -44,7 +43,7 @@ body {
 }
 
 #myImgCircle {
-    position: absolute;
+    position: relative;
     top: 50%;
     left: 50%;
     margin-left: -153px;
@@ -56,6 +55,7 @@ body {
 }
 
 #myImgCircle img {
+    position: absolute;
     width: 100%;
     height: 100%;
     border-radius: 50%;
@@ -108,23 +108,19 @@ body {
     text-shadow: #ff00bf 3px 3px;
 }
 
-#myBio {
-    text-align: center;
+#myBio{
+    position: relative;
     width: 100%;
     height: 40%;
-    position: relative;
     text-align: left;
 }
 
-.bioItem {
-    display: block;
-    margin-left: 13%;
+#myBio table {
+    text-align: left;
+    width: 80%;
+    margin-left: 11%;
 }
-
-#myBio span {
-    margin-top: 3%;
-}
-
+ 
 #myProfileSetting {
     position: absolute;
     right: 0;
@@ -132,6 +128,7 @@ body {
     width: 65px;
     height: 65px;
     text-align: center;
+    cursor: pointer;
 }
 
 #myProfileSetting svg {
@@ -162,5 +159,29 @@ body {
 
 a {
     text-decoration: none;
-    color: white;
+    color: inherit;
+}
+
+#settingMenu {
+    display: none;
+    position: absolute;
+    width: 15%;
+    top: 70px;
+    z-index: 15;
+    border: 1px solid #00f7ff;
+    background-color: rgba(0, 0, 0);
+    right: 0;
+    height: 65px;
+    border-radius: 15px;
+}
+
+#settingMenu table{
+    color: #ff00bf;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+}
+
+#settingMenu span {
+    cursor: pointer;
 }
