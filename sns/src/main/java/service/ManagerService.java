@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import dao.IF_ManagerDao;
 import vo.CommVO;
+import vo.ManagerVO;
 import vo.MemberVO;
 import vo.PostVO;
 import vo.ProfileVO;
@@ -41,6 +42,31 @@ public class ManagerService implements IF_ManagerService{
 	@Override
 	public List<MemberVO> getAllAdmins() throws Exception {
 		return mdao.getAllAdmins();
+	}
+
+	@Override
+	public List<MemberVO> searchMembers(ManagerVO mvo) throws Exception {
+		return mdao.searchMembers(mvo);
+	}
+
+	@Override
+	public List<ProfileVO> searchProfiles(ManagerVO mvo) throws Exception {
+		return mdao.searchProfiles(mvo);
+	}
+
+	@Override
+	public List<PostVO> searchPosts(ManagerVO mvo) throws Exception {
+		return mdao.searchPosts(mvo);
+	}
+
+	@Override
+	public List<CommVO> searchComms(ManagerVO mvo) throws Exception {
+		return mdao.searchComms(mvo);
+	}
+
+	@Override
+	public List<MemberVO> searchAdmins(ManagerVO mvo) throws Exception {
+		return mdao.searchAdmins(mvo);
 	}
 
 }

@@ -37,13 +37,13 @@ public class FollowListService implements IF_FollowListService{
 	}
 
 	@Override
-	public void unfollow(FollowVO fvo) throws Exception {
-		fdao.unfollow(fvo);
+	public int unfollow(FollowVO fvo) throws Exception {
+		return fdao.unfollow(fvo);
 	}
 
 	@Override
-	public void follow(FollowVO fvo) throws Exception {
-		fdao.follow(fvo);
+	public int follow(FollowVO fvo) throws Exception {
+		return fdao.follow(fvo);
 	}
 
 	//팔로잉 수를 세는 메서드

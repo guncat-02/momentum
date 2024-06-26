@@ -39,13 +39,13 @@ public class FollowListDao implements IF_FollowListDao{
 	}
 
 	@Override
-	public void unfollow(FollowVO fvo) throws Exception {
-		sql.delete(mapperQuery+".deleteFollowId", fvo);
+	public int unfollow(FollowVO fvo) throws Exception {
+		return sql.delete(mapperQuery+".deleteFollowId", fvo);
 	}
 
 	@Override
-	public void follow(FollowVO fvo) throws Exception {
-		sql.insert(mapperQuery+".insertFollowId", fvo);
+	public int follow(FollowVO fvo) throws Exception {
+		return sql.insert(mapperQuery+".insertFollowId", fvo);
 	}
 
 	//팔로잉 수를 세는 메서드

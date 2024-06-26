@@ -27,4 +27,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from blockTest where id = #{id} and blockId = #{blockId}
 	</delete>
 	
+	<select id="selectBlockedCnt" parameterType="vo.BlockVO" resultType="_int">
+		select count(blockId) from blockTest where id = #{id} and blockId = #{blockId}
+	</select>
+	
 </mapper>

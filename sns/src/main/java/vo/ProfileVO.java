@@ -8,12 +8,8 @@ public class ProfileVO {
 	private String bio; //한 줄 소개
 	private int privacy; //공개 여부
 	private int p_main; //메인 프로필 여부
-	
-	@Override
-	public String toString() {
-		return "ProfileVO [id=" + id + ", nickName=" + nickName + ", photo=" + photo + ", tel=" + tel + ", bio=" + bio
-				+ ", privacy=" + privacy + "]";
-	}
+	private String email; //이메일
+
 	//getter
 	public String getId() {
 		return id;
@@ -36,6 +32,9 @@ public class ProfileVO {
 	public int getP_main() {
 		return p_main;
 	}
+	public String getEmail() {
+		return email;
+	}
 	
 	//setter
 	public void setId(String id) {
@@ -55,6 +54,9 @@ public class ProfileVO {
 	}
 	public void setP_main(int p_main) {
 		this.p_main = p_main;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	//전화번호에 - 추가

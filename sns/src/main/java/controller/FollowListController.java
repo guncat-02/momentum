@@ -1,7 +1,6 @@
 package controller;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -16,9 +15,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import service.IF_BlockService;
 import service.IF_FollowListService;
 import service.IF_ProfileService;
 import util.FileDataUtil;
+import vo.BlockVO;
 import vo.FollowVO;
 import vo.ProfileVO;
 
@@ -33,6 +34,9 @@ public class FollowListController {
 	
 	@Inject
 	IF_ProfileService pservice;
+	
+	@Inject
+	IF_BlockService bservice;
 	
 	@GetMapping("/followList/*") // '/sns/followList/'이후 하나의 식별자에 대한 모든 request 받는다.
 	public String followList(Model model, HttpSession session, HttpServletRequest req,
@@ -74,19 +78,26 @@ public class FollowListController {
 	
 	@GetMapping("/followcancel")
 	@ResponseBody
-	public List<ProfileVO> followCancel(HttpServletRequest request, HttpServletResponse response,
+	public int followCancel(HttpServletRequest request, HttpServletResponse response,
 			@ModelAttribute FollowVO fvo) throws Exception {
-		fservice.unfollow(fvo);
-		return fservice.getFollowingsProfile(fvo.getId());
+		return fservice.unfollow(fvo);
 	}
 	
 	@GetMapping("/follow")
 	@ResponseBody
-	public List<ProfileVO> follow(HttpServletRequest request, HttpServletResponse response,
-			@ModelAttribute FollowVO fvo) throws Exception {
-		fservice.follow(fvo);
-		return fservice.getFollowingsProfile(fvo.getId());
+	public int follow(HttpServletRequest request, HttpServletResponse response,
+			@ModelAttribute FollowVO fvo, @ModelAttribute BlockVO bvo) throws Exception {
+		bvo.setId(fvo.getId());
+		bvo.setBlockId(fvo.getFollowId());
+		int blockFlag = bservice.chkBlocked(bvo);
+		if (blockFlag != 0) {
+			return -1;
+		} else {
+			return fservice.follow(fvo);
+		}
 	}
+	
+
 	
 	@GetMapping("/follow_followers")
 	@ResponseBody

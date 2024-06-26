@@ -94,7 +94,7 @@ body {
     margin-top: 12px;
     padding: 0px;
 }
-#search-cont > input[type=button] {
+#search-cont > input[type=reset] {
     width: 45px;
     height: 25px;
     text-align: center;
@@ -125,6 +125,22 @@ div[id^=menu] button {
     font-size: 12px;
     padding: 0px;
     border: 1px solid grey;
+}
+
+div[id^=menu] > button[value="1"], input[type=reset] {
+    background-color: black;
+    color: white;
+    border: 1px solid white;
+}
+div[id^=menu] > button[value="0"] {
+	background-color: black;
+	color: grey;
+	border: 1px solid grey;
+}
+div[id^=menu] > button[value="1"]:hover, input[type=reset]:hover {
+    transition-duration: 250ms;
+    filter: invert(100%);
+    cursor: pointer;
 }
 
 #admin-table {
@@ -227,13 +243,3 @@ div[id^=menu] button {
     cursor: pointer;
 }
 
-button:not(#export-Excel button), input[type=button], input[type=reset] {
-    background-color: black;
-    color: white;
-    border: 1px solid white;
-}
-button:not(#export-Excel button):hover, input[type=button]:hover, input[type=reset]:hover {
-    transition-duration: 250ms;
-    filter: invert(100%);
-    cursor: pointer;
-}

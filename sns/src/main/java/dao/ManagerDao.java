@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import vo.CommVO;
+import vo.ManagerVO;
 import vo.MemberVO;
 import vo.PostVO;
 import vo.ProfileVO;
@@ -43,6 +44,31 @@ public class ManagerDao implements IF_ManagerDao{
 	@Override
 	public List<MemberVO> getAllAdmins() throws Exception {
 		return sql.selectList(mapperQuery+".selectAllAdmins");
+	}
+
+	@Override
+	public List<MemberVO> searchMembers(ManagerVO mvo) throws Exception {
+		return sql.selectList(mapperQuery+".selectMembersWhere", mvo);
+	}
+
+	@Override
+	public List<ProfileVO> searchProfiles(ManagerVO mvo) throws Exception {
+		return sql.selectList(mapperQuery+".selectProfilesWhere", mvo);
+	}
+
+	@Override
+	public List<PostVO> searchPosts(ManagerVO mvo) throws Exception {
+		return sql.selectList(mapperQuery+".selectPostsWhere", mvo);
+	}
+
+	@Override
+	public List<CommVO> searchComms(ManagerVO mvo) throws Exception {
+		return sql.selectList(mapperQuery+".selectCommsWhere", mvo);
+	}
+
+	@Override
+	public List<MemberVO> searchAdmins(ManagerVO mvo) throws Exception {
+		return sql.selectList(mapperQuery+".selectMembersWhere", mvo);
 	}
 
 }

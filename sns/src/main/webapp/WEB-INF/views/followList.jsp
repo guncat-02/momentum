@@ -64,6 +64,11 @@ pageContext.setAttribute("curId", curId);
 							</td>
 							<td class="followList-names" colspan="2">
 								<input type="hidden" class="followList-privacy" value="${fProf.privacy}">
+								<c:if test="${fProf.privacy == 0 }">
+		                    		<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-lock" viewBox="0 0 16 16">
+	  									<path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2m3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2M5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1"/>
+									</svg>
+								</c:if>
 								<span class="followList-nickname">${fProf.nickName}</span>
 								(<span class="followList-id">${fProf.id }</span>)
 							</td>
@@ -156,7 +161,8 @@ pageContext.setAttribute("curId", curId);
 					'followId' : fId,
 				},
 				success : function() {
-
+					// 차단한 마우스 이벤트 재활성화
+					btn.css('pointer-events', 'auto');
 				},
 				error : function() {
 					alert('잠시 후 다시 시도해주세요.');
@@ -175,9 +181,17 @@ pageContext.setAttribute("curId", curId);
 					'id' : curId,
 					'followId' : fId,
 				},
-				success : function() {
-					// 차단한 마우스 이벤트 재활성화
-					btn.css('pointer-events', 'auto');
+				success : function(result) {
+					if (result == 1) {
+						btn.css('pointer-events', 'auto');		
+						return;
+					} else if (result == -1) {
+						alert('차단한 유저는 팔로우 할 수 없습니다.\n차단 해제 후 다시 시도해주세요.');
+					} else {
+						alert('잠시 후 다시 시도해주세요.');
+					}
+					btn.val(0);
+					btn.children('b').text('FOLLOW');
 				},
 				error : function() {
 					alert('잠시 후 다시 시도해주세요.');

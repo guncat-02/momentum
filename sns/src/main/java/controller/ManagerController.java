@@ -7,9 +7,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import service.IF_ManagerService;
+import vo.ManagerVO;
 
 @Controller
 public class ManagerController {
@@ -52,15 +54,32 @@ public class ManagerController {
 	}
 	
 	@GetMapping("/manager/search")
-	public String searchInUser(Model model, @RequestParam("searchArea")String area) {
-		System.out.println(area);
+	public String searchInUser(HttpServletRequest req, Model model, @RequestParam("searchArea")String area,
+			@ModelAttribute ManagerVO mvo) throws Exception {
+		String loc = mvo.getSearchLoc();
+		Object list = null;
 		if (area.equals("User")) {
-			
+			if (loc.equals("member")) {
+				list = mservice.searchMembers(mvo);
+				loc = "user";
+			} else if (loc.equals("profile")) {
+				list = mservice.searchProfiles(mvo);
+			} else if (loc.equals("post")) {
+				list = mservice.searchPosts(mvo);
+			} else if (loc.equals("comm")) {
+				list = mservice.searchComms(mvo);
+			} else if (loc.equals("admin")) {
+				list = mservice.searchAdmins(mvo);
+				loc = "user";
+			} else if (loc.equals("banned")) {
+//				
+			}
 		} else if (area.equals("Report")) {
 			
 		} else {
 			return "redirect:/manager";
 		}
+		model.addAttribute(loc+"s", list);
 		return "manage"+area;
 	}
 }

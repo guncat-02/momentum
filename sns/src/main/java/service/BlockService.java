@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import dao.IF_BlockDao;
+import vo.BlockVO;
 import vo.ProfileVO;
 
 @Service
@@ -32,6 +33,12 @@ public class BlockService implements IF_BlockService{
 	@Override
 	public void unblock(HashMap<String, String> map) throws Exception {
 		bdao.unblock(map);
+	}
+
+
+	@Override
+	public int chkBlocked(BlockVO bvo) throws Exception {
+		return bdao.chkBlocked(bvo);
 	}
 
 	

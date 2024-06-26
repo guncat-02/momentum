@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import vo.BlockVO;
 import vo.ProfileVO;
 
 @Repository
@@ -36,6 +37,12 @@ public class BlockDao implements IF_BlockDao{
 	@Override
 	public void unblock(HashMap<String, String> map) throws Exception {
 		sql.delete(mapperQuery+".deleteBlock", map);
+	}
+
+
+	@Override
+	public int chkBlocked(BlockVO bvo) throws Exception {
+		return sql.selectOne(mapperQuery+".selectBlockedCnt", bvo);
 	}
 
 }
