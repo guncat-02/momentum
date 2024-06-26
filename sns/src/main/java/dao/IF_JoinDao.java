@@ -9,4 +9,6 @@ public interface IF_JoinDao {
 	public String chkid(String id) throws Exception;
 
 	public String chkemail(String id) throws Exception;
+
+	public String chkdupemaip(String email);
 }

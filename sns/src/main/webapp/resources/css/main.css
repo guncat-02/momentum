@@ -1,3 +1,5 @@
+@charset "UTF-8";
+
 body {
     width: auto;
     margin: 0px;
@@ -42,3 +44,53 @@ body {
     left: 0;
     background-color: #00000050;
 }
+/* yoom에서 추가 */
+#root{
+	margin-left:70px;
+	
+
+}
+.postS{
+	border:1px solid violet; display:none;
+}
+.cssid{
+	margin-top:60px;
+	width:90%;
+	height:40px;
+	border:1px solid violet;
+	background-color:black;
+	color: violet;
+}
+.cont{
+	width:90%;
+	height:200px;
+	border:1px solid violet;
+	background-color:black;
+	color: violet;
+	
+}
+.likdeLine{
+	width:100%;
+	height:50px;
+	border:1px soild violet;
+}
+.likeCount{
+	margin-left:30px;
+	width:40%;
+	text-align:left;
+	display:inline-block;
+}
+.viewCount{
+	margin-left:30px;
+	width:40%;
+	text-align:right;
+	display:inline-block;
+}
+.showCnt{
+	border:none;
+	background-color:black;
+	color:violet;
+	
+}
+
+

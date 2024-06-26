@@ -9,12 +9,12 @@ public class MemberVO {
 	private String b_date; //생년월일
 	private String email; //이메일
 	private List<ProfileVO> profileList; //프로필
+	private String admin; // 관리자
 	
 	@Override
 	public String toString() {
 		return "MemberVO [id=" + id + ", pass=" + pass + ", name=" + name + ", b_date=" + b_date + "]";
 	}
-	
 	//getter
 	public String getId() {
 		return id;
@@ -34,6 +34,9 @@ public class MemberVO {
 	public List<ProfileVO> getProfileList() {
 		return profileList;
 	}
+	public String getAdmin() {
+		return admin;
+	}
 
 	
 	//setter
@@ -49,10 +52,13 @@ public class MemberVO {
 	public void setB_date(String b_date) {
 		this.b_date = b_date;
 	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public void setProfileList(List<ProfileVO> profileList) {
 		this.profileList = profileList;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setAdmin(String admin) {
+		this.admin = admin;
 	}
 }

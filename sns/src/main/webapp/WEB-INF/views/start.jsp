@@ -6,9 +6,21 @@
 <meta charset="UTF-8">
 <title>momentum</title>
 <link rel="stylesheet" href="./resources/css/start.css">
+   <style>
+    body {
+      opacity: 1;
+      transition-duration: 1s;
+      transition-property: opacity;
+    }
+
+    body.fade {
+      opacity: 0;
+    }
+
+  </style>
 </head>
 
-<body>
+<body class="fade">
     <div id="logoPage">
         <span id="logo">M</span>
     </div>
@@ -18,6 +30,12 @@
     window.onload = function() {
         window.setTimeout(function() {
             location.href = "/sns/loginpage";
-        }, 1000)
+        }, 3000)
     }
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        window.setTimeout(() => {
+          document.body.classList.remove('fade');
+        });
+      });
 </script>

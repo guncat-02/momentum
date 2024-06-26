@@ -37,5 +37,10 @@ public class JoinDao implements IF_JoinDao{
 		return sqlSession.selectOne(mapperQuery+".chkemail", id);
 		
 	}
+	@Override
+	public String chkdupemaip(String email) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(mapperQuery+".chkdupemail", email);
+	}
 
 }

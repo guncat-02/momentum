@@ -21,4 +21,18 @@ public class PostingService implements IF_PostingService{
 		}
 	}
 
+	@Override
+	public int c_like(String no) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int c_dislike(String no) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	
+
 }

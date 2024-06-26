@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.IF_ChatDao">
+	<insert id="chatRoomInsert" parameterType="vo.ChatRoomVO">
+		insert into chatRoomTest values(#{chatNum}, #{chatName}, #{chatImg, jdbcType=VARCHAR}, #{id}, #{nickName})
+	</insert>
+	<insert id="chatMemberInsert" parameterType="vo.ChatRoomVO">
+		insert into chatMemberTest values(#{chatNum}, #{id}, #{nickName},
+		<choose>
+			<when test="owner == null">
+				default
+			</when>
+			<when test="owner != null">
+				#{owner}
+			</when>
+		</choose>
+		)
+	</insert>
+	<select id="chatMemberSelect" resultType="int" parameterType="String">
+		select count(chatNum) from chatMemberTest where id = #{id}
+	</select>
+	<select id="select" resultType="String" parameterType="String">
+		select distinct nickname from chatMemberTest where id = #{id}
+	</select>
+	<select id="chatList" parameterType="String" resultType="vo.ChatRoomVO">
+		select * from chatRoomTest where nickName = #{nickName}
+	</select>
+	<select id="chatMemberList" parameterType="String" resultType="vo.ChatRoomVO">
+		select * from chatMemberTest where chatNum = #{chatNum}
+	</select>
+</mapper>

@@ -49,4 +49,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="followerSelect" resultType="int">
 		select count(id) from followTest where followId = #{id}
 	</select>
+	
+	<!-- 팔로우 리스트 chat -->
+	<select id="followingList" resultType="vo.ProfileVO">
+		select b.*
+		from followTest a
+		inner join profileTest b
+		on a.followid = b.id
+		where a.id = #{id}
+	</select>
+	
+	<select id="followerList" resultType="vo.ProfileVO">
+		select b.*
+		from followTest a
+		inner join profileTest b
+		on a.id = b.id
+		where a.followid = #{id}
+	</select>
 </mapper>

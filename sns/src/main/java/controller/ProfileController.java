@@ -55,7 +55,7 @@ public class ProfileController {
 			pVO.setPhoto(upload.fileUpload(myPhoto)[0]);
 		}
 		pServe.insert(pVO);
-		return "redirect:/main";
+		return "redirect:/loginpage";
 	}
 	
 	//각 개인의 profile 보기

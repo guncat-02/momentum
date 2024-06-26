@@ -53,4 +53,14 @@ public class FollowListService implements IF_FollowListService{
 		return fdao.followerSelect(id);
 	}
 
+	@Override
+	public List<ProfileVO> followingList(String id) throws Exception {
+		return fdao.followingList(id);
+	}
+
+	@Override
+	public List<ProfileVO> followerList(String id) throws Exception {
+		return fdao.followerList(id);
+	}
+
 }

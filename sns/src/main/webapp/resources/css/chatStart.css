@@ -1,0 +1,38 @@
+body {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bolder;
+    -webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+#chatStartTitle {
+    position: relative;
+    margin-top: 30%;
+    text-align: center;
+}
+
+#chatStartTitle span{
+    font-size: 50px;
+    display: block;
+}
+
+#chatStartMain {
+    text-align: center;
+    margin-top: 1%;
+}
+
+#chatstartBtn, #chatStartCancle {
+    font-size: 20px;
+    color: #ff00bf;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bolder;
+}
+
+#chatStartCancle {
+    color: #00f7ff;
+}

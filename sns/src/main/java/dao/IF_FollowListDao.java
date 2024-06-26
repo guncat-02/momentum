@@ -8,6 +8,7 @@ import vo.ProfileVO;
 public interface IF_FollowListDao {
 
 	public List<ProfileVO> getInterFollowersProfile(String followId) throws Exception;
+	
 	public List<ProfileVO> getFollowersProfile(String followId) throws Exception;
 
 	public List<ProfileVO> getFollowingsProfile(String id) throws Exception;
@@ -20,4 +21,7 @@ public interface IF_FollowListDao {
 	
 	public int followerSelect(String id) throws Exception;
 
+	public List<ProfileVO> followingList(String id) throws Exception;
+	
+	public List<ProfileVO> followerList(String id) throws Exception;
 }

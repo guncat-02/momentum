@@ -20,4 +20,8 @@ public interface IF_FollowListService {
 	public int followingSelect(String id) throws Exception;
 	
 	public int followerSelect(String id) throws Exception;
+
+	public List<ProfileVO> followingList(String id) throws Exception;
+	
+	public List<ProfileVO> followerList(String id) throws Exception;
 }

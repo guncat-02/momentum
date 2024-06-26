@@ -3,6 +3,8 @@ package vo;
 public class CommVO {
 	private int c_no; //댓글 번호
 	private int no; //글 번호
+	private int c_like;
+	private int c_dislike;
 	private String c_cont; // 댓글 내용
 	private String c_date; //댓글 날짜
 	
