@@ -127,7 +127,6 @@ public class LoginController {
 
 		return "findPw";
 	}
-
 	@GetMapping("/loginidchk")
 	@ResponseBody
 	public String idchk(@RequestParam("id") String id) throws Exception {

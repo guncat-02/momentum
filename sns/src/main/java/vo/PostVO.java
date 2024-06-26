@@ -5,10 +5,10 @@ public class PostVO {
 	private int re_no; //리포스트 번호
 	private String cont; //글 내용
 	private int show; //조회수
-	private int loveCnt; //좋아요 수
 	private String[] filename; //첨부 파일
 	private int privacy; //글 공개 여부
 	private int c_block; //댓글 차단 여부
+	private String id; //작성자 id
 	private String p_date; //글 작성일
 	
 	//getter
@@ -24,9 +24,6 @@ public class PostVO {
 	public int getShow() {
 		return show;
 	}
-	public int getLoveCnt() {
-		return loveCnt;
-	}
 	public String[] getFilename() {
 		return filename;
 	}
@@ -38,6 +35,9 @@ public class PostVO {
 	}
 	public String getP_date() {
 		return p_date;
+	}
+	public String getId() {
+		return id;
 	}
 	
 	//setter
@@ -53,9 +53,6 @@ public class PostVO {
 	public void setShow(int show) {
 		this.show = show;
 	}
-	public void setLoveCnt(int loveCnt) {
-		this.loveCnt = loveCnt;
-	}
 	public void setFilename(String[] filename) {
 		this.filename = filename;
 	}
@@ -67,5 +64,8 @@ public class PostVO {
 	}
 	public void setP_date(String p_date) {
 		this.p_date = p_date;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 }

@@ -1,4 +1,6 @@
-zpackage controller;
+package controller;
+
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -10,13 +12,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import service.IF_FollowListService;
+import service.IF_MainService;
 import service.IF_ProfileService;
 import util.FileDataUtil;
+import vo.PostVO;
 import vo.ProfileVO;
 
 @Controller
@@ -25,13 +28,16 @@ public class ProfileController {
 	IF_ProfileService pServe;
 	@Inject
 	IF_FollowListService fServe;
+	@Inject
+	IF_MainService mserve;
 	
 	@Inject
 	FileDataUtil upload;
 	
 	//프로필 view 불러오기
 	@GetMapping("/profile")
-	public String profile(@RequestParam("id") String id,Model model) {
+	public String profile(@RequestParam("id") String id,Model model) throws Exception {
+		
 		model.addAttribute("id", id);
 		return "profile";
 	}
@@ -54,28 +60,71 @@ public class ProfileController {
 		if(myPhoto != null) {
 			pVO.setPhoto(upload.fileUpload(myPhoto)[0]);
 		}
-		System.out.println(pVO.getId()+"여기 컨트롤러");
 		pServe.insert(pVO);
-		return "redirect:/main";
+		return "redirect:/loginpage";
 	}
 	
 	//각 개인의 profile 보기
 	@GetMapping("/profileShow")
-	public String profileShow(Model model) throws Exception {
-		ProfileVO p = pServe.select("nuit0204");
+	public String profileShow(Model model, HttpSession session) throws Exception {
+		ProfileVO p = pServe.select(String.valueOf(session.getAttribute("userid")));
+		if(p.getPhoto() == null) {
+			p.setPhoto("null");
+		}
 		model.addAttribute("profile", p);
-		model.addAttribute("following", fServe.followingSelect("nuit0204"));
-		model.addAttribute("follower", fServe.followerSelect("nuit0204"));
+		model.addAttribute("following", fServe.followingSelect(String.valueOf(session.getAttribute("userid"))));
+		model.addAttribute("follower", fServe.followerSelect(String.valueOf(session.getAttribute("userid"))));
+		model.addAttribute("mypostList", mserve.myPostList(String.valueOf(session.getAttribute("userid"))));
+		// 글 쓴 개수 
+		model.addAttribute("postlength", mserve.postLength(String.valueOf(session.getAttribute("userid"))));
 		return "profileShow";
 	}
+	// 프로필 날짜별 media 정보
+	@GetMapping("/profileMedia")
+	public String profileMedia(Model model, HttpSession session) throws Exception {
+		ProfileVO p = pServe.select(String.valueOf(session.getAttribute("userid")));
+		if(p.getPhoto() == null) {
+			p.setPhoto("null");
+		}
+
+		model.addAttribute("profile", p);
+		model.addAttribute("following", fServe.followingSelect(String.valueOf(session.getAttribute("userid"))));
+		model.addAttribute("follower", fServe.followerSelect(String.valueOf(session.getAttribute("userid"))));
+		model.addAttribute("myfiles", mserve.myfiles(String.valueOf(session.getAttribute("userid"))));
+		// 글 쓴 개수
+		model.addAttribute("postlength", mserve.postLength(String.valueOf(session.getAttribute("userid"))));
+		return "profileMedia";
+	}
+	// 좋아요 누른 게시물 모음집
+	@GetMapping("/profileLove")
+	public String profileLove(Model model, HttpSession session) throws Exception {
+		ProfileVO p = pServe.select(String.valueOf(session.getAttribute("userid")));
+		if(p.getPhoto() == null) {
+			p.setPhoto("null");
+		}
+
+		model.addAttribute("profile", p);
+		model.addAttribute("following", fServe.followingSelect(String.valueOf(session.getAttribute("userid"))));
+		model.addAttribute("follower", fServe.followerSelect(String.valueOf(session.getAttribute("userid"))));
+		model.addAttribute("lovepostList", mserve.lovePostList(String.valueOf(session.getAttribute("userid"))));
+		// 글 쓴 개수
+		model.addAttribute("postlength", mserve.postLength(String.valueOf(session.getAttribute("userid"))));
+		return "profileLove";
+	}
+	
 	
 	//프로필 수정
 	@PostMapping("/profileUpdate")
-	public String update(@ModelAttribute ProfileVO pVO, MultipartFile[] myFile) throws Exception {
-		pVO.setId("nuit0204");
-		pVO.setNickName("guncat");
-		if(myFile != null) {
-			pVO.setPhoto(upload.fileUpload(myFile)[0]);
+	public String update(@ModelAttribute ProfileVO pVO, MultipartFile[] proPhoto, HttpSession session) throws Exception {
+		pVO.setId(String.valueOf(session.getAttribute("userid")));
+		pVO.setNickName(String.valueOf(session.getAttribute("nickName")));
+		String file = upload.fileUpload(proPhoto)[0];
+		if(file != null) {
+			pVO.setPhoto(file);
+		} else {
+			if(pVO.getPhoto().equals("COMPLETE")) {
+				pVO.setPhoto(null);
+			}
 		}
 		pServe.update(pVO);
 		return "redirect:/profileShow";
@@ -83,8 +132,8 @@ public class ProfileController {
 	
 	//프로필 수정 화면 띄우기
 	@GetMapping("/profileEdit")
-	public String profileEdit(Model model) throws Exception {
-		ProfileVO p = pServe.select("nuit0204");
+	public String profileEdit(Model model, HttpSession session) throws Exception {
+		ProfileVO p = pServe.select(String.valueOf(session.getAttribute("userid")));
 		if(p.getPhoto() == null) {
 			p.setPhoto("null");
 		}

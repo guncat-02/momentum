@@ -1,6 +1,7 @@
 package controller;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import service.IF_PostingService;
 import util.FileDataUtil;
+import vo.CommVO;
 import vo.PostVO;
 
 @Controller
@@ -35,9 +37,5 @@ public class PostingController {
 		return "redirect:main";
 	}
 	
-	@GetMapping("/c_like")
-	public void c_like(@RequestParam("no") String no) {
-		/* pservice.c_like(no); */
-	}
 	
 }

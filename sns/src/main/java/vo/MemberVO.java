@@ -15,7 +15,6 @@ public class MemberVO {
 	public String toString() {
 		return "MemberVO [id=" + id + ", pass=" + pass + ", name=" + name + ", b_date=" + b_date + "]";
 	}
-	
 	//getter
 	public String getId() {
 		return id;
@@ -58,9 +57,6 @@ public class MemberVO {
 	}
 	public void setProfileList(List<ProfileVO> profileList) {
 		this.profileList = profileList;
-	}
-	public void setEmail(String email) {
-		this.email = email;
 	}
 	public void setAdmin(String admin) {
 		this.admin = admin;
