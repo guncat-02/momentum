@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.IF_ChatContDao">
+	<select id="selectCont" parameterType="String" resultType="vo.ChatContVO">
+		select * from chatContTest where chatNum = #{chatNum} order by chatTime asc
+	</select>
+	<insert id="insert" parameterType="vo.ChatContVO">
+		insert into chatContTest values (chatTest_no.nextval, #{chatNum}, #{nickName}, #{cont}, default)
+	</insert>
+</mapper>

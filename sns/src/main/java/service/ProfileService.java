@@ -1,5 +1,7 @@
 package service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -41,4 +43,15 @@ public class ProfileService implements IF_ProfileService{
 		return pDao.matchId(id);
 	}
 
+	//아이디와 일치한 모든 프로필 불러오기
+	@Override
+	public List<ProfileVO> selectProfile(String id) throws Exception {
+		return pDao.selectProfile(id);
+	}
+
+	//채팅 시 프로필 불러오기
+	@Override
+	public List<ProfileVO> profileList(List<String> nick) throws Exception {
+		return pDao.profileList(nick);
+	}
 }

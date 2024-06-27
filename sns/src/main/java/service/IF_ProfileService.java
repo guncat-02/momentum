@@ -1,5 +1,7 @@
 package service;
 
+import java.util.List;
+
 import vo.ProfileVO;
 
 public interface IF_ProfileService {
@@ -8,4 +10,6 @@ public interface IF_ProfileService {
 	public ProfileVO select(String id) throws Exception;
 	public void update(ProfileVO pVO) throws Exception;
 	public String matchId(String id) throws Exception;
+	public List<ProfileVO> selectProfile(String id) throws Exception;
+	public List<ProfileVO> profileList(List<String> nick) throws Exception;
 }
