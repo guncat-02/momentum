@@ -356,34 +356,36 @@
     
     //cont 내용 추가
     function chatInsert(chatCont, usersProfile, user) {
-    	let spDate = chatCont[0].chatTime.split(' ')
-        let firstDate = spDate[0];
-        $('#nowChatting').append("<thead><tr><td colspan='2' class='allDate'><div><hr>"+firstDate+"<hr></div></td></tr></thead>")
-        for (let i = 0; i < chatCont.length; i++) {
-            let allDate = chatCont[i].chatTime.split(' ');
-            let day = allDate[0];
-            let time = allDate[1];
-            if(firstDate != day) {
-                firstDate = day;
-                $('#nowChatting').append("<thead><tr><td colspan='2' class='allDate'><div><hr>"+firstDate+"<hr></div></td></tr></thead>")
-            }
-            if (chatCont[i].nickName == user) {
-                $('#nowChatting').append("<tr><td class='chatCont'><div class='chatting myChatting'><div class='chatUserDate myChatDate'><span>" + time + "</span></div><div class='userChat myChat'>" + chatCont[i].cont + "</div></div></td></tr>");
-                $('#nowChat').scrollTop($('#nowChat')[0].scrollHeight)
-            } else if (chatCont[i].nickName != user) {
-                for (let j = 0; j < usersProfile.length; j++) {
-                    if (chatCont[i].nickName == usersProfile[j].nickName) {
-                        if (usersProfile[j].photo != null) {
-                            $('#nowChatting').append("<tr><td class='chatProfile'><div class='chatProfileYou'><img src='download?filename=" + usersProfile[j].photo + "'></div></td><td class='chatCont'><div class='chatting yourChatting'><div class='userNick'>" + usersProfile[j].nickName + "</div><div class='userChat'>" + chatCont[i].cont + "</div><div class='chatUserDate'><span>" + time + "</span></div></div></td></tr>")
-                            break;
-                        } else {
-                            $('#nowChatting').append("<tr><td class='chatProfile'><div class='chatProfileYou'><img src='./resources/img/프로필.png'></div></td><td class='chatCont'><div class='chatting yourChatting'><div class='userNick'>" + usersProfile[j].nickName + "</div><div class='userChat'>" + chatCont[i].cont + "</div><div class='chatUserDate'><span>" + time + "</span></div></div></td></tr>")
-                            break;
+    	if(chatCont != null && chatCont.length != 0) {
+    		let spDate = chatCont[0].chatTime.split(' ');
+            let firstDate = spDate[0];
+            $('#nowChatting').append("<thead><tr><td colspan='2' class='allDate'><div><hr>"+firstDate+"<hr></div></td></tr></thead>")
+            for (let i = 0; i < chatCont.length; i++) {
+                let allDate = chatCont[i].chatTime.split(' ');
+                let day = allDate[0];
+                let time = allDate[1];
+                if(firstDate != day) {
+                    firstDate = day;
+                    $('#nowChatting').append("<thead><tr><td colspan='2' class='allDate'><div><hr>"+firstDate+"<hr></div></td></tr></thead>")
+                }
+                if (chatCont[i].nickName == user) {
+                    $('#nowChatting').append("<tr><td class='chatCont'><div class='chatting myChatting'><div class='chatUserDate myChatDate'><span>" + time + "</span></div><div class='userChat myChat'>" + chatCont[i].cont + "</div></div></td></tr>");
+                    $('#nowChat').scrollTop($('#nowChat')[0].scrollHeight)
+                } else if (chatCont[i].nickName != user) {
+                    for (let j = 0; j < usersProfile.length; j++) {
+                        if (chatCont[i].nickName == usersProfile[j].nickName) {
+                            if (usersProfile[j].photo != null) {
+                                $('#nowChatting').append("<tr><td class='chatProfile'><div class='chatProfileYou'><img src='download?filename=" + usersProfile[j].photo + "'></div></td><td class='chatCont'><div class='chatting yourChatting'><div class='userNick'>" + usersProfile[j].nickName + "</div><div class='userChat'>" + chatCont[i].cont + "</div><div class='chatUserDate'><span>" + time + "</span></div></div></td></tr>")
+                                break;
+                            } else {
+                                $('#nowChatting').append("<tr><td class='chatProfile'><div class='chatProfileYou'><img src='./resources/img/프로필.png'></div></td><td class='chatCont'><div class='chatting yourChatting'><div class='userNick'>" + usersProfile[j].nickName + "</div><div class='userChat'>" + chatCont[i].cont + "</div><div class='chatUserDate'><span>" + time + "</span></div></div></td></tr>")
+                                break;
+                            }
                         }
                     }
                 }
-            }
-        }
+            }	
+    	}
     }
 </script>
 </html>

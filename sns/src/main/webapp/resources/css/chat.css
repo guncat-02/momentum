@@ -18,7 +18,7 @@ body {
 
 #chatAll {
     display: grid;
-    grid-template-columns: 15% 15% 8% 31% 31%;
+    grid-template-columns: 15% 15% 6% 33% 31%;
     grid-template-rows: 10% 80% 10%;
     height: 100%;
     width: 100%;
@@ -90,12 +90,12 @@ body {
 }
 
 #nowUserCircle {
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
     position: absolute;
     top: 50%;
-    margin-top: -35px;
-    margin-left: -35px;
+    margin-top: -30px;
+    margin-left: -30px;
     left: 50%;
 }
 
