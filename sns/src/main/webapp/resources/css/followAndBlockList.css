@@ -18,6 +18,9 @@ body {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     cursor: pointer;
 }
+#fnb-back-btn a {
+	text-decoration: none;
+}
 
 h1 {
     display: block;
@@ -104,6 +107,13 @@ h1 {
     padding-left: 15px;
 }
 
+.fnb-nickname {
+	font-size: 25px;
+}
+.fnb-id {
+	font-size: 15px;
+}
+
 .fnb-btns-td {
     width: 20%;
     text-align: center;
@@ -115,12 +125,21 @@ h1 {
     width: 75%;
     height: 50%;
     cursor: pointer;
+    font-weight: bold;
 }
 
 .fnb-follow-btn {
     border: 2px solid #00f7ff;
 }
 
+.fnb-follow-btn[value="0"] {
+	color: #000000;
+	background-color: #00f7ff;
+}
+
 .fnb-block-btn {
     border: 2px solid red;
+}
+.fnb-block-btn[value="0"] {
+	border: 2px solid white;
 }

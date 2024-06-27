@@ -5,10 +5,11 @@ public class ProfileVO {
 	private String nickName; //닉네임
 	private String photo; //프로필 사진
 	private String tel; //전화번호
-	private String email; //이메일
 	private String bio; //한 줄 소개
 	private int privacy; //공개 여부
-	
+	private int p_main; //메인 프로필 여부
+	private String email; //이메일
+
 	//getter
 	public String getId() {
 		return id;
@@ -22,14 +23,17 @@ public class ProfileVO {
 	public String getTel() {
 		return tel;
 	}
-	public String getEmail() {
-		return email;
-	}
 	public String getBio() {
 		return bio;
 	}
 	public int getPrivacy() {
 		return privacy;
+	}
+	public int getP_main() {
+		return p_main;
+	}
+	public String getEmail() {
+		return email;
 	}
 	
 	//setter
@@ -45,11 +49,14 @@ public class ProfileVO {
 	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
 	public void setBio(String bio) {
 		this.bio = bio;
+	}
+	public void setP_main(int p_main) {
+		this.p_main = p_main;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	//전화번호에 - 추가
@@ -74,11 +81,6 @@ public class ProfileVO {
 			}
 		}
 		return telNum;
-	}
-	@Override
-	public String toString() {
-		return "ProfileVO [id=" + id + ", nickName=" + nickName + ", photo=" + photo + ", tel=" + tel + ", email="
-				+ email + ", bio=" + bio + ", privacy=" + privacy + "]";
 	}
 	
 }

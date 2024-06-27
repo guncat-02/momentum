@@ -3,8 +3,30 @@ package vo;
 public class CommVO {
 	private int c_no; //댓글 번호
 	private int no; //글 번호
+	private int c_like;
+	private int c_dislike;
 	private String c_cont; // 댓글 내용
+	private String c_date; //댓글 날짜
+	private String id;
 	
+	public int getC_like() {
+		return c_like;
+	}
+	public void setC_like(int c_like) {
+		this.c_like = c_like;
+	}
+	public int getC_dislike() {
+		return c_dislike;
+	}
+	public void setC_dislike(int c_dislike) {
+		this.c_dislike = c_dislike;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	//getter
 	public int getC_no() {
 		return c_no;
@@ -14,6 +36,9 @@ public class CommVO {
 	}
 	public String getC_cont() {
 		return c_cont;
+	}
+	public String getC_date() {
+		return c_date;
 	}
 	
 	//setter
@@ -25,5 +50,8 @@ public class CommVO {
 	}
 	public void setNo(int no) {
 		this.no = no;
+	}
+	public void setC_date(String c_date) {
+		this.c_date = c_date;
 	}
 }

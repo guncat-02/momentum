@@ -133,26 +133,24 @@
 <script>
     // 로컬 스토리지가 다크 모드를 저장하고 있을 경우 토글 스위치 디자인 변경
     $(document).ready(function() {
-        if (localStorage.getItem('curTheme') == './resources/css/dark_theme.css') {
+        if (getCurTheme() == 0) {
             $('#light-dark-switch').prop('checked', 'true');
             $('#current-theme').text('DARK');
         }
     });
     // 토글 스위치 누를 때 로컬 스토리지 값 변경, 화면 테마 변경
     $('#light-dark-switch').on('click', function () {
+        switchTheme();
         $('#current-theme').text('');
         if ($(this).prop('checked')) {
-            localStorage.setItem('curTheme', './resources/css/dark_theme.css');
             setTimeout(function () {
                 $('#current-theme').text('DARK');
             }, 500);
         } else {
-            localStorage.setItem('curTheme', './resources/css/light_theme.css');
             setTimeout(function () {
                 $('#current-theme').text('LIGHT');
             }, 500);
         }
-        $('#theme-setting').prop('href', localStorage.getItem('curTheme'));
     });
 </script>
 </html>

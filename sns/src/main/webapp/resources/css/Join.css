@@ -308,15 +308,6 @@ border: 1px solid #ff00bf;
 
 span:hover + p.arrow_box {
   display: block;
-}@charset "UTF-8";
-
-body {
-	background: black;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none
-	
 }
 
 

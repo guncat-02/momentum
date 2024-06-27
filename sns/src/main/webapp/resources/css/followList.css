@@ -6,31 +6,27 @@ body {
 	-ms-user-select: none;
 	user-select: none;
 }
-
-/* 메뉴바, 메인 div 포함하는 전체 div */
-#all {
-    display: flex;
-    justify-content: left;
-}
-
-/* 왼쪽 메뉴 바 */
-#menuall {
-    display: block;
-    width: 240px;
-    height: 100vmin;
-    position: sticky;
-    top: 0;
-    border-right: 1px solid #00f7ff;
-    box-shadow: 3px 0px 7px 0px #41c4c4;
-    overflow-y: auto;
-}
-
-/* 주요 컨텐츠 */
-#main {
-    display: block;
-    width: 100%;
+#followList-back-btn {
+    float: left;
+    width: fit-content;
     height: fit-content;
-    padding: 15px;
+    font-weight: bold;
+    font-size: 25px;
+    margin-top: 10px;
+    margin-left: 15px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    cursor: pointer;
+}
+#followList-back-btn a {
+	text-decoration: none;
+}
+
+h1 {
+    display: block;
+    width: fit-content;
+    height: fit-content;
+    margin: 15px auto;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 /* 화면 스크롤 바 정의 */
@@ -144,6 +140,10 @@ body {
 .followList-btn button:hover {
     cursor: pointer;
 }
+.followList-btn button[value="0"] {
+	background-color: #00f7ff;
+	color: #000000;
+}
 
 tfoot {
     text-align: center;
@@ -154,6 +154,7 @@ tfoot button {
     height: 38px;
     border: 2px solid #00f7ff;
     background-color: #00f7ff;
+    margin-top: 15px;
 }
 tfoot button:hover {
 	cursor: pointer;

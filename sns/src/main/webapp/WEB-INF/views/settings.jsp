@@ -12,7 +12,8 @@
     integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer">
 </script>
-<link id="theme-setting" rel="stylesheet" href="./resources/css/dark_theme.css">
+<script src="/sns/resources/JS/setTheme.js"></script>
+<link id="theme-setting" rel="stylesheet" href="/sns/resources/css/dark_theme.css">
 <body class="theme">
     <main>
         <div id="settings-menu">
@@ -39,7 +40,6 @@
                     <li><h4>Post</h4></li>
                     <ol>
                         <li id="settings-post-interaction">Interaction</li>
-                        <li id="settings-post-hide">Hidden Post</li>
                     </ol>
                 </ol>
             </ol>
@@ -55,7 +55,6 @@
 
 	$(document).ready(function() {
 	    $('#settings-menu label li > h2').css('color', 'grey');
-	    $('#theme-setting').prop('href', localStorage.getItem('curTheme'));
 	});
 	
 	$('#settings-menu label').on('click', function() {

@@ -6,11 +6,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="dao.IF_PostingDao">
 
 	<insert id="insertPost" parameterType="vo.PostVO">
-		insert into postTest values (seTest.nextval, null, 'nuit0204', #{cont}, 0, #{privacy}, default)
+		insert into postTest values (seTest.nextval, null, #{id}, #{cont}, 0, #{privacy}, default, default)
 	</insert>
 	
-	<insert id="insertAttach" parameterType="String">
-		insert into attachTest values ((select max(no) from postTest), #{fileName})
+	<insert id="insertRePost" parameterType="vo.PostVO">
+		insert into postTest values (seTest.nextval, #{re_no}, #{id}, #{cont}, 0, #{privacy}, default, default)
 	</insert>
+	
+	<insert id="insertAttach" parameterType="map">
+		insert into attachTest values ((select max(no) from postTest where id = #{id}), #{filename})
+	</insert>
+	
+	<select id="selectOnePost" parameterType="_int" resultType="vo.PostVO">
+		select * from postTest where no = #{no}
+	</select>
+	
+	<select id="selectAttach" parameterType="_int" resultType="String">
+		select filename from attachTest where no = #{no}
+	</select>
 	
 </mapper>

@@ -11,7 +11,7 @@
 <body>
 	<div>
 		<c:if test="${userid != null }">
-			<span> 사용자 정보 : ${userid } / ${username } / ${grade }</span>
+			<span> 사용자 정보 : ${userid } / ${username }</span>
 			<span><a href="/sns/logout">로그아웃</a></span>
 		</c:if>
 	</div>

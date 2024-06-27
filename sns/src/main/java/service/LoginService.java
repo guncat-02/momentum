@@ -19,4 +19,16 @@ public class LoginService implements IF_LoginService{
 		return ldao.logindao(id);
 	}
 
+	@Override
+	public String chkidser(String id) throws Exception {
+		// TODO Auto-generated method stub
+		return ldao.chkiddao(id);
+	}
+	
+	@Override
+	public void updatepw(MemberVO mvo) throws Exception {
+		// TODO Auto-generated method stub
+		System.out.println(mvo.getId()+ "/" + mvo.getPass());
+		ldao.updatepw(mvo);
+	}
 }
