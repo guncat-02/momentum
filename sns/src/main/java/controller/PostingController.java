@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import service.IF_PostingService;
 import service.IF_ProfileService;
 import util.FileDataUtil;
+import vo.CommVO;
 import vo.PostVO;
 import vo.ProfileVO;
 
@@ -45,12 +46,6 @@ public class PostingController {
 		pservice.insertPost(pvo);
 		return "redirect:main";
 	}
-	
-	@GetMapping("/c_like")
-	public void c_like(@RequestParam("no") String no) {
-		/* pservice.c_like(no); */
-	}
-	
 	
 	@GetMapping("/reposting")
 	public String reposting(@RequestParam("no")int no, Model model) throws Exception {

@@ -102,7 +102,6 @@ public class LoginController {
 				session.setAttribute("username", mvo.getName());
 				session.setAttribute("nickName", pServe.matchId(mvo.getId()));
 				
-				
 				return "redirect:main";
 			}
 		}else {
@@ -124,7 +123,7 @@ public class LoginController {
 	@GetMapping("logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
-		
+
 		return "redirect:/loginpage";
 	}
 

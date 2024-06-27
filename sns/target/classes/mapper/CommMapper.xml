@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.IF_CommDao">
+	
+	<insert id = "inputComm" parameterType="vo.CommVO">
+		insert into commtest values(commtest_no.nextval,#{no},#{c_cont},#{id},SYSDATE,default,default) 
+	</insert>
+	
+	<insert id = "incommlike" parameterType="vo.CommVO">
+		insert into c_liketest values(#{id},#{c_no},0)
+	</insert>
+	
+	<insert id = "incommdislike" parameterType="vo.CommVO">
+		insert into c_liketest values(#{id},#{c_no},1)
+	</insert>
+	
+	<select id = "takelikecnt" parameterType="int" resultType="int">
+		select count(*) from c_liketest where c_no = #{c_no} and c_like = 0
+	</select>
+	
+	<select id = "takedislikecnt" parameterType="int" resultType="int">
+		select count(*) from c_liketest where c_no = #{c_no} and c_like = 1
+	</select>
+	<!-- 좋아요 순 댓글 리스트  -->  
+	<select id = "likeCommList" resultType="vo.CommVO" parameterType="int">
+		select * from commtest where no = #{no} order by c_like DESC
+	</select>
+	<!-- 싫어요 순 댓글 리스트  -->  
+	<select id = "dislikeCommList" resultType="vo.CommVO" parameterType="int">
+		select * from commtest where no = #{no} order by c_dislike DESC
+	</select>
+	
+	<select id = "takeComm" resultType="vo.CommVO" parameterType="vo.CommVO">
+		select * from commtest where no = #{no} ORDER BY c_date DESC
+	</select> 
+	<!-- 최신순 가져오기 -->
+	<select id = "CommList" resultType="vo.CommVO" parameterType="int">
+		select * from commtest where no = #{no} ORDER BY c_date DESC
+	</select> 
+	
+	<select id = "cntComm" resultType="int" parameterType="int">
+		select count(c_no) from commtest where no = #{no}
+	</select>
+	<!-- 해당 글의 댓글 들 중 세션 아이디가 좋아요 누른 댓글 번호 -->  
+	<select id = "chklike" parameterType="hashmap" resultType = "int">
+		select c_liketest.c_no from commtest inner join c_liketest on 
+		commtest.c_no = c_liketest.c_no where no = #{no} and c_liketest.id = #{id} and c_liketest.c_like = '0'
+	</select>
+	<!-- 해당 글의 댓글 들 중 세션 아이디가 싫어요 누른 댓글 번호 -->
+	<select id = "chkdislike" parameterType="hashmap" resultType = "int">
+		select c_liketest.c_no from commtest inner join c_liketest on 
+		commtest.c_no = c_liketest.c_no where no = #{no} and c_liketest.id = #{id} and c_liketest.c_like = '1'
+	</select>
+	<!-- 해당 글의 내가 쓴 댓글 리스트 -->
+	<select id = "mycomm" parameterType="hashmap" resultType = "int">
+		select c_no from commtest where id = #{id} and no = #{no}
+	</select>
+	
+	<delete id="cancelcommlike" parameterType="vo.CommVO">
+		delete from c_liketest where c_no = #{c_no} and id = #{id}
+	</delete>
+	
+	<delete id="delcomm" parameterType="int">
+		delete from commtest where c_no = #{c_no}
+	</delete>
+	
+	<update id="updatelike" parameterType="hashmap">
+		update commtest set c_like = #{likecnt} where c_no = #{c_no}
+	</update>
+	<update id="updatedislike" parameterType="hashmap">
+		update commtest set c_dislike = #{dislikecnt} where c_no = #{c_no}
+	</update>
+	
+</mapper>

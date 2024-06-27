@@ -1,38 +1,85 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="true"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
-<% request.setCharacterEncoding("UTF-8");
-%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-"http://www.w3.org/TR/html4/loose.dtd">
-
-<html lang="kor">
-
+<!DOCTYPE html>
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document</title>
-</head>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
+<title>momentum</title>
+<!-- 다크 테마를 기본 값으로-->
+<link id="theme-setting" rel="stylesheet" href="./resources/css/dark_theme.css">
+<link rel="stylesheet" href="./resources/css/profileShow.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+    integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer">
 </script>
-
-
-<link id="theme-setting" rel="stylesheet" href="/sns/resources/css/dark_theme.css">
-<link rel="stylesheet" href="./resources/css/main.css">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</head>
 <body class="theme">
-	<div id="all">
-		<div id="menuall">
-			<%@ include file="menuAll.jsp"%>
+	<input type="hidden" value="${profile.photo}" id="photo">
+	<div id="back" class="theme">
+		<span id="backBtn"><a href="main">&lang;</a></span>
+		<div id="myProInfo">
+			<span id="myNick">${profile.nickName}</span> <span class="myDetail">( </span> <span id="myId" class="myDetail">${profile.id}</span> <span class="myDetail"> )</span>
 		</div>
-		<div class="myPost">
-		<c:forEach items="${aList}" var="mp">
-		<a href="myPost?no=${mp.no}" style="cursor:pointer;" class = "p_alink">
-		
+		<div id="myProfileSetting">
+			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+                <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z" />
+            </svg>
+		</div>
+		<div id="settingMenu">
+			<table>
+				<tr>
+					<td><a href="profileEdit">프로필 수정</a></td>
+				</tr>
+				<tr>
+					<td><a href="#">기타 프로필</a></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div id="myProfile">
+		<div id="myImg">
+			<div id="myImgCircle">
+				<img class="proImg">
+			</div>
+		</div>
+		<div id="myInfo">
+			<div id="myFollow">
+				<table>
+					<tr>
+						<th style="width: calc(100%/ 3);">게시물</th>
+						<th style="width: calc(100%/ 3);"><a href="#">FOLLOWING</a></th>
+						<th style="width: calc(100%/ 3);"><a href="#">FOLLOWER</a></th>
+					</tr>
+					<tr>
+						<td>${postlength}</td>
+						<td>${following}</td>
+						<td>${follower}</td>
+					</tr>
+				</table>
+			</div>
+			<div id="myBio">
+				<table>
+					<tr>
+						<td><span>${profile.tel}</span></td>
+					</tr>
+					<tr>
+						<td><span>${profile.bio}</span></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div id="myMenu" class="theme">
+		<input type="button" class="myMenuItem theme" value="POST" onclick="postbut()"> <input type="button" class="myMenuItem theme" value="REPOST" onclick="repostbut()"> <input type="button" class="myMenuItem theme" value="COMMENT" onclick="commentbut()"> <input type="button" class="myMenuItem theme" value="MEDIA" onclick="mediabut()"> <input type="button" class="myMenuItem theme" value="LOVE">
+	</div>
+	<div class="myPost">
+	<c:choose>
+		<c:when test="${not empty lovepostList}">
+		<c:forEach items="${lovepostList}" var="mp">
 		<c:set var="filenameLength" value="${fn:length(mp.filename)}" />
+		
+			<a href="myPost?no=${mp.no}" style="cursor:pointer;" class = "p_alink">
 			<div class="p_inf">
 				<div class="proimg">
 				<c:choose>
@@ -131,7 +178,8 @@
 					</div>
 				</c:when>
 			</c:choose> 
-		</a>
+			</a>
+			
 	
 			
 			<div class="mpfooter">
@@ -159,15 +207,50 @@
 </svg>
 					<span class="footspan">${mp.show}</span>
 				</div>
-				<div></div>
 			</div>
+
 		</c:forEach>
+			</c:when>
+			<c:otherwise>
+				<div class="nothing">좋아요한 글이 존재하지 않습니다.</div>
+			</c:otherwise>
+		</c:choose>
 	</div>
-
-
-
-
-			<div class="footer"></div>
-</div>
 </body>
+
+<script>
+    //설정 버튼 클릭 시 메뉴 띄우는 메서드
+    document.querySelector('#myProfileSetting').addEventListener('click', () => {
+        const menu = document.querySelector('#settingMenu');
+        if (menu.style.display == "block") {
+            menu.style.display = "none";
+        } else {
+            menu.style.display = "block";
+        }
+    })
+    console.log("${lovelength}");
+    window.onload = function() {
+        const img = document.querySelector('.proImg');
+        const photo = document.querySelector('#photo');
+         
+        if(photo.value != "null") {
+            img.src = "download?filename="+photo.value;
+        } else if(photo.value == "null") {
+            img.src = "./resources/img/프로필.png";
+        }
+    }
+
+    function postbut() {
+    	 location.href = "profileShow";
+    }
+    
+    function mediabut() {
+   	 	location.href = "profileMedia";
+   }
+    function lovebut() {
+   	 	location.href = "profileLove";
+   }
+     
+    
+</script>
 </html>

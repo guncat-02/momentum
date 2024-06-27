@@ -45,6 +45,8 @@ $(document).ready(function() {
 	
 	if(message == "manager") {
 		$("#loginbox").css("opacity","0.3");
+		$('#loginbox').css('pointer-events', "none");
+
 		$("#selbox").css("display", "block");
 	}else if(message != "") {
 		alert("${ msg }");

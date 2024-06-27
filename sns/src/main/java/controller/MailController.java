@@ -25,33 +25,13 @@ public class MailController {
 	
 	@Inject
 	IF_JoinService jservice;
-	
-	@RequestMapping(value = "/sendMail.do", method= RequestMethod.GET)
-	@ResponseBody
-	public String sendSimpleMail(HttpServletRequest request,HttpServletResponse response, @RequestParam("email") String email,@RequestParam("id") String id) throws Exception
-	{
-		
-		int ran = (int)((Math.random()* (99999 - 10000 + 1)) + 10000);
-		String code = Integer.toString(ran);
-		if(jservice.chkemail(id).equals(email)) {
-			request.setCharacterEncoding("utf-8");
-			response.setContentType("text/html;charset=utf-8");
-			mailService.sendMail(email,"Momentum 이메일 인증","인증번호: "+code);
-			
-		}
-		else {
-			code="null";
-		}
-		
-		return code;
-	}
-	
+
 	@RequestMapping(value = "/sendJoinMail.do", method= RequestMethod.GET)
 	@ResponseBody
 	public String sendJoinMail(HttpServletRequest request,HttpServletResponse response, @RequestParam("email") String email) throws Exception
 	{
 		
-		int ran = (int)((Math.random()* (99999 - 10000 + 1)) + 10000);
+		int ran = (int)((Math.random()* (999999 - 100000 + 1)) + 100000);
 		String code = Integer.toString(ran);
 		
 		if(jservice.chkdupemail(email)==null) {
