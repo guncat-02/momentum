@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="kor">
 
 <head>
     <meta charset="UTF-8">
@@ -15,7 +15,6 @@
 </script>
 
 <link id="theme-setting" rel="stylesheet" href="./resources/css/dark_theme.css">
-<input type="hidden" id="cur-theme" value="0">
 <link rel="stylesheet" href="./resources/css/posting.css">
 
 <body class="theme">

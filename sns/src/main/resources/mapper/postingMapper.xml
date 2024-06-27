@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="dao.IF_PostingDAO">
+<mapper namespace="dao.IF_PostingDao">
 
 	<insert id="insertPost" parameterType="vo.PostVO">
 		insert into postTest values (seTest.nextval, null, 'nuit0204', #{cont}, 0, #{privacy}, default)

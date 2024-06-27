@@ -1,7 +1,5 @@
 package vo;
 
-import java.util.List;
-
 public class BlockVO {
 	private String blockId; //차단 아이디
 	private String reason; //차단 사유

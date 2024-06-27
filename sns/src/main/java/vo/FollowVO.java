@@ -1,7 +1,5 @@
 package vo;
 
-import java.util.List;
-
 public class FollowVO {
 	private String followId; //팔로우 한 id
 	private String id; //사용자를 팔로우한 id
@@ -21,4 +19,5 @@ public class FollowVO {
 	public void setFollowId(String followId) {
 		this.followId = followId;
 	}
+	
 }

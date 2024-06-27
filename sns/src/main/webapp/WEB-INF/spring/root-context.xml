@@ -7,9 +7,9 @@
 	<!-- 오라클 bean -->
 	<bean
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource"
-		id="dataSource">  <!-- 한 개가 빈설정.. 객체 설정.. 객체만들어 달라고 하는 것.. -->
+		id="dataSource">
 		<property name="driverClassName"
-			value="oracle.jdbc.driver.OracleDriver"> <!-- 객체의 변수 -->
+			value="oracle.jdbc.driver.OracleDriver">
 		</property>
 		<property name="url"
 			value="jdbc:oracle:thin:@192.168.0.28:1521:orcl" />
@@ -30,7 +30,10 @@
 		id="sqlSession">
 		<constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg>
 
-	</bean>	
+	</bean>
+	
+	
+	
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl"> 
 	     	<property name="host" value="smtp.gmail.com" />
 	     	<!-- google SMTP 메일 서버 포트 -->

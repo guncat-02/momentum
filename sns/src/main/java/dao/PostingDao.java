@@ -8,9 +8,9 @@ import org.springframework.stereotype.Repository;
 import vo.PostVO;
 
 @Repository
-public class PostingDAOImpl implements IF_PostingDAO{
+public class PostingDao implements IF_PostingDao{
 
-	private static String mapperQuery = "dao.IF_PostingDAO";
+	private static String mapperQuery = "dao.IF_PostingDao";
 	
 	@Inject
 	SqlSession sql;
