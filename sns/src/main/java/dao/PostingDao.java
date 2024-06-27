@@ -1,5 +1,8 @@
 package dao;
 
+import java.util.HashMap;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -17,12 +20,28 @@ public class PostingDao implements IF_PostingDao{
 	
 	@Override
 	public void insertPost(PostVO pvo) throws Exception {
+		System.out.println("dao postInsert"+pvo.toString());
 		sql.insert(mapperQuery+".insertPost", pvo);
 	}
 
 	@Override
-	public void insertAttach(String fileName) throws Exception {
-		sql.insert(mapperQuery+".insertAttach", fileName);
+	public void insertAttach(HashMap<String, Object> fileMap) throws Exception {
+		sql.insert(mapperQuery+".insertAttach", fileMap);
+	}
+
+	@Override
+	public PostVO selectOnePost(int no) throws Exception {
+		return sql.selectOne(mapperQuery+".selectOnePost", no);
+	}
+
+	@Override
+	public List<String> selectAttach(int no) throws Exception {
+		return sql.selectList(mapperQuery+".selectAttach", no);
+	}
+
+	@Override
+	public void insertRePost(PostVO pvo) throws Exception {
+		sql.insert(mapperQuery+".insertRePost", pvo);
 	}
 
 }

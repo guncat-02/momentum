@@ -1,10 +1,9 @@
 body {
-	width: auto;
-	margin: 0px;
-	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
-		sans-serif;
-	font-weight: bolder;
-	-webkit-user-select: none;
+    width: auto;
+    margin: 0px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bolder;
+    -webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
@@ -153,7 +152,6 @@ body {
 
 #myNick {
 	color: #ff00bf;
-	text-shadow: #00f7ff 3px 3px;
 	font-size: 45px;
 }
 
@@ -269,7 +267,7 @@ a {
 	margin-top: 50px;
 	height: 30px;
 	justify-content: space-evenly;
-	padding-left: 150px;
+	padding-left : 130px;
 	padding-top: 10px;
 }
 
@@ -345,7 +343,7 @@ a {
 .modal_body {
 	position: absolute;
 	top: 50%;
-	width: 400px;
+	width: 600px;
 	height: 600px;
 	padding: 40px;
 	text-align: center;
@@ -358,8 +356,8 @@ a {
 
 
 .closeModal {
-	left : 90%;
-	bottom : 93%;
+	left : 94%;
+	bottom : 94%;
 	position: absolute;
 	cursor: pointer;
 }
@@ -370,8 +368,8 @@ a {
 .modalImg {
 	width:100%;
     height:100%;
-	 max-width:380px;
-    max-height: 500px
+	 max-width:600px;
+    max-height: 600px
     object-fit:cover;
 }
 
@@ -385,3 +383,4 @@ a {
 	padding-top: 150px;
 	
 }
+

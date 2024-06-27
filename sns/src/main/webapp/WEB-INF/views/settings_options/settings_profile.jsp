@@ -119,7 +119,7 @@
     });
     // 해당 프로필의 팔로우 및 차단 리스트
     $('#follow-block-list').on('click', function() {
-        location.href = "#";
+        location.href = "/sns/list_fnb/";
     });
     // 해당 계정의 서브 프로필
     $('#show-sub-profile').on('click', function() {

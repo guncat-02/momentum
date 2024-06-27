@@ -147,6 +147,9 @@
     function postbut() {
    	 location.href = "profileShow";
    }
+    function commentbut() {
+    	location.href = "profileComment";
+    }
    
    function mediabut() {
   	 	location.href = "profileMedia";

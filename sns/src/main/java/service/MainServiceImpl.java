@@ -7,25 +7,23 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import dao.IF_MainDAO;
-import vo.PostVO;
 
+import vo.PostVO;
 @Service
-public class MainServiceImpl implements IF_MainService {
+public class MainServiceImpl implements IF_MainService{
 	@Inject
 	IF_MainDAO maindao;
-
 	@Override
 	public List<PostVO> mainAll() throws Exception {
 		return maindao.mainAll();
 	}
-
+	
 	@Override
 	public List<PostVO> attachAll() throws Exception {
 		List<PostVO> attach = maindao.mainAll();
-		for (PostVO pvo : attach) {
+		for(PostVO pvo : attach) {
 			List<String> fileList = maindao.postAttach(pvo.getNo());
-
-			if (fileList != null) {
+			if(fileList != null) {
 				String list[] = fileList.toArray(new String[fileList.size()]);
 				pvo.setFilename(list);
 			}
@@ -92,6 +90,13 @@ public class MainServiceImpl implements IF_MainService {
 			}
 		}
 		return lovepostList;
+	}
+
+	@Override
+	public void p_show(int no) throws Exception {
+		
+		maindao.p_show(no);
+		
 	}
 	
 

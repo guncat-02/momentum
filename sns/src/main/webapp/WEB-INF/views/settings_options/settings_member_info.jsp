@@ -258,8 +258,7 @@
                         <td style="height: 30%;" colspan="2">
                             아래의 문구를 정확히 따라 입력하여 삭제를 완료합니다.<br><br>
                             <!-- Session에서 가져온 값 활용 -->
-                            <!-- <span id="idAndNick"><%=id %>/<%=nickName %> 계정을 삭제합니다.</span> -->
-                            <span id="idAndNick">brian332/brian332 의 계정을 삭제합니다.</span>
+                            <span id="idAndNick"><%=id %>/<%=nickName %> 계정을 삭제합니다.</span>
                         </td>
                     </tr>
                     <tr>
@@ -328,6 +327,7 @@
                 	nameTr.text('완료');
                 	nameTr.css('border', '1px solid rgb(0, 255, 0)');
                 	nameTr.css('color', 'rgb(0, 255, 0)');
+                	nameTr.css('pointer-events', 'none');
                     $('#nametext').prop('disabled', 'true');
                     $('#nametext').css('border', '1px solid rgb(0, 255, 0)');
                     nameTr.closest('tr').find('td:first-child').text('완료되었습니다.');

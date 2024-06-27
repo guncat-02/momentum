@@ -20,49 +20,26 @@
 <link rel="stylesheet" href="./resources/css/manage.css">
 
 <body class="theme">
+	
+		<%-- <c:if test="${userid != null }">
+			<span> 사용자 정보 <br> ID : ${userid } <br> 이름 : ${username } <br> 닉네임:  ${nickName }</span>
+			<span>로그아웃</span>
+		</c:if> --%>
+		
+
     <div id="all">
+        <div id="menuall">
+            <%@ include file="menuAll.jsp"%>
+        </div>
         <div id="main">
             <main>
-                <h1 class="theme-font">MANAGE PAGE</h1>
+                <h1 class="theme-font">관리자 페이지에 온 걸 환영합니다.</h1>
             </main>
             <div class = "container">
-               <div class = "item">메뉴바</div>
-               <div class = "item">회원관리</div>
-               <div class = "item">검색 바</div>
-               <div class = "item">결과값 테이블
-                <div class="modal">
-                    <div class="modal_popup">
-                        <h3>모달 회원이 쓴 글</h3>
-                        <p>이거 모달이거 써서 글 내용들 띄우기</p>
-                        <button type="button" class="close_btn">닫기</button>
-                    </div>
-                </div>
-                <!--end 모달 팝업-->
-                <main>
-                    <section>
-                        <h2>모달 팝업</h2>
-                        <button type="button" class="modal_btn">모달</button>
-                    </section>
-                </main>
-               </div>
+            	
             </div>
         </div>
     </div>
     
 </body>
 </html>
-<script>
-
-
-//열기 버튼을 눌렀을 때 모달팝업이 열림
-$(".modal_btn").click(function() {
-    $(".modal").css("display","block");
-});
-
-
-//닫기 버튼을 눌렀을 때 모달팝업이 닫힘
-$(".close_btn").click(function() {
-    $(".modal").css("display","none");
-});
-
-</script>
