@@ -26,4 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="postLength" resultType="int" parameterType="String">
 		select count(*) from posttest where id = #{id}
 	</select>
+	<update id = "p_show" parameterType="int">
+		update posttest set show = show+1 where no = #{no}
+	</update>
 </mapper>

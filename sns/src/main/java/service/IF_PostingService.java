@@ -13,5 +13,4 @@ public interface IF_PostingService {
 	public void insertRePost(PostVO pvo) throws Exception;
 	
 	public PostVO selectOnePost(int no) throws Exception;
-	
 }

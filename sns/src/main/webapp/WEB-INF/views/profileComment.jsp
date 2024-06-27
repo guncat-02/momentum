@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +9,9 @@
 <!-- 다크 테마를 기본 값으로-->
 <link id="theme-setting" rel="stylesheet" href="./resources/css/dark_theme.css">
 <link rel="stylesheet" href="./resources/css/profileShow.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+    integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer">
 </script>
 </head>
 <body class="theme">
@@ -71,54 +73,16 @@
 	<div id="myMenu" class="theme">
 		<input type="button" class="myMenuItem theme" value="POST" onclick="postbut()"> <input type="button" class="myMenuItem theme" value="REPOST" onclick="repostbut()"> <input type="button" class="myMenuItem theme" value="COMMENT" onclick="commentbut()"> <input type="button" class="myMenuItem theme" value="MEDIA" onclick="mediabut()"> <input type="button" class="myMenuItem theme" value="LOVE" onclick="lovebut()">
 	</div>
-	<div class="media">
-		<div class="m_intro">
-			<span class="nick">${profile.nickName}</span>’s<span class="memories"> Memories</span>
+	<div class = "myComment">
+		<div>
+			프로필 
+			댓글 개수
 		</div>
-
-		<c:forEach items="${myfiles}" var="mf" varStatus="loop">
-			<c:set var="filenameLength" value="${fn:length(mf.filename)}" />
-			
-			<c:choose>
-				<c:when test="${loop.index == 0 or mf.p_date ne myfiles[loop.index - 1].p_date}">
-					<c:choose>
-						<c:when test="${filenameLength ne 0 }">
-							<div class="m_date">
-							<span class="m_datespan">${mf.p_date}</span>
-							</div>
-							<div class="files">
-						</c:when>
-					</c:choose>
-				</c:when>
-			</c:choose>
-			<c:forEach items="${mf.filename}" var="file" varStatus="status">
-				<div class="p_item">
-					<a onclick="openModal('${status.current}')"><img src="download?filename=${status.current}"></a>
-				</div>
-			</c:forEach>
-			
-			<c:choose>
-				<c:when test="${loop.index == myfiles.size() - 1 or mf.p_date ne myfiles[loop.index + 1].p_date}">
-				</div>
-				</c:when>
-			</c:choose>
+			<div class = "p_cont">글 내용</div>
+				<div>글번호에 따른 댓글 들</div>
 		
-	</c:forEach>
-
-
-
-
+		
 	</div>
-	<div class="modal">
-		<div class="modal_body">
-			<img src="" class="modalImg">
-			<svg class="closeModal" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="black" class="bi bi-x-lg" viewBox="0 0 16 16">
-  <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
-</svg>
-		</div>
-
-	</div>
-
 </body>
 
 <script>
@@ -145,33 +109,26 @@
     }
 
     function postbut() {
-   	 location.href = "profileShow";
+    	 location.href = "profileShow";
+    }
+    
+    function mediabut() {
+   	 	location.href = "profileMedia";
    }
-    function commentbut() {
-    	location.href = "profileComment";
-    }
-   
-   function mediabut() {
-  	 	location.href = "profileMedia";
-  }
-   function lovebut() {
-  	 	location.href = "profileLove";
-  }
+    function lovebut() {
+   	 	location.href = "profileLove";
+   }
     
-    
-	// 모달    
-    const modal = document.querySelector('.modal');
-
-    function openModal(filename) {
-    	modal.style.display="flex";
-    	console.log(filename);
-    	$(".modalImg").attr("src", "download?filename="+filename);
-    	console.log("download?filename="+filename);
-    }
-    
-	$(".closeModal").click(function() {
-		$(".modal").css("display","none");
-	});
+    function p_show(no) {
+		$.ajax({
+			type:"GET",
+			url:"p_show",
+			data: {"no" : no},
+			cache : false,
+			success:function() {
+				}
+		 })  
+	}
      
     
 </script>
