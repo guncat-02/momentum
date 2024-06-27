@@ -1,7 +1,5 @@
 package controller;
 
-import java.util.List;
-
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,7 +17,6 @@ import service.IF_FollowListService;
 import service.IF_MainService;
 import service.IF_ProfileService;
 import util.FileDataUtil;
-import vo.PostVO;
 import vo.ProfileVO;
 
 @Controller
@@ -139,5 +136,16 @@ public class ProfileController {
 		ProfileVO p = pServe.select(String.valueOf(session.getAttribute("userid")));
 		model.addAttribute("profile", p);
 		return "profileEdit";
+	}
+	
+	//다른 유저 프로필
+	@GetMapping("userprofile")
+	public String userProfile(@RequestParam("id") String id, Model model) throws Exception {
+		model.addAttribute("profile", pServe.select(id));
+		model.addAttribute("following", fServe.followingSelect(id));
+		model.addAttribute("follower", fServe.followerSelect(id));
+		model.addAttribute("postlength", mserve.postLength(id));
+		model.addAttribute("mypostList", mserve.myPostList(id));
+		return "userProfile";
 	}
 }
