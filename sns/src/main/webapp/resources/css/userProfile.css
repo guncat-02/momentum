@@ -1,0 +1,20 @@
+#userFollow {
+    cursor: pointer;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bolder;
+    background-color: transparent;
+    color: #ff00bf;
+    font-size: 30px;
+    margin-top: 7%;
+    width: 210px;
+}
+
+#userFollowBtn {
+    position: absolute;
+    left: 82%;
+    top: 0;
+    width: 150px;
+    height: 65px;
+    text-align: center;
+    z-index: 10;
+}

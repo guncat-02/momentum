@@ -262,9 +262,6 @@ input[type='radio']:checked {
 	box-shadow: none;
 }
 
-.comm_date{
-	font-size : 15px;
-}
 
 
 
@@ -273,7 +270,8 @@ input[type='radio']:checked {
 	border-radius : 5px;
 	border : 1px solid #00f7ff;
 }
-.ctable {
+
+[class*="ctable"] {
 	display : block;
 	width : 1000px;
 	margin-left :10px;
@@ -285,23 +283,23 @@ input[type='radio']:checked {
 	padding-left : 10px;
 }
 
-
-
-
 .commcontents {
 	width : 1000px;
 	height : 5px;
-	padding-left : 75px;
+	padding-left : 90px;
+	font-size : 20px;
 }
 
 .comm_date {
-	padding-left :75px;
+	font-size : 10px;
+	padding-left :90px;
+	color : gray;
 }
 
 
 .commpro_radius{
-	width: 150px;
-	height: 50px; 
+	width: 200px;
+	height: 70px; 
 	display:inline-block;
 }
 .commpro_radius b{
@@ -322,5 +320,26 @@ input[type='radio']:checked {
 	margin-right :20px;
 	margin-bottom :-15px;
 }
+
+#ordercomm {
+	margin-top: 15px;
+}
+
+
+[class*="delete"] {
+	display: none;
+	color : #ff00bf;
+	border: 1px solid  #ff00bf;
+}
+[class*="reporticon"] {
+	padding-left : 100px;
+}
+
+[class*="icon"] {
+	border: 0;
+ 	background-color: transparent;
+	color: white;
+}
+
 
 

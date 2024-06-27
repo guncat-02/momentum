@@ -1,76 +1,55 @@
 package controller;
 
-
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import service.IF_CommService;
 import service.IF_MainService;
 import vo.PostVO;
 
 @Controller
+@EnableAsync
 public class MainController {
 	@Inject
 	IF_MainService mainSer;
 	
+	@Inject
+	IF_CommService cser;
+
 	@GetMapping("main")
-	public String mint(Model model,
-			HttpSession session) throws Exception {
-		
-		String id = String.valueOf(session.getAttribute("userid"));
-		
-		List<PostVO> attachList= mainSer.attachAll();
-		model.addAttribute("aList",attachList);
+	public String mint(Model model, HttpSession session) throws Exception {
+
+		List<PostVO> attachList = mainSer.attachAll();
+		model.addAttribute("aList", attachList);
 		return "main";
 	}
-	@PostMapping("myPost")
-	public String post(
-						Model model
-						,@ModelAttribute PostVO postvo
-						,@RequestParam("myid") String myid
-						,@RequestParam("myname") String myname
-						,@RequestParam("mygrade") String mygrade
-						)throws Exception {
+
+	@GetMapping("myPost")
+	public String post(Model model, @ModelAttribute PostVO postvo, @RequestParam(value="order", required = false) String order,@RequestParam(value="no", required = false) int no ) throws Exception {
+			System.out.println(no);
+		// 해당 포스트 글번호의 댓글 리스트 
+			model.addAttribute("commlist",cser.CommList(postvo.getNo())); 
+			model.addAttribute("Commcnt", cser.cntComm(postvo.getNo()));
+			model.addAttribute("postvo", mainSer.takePostVO(no));
+	
 		
-		model.addAttribute("postvo",postvo) ;
-		model.addAttribute("myid",myid);
-		model.addAttribute("myname",myname);
-		model.addAttribute("mygrade",mygrade);
 		
-		/*
-		 * model.addAttribute("filename", filename); model.addAttribute("showCnt",
-		 * viewCnt); model.addAttribute("cont", content); model.addAttribute("id",
-		 * postname); model.addAttribute("no", no);
-		 */
-		
-		//List<String> myAttach= mainSer.postAttach(no);
-		//model.addAttribute("myattach",myAttach);
+
 		return "myPost";
 	}
 	
-	/*
-	@PostMapping("/main_mintest/id/like")
-	public ResponseEntity likePost() {
-		return ResponseEntity<>()
-	}
-	*/
-	
-	
-	
-	/*
-	@PostMapping("/main_mintest/like")
-	public ResponseEntity likePost() {
-		LikeViewResponse likeViewResponse = MainSer.pressLike();
-		return new ResponseEntity<>(likeViewResponse , HttpStatus.OK);
-	}
-	*/
-	
+
+
+
 }

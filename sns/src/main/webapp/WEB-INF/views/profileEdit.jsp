@@ -129,9 +129,9 @@
 
     //프로필 불러오기
     window.onload = function() {
-        if(photo.value != "null") {
+        if(photo.value != null && photo.value != "") {
             img.src = "download?filename="+photo.value;
-        } else if(photo.value == "null") {
+        } else {
             img.src = "./resources/img/프로필.png"
         }
         for(let i = 0; i < radio.length; i++) {

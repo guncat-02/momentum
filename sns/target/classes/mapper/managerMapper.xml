@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.IF_ManagerDao">
+
+	<select id="selectAllMembers" resultType="vo.MemberVO">
+		select * from memberTest order by id
+	</select>
+	
+	<select id="selectAllProfiles" resultType="vo.ProfileVO">
+		select * from profileTest order by id
+	</select>
+	
+	<select id="selectAllPosts" resultType="vo.PostVO">
+		select * from postTest order by no desc
+	</select>
+	
+	<select id="selectAllComms" resultType="vo.CommVO">
+		select * from commTest order by c_no desc
+	</select>
+	
+	<select id="selectAllAdmins" resultType="vo.MemberVO">
+		select * from memberTest where admin is not null order by id
+	</select>
+	
+	
+	<select id="selectMembersWhere" parameterType="vo.ManagerVO" resultType="vo.MemberVO">
+		select * from memberTest where 
+		<if test="searchLoc == 'admin'">
+			admin is not null and
+		</if>
+		<choose>
+			<when test="searchType == 'id'">
+				id like '%'||#{searchWord}||'%' order by id
+			</when>
+			<when test="searchType == 'period'">
+				b_date between #{stDate} and #{ndDate} order by b_date
+			</when>
+		</choose>
+
+	</select>
+
+	<select id="selectProfilesWhere" parameterType="vo.ManagerVO" resultType="vo.ProfileVO">
+		select * from profileTest where 
+		<choose>
+			<when test="searchType == 'id'">
+				id like '%'||#{searchWord}||'%'
+			</when>
+			<when test="searchType == 'cont'">
+				bio like '%'||#{searchWord}||'%'
+			</when>
+		</choose>
+		order by id
+	</select>
+	
+	<select id="selectPostsWhere" parameterType="vo.ManagerVO" resultType="vo.PostVO">
+		select * from postTest where
+		<choose>
+			<when test="searchType == 'id'">
+				id like '%'||#{searchWord}||'%'
+			</when>
+			<when test="searchType == 'cont'">
+				cont like '%'||#{searchWord}||'%'
+			</when>
+			<when test="searchType == 'period'">
+				p_date between #{stDate} and #{ndDate}
+			</when>
+		</choose>
+		order by no desc
+	</select>
+	
+	<select id="selectCommsWhere" parameterType="vo.ManagerVO" resultType="vo.CommVO">
+		select * from commTest where
+		<choose>
+			<when test="searchType == 'id'">
+				id like '%'||#{searchWord}||'%'
+			</when>
+			<when test="searchType == 'cont'">
+				c_cont like '%'||#{searchWord}||'%'
+			</when>
+			<when test="searchType == 'period'">
+				c_date between #{stDate} and #{ndDate}
+			</when>
+		</choose>
+		order by c_no desc
+	</select>
+
+</mapper>

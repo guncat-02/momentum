@@ -10,4 +10,8 @@ public interface IF_PostingService {
 	
 	public int c_dislike(String no);
 	
+	public void insertRePost(PostVO pvo) throws Exception;
+	
+	public PostVO selectOnePost(int no) throws Exception;
+	
 }

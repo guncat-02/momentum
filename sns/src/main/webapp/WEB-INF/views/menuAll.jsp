@@ -8,16 +8,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>momentum</title>
 </head>
-<link rel="stylesheet" href="./resources/css/menuAll.css">
+<link rel="stylesheet" href="/sns/resources/css/menuAll.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
     integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer">
 </script>
+<script src="/sns/resources/JS/setTheme.js"></script>
 <body>
     <div id="menulogo">
         <!--아이콘-->
     </div>
     <div id="menu">
+    
+    	<a href="/sns/main">
+    		<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
+  				<path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"/>
+			</svg>
+			<span>HOME</span>
+    	</a>
+    	<br>
+
         <a href="profileShow">
             <div id="menu-profile-image">
                 <img src="" alt="">
@@ -26,7 +36,7 @@
         </a>
         <br>
 
-        <a href="search">
+        <a href="/sns/search">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search"
                 viewBox="0 0 16 16">
                 <path
@@ -36,7 +46,7 @@
         </a>
         <br>
 
-        <a href="allList">
+        <a href="/sns/allList">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-compass"
                 viewBox="0 0 16 16">
                 <path
@@ -47,7 +57,7 @@
         </a>
         <br>
 
-        <a href="chatStart">
+        <a href="/sns/chatStart">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-send"
                 viewBox="0 0 16 16">
                 <path
@@ -57,7 +67,7 @@
         </a>
         <br>
 
-        <a href="alarm">
+        <a href="/sns/alarm">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bell"
                 viewBox="0 0 16 16">
                 <path
@@ -67,7 +77,7 @@
         </a>
         <br>
 
-        <a href="posting">
+        <a href="/sns/posting">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil"
                 viewBox="0 0 16 16">
                 <path
@@ -78,7 +88,7 @@
         <br>
 
 
-        <a href="followList">
+        <a href="/sns/followList/followings">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-people"
                 viewBox="0 0 16 16">
                 <path
@@ -88,7 +98,7 @@
         </a>
         <br>
         
-        <a href="settings">
+        <a href="/sns/settings">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-gear"
                 viewBox="0 0 16 16">
                 <path
@@ -121,7 +131,7 @@
         </table>
     </div>
     <div id="logout">
-        <a href="/sns" id="menu-logout">
+        <a href="/sns/logout" id="menu-logout">
         	<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-power" viewBox="0 0 16 16">
   <path d="M7.5 1v7h1V1z"/>
   <path d="M3 8.812a5 5 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812"/>
@@ -130,23 +140,13 @@
     </div>
 </body>
 <script>
-	$(document).ready(function() {
-	    if (localStorage.getItem('curTheme') == null) {
-	        localStorage.setItem('curTheme', './resources/css/dark_theme.css');
-	    }
-	    $('#theme-setting').prop('href', localStorage.getItem('curTheme'));
-	});
-	$('#theme-change-btn').click(function() {
-	    if (localStorage.getItem('curTheme') == './resources/css/dark_theme.css') {
-	        localStorage.setItem('curTheme', './resources/css/light_theme.css');
-	    } else {
-	        localStorage.setItem('curTheme', './resources/css/dark_theme.css');
-	    }
-	    $('#theme-setting').prop('href', localStorage.getItem('curTheme'));
+
+	$('#theme-change-btn').on('click', function() {
+		switchTheme();
 	});
 	
-	$('#menu-logout').click(function() {
-	    localStorage.removeItem('curTheme');
-	});
+
+	
+	
 </script>
 </html>

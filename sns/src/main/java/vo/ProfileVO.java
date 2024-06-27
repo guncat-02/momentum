@@ -7,7 +7,9 @@ public class ProfileVO {
 	private String tel; //전화번호
 	private String bio; //한 줄 소개
 	private int privacy; //공개 여부
-	
+	private int p_main; //메인 프로필 여부
+	private String email; //이메일
+
 	//getter
 	public String getId() {
 		return id;
@@ -27,6 +29,12 @@ public class ProfileVO {
 	public int getPrivacy() {
 		return privacy;
 	}
+	public int getP_main() {
+		return p_main;
+	}
+	public String getEmail() {
+		return email;
+	}
 	
 	//setter
 	public void setId(String id) {
@@ -43,6 +51,12 @@ public class ProfileVO {
 	}
 	public void setBio(String bio) {
 		this.bio = bio;
+	}
+	public void setP_main(int p_main) {
+		this.p_main = p_main;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	//전화번호에 - 추가

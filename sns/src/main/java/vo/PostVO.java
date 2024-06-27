@@ -1,5 +1,7 @@
 package vo;
 
+import java.util.Arrays;
+
 public class PostVO {
 	private int no; //글번호
 	private int re_no; //리포스트 번호

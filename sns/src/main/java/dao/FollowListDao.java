@@ -32,15 +32,20 @@ public class FollowListDao implements IF_FollowListDao{
 	public List<ProfileVO> getFollowingsProfile(String id) throws Exception {
 		return sql.selectList(mapperQuery+".selectFollowingsProfile", id);
 	}
-
+	
 	@Override
-	public void unfollow(FollowVO fvo) throws Exception {
-		sql.delete(mapperQuery+".deleteFollowId", fvo);
+	public List<String> getFollowingsId(String id) throws Exception {
+		return sql.selectList(mapperQuery+".selectFollowingsId", id);
 	}
 
 	@Override
-	public void follow(FollowVO fvo) throws Exception {
-		sql.insert(mapperQuery+".insertFollowId", fvo);
+	public int unfollow(FollowVO fvo) throws Exception {
+		return sql.delete(mapperQuery+".deleteFollowId", fvo);
+	}
+
+	@Override
+	public int follow(FollowVO fvo) throws Exception {
+		return sql.insert(mapperQuery+".insertFollowId", fvo);
 	}
 
 	//팔로잉 수를 세는 메서드

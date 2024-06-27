@@ -13,9 +13,11 @@ public interface IF_FollowListService {
 	
 	public List<ProfileVO> getFollowingsProfile(String id) throws Exception;
 	
-	public void unfollow(FollowVO fvo) throws Exception;
+	public List<String> getFollowingsId(String id) throws Exception;
 	
-	public void follow(FollowVO fvo) throws Exception;
+	public int unfollow(FollowVO fvo) throws Exception;
+	
+	public int follow(FollowVO fvo) throws Exception;
 	
 	public int followingSelect(String id) throws Exception;
 	

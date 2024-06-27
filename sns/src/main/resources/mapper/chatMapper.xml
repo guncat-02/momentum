@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into chatRoomTest values(#{chatNum}, #{chatName}, #{chatImg, jdbcType=VARCHAR}, #{id}, #{nickName})
 	</insert>
 	<insert id="chatMemberInsert" parameterType="vo.ChatRoomVO">
-		insert into chatMemberTest values(#{chatNum}, #{id}, #{nickName},
+		insert into chatMemberTest values(#{chatNum}, #{id}, #{nickName},My Project 27639
 		<choose>
 			<when test="owner == null">
 				default
@@ -25,7 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select distinct nickname from chatMemberTest where id = #{id}
 	</select>
 	<select id="chatList" parameterType="String" resultType="vo.ChatRoomVO">
-		select * from chatRoomTest where chatNum = (
+		select * from chatRoomTest where chatNum in (
 			select chatNum from chatMemberTest where nickName = #{nickName})
 	</select>
 	<select id="chatMemberList" parameterType="String" resultType="vo.ChatRoomVO">

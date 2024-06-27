@@ -5,7 +5,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="dao.IF_MainDAO">
 	
 	<select id="mainList" resultType="vo.PostVO" parameterType="String">
-		select * from posttest where privacy = 1 order by no asc
+		select * from posttest where privacy = 1 order by p_date desc
+	</select>
+	<select id="myPost" resultType="vo.PostVO" parameterType="String">
+		select * from posttest where id = #{id} order by no desc
+	</select>
+	<!-- 좋아요 누른 글 리스트 -->
+	<select id="lovePostList" resultType="vo.PostVO" parameterType="String">
+		select posttest.* from posttest left join p_lovetest on posttest.no = p_lovetest.no where p_lovetest.id = #{id}
+	</select>
+	<select id="takePostVO" resultType="vo.PostVO" parameterType="int">
+		select * from posttest where no = #{no}
 	</select>
 	<select id="attachList" resultType="vo.PostVO">
 		select * from attachtest
@@ -13,99 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="postAttach" resultType="String">
 		select filename from attachtest where no = #{no}
 	</select>
+	<select id="postLength" resultType="int" parameterType="String">
+		select count(*) from posttest where id = #{id}
+	</select>
 </mapper>
-
-
-
-<!--  처음 쿼리 소스
-		select sumjoin.followid, sumjoin.no, sumjoin.cont, cjoin.filename, sumjoin.show
-		from
-			(select ajoin.followid, bjoin.no, bjoin.cont ,bjoin.show
-			from (select followid from followtest where id=#{id}) ajoin
-			INNER JOIN posttest bjoin
-			ON ajoin.followid= bjoin.id
-			where privacy = 1 ) sumjoin
-		Left OUTER JOIN attachtest cjoin
-		ON sumjoin.no = cjoin.no 
-		order by sumjoin.no asc
--->
-<!-- 리팩토링 1 생각: 파일네임테이블을 분리해서 쿼리를 두번 사용하려고 해봤음.. 근데 controller단에서 db까지 왔다갔다 하는게 두번이나 이뤄지니 속도가 걱정..
-	<select id="mainList" resultType="vo.MainVO" parameterType="String">
-		select ajoin.followid, bjoin.no, bjoin.cont, bjoin.show
-	    from (select followid from followtest where id = #{id}) ajoin
-	    INNER JOIN posttest bjoin
-	    ON ajoin.followid = bjoin.id
-	    where privacy = 1
-	</select>
-	<select id="getFiles" resultType="String">
-		select filename from attachtest where no = #{no}
-	</select>
--->
-<!-- 리팩토링 2 생각 : 위의 코드를 보완하여 멀티플 조인으로 코드 구현함 0612/ 그런데 비밀글을 찾으려 할때 첫번째 서브쿼리가 방해가 된다..
-		select distinct sumjoin.no , sumjoin.followid ,sumjoin.cont,cjoin.filename,sumjoin.show
-		from
-		    (select ajoin.followid, bjoin.no, bjoin.cont ,bjoin.show
-		    from(select followid from followtest where id=#{id}) ajoin
-		    INNER JOIN posttest bjoin
-		    ON ajoin.followid= bjoin.id
-		    where privacy = 1 ) sumjoin
-		Left OUTER JOIN attachtest cjoin
-		ON sumjoin.no = cjoin.no
-		order by sumjoin.no asc 
--->
-<!-- 리팩토링 3 생각 : 위의 코드를 보완하여 불필요한 서브쿼리 수를 줄였음 + 비밀글을 위해 privacy값을 where절 조건으로 사용
-															  0613/오전 11:53 
-		select distinct *
-		from(
-		    select *
-		    from followtest a
-		    right join posttest b
-		    on a.followid = b.id
-		    where a.id=#{id} or (b.id=#{id} and privacy=0)
-		    ) aa
-		left join attachtest c
-		on aa.no = c.no
-		order by aa.no asc
--->
-<!-- 리팩토링 4 : 위코드로 실행시 중복되는 컬럼의 컬럼명이 찾기 힘들었다 sql developer에서 컬럼명이 qcsj_c00000000400000이런식으로 나와서 곤란했다.
-	그래서 다시 고쳤다. 0613/오전 12:20
-	a.followid는 min이 팔로우한 사람의 아이디, b.id는 게시물을 작성한 사람의 id
-	즉 내가 팔로우한 사람의 게시물만 볼수 있고 게시물의 공개여부가 공개상태여야 한다 where절 a.id=min and b.privacy=1
-	만약 게시물작성자가 나라면 공개여부 비공개글도 볼수있다 where절 b.id=min and (b.privacy=0 or b.privacy=1)
-	
-		select distinct a.followid, b.no, b.id, b.cont, b.show, b.privacy, b.p_date, c.filename
-	    from followtest a
-	    right join posttest b
-	    on a.followid = b.id
-	    left join attachtest c
-	    on b.no = c.no
-	    where (a.id='min' and b.privacy=1) or (b.id='min' and (b.privacy=0 or b.privacy=1))
-	    order by b.no asc
-	    ;
-
-
- -->
- <!-- 
- 
- 		select distinct a.followid, b.no, b.id, b.cont, b.show, b.privacy, b.p_date, c.filename
-	    from followtest a
-	    right join posttest b
-	    on a.followid = b.id
-	    left join attachtest c
-	    on b.no = c.no
-	    where (a.id=#{id} and b.privacy=1) or (b.id=#{id} and (b.privacy=0 or b.privacy=1))
-	    order by b.no asc
- 
-  -->
-  <!-- VO를 통일하자.. 결국 쿼리는 두개로 나눠 써야겠다
- 
- 		select distinct b.no ,a.followid, b.id, b.cont, b.show, b.privacy, b.p_date
-	    from followtest a
-	    right join (select distinct * from posttest) b
-	    on a.followid = b.id
-	    left join (select no from attachtest group by no) c
-	    on b.no = c.no
-	    where (a.id= #{id} and b.privacy=1) or (b.id= #{id} and (b.privacy=0 or b.privacy=1))
-	    order by b.no asc
- 
-  -->

@@ -30,15 +30,20 @@ public class FollowListService implements IF_FollowListService{
 	public List<ProfileVO> getFollowingsProfile(String id) throws Exception {
 		return fdao.getFollowingsProfile(id);
 	}
-
+	
 	@Override
-	public void unfollow(FollowVO fvo) throws Exception {
-		fdao.unfollow(fvo);
+	public List<String> getFollowingsId(String id) throws Exception {
+		return fdao.getFollowingsId(id);
 	}
 
 	@Override
-	public void follow(FollowVO fvo) throws Exception {
-		fdao.follow(fvo);
+	public int unfollow(FollowVO fvo) throws Exception {
+		return fdao.unfollow(fvo);
+	}
+
+	@Override
+	public int follow(FollowVO fvo) throws Exception {
+		return fdao.follow(fvo);
 	}
 
 	//팔로잉 수를 세는 메서드

@@ -1,7 +1,6 @@
 body {
     width: auto;
     margin: 0px;
-    overflow-y: auto;
     -webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
@@ -34,15 +33,6 @@ body {
     padding: 15px;
 }
 
-/* 화면 왼쪽 상단 CREATE 텍스트 */
-#cur-title {
-    display: block;
-    height: fit-content;
-    margin-top: 65px;
-    margin-left: 50px;
-    font-size: 25px;
-}
-
 
 
 
@@ -52,33 +42,30 @@ body {
     margin: 32px auto 0px auto;
     padding: 5px;
     width: 90%;
-    min-height: 60vmin;
+    min-height: 50vmin;
     border-radius: 15px;
     position: relative;
     border: 3px solid #ff00bf;
 }
-
 /* 글 작성 영역 */
 #create-post-cont {
     width: 99.5%;
     background-color: transparent;
-    border: none;
     border-radius: 15px 15px 0px 0px / 15px 15px 0px 0px;
+    border: none;
     resize: none;
     font-size: 23px;
 }
-
-
-
 /* 글 작성 영역 클릭했을 때 디자인 바뀌지 않도록 */
 #create-post-cont:focus {
     outline: none;
 }
-
 /* 글 작성 영역 스크롤바 숨김 */
 #create-post-cont::-webkit-scrollbar {
     background-color: transparent;
 }
+
+
 
 /* 사진 표시되는 영역 div */
 #create-post-attach {
@@ -88,74 +75,47 @@ body {
     height: fit-content;
     padding: 0px;
 }
-
-
-
-/* 사진 더하는 영역 div */
-#attach-add {
-    display: inline-block;
-    text-align: center;
-    width: fit-content;
-    height: fit-content;
-    padding-top: 10px;
-    padding-left: 10px;
-    font-size: 25px;
-    position: absolute;
-    bottom: 11px;
-}
-#attach-add:hover {
-    cursor: pointer;
-}
-
-/* 사진 더하는 영역의 input file 디자인 */
-#attach-add label {
-    display: inline-block;
-    width: 100%;
-    height: 100%;
+/* 사진 하나의 div */
+.attach-one-div {
+    width: 125px;
+    height: 125px;
+    border: 1px solid grey;
     border-radius: 15px;
-    cursor: pointer;
-}
-#attach-add label input[type=file] {
-    display: none;
-}
-#attach-add label svg {
-    color: #00f7ff;
-}
-
-/* 추가된 각 사진 영역 div */
-.create-post-attach-one {
-    display: inline-block;
-    text-align: center;
-    width: 19.7%;
-    height: 200px;
-    border-radius: 15px;
-    overflow: hidden;
     position: relative;
+    overflow: hidden;
 }
-
-/* 추가된 사진 영역의 img */
-.create-post-attach-one img {
+.attach-one-div label {
+    display: inline-block;
+    width: inherit;
+    height: inherit;    
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+}
+label img {
     position: absolute;
     top: 0;
     left: 0;
-    width: 95%;
-    height: 100%;
-    border-radius: 15px;
 }
+input[type=file] {
+    visibility: hidden;
+}
+
+
+
+
+
 
 /* 사진 오른쪽 위 삭제 버튼 */
 .delAttach {
     position: absolute;
-    z-index: 1;
-    top: 10px;
-    right: 15px;
-    border-radius: 100px;
-    width: 30px;
-    height: 30px;
+    z-index: 10;
+    top: 7px;
+    right: 10px;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
     text-align: center;
-    border: none;
-}
-.delAttach:hover {
     cursor: pointer;
 }
 
@@ -175,7 +135,7 @@ body {
     height: fit-content;
     margin-top: 10px;
 }
-/* input radio label */
+/* 게시물 공개 여부 라디오 버튼 */
 .privacy-label {
     margin-left: 15px;
 }

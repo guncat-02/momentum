@@ -1,6 +1,8 @@
 package controller;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import service.IF_JoinService;
 import service.IF_LoginService;
 import service.IF_ProfileService;
+import util.CookieUtil;
 import vo.MemberVO;
 
 @Controller
@@ -30,6 +33,15 @@ public class LoginController {
 
 	@Inject
 	IF_ProfileService pServe;
+	
+	// 소스 수정 24.06.19 우승훈.
+	// 테마 변경 기능에 cookie 활용 위한 수정 진행.
+	// 소스 수정 시작.
+	
+	// cookie 생성, 조회, 삭제, 클리어 method 정의한 controller.
+	// util.CookieUtil
+	@Inject
+	CookieUtil cookieUtil;
 
 	@GetMapping("/loginpage")
 	public String loginpage(Model model) throws Exception {
@@ -39,7 +51,7 @@ public class LoginController {
 
 	@PostMapping("loginchk")
 	public String login(@RequestParam("id") String id, @RequestParam("pass") String pass, HttpSession session,
-			RedirectAttributes rt) throws Exception {
+			RedirectAttributes rt, HttpServletRequest req, HttpServletResponse res) throws Exception {
 		if (id == "") {
 			rt.addFlashAttribute("msg", "아이디 또는 비밀번호를 입력하세요.");
 			return "redirect:loginpage";
@@ -51,6 +63,21 @@ public class LoginController {
 		MemberVO mvo = lservice.loginser(id);
 
 		if(mvo.getPass().equals(pass)) {
+			
+			// 테마 경로를 쿠키에 저장하고, view에서 활용.
+			// 기존의 cookie가 있을 경우 유효 기간 갱신, 그렇지 않을 경우 생성.
+			// cookie 관련 기능 동작 위해 현재 method에 매개변수로
+			// HttpServletRequest와 HttpServletResponse 추가.
+
+			// 기존 cookie value 저장.
+			String cookieVal = cookieUtil.getCookie(req, "curTheme");
+			if (cookieVal == null) { // 해당 cookie가 없거나 만료되었을 경우.
+				// 새로운 cookie 생성. 기본으로 다크테마 적용.
+				cookieUtil.setCookie(res, "curTheme", "0");
+			} else { // 해당 cookie가 존재할 경우.
+				// 해당 cookie 유효 기간 갱신.
+				cookieUtil.setCookie(res, "curTheme", cookieVal);
+			}
 			
 			if (mvo.getAdmin() != null) {
 				if (session.getAttribute("userid") != null) {
