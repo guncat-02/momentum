@@ -237,7 +237,8 @@
 				if(data != "null") {
 					alert("인증번호 발송이 완료되었습니다. 입력한 이메일에서 확인 해주십시오.");
 					code = data;
-					$("#emailhid").val(email);	
+					$("#emailhid").val(email);
+					console.log(code);
 				}else {
 					alert("중복된 이메일입니다.");
 				}

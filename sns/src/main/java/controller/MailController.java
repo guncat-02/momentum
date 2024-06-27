@@ -37,7 +37,7 @@ public class MailController {
 			request.setCharacterEncoding("utf-8");
 			response.setContentType("text/html;charset=utf-8");
 			mailService.sendMail(email,"Momentum 이메일 인증","인증번호: "+code);
-			
+			System.out.println(code);
 		}
 		else {
 			code="null";
