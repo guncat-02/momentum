@@ -1,6 +1,5 @@
 package controller;
 
-import java.io.IOException;
 import java.util.HashMap;
 
 import javax.inject.Inject;
@@ -45,12 +44,6 @@ public class PostingController {
 		pservice.insertPost(pvo);
 		return "redirect:main";
 	}
-	
-	@GetMapping("/c_like")
-	public void c_like(@RequestParam("no") String no) {
-		/* pservice.c_like(no); */
-	}
-	
 	
 	@GetMapping("/reposting")
 	public String reposting(@RequestParam("no")int no, Model model) throws Exception {

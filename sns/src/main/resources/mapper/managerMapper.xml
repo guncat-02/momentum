@@ -4,28 +4,55 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.IF_ManagerDao">
 
-	<select id="selectAllMembers" resultType="vo.MemberVO">
+	<select id="selectAllMembers" parameterType="vo.PageVO" resultType="vo.MemberVO">
+		select a.* from (
+		select sub.*, rownum as rn from (
 		select * from memberTest order by id
+		) sub
+		) a
+		where rn between #{startNo} and #{endNo}
 	</select>
 	
-	<select id="selectAllProfiles" resultType="vo.ProfileVO">
+	<select id="selectAllProfiles" parameterType="vo.PageVO" resultType="vo.ProfileVO">
+		select a.* from (
+		select sub.*, rownum as rn from (
 		select * from profileTest order by id
+		) sub
+		) a
+		where rn between #{startNo} and #{endNo}
 	</select>
 	
-	<select id="selectAllPosts" resultType="vo.PostVO">
+	<select id="selectAllPosts" parameterType="vo.PageVO" resultType="vo.PostVO">
+		select a.* from (
+		select sub.*, rownum as rn from (
 		select * from postTest order by no desc
+		) sub
+		) a
+		where rn between #{startNo} and #{endNo}
 	</select>
 	
-	<select id="selectAllComms" resultType="vo.CommVO">
+	<select id="selectAllComms" parameterType="vo.PageVO" resultType="vo.CommVO">
+		select a.* from (
+		select sub.*, rownum as rn from (
 		select * from commTest order by c_no desc
+		) sub
+		) a
+		where rn between #{startNo} and #{endNo}
 	</select>
 	
-	<select id="selectAllAdmins" resultType="vo.MemberVO">
+	<select id="selectAllAdmins" parameterType="vo.PageVO" resultType="vo.MemberVO">
+		select a.* from (
+		select sub.*, rownum as rn from (
 		select * from memberTest where admin is not null order by id
+		) sub
+		) a
+		where rn between #{startNo} and #{endNo}
 	</select>
 	
 	
-	<select id="selectMembersWhere" parameterType="vo.ManagerVO" resultType="vo.MemberVO">
+	<select id="selectMembersWhere" parameterType="vo.PageVO" resultType="vo.MemberVO">
+		select a.* from (
+		select sub.*, rownum as rn from (
 		select * from memberTest where 
 		<if test="searchLoc == 'admin'">
 			admin is not null and
@@ -38,10 +65,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				b_date between #{stDate} and #{ndDate} order by b_date
 			</when>
 		</choose>
-
+		) sub
+		) a
+		where rn between #{startNo} and #{endNo}
 	</select>
 
-	<select id="selectProfilesWhere" parameterType="vo.ManagerVO" resultType="vo.ProfileVO">
+	<select id="selectProfilesWhere" parameterType="vo.PageVO" resultType="vo.ProfileVO">
+		select a.* from (
+		select sub.*, rownum as rn from (
 		select * from profileTest where 
 		<choose>
 			<when test="searchType == 'id'">
@@ -52,9 +83,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</when>
 		</choose>
 		order by id
+		) sub
+		) a
+		where rn between #{startNo} and #{endNo}
 	</select>
 	
-	<select id="selectPostsWhere" parameterType="vo.ManagerVO" resultType="vo.PostVO">
+	<select id="selectPostsWhere" parameterType="vo.PageVO" resultType="vo.PostVO">
+		select a.* from (
+		select sub.*, rownum as rn from (
 		select * from postTest where
 		<choose>
 			<when test="searchType == 'id'">
@@ -68,9 +104,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</when>
 		</choose>
 		order by no desc
+		) sub
+		) a
+		where rn between #{startNo} and #{endNo}
 	</select>
 	
-	<select id="selectCommsWhere" parameterType="vo.ManagerVO" resultType="vo.CommVO">
+	<select id="selectCommsWhere" parameterType="vo.PageVO" resultType="vo.CommVO">
+		select a.* from (
+		select sub.*, rownum as rn from (
 		select * from commTest where
 		<choose>
 			<when test="searchType == 'id'">
@@ -84,6 +125,79 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</when>
 		</choose>
 		order by c_no desc
+		) sub
+		) a
+		where rn between #{startNo} and #{endNo}
 	</select>
 
+
+	<select id="selectAllCounts" parameterType="vo.PageVO" resultType="_int">
+		select count(*) from
+		<choose>
+			<when test="searchLoc == 'admin'">
+				memberTest where admin is not null
+			</when>
+			<otherwise>
+				${searchLoc}Test
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="selectMemberCountWhere" parameterType="vo.PageVO" resultType="_int">
+		select count(*) from memberTest where
+		<choose>
+			<when test="searchType == 'id'">
+				id like '%'||#{searchWord}||'%'
+			</when>
+			<when test="searchType == 'period'">
+				b_date between #{stDate} and #{ndDate}
+			</when>
+		</choose>
+		<if test="searchLoc == 'admin'">
+			and admin is not null
+		</if>
+	</select>
+	
+	<select id="selectProfileCountWhere" parameterType="vo.PageVO" resultType="_int">
+		select count(*) from profileTest where
+		<choose>
+			<when test="searchType == 'id'">
+				id like '%'||#{searchWord}||'%'
+			</when>
+			<when test="searchType == 'cont'">
+				bio like '%'||#{searchWord}||'%'
+			</when>
+		</choose>
+	</select>
+	
+	<select id="selectPostCountWhere" parameterType="vo.PageVO" resultType="_int">
+		select count(*) from postTest where
+		<choose>
+			<when test="searchType == 'id'">
+				id like '%'||#{searchWord}||'%'
+			</when>
+			<when test="searchType == 'cont'">
+				cont like '%'||#{searchWord}||'%'
+			</when>
+			<when test="searchType == 'period'">
+				p_date between #{stDate} and #{ndDate}
+			</when>
+		</choose>
+	</select>
+	
+	<select id="selectCommCountWhere" parameterType="vo.PageVO" resultType="_int">
+		select count(*) from commTest where
+		<choose>
+			<when test="searchType == 'id'">
+				id like '%'||#{searchWord}||'%'
+			</when>
+			<when test="searchType == 'cont'">
+				c_cont like '%'||#{searchWord}||'%'
+			</when>
+			<when test="searchType == 'period'">
+				c_date between #{stDate} and #{ndDate}
+			</when>
+		</choose>
+	</select>
+	
 </mapper>

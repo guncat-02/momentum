@@ -44,6 +44,11 @@ public class ManagerVO {
 	public void setNdDate(String ndDate) {
 		this.ndDate = ndDate;
 	}
+	@Override
+	public String toString() {
+		return "ManagerVO [searchLoc=" + searchLoc + ", searchType=" + searchType + ", searchWord=" + searchWord
+				+ ", stDate=" + stDate + ", ndDate=" + ndDate + "]";
+	}
 
 	
 	

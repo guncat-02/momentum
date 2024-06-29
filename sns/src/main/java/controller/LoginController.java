@@ -102,7 +102,6 @@ public class LoginController {
 				session.setAttribute("username", mvo.getName());
 				session.setAttribute("nickName", pServe.matchId(mvo.getId()));
 				
-				
 				return "redirect:main";
 			}
 		}else {
@@ -122,9 +121,9 @@ public class LoginController {
 	}
 
 	@GetMapping("logout")
-	public String logout(HttpSession session) {
+	public String logout(HttpSession session, HttpServletResponse res) {
 		session.invalidate();
-		
+		cookieUtil.removeCookie(res, "curTheme");
 		return "redirect:/loginpage";
 	}
 

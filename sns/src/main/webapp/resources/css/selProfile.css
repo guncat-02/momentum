@@ -1,0 +1,55 @@
+body {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bolder;
+    -webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#selectProfileTitle {
+    margin-top: 5%;
+    text-align: center;
+}
+
+#selectProfileTitle span {
+    font-size: 50px;
+    color: #ff00bf;
+    text-shadow: #00f7ff 3px 3px;
+}
+
+#selectProfileTitle p {
+    font-size: 15px;
+}
+
+#selectProfile {
+    margin-top: 3%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.selectProfileCircle {
+    width: 350px;
+    height: 350px;
+    border: 2px solid #ff00bf;
+    border-radius: 50%;
+}
+
+.selectProfileNick {
+    margin-top: 3%;
+    font-size: 25px;
+    text-align: center;
+    color: #00f7ff;
+}
+
+.selectProfileCircle img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.selProfile {
+    cursor: pointer;
+}

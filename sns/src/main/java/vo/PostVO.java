@@ -13,14 +13,6 @@ public class PostVO {
 	private String id; //작성자 id
 	private String p_date; //글 작성일
 	
-	
-	@Override
-	public String toString() {
-		return "PostVO [no=" + no + ", re_no=" + re_no + ", cont=" + cont + ", show=" + show + ", filename="
-				+ Arrays.toString(filename) + ", privacy=" + privacy + ", c_block=" + c_block + ", id=" + id
-				+ ", p_date=" + p_date + "]";
-	}
-	
 	//getter
 	public int getNo() {
 		return no;
@@ -77,5 +69,11 @@ public class PostVO {
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	@Override
+	public String toString() {
+		return "PostVO [no=" + no + ", re_no=" + re_no + ", cont=" + cont + ", show=" + show + ", filename="
+				+ Arrays.toString(filename) + ", privacy=" + privacy + ", c_block=" + c_block + ", id=" + id
+				+ ", p_date=" + p_date + "]";
 	}
 }

@@ -23,4 +23,7 @@ public interface IF_FollowListDao {
 	
 	public int followerSelect(String id) throws Exception;
 
+	public List<ProfileVO> followingList(String id) throws Exception;
+	
+	public List<ProfileVO> followerList(String id) throws Exception;
 }

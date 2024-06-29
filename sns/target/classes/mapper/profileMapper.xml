@@ -9,14 +9,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <select id="chk" resultType="int">
 	select count(nickname) from profileTest where nickname = #{nickName}
 </select>
-<select id="select" resultType="vo.ProfileVO">
+<select id="select" resultType="vo.ProfileVO" parameterType="String">
 	select * from profileTest where p_main = 1 and id = #{id}
 </select>
 <update id="update" parameterType="vo.ProfileVO">
-	update profileTest set id = #{id}, nickName = #{nickName}, photo = #{photo, jdbcType=VARCHAR}, tel = #{tel, jdbcType=VARCHAR}, bio = #{bio, jdbcType=VARCHAR}, privacy = #{privacy} where id = #{id}
+	update profileTest set nickName = #{nickName}, photo = #{photo, jdbcType=VARCHAR}, tel = #{tel, jdbcType=VARCHAR}, bio = #{bio, jdbcType=VARCHAR}, privacy = #{privacy} where id = #{id}
 </update>
-<select id="matchId" resultType="String">
+<select id="matchId" resultType="String"  parameterType="String">
 	select nickName from profileTest where id = #{id} and p_main =1
 </select>
-
+<select id="selectProfile" resultType="vo.ProfileVO" parameterType="String">
+	select * from profileTest where id = #{id}
+</select>
+<select id="profileList" resultType="vo.ProfileVO" parameterType="java.util.List">
+	select * from profileTest where nickName in
+		<foreach collection="list" item="item" separator="," open="(" close=")">
+			#{item}
+		</foreach>
+</select>
 </mapper>
