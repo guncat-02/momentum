@@ -16,22 +16,36 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import service.IF_CommService;
 import service.IF_MainService;
+import service.IF_ProfileService;
 import vo.PostVO;
 
 @Controller
 @EnableAsync
 public class MainController {
 	@Inject
-	IF_MainService mainSer;
-	
+	IF_MainService mser;
 	@Inject
 	IF_CommService cser;
+	@Inject
+	IF_ProfileService pser;
 
 	@GetMapping("main")
 	public String mint(Model model, HttpSession session) throws Exception {
 
-		List<PostVO> attachList = mainSer.attachAll();
+		List<PostVO> attachList = mser.attachAll();
+		for(PostVO pvo : attachList) {
+			int ccnt = mser.takeCommCnt(pvo.getNo());
+			int p_love = mser.takeP_loveCnt(pvo.getNo());
+			int reCnt = mser.takeReCnt(pvo.getNo());
+			// 해당 글의 댓글 수
+			pvo.setCommCnt(ccnt);
+			// 해당 글의 좋아요 수
+			pvo.setP_love(p_love);
+			// 해당 글의 리포스트 수
+			pvo.setReCnt(reCnt);
+		}
 		model.addAttribute("aList", attachList);
+		model.addAttribute("profilelist",pser.allprofileList());
 		return "main";
 	}
 
@@ -40,7 +54,7 @@ public class MainController {
 		// 해당 포스트 글번호의 댓글 리스트 
 			model.addAttribute("commlist",cser.CommList(postvo.getNo())); 
 			model.addAttribute("Commcnt", cser.cntComm(postvo.getNo()));
-			model.addAttribute("postvo", mainSer.takePostVO(no));
+			model.addAttribute("postvo", mser.takePostVO(no));
 	
 		
 		
@@ -51,6 +65,6 @@ public class MainController {
 	@GetMapping("p_show")
 	@ResponseBody
 	public void p_show(@RequestParam("no") int no) throws Exception {
-		mainSer.p_show(no);
+		mser.p_show(no);
 	}
 }

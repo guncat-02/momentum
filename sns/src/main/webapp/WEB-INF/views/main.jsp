@@ -30,24 +30,19 @@
 		</div>
 		<div class="myPost">
 		<c:forEach items="${aList}" var="mp">
-		
-		
 		<c:set var="filenameLength" value="${fn:length(mp.filename)}" />
 			<div class="p_inf">
-			<a href="userprofile?id=${mp.id}" onclick="alert("아아")">
-				<div class="proimg">
-				<c:choose>
-					<c:when test ="${ !empty profile.photo }">
-						<img class="profileImg" src="download?filename=${profile.photo }">
-					</c:when>
-					<c:otherwise>
+			<a href="userprofile?id=${mp.id}" class ="userprofilealink">
+			<div class="proimg">
 						<img class="profileImg" src="./resources/img/프로필.png">
-					</c:otherwise>
-					
-				</c:choose>
-					
-				</div>
+				<c:forEach items="${profilelist }" var ="pr">
+					<c:if test="${mp.id eq pr.id }">			
+						<img class="profileImg" src="download?filename=${pr.photo }">					
+					</c:if>
+				</c:forEach>
+			</div>
 				<span class="p_id">${mp.id }</span></a> <span class="p_date">${mp.p_date} </span>
+				
 			</div>
 			
 			<a href="myPost?no=${mp.no}" style="cursor:pointer;" class = "p_alink" onclick="p_show(${mp.no})">
@@ -136,25 +131,25 @@
 			</c:choose> 
 		</a>
 	
-			
+			<input type="hidden" value = "0" class="p_love${mp.no}">
 			<div class="mpfooter">
 				<div>
-					<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+					<button type="button" class="p_lovebut${mp.no }"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
   <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314" />
-</svg>
-					<span class="footspan">${mp.show}</span>
+</svg></button>
+					<span class="footspan">${mp.p_love}</span>
 				</div>
 				<div>
 					<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-chat-right-dots-fill" viewBox="0 0 16 16">
   <path d="M16 2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h9.586a1 1 0 0 1 .707.293l2.853 2.853a.5.5 0 0 0 .854-.353zM5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0m3 1a1 1 0 1 1 0-2 1 1 0 0 1 0 2" />
 </svg>
-					<span class="footspan">${mp.show}</span>
+					<span class="footspan">${mp.commCnt}</span>
 				</div>
 				<div>
 					<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-share" viewBox="0 0 16 16">
   <path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.5 2.5 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5m-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3m11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3" />
 </svg>
-					<span class="footspan">${mp.show}</span>
+					<span class="footspan">${mp.reCnt}</span>
 				</div>
 				<div>
 					<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
@@ -174,8 +169,10 @@
 </div>
 </body>
 <script>
+
+	
 	// 게시물 좋아요 누르기
-	function p_love() {
+	function p_love(no) {
 		
 	}
 	// 게시물 조회수 +1 

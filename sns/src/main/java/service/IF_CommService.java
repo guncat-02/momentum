@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import vo.CommVO;
+import vo.PostVO;
 
 public interface IF_CommService {
 
@@ -39,6 +40,12 @@ public interface IF_CommService {
 	public List<Integer> mycomm(HashMap<String, Object> params) throws Exception;
 	// 해당 댓글 삭제
 	public void delcomm(int c_no) throws Exception;
+	// 내가 쓴 댓글 리스트
+	public List<CommVO> myCommList(String id) throws Exception;
+	// 내가 쓴 댓글의 글 정보 리스트
+	public List<PostVO> mycpList(String id) throws Exception;
+	// 내가 쓴 댓글 개수
+	public int mycommcnt(String id) throws Exception;
 	
 	
 }

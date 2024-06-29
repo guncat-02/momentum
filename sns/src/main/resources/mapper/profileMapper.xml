@@ -27,4 +27,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			#{item}
 		</foreach>
 </select>
+<!-- 프로필 사진이 있는 프로필 리스트만 개져오기 -->
+<select id ="allprofileList" resultType="vo.ProfileVO">
+	select * from profileTest where photo is not null
+</select>
 </mapper>

@@ -12,10 +12,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<!-- 좋아요 누른 글 리스트 -->
 	<select id="lovePostList" resultType="vo.PostVO" parameterType="String">
-		select posttest.* from posttest left join p_lovetest on posttest.no = p_lovetest.no where p_lovetest.id = #{id}
+		select posttest.* from posttest left join p_lovetest on posttest.no = p_lovetest.no where p_lovetest.id = #{id} order by p_date desc
 	</select>
 	<select id="takePostVO" resultType="vo.PostVO" parameterType="int">
-		select * from posttest where no = #{no}
+		select * from posttest where no = #{no} order by p_date desc
 	</select>
 	<select id="attachList" resultType="vo.PostVO">
 		select * from attachtest
@@ -26,7 +26,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="postLength" resultType="int" parameterType="String">
 		select count(*) from posttest where id = #{id}
 	</select>
+	<!-- 글의 댓글 개수 -->
+	<select id= "takeCommCnt" parameterType = "int" resultType= "int">
+		select count(*) from commtest where no = #{no}
+	</select>
+	<!-- 글의 좋아요 개수 -->
+	<select id= "takeP_loveCnt" parameterType = "int" resultType= "int">
+		select count(*) from p_lovetest where no = #{no}
+	</select>
+	<!-- 글의 리포스트 개수 -->
+	<select id= "takeReCnt" parameterType = "int" resultType= "int">
+		select count(*) from posttest where re_no = #{no}
+	</select>
 	<update id = "p_show" parameterType="int">
-		update posttest set show = show+1 where no = #{no}
+		update posttest set show = show+1 where no = #{no} 
 	</update>
 </mapper>

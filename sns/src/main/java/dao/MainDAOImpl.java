@@ -62,7 +62,23 @@ public class MainDAOImpl implements IF_MainDAO{
 		// TODO Auto-generated method stub
 		sqlsession.update(mapperQuery+".p_show",no);
 	}
+	@Override
+	public int takeCommCnt(int no) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlsession.selectOne(mapperQuery+".takeCommCnt",no);
+	}
 
+	@Override
+	public int takeP_loveCnt(int no) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlsession.selectOne(mapperQuery+".takeP_loveCnt",no);
+	}
+
+	@Override
+	public int takeReCnt(int no) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlsession.selectOne(mapperQuery+".takeReCnt",no);
+	}
 	
 
 	

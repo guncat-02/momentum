@@ -20,5 +20,11 @@ public interface IF_MainService {
 	public List<PostVO> lovePostList(String id) throws Exception;
 	// 게시물 조회수
 	public void p_show(int no) throws Exception;
+	// 글의 댓글 개수
+	public int takeCommCnt(int no) throws Exception;
+	// 글의 좋아요 개수
+	public int takeP_loveCnt(int no) throws Exception;
+	// 글의 리포스트 개수
+	public int takeReCnt(int no) throws Exception;
 	
 }

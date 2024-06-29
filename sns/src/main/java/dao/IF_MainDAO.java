@@ -20,6 +20,12 @@ public interface IF_MainDAO {
 	public List<PostVO> lovePostList(String id) throws Exception;
 
 	public void p_show(int no) throws Exception;
+
+	public int takeCommCnt(int no) throws Exception;
+	
+	public int takeP_loveCnt(int no) throws Exception;
+
+	public int takeReCnt(int no) throws Exception;
 	
 	
 	

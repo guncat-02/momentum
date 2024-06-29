@@ -31,7 +31,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id = "dislikeCommList" resultType="vo.CommVO" parameterType="int">
 		select * from commtest where no = #{no} order by c_dislike DESC
 	</select>
-	
+	<select id = "cntComm" resultType="int" parameterType="int">
+		select count(c_no) from commtest where no = #{no}
+	</select>
 	<select id = "takeComm" resultType="vo.CommVO" parameterType="vo.CommVO">
 		select * from commtest where no = #{no} ORDER BY c_date DESC
 	</select> 
@@ -39,10 +41,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id = "CommList" resultType="vo.CommVO" parameterType="int">
 		select * from commtest where no = #{no} ORDER BY c_date DESC
 	</select> 
-	
-	<select id = "cntComm" resultType="int" parameterType="int">
-		select count(c_no) from commtest where no = #{no}
-	</select>
 	<!-- 해당 글의 댓글 들 중 세션 아이디가 좋아요 누른 댓글 번호 -->  
 	<select id = "chklike" parameterType="hashmap" resultType = "int">
 		select c_liketest.c_no from commtest inner join c_liketest on 
@@ -57,7 +55,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id = "mycomm" parameterType="hashmap" resultType = "int">
 		select c_no from commtest where id = #{id} and no = #{no}
 	</select>
-	
+	<!-- 내가 쓴 댓글 리스트 -->
+	<select id = "myCommList" parameterType="String" resultType="vo.CommVO">
+		select * from commtest where id = #{id}
+	</select>
+	<select id = "mycpList" parameterType="String" resultType="vo.PostVO">
+		select * from posttest where no in (select no from commtest where id = #{id}) order by p_date desc
+	</select>
+	<select id = "mycommcnt" parameterType="String" resultType="int">
+		select count(*) from commtest where id = #{id}
+	</select>
 	<delete id="cancelcommlike" parameterType="vo.CommVO">
 		delete from c_liketest where c_no = #{c_no} and id = #{id}
 	</delete>

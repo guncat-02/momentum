@@ -132,3 +132,18 @@ body {
 	color: inherit;
 	cursor: pointer;
 }
+.userprofilealink {
+	text-decoration: none;
+  	cursor: pointer;
+}
+
+
+[class*="p_lovebut"] {
+	border: 0;
+ 	background-color: transparent;
+	color: white;
+}
+[class*="p_lovebut"]:hover {
+      color:red;
+      transition: 0.7s;
+  }

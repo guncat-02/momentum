@@ -184,13 +184,13 @@
 					<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
   <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314" />
 </svg>
-					<span class="footspan">${mp.show}</span>
+					<span class="footspan">좋아요 수</span>
 				</div>
 				<div>
 					<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-chat-right-dots-fill" viewBox="0 0 16 16">
   <path d="M16 2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h9.586a1 1 0 0 1 .707.293l2.853 2.853a.5.5 0 0 0 .854-.353zM5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0m3 1a1 1 0 1 1 0-2 1 1 0 0 1 0 2" />
 </svg>
-					<span class="footspan">${mp.show}</span>
+					<span class="footspan">${mp.commCnt}</span>
 				</div>
 				<div>
 					<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-share" viewBox="0 0 16 16">
@@ -227,7 +227,7 @@
     window.onload = function() {
         const img = document.querySelector('.proImg');
         const photo = document.querySelector('#photo');
-         
+  
         if(photo.value != "" && photo.value != null) {
             img.src = "download?filename="+photo.value;
         } else {

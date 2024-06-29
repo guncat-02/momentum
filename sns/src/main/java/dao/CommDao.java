@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import vo.CommVO;
+import vo.PostVO;
 
 @Repository
 public class CommDao implements IF_CommDao {
@@ -128,5 +129,24 @@ public class CommDao implements IF_CommDao {
 		// TODO Auto-generated method stub
 		sqlSession.delete(mapperQuery + ".delcomm", c_no);
 	}
+	// 내 댓글 리스트
+	@Override
+	public List<CommVO> myCommList(String id) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(mapperQuery + ".myCommList", id);
+	}
+	// 내가 쓴 댓글의 글 정보 리스트
+	@Override
+	public List<PostVO> mycpList(String id) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(mapperQuery + ".mycpList", id);
+	}
+
+	@Override
+	public int mycommcnt(String id) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(mapperQuery + ".mycommcnt", id);
+	}
+
 
 }

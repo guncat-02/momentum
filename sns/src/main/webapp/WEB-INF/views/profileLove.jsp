@@ -71,7 +71,7 @@
 		</div>
 	</div>
 	<div id="myMenu" class="theme">
-		<input type="button" class="myMenuItem theme" value="POST" onclick="postbut()"> <input type="button" class="myMenuItem theme" value="REPOST" onclick="repostbut()"> <input type="button" class="myMenuItem theme" value="COMMENT" onclick="commentbut()"> <input type="button" class="myMenuItem theme" value="MEDIA" onclick="mediabut()"> <input type="button" class="myMenuItem theme" value="LOVE">
+		<input type="button" class="myMenuItem theme" value="POST" onclick="postbut('${profile.id}')"> <input type="button" class="myMenuItem theme" value="REPOST" onclick="repostbut('${profile.id}')"> <input type="button" class="myMenuItem theme" value="COMMENT" onclick="commentbut('${profile.id}')"> <input type="button" class="myMenuItem theme" value="MEDIA" onclick="mediabut('${profile.id}')"> <input type="button" class="myMenuItem theme" value="LOVE" onclick="lovebut('${profile.id}')">
 	</div>
 	<div class="myPost">
 	<c:choose>
@@ -82,17 +82,13 @@
 			<a href="myPost?no=${mp.no}" style="cursor:pointer;" class = "p_alink" onclick="p_show(${mp.no})">
 			<div class="p_inf">
 				<div class="proimg">
-				<c:choose>
-					<c:when test ="${ !empty profile.photo }">
-						<img class="profileImg" src="download?filename=${profile.photo }">
-					</c:when>
-					<c:otherwise>
 						<img class="profileImg" src="./resources/img/프로필.png">
-					</c:otherwise>
-					
-				</c:choose>
-					
-				</div>
+				<c:forEach items="${profilelist }" var ="pr">
+					<c:if test="${mp.id eq pr.id }">			
+						<img class="profileImg" src="download?filename=${pr.photo }">					
+					</c:if>
+				</c:forEach>
+			</div>
 				<span class="p_id">${mp.id }</span> <span class="p_date">${mp.p_date} </span>
 			</div>
 			<!-- 프로필 아이디 -->
@@ -193,7 +189,7 @@
 					<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-chat-right-dots-fill" viewBox="0 0 16 16">
   <path d="M16 2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h9.586a1 1 0 0 1 .707.293l2.853 2.853a.5.5 0 0 0 .854-.353zM5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0m3 1a1 1 0 1 1 0-2 1 1 0 0 1 0 2" />
 </svg>
-					<span class="footspan">${mp.show}</span>
+					<span class="footspan">${mp.commCnt}</span>
 				</div>
 				<div>
 					<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-share" viewBox="0 0 16 16">
@@ -243,19 +239,20 @@
         }
     }
 
-    function postbut() {
-    	 location.href = "profileShow";
-    }
-    function commentbut() {
-    	location.href = "profileComment";
-    }
-    
-    function mediabut() {
-   	 	location.href = "profileMedia";
+    function postbut(id) {
+    	console.log(id+"post");
+   	 location.href = "profileShow?id="+id;
    }
-    function lovebut() {
-   	 	location.href = "profileLove";
+   function commentbut(id) {
+	   console.log(id+"comm");
+   	location.href = "profileComment?id="+id;
    }
+   function mediabut(id) {
+  	 	location.href = "profileMedia?id="+id;
+  }
+   function lovebut(id) {
+  	 	location.href = "profileLove?id="+id;
+  }
      
     function p_show(no) {
 		$.ajax({

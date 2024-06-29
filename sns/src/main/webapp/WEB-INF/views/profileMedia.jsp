@@ -69,7 +69,7 @@
 		</div>
 	</div>
 	<div id="myMenu" class="theme">
-		<input type="button" class="myMenuItem theme" value="POST" onclick="postbut()"> <input type="button" class="myMenuItem theme" value="REPOST" onclick="repostbut()"> <input type="button" class="myMenuItem theme" value="COMMENT" onclick="commentbut()"> <input type="button" class="myMenuItem theme" value="MEDIA" onclick="mediabut()"> <input type="button" class="myMenuItem theme" value="LOVE" onclick="lovebut()">
+		<input type="button" class="myMenuItem theme" value="POST" onclick="postbut('${profile.id}')"> <input type="button" class="myMenuItem theme" value="REPOST" onclick="repostbut('${profile.id}')"> <input type="button" class="myMenuItem theme" value="COMMENT" onclick="commentbut('${profile.id}')"> <input type="button" class="myMenuItem theme" value="MEDIA" onclick="mediabut('${profile.id}')"> <input type="button" class="myMenuItem theme" value="LOVE" onclick="lovebut('${profile.id}')">
 	</div>
 	<div class="media">
 		<div class="m_intro">
@@ -144,18 +144,18 @@
         }
     }
 
-    function postbut() {
-   	 location.href = "profileShow";
+    function postbut(id) {
+   	 location.href = "profileShow?id="+id;
    }
-    function commentbut() {
-    	location.href = "profileComment";
+    function commentbut(id) {
+    	location.href = "profileComment?id="+id;
     }
    
-   function mediabut() {
-  	 	location.href = "profileMedia";
+   function mediabut(id) {
+  	 	location.href = "profileMedia?id="+id;
   }
-   function lovebut() {
-  	 	location.href = "profileLove";
+   function lovebut(id) {
+  	 	location.href = "profileLove?id="+id;
   }
     
     
