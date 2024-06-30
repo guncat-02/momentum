@@ -9,6 +9,7 @@ public class CommVO {
 	private String c_cont; // 댓글 내용
 	private String c_date; //댓글 날짜
 	
+
 	//getter
 	public int getC_no() {
 		return c_no;

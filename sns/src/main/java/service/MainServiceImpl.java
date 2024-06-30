@@ -91,6 +91,13 @@ public class MainServiceImpl implements IF_MainService{
 		}
 		return lovepostList;
 	}
+
+	@Override
+	public void p_show(int no) throws Exception {
+		
+		maindao.p_show(no);
+		
+	}
 	
 
 }

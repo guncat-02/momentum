@@ -1,12 +1,12 @@
 package vo;
 
 public class ChatRoomVO {
-	private String chatNum;
-	private String chatName;
-	private String chatImg;
-	private String id;
-	private String nickName;
-	private String owner;
+	private String chatNum; //채팅방 코드
+	private String chatName; //채팅방 이름
+	private String chatImg; //채팅방 사진
+	private String id; //아이디
+	private String nickName; //닉네임
+	private String owner; //방장 여부
 	
 	//getter
 	public String getChatNum() {

@@ -52,6 +52,12 @@
 							</span>
 							</td>
 						</tr>
+						<tr class="userInfo" style="display: none;">
+							<td class="userList" colspan="2">
+								<div class="userListDiv">
+								</div>
+							</td>
+						</tr>
 					</c:forEach>
 				</table>
 			</div>
@@ -130,6 +136,9 @@
 					</div>
 				</div>
 			</div>
+			<div id="chatCover" class="chatItem theme">
+				<div id="chatCoverDiv"><span>M</span></div>
+            </div>
 		</div>
 		<div id="emojiAll" class="theme">
 			<table id="emojiAllTable">
@@ -142,9 +151,13 @@
 			<div id="chatImgList"></div>
 		</div>
 	</form>
+	<div id="imgDiv">
+		<img id="bigImg">
+	</div>
 </body>
 <script>
 	let chatNum;
+	let lastNum;
 
     //window 시작 시 기본 설정
     window.onload = function () {
@@ -270,8 +283,9 @@
 
     //채팅 추가
     $('#chattingText').keydown(function (e) {
-        if ($('#chattingText').val().trim() != "") {
-            if (e.keyCode == 13) {
+        if (e.keyCode == 13) {
+        	text = $('#chattingText').val();
+            if ((text != null && text.trim() != "")|| file.files.length != 0) {
                	const form = $('#form')[0];
                	const formData = new FormData(form);
             	$.ajax({
@@ -279,30 +293,29 @@
             		type: "post",
             		enctype: "multipart/form_data",
             		data: formData,
-            		success: function() {
-            			$('#chattingText').val("");
-            			$('#nowChat').load(window.location.href + " #nowChatting");
-            		},
+            		async: false,
             		processData: false,
                 	contentType: false
             	})
-            	$('#chattingText').val("")
-            	$('#nowChat').load(window.location.href + " #nowChatting");
             }
+            resetChat();
+            contAjax(chatNum);
         }
     })
     
+    let chatIndex;
+    
     //그룹방 선택 시
     $('.chatInfo').click(function() {
-    	$('#nowChatting').empty();
-        $('#nowInput').load(window.location.href + " #nowInput div");
-    	const index = $('.chatInfo').index($(this));
-    	chatNum = $('.infoNum').eq(index).val();
-    	switchInput(index);
-    	const img = $('.infoImg').eq(index).val();
+    	$('#chatCover').css("display", "none");
+    	resetChat();
+        chatIndex = $('.chatInfo').index($(this));
+    	chatNum = $('.infoNum').eq(chatIndex).val();
+    	switchInput(chatIndex);
+    	const img = $('.infoImg').eq(chatIndex).val();
     	$('.userSel').css("display","none")
-    	$('.userSel').eq(index).css("display", "block");
-    	$('#nowUserName').text($('.infoName').eq(index).text())
+    	$('.userSel').eq(chatIndex).css("display", "block");
+    	$('#nowUserName').text($('.infoName').eq(chatIndex).text())
     	if(img != null && img.trim() != "") {
     		$('#nowUserImg').attr('src', "download?filename="+img)
     	} else {
@@ -310,6 +323,16 @@
     	}
         contAjax(chatNum);
     });
+    
+    //채팅 초기화
+    function resetChat() {
+    	$('#nowChatting').empty();
+    	$('#chattingText').val("");
+    	$('#chatAttachBox').css("display", "none");
+    	dataSave.items.clear();
+    	file.files = dataSave.files;
+    	$('#nowChat').scrollTop($('#nowChat')[0].scrollHeight);
+    }
     
     //true false 변환
     function switchInput(index) {
@@ -354,8 +377,23 @@
         return usersProfile;
     }
     
+    //userList 추가
+    function userList(index, users) {
+    	$('.userListDiv').empty();
+    	$('.userInfo').css('display', 'none')
+    	$('.userInfo').eq(index).css('display', 'table');
+    	for(let i = 0; i < users.length; i++) {
+    		if(users[i].nickName == $('#user').val()) {
+    			$('.userListDiv').eq(index).append("<span style='font-size: 15px; color: #ff00bf;'>"+users[i].nickName+" (M)</span>");
+    		} else {
+    			$('.userListDiv').eq(index).append("<span style='font-size: 15px;'>"+users[i].nickName+"</span>");
+    		}
+    	}   	
+    }
+    
     //cont 내용 추가
-    function chatInsert(chatCont, usersProfile, user) {
+    function chatInsert(chatCont, usersProfile, user) {	
+    	userList(chatIndex, usersProfile);
     	if(chatCont != null && chatCont.length != 0) {
     		let spDate = chatCont[0].chatTime.split(' ');
             let firstDate = spDate[0];
@@ -369,7 +407,11 @@
                     $('#nowChatting').append("<thead><tr><td colspan='2' class='allDate'><div><hr>"+firstDate+"<hr></div></td></tr></thead>")
                 }
                 if (chatCont[i].nickName == user) {
-                    $('#nowChatting').append("<tr><td class='chatCont'><div class='chatting myChatting'><div class='chatUserDate myChatDate'><span>" + time + "</span></div><div class='userChat myChat'>" + chatCont[i].cont + "</div></div></td></tr>");
+                	if(chatCont[i].cont != null && chatCont[i].cont.trim() != "") {
+                		$('#nowChatting').append("<tr><td class='chatCont'><div class='chatting myChatting'><div class='chatUserDate myChatDate'><span>" + time + "</span></div><div class='userChat myChat'>" + chatCont[i].cont + "</div></div></td></tr>");
+                	} else {
+                		$('#nowChatting').append("<tr><td class='chatCont'><div class='chatting myChatting'><div class='chatUserDate myChatDate'><span>" + time + "</span></div><div class='userChat myChat'><img src=download?filename=" + chatCont[i].chatAttach + " class='chattingImg'></div></div></td></tr>");
+                	}
                     $('#nowChat').scrollTop($('#nowChat')[0].scrollHeight)
                 } else if (chatCont[i].nickName != user) {
                     for (let j = 0; j < usersProfile.length; j++) {
@@ -386,6 +428,36 @@
                 }
             }	
     	}
+    	$('#nowChat').scrollTop($('#nowChat')[0].scrollHeight)
     }
+    
+    //이미지 크게보기
+    $('#nowChatting').on('click', '.chattingImg', function() {
+    	$('#imgDiv').css('display', 'block');
+    	$('#bigImg').attr('src', $(this).attr('src'));
+    })
+    
+    //이미지 없애기
+    $('#imgDiv').click(function(){
+    	$('#imgDiv').css('display', 'none');  	
+    })
+    
+    //채팅방 검색
+    $('#chatSearch').keydown(function(e) {
+    	if (e.keyCode == 13) {
+    		let searWord = $('.infoName')
+    		if($('#chatSearch').val().trim != "") {
+    			$('.chatInfo').css('display', 'none')
+    			let word = $('#chatSearch').val()
+    			for(let i = 0; i < searWord.length; i++) {
+    				if(searWord[i].innerText.includes(word)) {
+    					$('.chatInfo').eq(i).css('display', 'table');
+    				}
+    			}
+    		} else {
+    			$('.chatInfo').css('display', 'table')
+    		}
+    	}
+    })
 </script>
 </html>

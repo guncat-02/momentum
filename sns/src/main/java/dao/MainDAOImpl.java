@@ -56,6 +56,12 @@ public class MainDAOImpl implements IF_MainDAO{
 		// TODO Auto-generated method stub
 		return sqlsession.selectList(mapperQuery+".lovePostList", id);
 	}
+	// 글 번호 조회수
+	@Override
+	public void p_show(int no) throws Exception {
+		// TODO Auto-generated method stub
+		sqlsession.update(mapperQuery+".p_show",no);
+	}
 
 	
 

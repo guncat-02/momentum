@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into chatRoomTest values(#{chatNum}, #{chatName}, #{chatImg, jdbcType=VARCHAR}, #{id}, #{nickName})
 	</insert>
 	<insert id="chatMemberInsert" parameterType="vo.ChatRoomVO">
-		insert into chatMemberTest values(#{chatNum}, #{id}, #{nickName},My Project 27639
+		insert into chatMemberTest values(#{chatNum}, #{id}, #{nickName},
 		<choose>
 			<when test="owner == null">
 				default

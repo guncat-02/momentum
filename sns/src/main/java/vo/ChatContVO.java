@@ -1,12 +1,13 @@
 package vo;
 
 public class ChatContVO {
-	private int no;
-	private String chatNum;
-	private String nickName;
-	private String cont;
-	private String chatTime;
-	private String[] chatAttach;
+	private int no; //chat 번호
+	private String chatNum; //채팅방 코드
+	private String nickName; //닉네임
+	private String cont; //채팅 내용
+	private String chatTime; //채팅 시간
+	private String[] attachList; //채팅 사진
+	private String chatAttach; //채팅 사진
 	
 	//getter
 	public int getNo() {
@@ -24,7 +25,10 @@ public class ChatContVO {
 	public String getChatTime() {
 		return chatTime;
 	}
-	public String[] getChatAttach() {
+	public String[] getAttachList() {
+		return attachList;
+	}
+	public String getChatAttach() {
 		return chatAttach;
 	}
 	
@@ -44,7 +48,10 @@ public class ChatContVO {
 	public void setChatTime(String chatTime) {
 		this.chatTime = chatTime;
 	}
-	public void setChatAttach(String[] chatAttach) {
+	public void setAttachList(String[] attachList) {
+		this.attachList = attachList;
+	}
+	public void setChatAttach(String chatAttach) {
 		this.chatAttach = chatAttach;
 	}
 }

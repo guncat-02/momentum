@@ -18,6 +18,8 @@ public interface IF_MainDAO {
 	public PostVO takePostVO(int no) throws Exception;
 
 	public List<PostVO> lovePostList(String id) throws Exception;
+
+	public void p_show(int no) throws Exception;
 	
 	
 	

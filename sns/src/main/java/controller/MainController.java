@@ -37,7 +37,6 @@ public class MainController {
 
 	@GetMapping("myPost")
 	public String post(Model model, @ModelAttribute PostVO postvo, @RequestParam(value="order", required = false) String order,@RequestParam(value="no", required = false) int no ) throws Exception {
-			System.out.println(no);
 		// 해당 포스트 글번호의 댓글 리스트 
 			model.addAttribute("commlist",cser.CommList(postvo.getNo())); 
 			model.addAttribute("Commcnt", cser.cntComm(postvo.getNo()));
@@ -49,7 +48,9 @@ public class MainController {
 		return "myPost";
 	}
 	
-
-
-
+	@GetMapping("p_show")
+	@ResponseBody
+	public void p_show(@RequestParam("no") int no) throws Exception {
+		mainSer.p_show(no);
+	}
 }
