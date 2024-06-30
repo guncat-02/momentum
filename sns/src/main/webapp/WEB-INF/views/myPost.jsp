@@ -337,7 +337,6 @@
 				contentType:'application/json; charset=utf-8',
 				data : JSON.stringify(param),
 				success:function(data) {
-					console.log("여기 안됨?");
 					document.location.reload();
 					}
 			 }) 

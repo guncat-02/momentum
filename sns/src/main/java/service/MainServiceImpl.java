@@ -1,5 +1,6 @@
 package service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -97,6 +98,42 @@ public class MainServiceImpl implements IF_MainService{
 		
 		maindao.p_show(no);
 		
+	}
+	// 글 번호의 댓글 개수
+	@Override
+	public int takeCommCnt(int no) throws Exception {
+		// TODO Auto-generated method stub
+		return maindao.takeCommCnt(no);
+	}
+
+	@Override
+	public int takeP_loveCnt(int no) throws Exception {
+		// TODO Auto-generated method stub
+		return maindao.takeP_loveCnt(no);
+	}
+
+	@Override
+	public int takeReCnt(int no) throws Exception {
+		// TODO Auto-generated method stub
+		return maindao.takeReCnt(no);
+	}
+
+	@Override
+	public void p_love(HashMap<String, Object> params) throws Exception {
+		// TODO Auto-generated method stub
+		maindao.p_love(params);
+	}
+
+	@Override
+	public void p_loveCancel(HashMap<String, Object> params) throws Exception {
+		// TODO Auto-generated method stub
+		maindao.p_loveCancel(params);
+	}
+
+	@Override
+	public List<Integer> chklove(String id) throws Exception {
+		// TODO Auto-generated method stub
+		return maindao.chklove(id);
 	}
 	
 

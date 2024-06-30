@@ -56,4 +56,10 @@ public class ProfileDao implements IF_ProfileDao{
 	public List<ProfileVO> profileList(List<String> nick) throws Exception {
 		return sql.selectList(mapperQuery+".profileList", nick);
 	}
+	// 모든 프로필 리스트 가져오기
+	@Override
+	public List<ProfileVO> allprofileList() throws Exception {
+		// TODO Auto-generated method stub
+		return sql.selectList(mapperQuery+".allprofileList");
+	}
 }

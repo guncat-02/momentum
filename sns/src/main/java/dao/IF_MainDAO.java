@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import vo.PostVO;
@@ -20,6 +21,18 @@ public interface IF_MainDAO {
 	public List<PostVO> lovePostList(String id) throws Exception;
 
 	public void p_show(int no) throws Exception;
+
+	public int takeCommCnt(int no) throws Exception;
+	
+	public int takeP_loveCnt(int no) throws Exception;
+
+	public int takeReCnt(int no) throws Exception;
+
+	public void p_love(HashMap<String, Object> params) throws Exception;
+
+	public void p_loveCancel(HashMap<String, Object> params) throws Exception;
+
+	public List<Integer> chklove(String id) throws Exception;
 	
 	
 	

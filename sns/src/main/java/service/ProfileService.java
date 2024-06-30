@@ -54,4 +54,10 @@ public class ProfileService implements IF_ProfileService{
 	public List<ProfileVO> profileList(List<String> nick) throws Exception {
 		return pDao.profileList(nick);
 	}
+	// 모든 프로필리스트 가져오기
+	@Override
+	public List<ProfileVO> allprofileList() throws Exception {
+		// TODO Auto-generated method stub
+		return pDao.allprofileList();
+	}
 }
