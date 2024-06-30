@@ -34,4 +34,11 @@ public interface IF_MainService {
 	// 좋아요 누른 리스트
 	public List<Integer> chklove(String id) throws Exception;
 	
+	
+	public String[] getAttach(int no) throws Exception;
+	
+	public Integer getLoveCnt(int no) throws Exception;
+	
+	public Integer getRePostedCnt(int no) throws Exception;
+	
 }

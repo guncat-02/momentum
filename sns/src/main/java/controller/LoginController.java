@@ -121,9 +121,9 @@ public class LoginController {
 	}
 
 	@GetMapping("logout")
-	public String logout(HttpSession session) {
+	public String logout(HttpSession session, HttpServletRequest req, HttpServletResponse res) {
 		session.invalidate();
-
+		cookieUtil.clearCookie(req, res);
 		return "redirect:/loginpage";
 	}
 

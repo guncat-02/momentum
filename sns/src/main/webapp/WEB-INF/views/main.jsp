@@ -1,10 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="true"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<%
-	request.setCharacterEncoding("UTF-8");
+<% request.setCharacterEncoding("UTF-8");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
@@ -47,7 +46,7 @@
 				</div>
 
 				<a href="myPost?no=${mp.no}" style="cursor: pointer;" class="p_alink" onclick="p_show(${mp.no})"> <!-- 프로필 아이디 -->
-					<div class="p_cont">${mp.cont }</div> <c:choose>
+					<div class="p_cont theme">${mp.cont }</div> <c:choose>
 						<c:when test="${filenameLength eq 0}">
 							<div class="p_files" style="display: none">
 								<c:forEach items="${mp.filename }" var="file" varStatus="status">
@@ -129,7 +128,7 @@
 
 				<input type="hidden" value="0" class="p_lovehid${mp.no}">
 				<input type="hidden" value="${mp.no}" id="p_lovehid${mp.no}">
-				<div class="mpfooter">
+				<div class="mpfooter theme">
 					<div>
 						<button type="button" class="p_lovebut${mp.no }" onclick="p_love(${mp.no })">
 							<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314" /> </svg>

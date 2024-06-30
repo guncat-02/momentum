@@ -19,6 +19,7 @@ import service.IF_CommService;
 import service.IF_MainService;
 import service.IF_ProfileService;
 import vo.PostVO;
+import vo.ProfileVO;
 
 @Controller
 @EnableAsync
@@ -90,4 +91,47 @@ public class MainController {
 		List<Integer> p_loveList = mser.chklove(id);
 		return p_loveList;
 	}
+	
+	@GetMapping("menu-profile")
+	@ResponseBody
+	public ProfileVO menuProfile(HttpSession session) throws Exception {
+		String curId = (String)session.getAttribute("userid");
+		ProfileVO pvo = pser.select(curId);
+		return pvo;
+	}
+
+	@GetMapping("myPost")
+	public String post(Model model, @ModelAttribute PostVO postvo,
+			@RequestParam(value="order", required = false) String order,
+			@RequestParam(value="no", required = false) int no ) throws Exception {
+		// 해당 포스트 글번호의 댓글 리스트 
+		model.addAttribute("commlist",cser.CommList(postvo.getNo()));
+		model.addAttribute("Commcnt", cser.cntComm(postvo.getNo()));
+		
+		//클릭한 게시물
+		PostVO pvo = mser.takePostVO(no);
+		pvo.setFilename(mser.getAttach(no));
+		//게시물 작성자
+		ProfileVO proVO = pser.select(pvo.getId());
+		model.addAttribute("postvo", pvo);
+		model.addAttribute("proVO", proVO);
+		
+		int re_no = pvo.getRe_no();
+		if (re_no != 0) { // 리포스트한 게시물일 경우
+			//클릭한 게시물의 리포스트 게시물
+			PostVO repvo = mser.takePostVO(re_no);
+			repvo.setFilename(mser.getAttach(re_no));
+			// 클릭한 게시물의 리포스트 게시물 작성자
+			ProfileVO reProVO = pser.select(repvo.getId());
+			model.addAttribute("repvo", repvo);
+			model.addAttribute("reProVO", reProVO);
+		}
+		return "myPost";
+	}
+
+	
+	
+
+
+
 }

@@ -1,42 +1,39 @@
+@charset "UTF-8";
+
 body {
-    width: auto;
-    margin: 0px;
-    -webkit-user-select: none;
+	width: auto;
+	margin: 0px;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
+		sans-serif;
+	font-weight: bolder;
+	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
 }
 
 /* 메뉴바, 메인 div 포함하는 전체 div */
-a {
-  text-decoration: none;
-  cursor: pointer;
-}
-
 #all {
-    display: flex;
-    justify-content: left;
+	display: flex;
+	justify-content: left;
 }
 
 /* 왼쪽 메뉴 바 */
 #menuall {
-    display: block;
-    width: 240px;
-    height: 100vmin;
-    position: sticky;
-    top: 0;
-    border-right: 1px solid #00f7ff;
-    box-shadow: 3px 0px 7px 0px #41c4c4;
-    overflow-y: auto;
+	display: block;
+	width: 240px;
+	height: 100vmin;
+	position: sticky;
+	top: 0;
+	border-right: 1px solid #00f7ff;
+	box-shadow: 3px 0px 7px 0px #41c4c4;
+	overflow-y: auto;
 }
-
-/* 주요 컨텐츠 */
 #main {
 	display: block;
 	width: 100%;
 	height: fit-content;
 }
-
 .one-post-container {
     display: grid;
     grid-template-columns: 100px 500px 50px;
@@ -68,9 +65,6 @@ a {
     background-clip: content-box, border-box;
     position: relative;
 }
-.photo-div:hover {
-	cursor: pointer;
-}
 .one-post-photo .photo-div img {
     position: absolute;
     top: 0;
@@ -84,9 +78,6 @@ a {
     grid-column: 2 / 3;
     grid-row: 1 / 2;
     display: flex;
-}
-.one-post-names:hover {
-	cursor: pointer;
 }
 .one-post-names .nickname-span {
     font-size: 25px;
@@ -112,9 +103,6 @@ a {
     height: 20px;
     margin: 15px 0px;
     color: #00f7ff;
-}
-.one-post-menu > svg:hover {
-    cursor: pointer;         
 }
 .one-post-menu-box {        
     display: none;
@@ -164,19 +152,6 @@ a {
     word-wrap: break-word;
     word-break: keep-all;
 }
-.one-post-cont .edit-contents-textarea {
-    display: none;
-    width: 525px;
-    height: 50px;
-    resize: none;
-    word-wrap: break-word;
-    word-break: keep-all;
-    border: 1px solid #00f7ff;
-}
-.one-post-cont .edit-contents-textarea::-webkit-scrollbar {
-    width: 0px;
-}
-
 
 /* 리포스트 마크 아래 공백 영역 */
 .one-post-space {
@@ -226,6 +201,8 @@ button[class^=arrow-] svg {
     right: 10px;
 }
 
+
+
 /* 게시물의 리포스트 게시물 영역 */
 .one-post-reposted {
     grid-column: 2 / 4;
@@ -267,34 +244,11 @@ button[class^=arrow-] svg {
     position: relative;
 }
 .re-attach-div img {
+    width: 100%;
+    height: auto;
     position: absolute;
-}
-.re-attach-div button[class^=re-arrow-] {
-    border: none;
-    background-color: transparent;
-    width: 24px;
-    height: 24px;
-    text-align: center;
-    padding: 0px;
-    border-radius: 50%;
-    position: absolute;
-    top: 50%;
-    margin-top: -12px;
-    z-index: 3;
-}
-.re-attach-div button[class^=re-arrow-]:hover {
-    cursor: pointer;
-}
-button[class^=re-arrow-] svg {
-    width: 25px;
-    height: 25px;
-    color: #ff00bf;
-}
-.re-arrow-left {
-    left: 10px;
-}
-.re-arrow-right {
-    right: 10px;
+    top: 0;
+    left: 0;
 }
 
 /* 리포스트 게시물 게시자 프로필 사진 영역 */
@@ -318,17 +272,6 @@ button[class^=re-arrow-] svg {
     background-clip: content-box, border-box;
     position: relative;
 }
-.re-photo-div:hover {
-	cursor: pointer;
-}
-.re-photo-div img {
-	position: absolute;
-	width: 100%;
-	height: auto;
-	top: 0;
-	left: 0;
-}
-
 
 /* 리포스트 게시물 게시자 닉네임, 아이디 영역 */
 .reposted-container .reposted-names {
@@ -338,18 +281,13 @@ button[class^=re-arrow-] svg {
 }
 .reposted-names .re-nickname-span {
     font-size: 25px;
-    margin: 15px 0px;
+    margin: 25px 0px;
     margin-left: 5px;
-    height: fit-content;
 }
 .reposted-names .re-id-span {
     font-size: 15px;
-    margin: 23px 0px;
+    margin: 30px 0px;
     margin-left: 5px;
-    height: fit-content;
-}
-.reposted-names:hover {
-	cursor: pointer;
 }
 
 /* 리포스트 게시물 내용 영역 */
@@ -362,13 +300,14 @@ button[class^=re-arrow-] svg {
 .reposted-cont::-webkit-scrollbar {
     width: 0px;
 }
-.reposted-cont:hover {
-	cursor: pointer;
-}
 .re-contents-span {
     word-break: keep-all;
     word-wrap: break-word;
 }
+
+
+
+
 
 /* 게시물 상호작용 영역 */
 .one-post-interactions {
@@ -396,169 +335,3 @@ button[class^=re-arrow-] svg {
     margin: 10px 0px;    
     margin-left: -50px;
 }
-.interactions-span .edit-confirm-btn {
-	display: none;
-    border: 2px solid #00f7ff;
-    border-radius: 7.5px;
-    background-color: transparent;
-    font-weight: bold;
-    font-size: 20px;
-    height: fit-content;
-    margin-top: 7.5px;
-}
-.interactions-span .edit-cancel-btn {
-	display: none;
-    border: 2px solid #ff00bf;
-    border-radius: 7.5px;
-    background-color: transparent;
-    font-weight: bold;
-    font-size: 20px;
-    height: fit-content;
-    margin-top: 7.5px;
-}
-.edit-confirm-btn:hover {
-    transition-duration: 150ms;
-    cursor: pointer;
-    background-color: #00f7ff;
-    color: black;
-}
-.edit-cancel-btn:hover {
-    transition-duration: 150ms;
-    cursor: pointer;
-    background-color: #ff00bf;
-    color: black;
-}
-
-
-
-
-
-
-
-
-
-#comments {
-	padding-top : 30px;
-}
-
-
-.comminput {
-	margin-top : 10px;
-	width : 900px;
-	height : 50px;
-	border-radius: 10px;
-	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-	font-size : 15px;
-
-}
-.recomminput{
-	margin-top : 10px;
-	width : 880px;
-	height : 50px;
-	border-radius: 10px;
-	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-	font-size : 15px;
-
-}
-
-.postcommbut {
-	margin-top : 15px;
-	background-color: #000000;
-	cursor: pointer;
-	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-	width: 100px;
-	height: 50px;
-	color: #00f7ff;
-	border: 1px solid #00f7ff;
-	border-radius: 5px;
-	margin-left: 5px;
-	box-shadow: 0px 7px 0px 0px #1e1f22;
-	
-}
-.postcommbut:active {
-	position: relative;
-	top: 2px;
-	box-shadow: none;
-}
-
-
-
-
-#ctablediv {
-	margin-top : 20px;
-	border-radius : 5px;
-	border : 1px solid #00f7ff;
-}
-
-[class*="ctable"] {
-	display : block;
-	width : 1000px;
-	margin-left :10px;
-	border-bottom : 1px solid #00f7ff;
-	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; 
-}
-
-.thumb {
-	padding-left : 10px;
-}
-
-.commcontents {
-	width : 1000px;
-	height : 5px;
-	padding-left : 90px;
-	font-size : 20px;
-}
-
-.comm_date {
-	font-size : 10px;
-	padding-left :90px;
-	color : gray;
-}
-
-
-.commpro_radius{
-	width: 200px;
-	height: 70px; 
-	display:inline-block;
-}
-.commpro_radius b{
-	
-	color : #ef07b5;
-	font-size : 16px;
-	padding-bottom : 10px;
-}
-
-.commpro_radius img{
-	border:1px solid violet;
-	border-radius: 50%;
-	width: 35%;
-	height: 100%;
-	overflow: hidden;
-	object-fit: cover;
-	margin-top : 10px;
-	margin-right :20px;
-	margin-bottom :-15px;
-}
-
-#ordercomm {
-	margin-top: 15px;
-}
-
-
-[class*="delete"] {
-	display: none;
-	color : #ff00bf;
-	border: 1px solid  #ff00bf;
-}
-[class*="reporticon"] {
-	padding-left : 100px;
-}
-
-[class*="icon"] {
-	border: 0;
- 	background-color: transparent;
-	color: white;
-}
-
-
-

@@ -36,4 +36,10 @@ public interface IF_MainDAO {
 	
 	
 	
+	public List<String> getAttach(int no) throws Exception;
+	
+	public Integer getLoveCnt(int no) throws Exception;
+	
+	public Integer getRePostedCnt(int no) throws Exception;
+	
 }

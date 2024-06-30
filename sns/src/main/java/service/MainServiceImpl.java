@@ -136,5 +136,20 @@ public class MainServiceImpl implements IF_MainService{
 		return maindao.chklove(id);
 	}
 	
+	public String[] getAttach(int no) throws Exception {
+		List<String> fList = maindao.getAttach(no);
+		return fList.toArray(new String[0]);
+	}
+
+	@Override
+	public Integer getLoveCnt(int no) throws Exception {
+		return maindao.getLoveCnt(no);
+	}
+
+	@Override
+	public Integer getRePostedCnt(int no) throws Exception {
+		return maindao.getRePostedCnt(no);
+	}
+	
 
 }

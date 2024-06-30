@@ -98,6 +98,22 @@ public class MainDAOImpl implements IF_MainDAO{
 		// TODO Auto-generated method stub
 		return sqlsession.selectList(mapperQuery+".chklove", id);
 	}
+
+	@Override
+	public List<String> getAttach(int no) throws Exception {
+		return sqlsession.selectList(mapperQuery+".selectAttachWhere", no);
+	}
+
+	@Override
+	public Integer getLoveCnt(int no) throws Exception {
+		return sqlsession.selectOne(mapperQuery+".selectLoveCnt", no);
+	}
+
+	@Override
+	public Integer getRePostedCnt(int no) throws Exception {
+		return sqlsession.selectOne(mapperQuery+".selectRePostedCnt", no);
+	}
+
 	
 
 	

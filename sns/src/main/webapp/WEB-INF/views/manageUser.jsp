@@ -19,8 +19,12 @@
 <body>
     <div id="manage-allGrid">
         <div id="manage-menu">
-
+            <h2><a href="/sns/main">SNS</a></h2>
+            <h2><a href="/sns/manager">DashBoard</a></h2>
+            <h2><a href="/sns/manager/user/">User Info</a></h2>
+            <h2><a href="#">Report Info</a></h2>
         </div>
+        <form action="/sns/manager/search" method="get" onsubmit="return validation();">
             <div id="admin-grid-container">
                 <div id="title">
                     <a href="/sns/manager/user/"><h1>User Info</h1></a>
@@ -30,21 +34,22 @@
                     <span id="cur-adminId-span">Admin : ${curId }</span>
                 </div>
                 <div id="search-type">
-                    <select id="searchType">
-                    	<option value="all" selected>select option...</option>
-                        <option value="id">user-Id</option>
+                	<input type="hidden" name="searchArea" value="User">
+                	<input type="hidden" name="searchLoc" value="">
+                    <select id="searchType" name="searchType">
+                        <option value="id" selected>user-Id</option>
                         <option value="cont">contents</option>
                         <option value="period">period</option>
                     </select>
                 </div>
                 <div id="search-cont">
-                    <input type="text" id="searchWord">
-                    <input type="date" id="stDate">
-                    <input type="date" id="ndDate">
-                    <input type="reset" value="clear" id="resetBtn">
+                    <input type="text" id="searchWord" name="searchWord">
+                    <input type="date" id="stDate" name="stDate">
+                    <input type="date" id="ndDate" name="ndDate">
+                    <button value="1" id="searchBtn">Search</button>
                 </div>
                 <div id="search-result">
-                	<span id="result-span"></span>
+                	<span id="result-span">총 조회 결과 : ${cnt }건.</span>
                 </div>
                 <div id="menu-user-member">
                     <button type="button" value="1" id="member-btn">MEMBER</button>
@@ -71,10 +76,10 @@
 		                        <thead>
 		                            <tr>
 		                                <th style="width: 20%">ID</th>
-		                                <th>EMAIL</th>
-		                                <th>PASSWORD</th>
-		                                <th>NAME</th>
-		                                <th>B_DATE</th>
+		                                <th style="width: 30%">EMAIL</th>
+		                                <th style="width: 20%">PASSWORD</th>
+		                                <th style="width: 10%">NAME</th>
+		                                <th style="width: 20%">B_DATE</th>
 		                            </tr>
 		                        </thead>
 		                        <tbody>
@@ -195,51 +200,134 @@
                         </c:choose>
                     </table>
                 </div>
+                <div id="paging">
+                	<c:if test="${pagevo.prev }">
+                		<button type="button">[prev]</button>
+					</c:if> 
+					<c:forEach begin="${pagevo.startPage }" end="${pagevo.endPage }" var="idx">
+						<c:choose>
+							<c:when test="${idx == pagevo.page }">
+								<!-- 현재 페이지 굵은 글씨 -->
+								<button type="button"><b>${idx }</b></button>
+							</c:when>
+							<c:otherwise>
+							<button type="button">${idx }</button>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach> 
+					<c:if test="${pagevo.next }">
+						<button type="button">[next]</button>
+					</c:if>
+                </div>
                 <div id="reset">
+                	<button type="button"><a href="/sns/manager/user/">reset</a></button>
                 </div>
                 <div id="export-Excel">
                     <button type="button">export as Excel</button>
                 </div>
             </div>
+		</form>           
 	</div>
 </body>
 
 <script>
 	
-	let url = window.location.href.split('/');
-	
-   	
+	function validation() {
+		let selected = $('#searchType').val();
+		if (selected != 'period') {
+			if ($.trim($('#searchWord').val()) == '') {
+				alert('유효한 값을 입력하세요.');
+				return false;
+			} else {
+				return true;
+			}
+		} else {
+			if ($.trim($('#stDate').val()) == '' || $.trim($('#ndDate').val()) == '') {
+				alert('유효한 값을 입력하세요.');
+				return false;
+			} else {
+				return true;
+			}
+		}
+	}
+
     $(document).ready(function () {
         connTime(); // 접속 시간 갱신
-        getResultCnt(); // 조회 튜플 개수 갱신
-        searchTypeChange(); // 검색 타입 지정
-		let curList = $.trim(url[url.length-1].split('?')[0]);
-		if (curList == 'user' || curList == '') { curList = 'member'; }
+        // getResultCnt(); // 조회 튜플 개수 갱신
+        
+        let curList = '${pagevo.searchLoc}';
         $(`div[id$=\${curList}] button`).css('filter', 'invert(100%)');
+        $('input[name=searchLoc]').val(curList);
+       	let result = searchFlag();
+       	searchTypeChange(); // 검색 타입 지정
+       	searchPaging(result);
     });
     
-    // 검색 버튼 클릭 시
-    $('#resetBtn').on('click', function() {
-    	$('#search-cont input:not([type=reset])').val('');
-    });
+    function searchFlag() {
+    	let sType = '${pagevo.searchType}';
+    	
+    	if (sType.trim() != '') {
+        	let sWord = '${pagevo.searchWord}';
+        	let stDate = '${pagevo.stDate}';
+        	let ndDate = '${pagevo.ndDate}';
+    		$('option[value=id]').removeAttr('selected');
+    		$(`option[value=${pagevo.searchType}]`).attr('selected', '');
+        	if (sWord != null && stDate != null && ndDate != null) {
+				$('#searchWord').val(sWord);
+        		$('#stDate').val(stDate);
+        		$('#ndDate').val(ndDate);
+        	}
+        	return {
+        		'searchLoc' : '${pagevo.searchLoc}',
+        		'sType' : sType,
+        		'sWord' : sWord,
+        		'stDate' : stDate,
+        		'ndDate' : ndDate,
+        	};
+    	}
+    	return null;
+    }
+    
+    function searchPaging(result) {
+		$('#paging').on('click', 'button', function() {
+			let idx = $.trim($(this).text());
+			let link;
+			if (result != null) {
+				link = `/sns/manager/search?searchArea=User&searchLoc=\${result.searchLoc}&searchType=\${result.sType}&searchWord=\${result.sWord}&stDate=\${result.stDate}&ndDate=\${result.ndDate}`
+				if (idx  == '[prev]') {
+					location.href = `\${link}&page=${pagevo.startPage -1}`;
+				} else if (idx == '[next]') {
+					location.href = `\${link}&page=${pagevo.endPage +1}`;				
+				} else {
+					location.href = `\${link}&page=\${idx}`;
+				}
+			} else {
+				link = `/sns/manager/user/${pagevo.searchLoc}`;
+				if (idx  == '[prev]') {
+					location.href = `\${link}?page=${pagevo.startPage -1}`;
+				} else if (idx == '[next]') {
+					location.href = `\${link}?page=${pagevo.endPage +1}`;				
+				} else {
+					location.href = `\${link}?page=\${idx}`;
+				}
+			}
+
+		});
+    }
+    
     
     // 선택한 검색 유형에 따라 검색어 input display 변환
     $('#searchType').on('change', function () { searchTypeChange(); });
     function searchTypeChange() {
-        let selected = $('#searchType').val();
-        $('#search-cont input:not([type=reset])').val('');
-        if (selected == 'all') {
-        	$('#search-cont input').css('display', 'none');
-        } else if (selected != 'period') { // userid, contents
+        let selected = $('#searchType').val();        
+        if (selected != 'period') { // userid, contents
             $('#searchWord').css('display', '');
             $('input[type=date]').css('display', 'none');
             $('input[type=date]').attr('disabled', '');
-            $('input[type=reset]').css('display', '');
         } else { // period
             $('#searchWord').css('display', 'none');
             $('input[type=date]').css('display', '');
             $('#stDate').removeAttr('disabled');
-            $('input[type=reset]').css('display', '');
         }
         limitAction(selected);
     }
@@ -261,6 +349,14 @@
     		$('div[id^=menu-] button').removeAttr('disabled');
     		$('div[id^=menu-] button').val(1);
     	}
+    	console.log($('button[value=0]').text().toLowerCase().indexOf('${pagevo.searchLoc}'));
+    	if ($('button[value=0]').text().toLowerCase().indexOf('${pagevo.searchLoc}') != -1) {
+    		$('#searchBtn').attr('disabled', '');
+    		$('#searchBtn').val(0);
+    	} else {
+    		$('#searchBtn').removeAttr('disabled');
+    		$('#searchBtn').val(1);
+    	}
     }
     
     
@@ -273,46 +369,25 @@
     
     // table 위 버튼 클릭 시 버튼 디자인 변경 및 table 영역 새로고침
     $('div[id^=menu-]').on('click', 'button', function() {
-    	$('div[id^=menu] button').css('filter', '');
-    	let flag = $(this);
-    	flag.css('filter', 'invert(100%)');
-    	connTime();
-		updateTable(flag.text().toLowerCase());
+		updateTable($(this).text().toLowerCase());
     });
     
     // table 영역 새로고침 및 리턴 결과 개수 갱신
     function updateTable(flag) {
-    	let sType = document.querySelector('#searchType').value.trim();
-    	let sWord = $.trim($('#searchWord').val());
-    	let date1 = $.trim($('#stDate').val());
-    	let date2 = $.trim($('#ndDate').val());
-    	if (sType == null || sType == 'all' || (sWord == '' && date1 == '')) { // 검색어 입력 값 없을 경우
-       		$('#admin-table').load(`/sns/manager/user/\${flag}` + " #admin-table table", function() {
-           		getResultCnt();
-           	});
-    	} else { // 검색어 입력 값 있을 경우
-        	if ((sType == 'id' || sType == 'cont') && sWord == '') {
-        		alert('검색어를 입력하세요.');
-        	} else if (sType == 'period' && (date1 == '' || date2 == '')) {
-        		alert('날짜를 모두 선택하세요.');
-        	} else {
-        		let searchParam = `?searchLoc=\${flag}&searchArea=User&searchType=\${sType}&searchWord=\${sWord}&stDate=\${date1}&ndDate=\${date2}`;           		
-        		$('#admin-table').load(`/sns/manager/search\${searchParam}` + " #admin-table table", function() {
-               		getResultCnt();
-               	});
-        	}
-    	}
+		let searchFlag = window.location.href;
+		console.log(searchFlag);
+		if (searchFlag.indexOf('search') == -1) {
+			location.href = `/sns/manager/user/\${flag}`;
+		} else {
+			let sType = '${pagevo.searchType}';
+        	let sWord = '${pagevo.searchWord}';
+        	let stDate = '${pagevo.stDate}';
+        	let ndDate = '${pagevo.ndDate}';
+			location.href = `/sns/manager/search?searchArea=User&searchLoc=\${flag}&searchType=\${sType}&searchWord=\${sWord}&stDate=\${stDate}&ndDate=\${ndDate}`;
+		}
     }
     
 
-    
-    
-    // 리턴 결과 개수 갱신
-    function getResultCnt() {
-    	let cnt = $('#admin-table tbody tr').length;
-    	$('#result-span').text(`조회 결과 : \${cnt}건.`);
-    }
-    
     // 페이지 새로고침 또는 접속한 시간 갱신 및 표시
     function connTime() {
 		let dt = new Date();

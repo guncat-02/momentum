@@ -17,11 +17,14 @@
 <body>
     <div id="manage-allGrid">
         <div id="manage-menu">
-
+            <h2><a href="/sns/main">SNS</a></h2>
+            <h2><a href="/sns/manager">DashBoard</a></h2>
+            <h2><a href="/sns/manager/user/">User Info</a></h2>
+            <h2><a href="#">Report Info</a></h2>
         </div>
         <div id="manage-dashboard-container">
             <div id="dashboard-title">
-                <h1>Dashboard</h1>
+                <h1>DashBoard</h1>
             </div>
             <div id="dashboard-info">
                 <span id="dashboard-date-span"></span>
