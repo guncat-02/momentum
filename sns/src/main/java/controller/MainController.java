@@ -50,15 +50,6 @@ public class MainController {
 		model.addAttribute("profilelist",pser.allprofileList());
 		return "main";
 	}
-
-	@GetMapping("myPost")
-	public String post(Model model, @ModelAttribute PostVO postvo, @RequestParam(value="order", required = false) String order,@RequestParam(value="no", required = false) int no ) throws Exception {
-		// 해당 포스트 글번호의 댓글 리스트 
-			model.addAttribute("commlist",cser.CommList(postvo.getNo())); 
-			model.addAttribute("Commcnt", cser.cntComm(postvo.getNo()));
-			model.addAttribute("postvo", mser.takePostVO(no));
-		return "myPost";
-	}
 	
 	@GetMapping("p_show")
 	@ResponseBody
