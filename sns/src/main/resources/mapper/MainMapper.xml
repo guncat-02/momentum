@@ -50,4 +50,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id = "p_loveCancel" parameterType="hashmap">
 		delete from p_lovetest where id= #{id} and no = #{no}
 	</delete>
+	<select id="selectAttachWhere" parameterType="_int" resultType="String">
+		select filename from attachTest where no = #{no}
+	</select>
 </mapper>
