@@ -384,7 +384,7 @@
     	$('.userInfo').eq(index).css('display', 'table');
     	for(let i = 0; i < users.length; i++) {
     		if(users[i].nickName == $('#user').val()) {
-    			$('.userListDiv').eq(index).append("<span style='font-size: 15px; color: #ff00bf;'>"+users[i].nickName+" (M)</span>");
+    			$('.userListDiv').eq(index).append("<span style='font-size: 15px;'>"+users[i].nickName+"</span>");
     		} else {
     			$('.userListDiv').eq(index).append("<span style='font-size: 15px;'>"+users[i].nickName+"</span>");
     		}
@@ -417,11 +417,21 @@
                     for (let j = 0; j < usersProfile.length; j++) {
                         if (chatCont[i].nickName == usersProfile[j].nickName) {
                             if (usersProfile[j].photo != null) {
-                                $('#nowChatting').append("<tr><td class='chatProfile'><div class='chatProfileYou'><img src='download?filename=" + usersProfile[j].photo + "'></div></td><td class='chatCont'><div class='chatting yourChatting'><div class='userNick'>" + usersProfile[j].nickName + "</div><div class='userChat'>" + chatCont[i].cont + "</div><div class='chatUserDate'><span>" + time + "</span></div></div></td></tr>")
-                                break;
+                            	if(chatCont[i].cont != null && chatCont[i].cont.trim() != "") {
+                            		$('#nowChatting').append("<tr><td class='chatProfile'><div class='chatProfileYou'><img src='download?filename=" + usersProfile[j].photo + "'></div></td><td class='chatCont'><div class='chatting yourChatting'><div class='userNick'>" + usersProfile[j].nickName + "</div><div class='userChat'>" + chatCont[i].cont + "</div><div class='chatUserDate'><span>" + time + "</span></div></div></td></tr>")
+                                    break;
+                            	} else {
+                            		$('#nowChatting').append("<tr><td class='chatProfile'><div class='chatProfileYou'><img src='download?filename=" + usersProfile[j].photo + "'></div></td><td class='chatCont'><div class='chatting yourChatting'><div class='userNick'>" + usersProfile[j].nickName + "</div><div class='userChat'><img src=download?filename=" + chatCont[i].chatAttach + " class='chattingImg'></div><div class='chatUserDate'><span>" + time + "</span></div></div></td></tr>")
+                                    break;
+                            	}
                             } else {
-                                $('#nowChatting').append("<tr><td class='chatProfile'><div class='chatProfileYou'><img src='./resources/img/프로필.png'></div></td><td class='chatCont'><div class='chatting yourChatting'><div class='userNick'>" + usersProfile[j].nickName + "</div><div class='userChat'>" + chatCont[i].cont + "</div><div class='chatUserDate'><span>" + time + "</span></div></div></td></tr>")
-                                break;
+                            	if(chatCont[i].cont != null && chatCont[i].cont.trim() != "") {
+                            		$('#nowChatting').append("<tr><td class='chatProfile'><div class='chatProfileYou'><img src='./resources/img/프로필.png'></div></td><td class='chatCont'><div class='chatting yourChatting'><div class='userNick'>" + usersProfile[j].nickName + "</div><div class='userChat'>" + chatCont[i].cont + "</div><div class='chatUserDate'><span>" + time + "</span></div></div></td></tr>")
+                                    break;
+                            	} else {
+                            		$('#nowChatting').append("<tr><td class='chatProfile'><div class='chatProfileYou'><img src='./resources/img/프로필.png'></div></td><td class='chatCont'><div class='chatting yourChatting'><div class='userNick'>" + usersProfile[j].nickName + "</div><div class='userChat'><img src=download?filename=" + chatCont[i].chatAttach + " class='chattingImg'></div><div class='chatUserDate'><span>" + time + "</span></div></div></td></tr>")
+                                    break;
+                            	}
                             }
                         }
                     }
