@@ -5,9 +5,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>momentum</title>
-<link rel="stylesheet" href="./resources/css/search.css">
-<link id="theme-setting" rel="stylesheet" href="./resources/css/dark_theme.css">
+<title>Insert title here</title>
+    <link rel="stylesheet" href="./resources/css/searchList.css">
+    <!-- 다크 테마를 기본 값으로-->
+    <link id="theme-setting" rel="stylesheet" href="./resources/css/dark_theme.css">
 </head>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -18,7 +19,7 @@
         </div>
         <div id="main">
             <!--메인 컨텐츠는 여기에 작성 부탁합니당-->
-            <form action="searchList" method="get" onsubmit="return searchSubmit()">
+            <form>
                 <div id="searchBar">
                     <div id="searIcon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -31,19 +32,29 @@
                     <input type="search" id="search" placeholder="SEARCH" name="keyWord">
                 </div>
             </form>
-            <div id="trendyTitle">
-                <span>TRENDY</span>
+            <div id="searMenuBar">
+                <ul id="searMenu">
+                    <li>
+                        <span class="keyType" id="nowKeyType">인기</span>
+                    </li>
+                    <li>
+                        <span class="keyType">최신</span>
+                    </li>
+                    <li>
+                        <span class="keyType">마음</span>
+                    </li>
+                    <li>
+                        <span class="keyType">리포스트</span>
+                    </li>
+                    <li>
+                        <span class="keyType">사용자</span>
+                    </li>
+                </ul>
+            </div>
+            <div id="searList">
+
             </div>
         </div>
     </div>
 </body>
-<script>
-	//검색어가 없을 경우 submit x
-	function searchSubmit() {
-		if($('#search').val().trim() != "" && $('#search').val() != null) {
-			return true;
-		}
-		return false;
-	}
-</script>
 </html>

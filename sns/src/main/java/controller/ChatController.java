@@ -45,13 +45,6 @@ public class ChatController {
 		List<ProfileVO> pro = pServe.selectProfile(id);
 		model.addAttribute("profile", pro);
 		List<String> nick = cServe.select(id);
-		for(int i = 0; i < pro.size(); i++) {
-			for(int j = 0; j < nick.size(); j++) {
-				if(pro.get(i).getNickName().equals(nick.get(j))) {
-					nick.set(j, nick.get(j)+"chat");
-				}
-			}
-		}
 		model.addAttribute("cnt", nick);
 		return "selProfile";
 	}

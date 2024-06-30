@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import service.IF_ChatContService;
 import service.IF_ChatService;
 import service.IF_ProfileService;
+import util.FileDataUtil;
 import vo.ChatContVO;
 import vo.ChatRoomVO;
 import vo.ProfileVO;
@@ -26,6 +28,9 @@ public class ChatContController {
 	IF_ProfileService pServe;
 	@Inject
 	IF_ChatService cServe;
+	
+	@Inject
+	FileDataUtil upload;
 	
 	//채팅 내용을 불러오기 위한 메서드
 	@ResponseBody
@@ -52,7 +57,14 @@ public class ChatContController {
 	
 	//채팅을 insert 하기 위한 메서드
 	@PostMapping("chat/chatting")
-	public void insert(@ModelAttribute ChatContVO ccVO) throws Exception {
-		ccServe.insert(ccVO);
+	public void insert(@ModelAttribute ChatContVO ccVO, MultipartFile[] chatFile) throws Exception {
+		if(ccVO.getCont() != null && !ccVO.getCont().trim().equals("")) {
+			ccServe.insert(ccVO);
+		}
+		String[] files = upload.fileUpload(chatFile);
+		if(files[0] != null) {
+			ccVO.setAttachList(files);
+			ccServe.insertAttach(ccVO);
+		}
 	}
 }
