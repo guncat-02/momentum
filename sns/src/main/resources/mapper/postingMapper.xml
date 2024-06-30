@@ -25,4 +25,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select filename from attachTest where no = #{no}
 	</select>
 	
+	<update id="updatePost" parameterType="hashmap">
+		update postTest set cont = #{cont} where no = #{no}
+	</update>
+	
+	<delete id="deletePost" parameterType="_int">
+		delete from postTest where no = #{no}
+	</delete>
+	
 </mapper>

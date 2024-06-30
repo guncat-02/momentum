@@ -1,10 +1,8 @@
 package controller;
 
-import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -40,6 +38,14 @@ public class MainController {
 		model.addAttribute("aList", attachList);
 		return "main";
 	}
+	
+	@GetMapping("menu-profile")
+	@ResponseBody
+	public ProfileVO menuProfile(HttpSession session) throws Exception {
+		String curId = (String)session.getAttribute("userid");
+		ProfileVO pvo = pservice.select(curId);
+		return pvo;
+	}
 
 	@GetMapping("myPost")
 	public String post(Model model, @ModelAttribute PostVO postvo,
@@ -52,10 +58,8 @@ public class MainController {
 		//클릭한 게시물
 		PostVO pvo = mainSer.takePostVO(no);
 		pvo.setFilename(mainSer.getAttach(no));
-		System.out.println(pvo.toString());
 		//게시물 작성자
 		ProfileVO proVO = pservice.select(pvo.getId());
-		System.out.println(proVO.toString());
 		model.addAttribute("postvo", pvo);
 		model.addAttribute("proVO", proVO);
 		
@@ -64,10 +68,8 @@ public class MainController {
 			//클릭한 게시물의 리포스트 게시물
 			PostVO repvo = mainSer.takePostVO(re_no);
 			repvo.setFilename(mainSer.getAttach(re_no));
-			System.out.println(repvo.toString());
 			// 클릭한 게시물의 리포스트 게시물 작성자
 			ProfileVO reProVO = pservice.select(repvo.getId());
-			System.out.println(reProVO.toString());
 			model.addAttribute("repvo", repvo);
 			model.addAttribute("reProVO", reProVO);
 		}

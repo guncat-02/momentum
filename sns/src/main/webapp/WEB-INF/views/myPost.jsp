@@ -14,7 +14,6 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
-<!--다크 테마 기본 값-->
 <link id="theme-setting" rel="stylesheet" href="./resources/css/dark_theme.css">
 <link rel="stylesheet" href="./resources/css/myPost.css">
 
@@ -24,13 +23,14 @@
 			<%@ include file="menuAll.jsp"%>
 		</div>
 		<div id="main">
-			<form id="clicked-profile">
-				<input type="hidden" value="${proVO.id }">
+			<form id="clicked-profile" action="userprofile" method="get">
+				<input type="hidden" value="${proVO.id }" name="id">
 			</form>
-			<form id="clicked-re-profile">
+			<form id="clicked-re-profile" action="userprofile" method="get">
+				<input type="hidden" value="${reProVO.id }" name="id">
 			</form>
-			<form id="clicked-repost">
-			
+			<form id="clicked-repost" action="myPost" method="get">
+				<input type="hidden" value="${repvo.no }" name="no">
 			</form>
 			<!-- 게시물 시작 -->
 			<div class="one-post-container">
@@ -61,19 +61,19 @@
 		                <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3" />
 		            </svg>
 					<div class="one-post-menu-box">
-						<button type="button" class="theme">
+						<button type="button" class="theme one-post-menu-edit">
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
 		                        <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325" />
 		                    </svg>
 							EDIT
 						</button>
-						<button type="button" class="theme">
+						<button type="button" class="theme one-post-menu-remove">
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
 		                        <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
 		                    </svg>
 							REMOVE
 						</button>
-						<button type="button" class="theme">REPORT...</button>
+						<button type="button" class="theme one-post-menu-report">REPORT...</button>
 					</div>
 				</div>
 				
@@ -82,6 +82,7 @@
 					<span class="contents-span">
 						${postvo.cont }
 					</span>
+					<textarea maxlength="100" class="edit-contents-textarea theme" required>${postvo.cont }</textarea>
 				</div>
 				
 				<!-- 게시물 프로필 사진 아래 빈 공간 -->
@@ -183,6 +184,8 @@
 		                    <path d="M6.75 1a.75.75 0 0 1 .75.75V8a.5.5 0 0 0 1 0V5.467l.086-.004c.317-.012.637-.008.816.027.134.027.294.096.448.182.077.042.15.147.15.314V8a.5.5 0 0 0 1 0V6.435l.106-.01c.316-.024.584-.01.708.04.118.046.3.207.486.43.081.096.15.19.2.259V8.5a.5.5 0 1 0 1 0v-1h.342a1 1 0 0 1 .995 1.1l-.271 2.715a2.5 2.5 0 0 1-.317.991l-1.395 2.442a.5.5 0 0 1-.434.252H6.118a.5.5 0 0 1-.447-.276l-1.232-2.465-2.512-4.185a.517.517 0 0 1 .809-.631l2.41 2.41A.5.5 0 0 0 6 9.5V1.75A.75.75 0 0 1 6.75 1M8.5 4.466V1.75a1.75 1.75 0 1 0-3.5 0v6.543L3.443 6.736A1.517 1.517 0 0 0 1.07 8.588l2.491 4.153 1.215 2.43A1.5 1.5 0 0 0 6.118 16h6.302a1.5 1.5 0 0 0 1.302-.756l1.395-2.441a3.5 3.5 0 0 0 .444-1.389l.271-2.715a2 2 0 0 0-1.99-2.199h-.581a5 5 0 0 0-.195-.248c-.191-.229-.51-.568-.88-.716-.364-.146-.846-.132-1.158-.108l-.132.012a1.26 1.26 0 0 0-.56-.642 2.6 2.6 0 0 0-.738-.288c-.31-.062-.739-.058-1.05-.046zm2.094 2.025" />
 		                </svg>
 		                <span class="show-cnt-span">${postvo.show }</span> <!-- 조회수 -->
+		                <button type="button" class="edit-confirm-btn theme">EDIT POST</button>
+		                <button type="button" class="edit-cancel-btn theme">CANCEL EDIT</button>
 					</span>
 				</div>
 				
@@ -250,7 +253,18 @@
 </body>
 
 <script>
+
+	//페이지 로드 할 때 좋아요 누른 여부 가져오기
+	$(document).ready(function(){
+		setting();
+		adjustImgs();
+		adjustReImgs();
+		limitMenu();
+		limitProfileShow();
+	});
 	
+	//현재 로그인 아이디
+	const curId = '<%=(String)session.getAttribute("userid") %>';
 	//게시물 전체 이미지
 	const allImg = $('.attach-div img');
 	//리포스트 게시물 전체 이미지
@@ -260,17 +274,122 @@
 	// 리포스트 게시물 이미지 현재 인덱스
 	let reImgIdx = 0;
 	
+	//게시물의 프로필사진 및 아이디 닉네임 클릭해서 해당 프로필로 이동
+	$('.photo-div, .one-post-names').on('click', function() {
+		$('#clicked-profile').submit();
+	});
+	//리포스트 게시물의 프로필사진 및 아이디 닉네임 클릭해서 해당 프로필로 이동
+	$('.re-photo-div, .reposted-names').on('click', function() {
+		$('#clicked-re-profile').submit();
+	});
+	//리포스트 게시물 클릭 시 해당 게시물로 이동
+	$('.reposted-cont').on('click', function() {
+		$('#clicked-repost').submit();
+	});
+	
+	//게시물 작성자와 세션 아이디 비교해서 사용 가능한 메뉴 제한.
+	function limitMenu() {
+		if ('${proVO.id}' != curId) { // 게시물 작성자 아이디와 현재 로그인 아이디 다를 때 
+			$('.one-post-menu-edit').remove();
+			$('.one-post-menu-remove').remove();
+		}
+	}
+	// 게시물 작성자 프로필 클릭 시 이동할 페이지에 대한 form action 조정.
+	function limitProfileShow() {
+		if ('${proVO.id}' == curId) { // 게시물 작성자 아이디와 현재 로그인 아이디 같을 때
+			$('#clicked-profile').attr('action', 'profileShow');
+			$('#clicked-profile > input[type="hidden"]').attr('disabled', '');
+		}
+		if ('${reProVO.id}' == curId) { // 리포스트 게시물 작성자 아이디와 현재 로그인 아이디 같을 때
+			$('#clicked-re-profile').attr('action', 'profileShow');
+			$('#clicked-re-profile > input[type="hidden"]').attr('disabled', '');
+		}
+	}
+	
 	//...버튼 눌러서 메뉴 활성화 비활성화
 	$('.one-post-menu svg').on('click', function() {
 	    $(this).css('pointer-events', 'none');
-	    let status = $('.one-post-menu-box').css('display');
+	    onOffMenu();
+	    $(this).css('pointer-events', 'auto');
+	});
+	function onOffMenu() {
+		let status = $('.one-post-menu-box').css('display');
 	    if (status.indexOf('block') == -1) {
 	        $('.one-post-menu-box').css('display', 'block');
 	    } else {
 	        $('.one-post-menu-box').css('display', 'none');
 	    }
-	    $(this).css('pointer-events', 'auto');
+	}
+	// 메뉴 클릭 시 이벤트 처리
+	$('.one-post-menu-box button').on('click', function() {
+		let status = $(this).attr('class');
+		if (status.indexOf('edit') != -1) {
+			$('.contents-span').css('display', 'none');
+			$('.edit-contents-textarea').css('display', 'block');
+			$('.interactions-span svg, .interactions-span span').css('display', 'none');
+			$('.interactions-span button[class^=edit-]').css('display', 'block');
+		} else if (status.indexOf('remove') != -1) {
+			if (confirm('해당 작업은 되돌릴 수 없습니다. 게시물을 삭제하시겠습니까?')) {
+				deletePost();
+			}
+		} else if (status.indexOf('report') != -1) {
+			
+		}
+		onOffMenu();
 	});
+	$('.interactions-span button[class^=edit-]').on('click', function() {
+		let status = $(this).attr('class');
+		console.log(status);
+		if (status.indexOf('confirm') != -1) { // edit post 버튼 클릭 시
+			if ($.trim($('.edit-contents-textarea').val()) == '') { // 빈칸 입력 시
+				alert('게시물은 필수로 작성해야 합니다.');
+			} else if (confirm('게시물을 수정하시겠습니까?')) { // 수정 확인 창
+				updatePost();
+			}
+		} else if (status.indexOf('cancel') != -1) { // cancel post 버튼 클릭 시
+			if (confirm('수정한 내용이 저장되지 않습니다. 취소하시겠습니까?')) {
+				location.reload(true);
+			}
+		}
+	});
+	function updatePost() {
+		$.ajax({
+			url: 'edit-save',
+			type: 'post',
+			data: {
+				no: '${postvo.no}',
+				cont: $.trim($('.edit-contents-textarea').val())
+			},
+			success: function(result) {
+				if (result == 1) {
+					location.reload(true);
+				} else {
+					alert('잠시 후 다시 시도해주세요.');
+				}
+			},
+			error: function() {
+				alert('잠시 후 다시 시도해주세요.');
+			}
+		});
+	}
+	function deletePost() {
+		$.ajax({
+			url: 'delete-post',
+			type: 'get',
+			data: {
+				no: '${postvo.no}'
+			},
+			success: function() {
+				location.href="/sns/main";
+			},
+			error: function() {
+				alert('잠시 후 다시 시도해주세요.');
+			}
+		});
+	}
+
+	
+	
 	//게시물 사진 css 적용
 	function adjustImgs() {
 	    allImg.css('display', 'none');
@@ -370,12 +489,7 @@
 	
 
 
-	//페이지 로드 할 때 좋아요 누른 여부 가져오기
-	$(document).ready(function(){
-		setting();
-		adjustImgs();
-		adjustReImgs();
-	})
+
 
 	function showSheet(){
 		document.getElementById("moveSheet").classList.add("active");

@@ -68,6 +68,9 @@ a {
     background-clip: content-box, border-box;
     position: relative;
 }
+.photo-div:hover {
+	cursor: pointer;
+}
 .one-post-photo .photo-div img {
     position: absolute;
     top: 0;
@@ -81,6 +84,9 @@ a {
     grid-column: 2 / 3;
     grid-row: 1 / 2;
     display: flex;
+}
+.one-post-names:hover {
+	cursor: pointer;
 }
 .one-post-names .nickname-span {
     font-size: 25px;
@@ -158,6 +164,19 @@ a {
     word-wrap: break-word;
     word-break: keep-all;
 }
+.one-post-cont .edit-contents-textarea {
+    display: none;
+    width: 525px;
+    height: 50px;
+    resize: none;
+    word-wrap: break-word;
+    word-break: keep-all;
+    border: 1px solid #00f7ff;
+}
+.one-post-cont .edit-contents-textarea::-webkit-scrollbar {
+    width: 0px;
+}
+
 
 /* 리포스트 마크 아래 공백 영역 */
 .one-post-space {
@@ -299,6 +318,9 @@ button[class^=re-arrow-] svg {
     background-clip: content-box, border-box;
     position: relative;
 }
+.re-photo-div:hover {
+	cursor: pointer;
+}
 .re-photo-div img {
 	position: absolute;
 	width: 100%;
@@ -326,6 +348,9 @@ button[class^=re-arrow-] svg {
     margin-left: 5px;
     height: fit-content;
 }
+.reposted-names:hover {
+	cursor: pointer;
+}
 
 /* 리포스트 게시물 내용 영역 */
 .reposted-cont {
@@ -336,6 +361,9 @@ button[class^=re-arrow-] svg {
 }
 .reposted-cont::-webkit-scrollbar {
     width: 0px;
+}
+.reposted-cont:hover {
+	cursor: pointer;
 }
 .re-contents-span {
     word-break: keep-all;
@@ -368,6 +396,39 @@ button[class^=re-arrow-] svg {
     margin: 10px 0px;    
     margin-left: -50px;
 }
+.interactions-span .edit-confirm-btn {
+	display: none;
+    border: 2px solid #00f7ff;
+    border-radius: 7.5px;
+    background-color: transparent;
+    font-weight: bold;
+    font-size: 20px;
+    height: fit-content;
+    margin-top: 7.5px;
+}
+.interactions-span .edit-cancel-btn {
+	display: none;
+    border: 2px solid #ff00bf;
+    border-radius: 7.5px;
+    background-color: transparent;
+    font-weight: bold;
+    font-size: 20px;
+    height: fit-content;
+    margin-top: 7.5px;
+}
+.edit-confirm-btn:hover {
+    transition-duration: 150ms;
+    cursor: pointer;
+    background-color: #00f7ff;
+    color: black;
+}
+.edit-cancel-btn:hover {
+    transition-duration: 150ms;
+    cursor: pointer;
+    background-color: #ff00bf;
+    color: black;
+}
+
 
 
 
