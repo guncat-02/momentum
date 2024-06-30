@@ -130,7 +130,7 @@
 				<input type="hidden" value="${mp.no}" id="p_lovehid${mp.no}">
 				<div class="mpfooter theme">
 					<div>
-						<button type="button" class="p_lovebut${mp.no }" onclick="p_love(${mp.no })">
+						<button type="button" class="p_lovebut${mp.no } theme" onclick="p_love(${mp.no })">
 							<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314" /> </svg>
 						</button>
 						<span class="footspan p_lovecnt${mp.no}">${mp.p_love}</span>

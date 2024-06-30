@@ -227,14 +227,13 @@
             menu.style.display = "block";
         }
     })
-    console.log("${lovelength}");
     window.onload = function() {
         const img = document.querySelector('.proImg');
         const photo = document.querySelector('#photo');
-         
-        if(photo.value != "null") {
+  
+        if(photo.value != "" && photo.value != null) {
             img.src = "download?filename="+photo.value;
-        } else if(photo.value == "null") {
+        } else {
             img.src = "./resources/img/프로필.png";
         }
     }
