@@ -99,23 +99,7 @@ body {
 	box-shadow: none;
 }
 
-/* 내가 팔로우하는 유저 목록 간단히 보여주는 table의 div */
-#simplefollowtable {
-    display: block;
-    width: 100%;
-    height: fit-content;
-}
 
-#simplefollowtable table {
-    width: 100%;
-    height: fit-content;
-    border-collapse: collapse;
-}
-
-#simplefollowtable table,tr,th,td {
-    padding: 5px 0px;
-    /* border: 1px solid red; */
-}
 
 /* 로그 아웃 글자 */
 #logout {

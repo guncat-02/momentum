@@ -18,6 +18,7 @@ import service.IF_MainService;
 import service.IF_PostingService;
 import service.IF_ProfileService;
 import util.FileDataUtil;
+import vo.CommVO;
 import vo.PostVO;
 import vo.ProfileVO;
 

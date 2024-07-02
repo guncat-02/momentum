@@ -82,10 +82,5 @@ public class ProfileVO {
 		}
 		return telNum;
 	}
-	@Override
-	public String toString() {
-		return "ProfileVO [id=" + id + ", nickName=" + nickName + ", photo=" + photo + ", tel=" + tel + ", bio=" + bio
-				+ ", privacy=" + privacy + ", p_main=" + p_main + ", email=" + email + "]";
-	}
 	
 }

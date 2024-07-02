@@ -12,7 +12,9 @@ public class PostVO {
 	private int c_block; //댓글 차단 여부
 	private String id; //작성자 id
 	private String p_date; //글 작성일
-	
+	private int commCnt; // 글의 댓글 수
+	private int p_love; // 글의 좋아요 수
+	private int reCnt; // 글의 좋아요 수
 	//getter
 	public int getNo() {
 		return no;
@@ -41,7 +43,15 @@ public class PostVO {
 	public String getId() {
 		return id;
 	}
-	
+	public int getCommCnt() {
+		return commCnt;
+	}
+	public int getP_love() {
+		return p_love;
+	}
+	public int getReCnt() {
+		return reCnt;
+	}
 	//setter
 	public void setNo(int no) {
 		this.no = no;
@@ -70,10 +80,19 @@ public class PostVO {
 	public void setId(String id) {
 		this.id = id;
 	}
+	public void setCommCnt(int commCnt) {
+		this.commCnt = commCnt;
+	}
+	public void setP_love(int p_love) {
+		this.p_love = p_love;
+	}
+	public void setReCnt(int reCnt) {
+		this.reCnt = reCnt;
+	}
 	@Override
 	public String toString() {
 		return "PostVO [no=" + no + ", re_no=" + re_no + ", cont=" + cont + ", show=" + show + ", filename="
 				+ Arrays.toString(filename) + ", privacy=" + privacy + ", c_block=" + c_block + ", id=" + id
-				+ ", p_date=" + p_date + "]";
+				+ ", p_date=" + p_date + ", commCnt=" + commCnt + ", p_love=" + p_love + ", reCnt=" + reCnt + "]";
 	}
 }

@@ -19,5 +19,4 @@ public interface IF_PostingService {
 	public int updatePost(HashMap<String, Object> editMap) throws Exception;
 	
 	public int deletePost(int no) throws Exception;
-	
 }

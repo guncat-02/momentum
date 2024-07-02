@@ -152,7 +152,6 @@ body {
 
 #myNick {
 	color: #ff00bf;
-	text-shadow: #00f7ff 3px 3px;
 	font-size: 45px;
 }
 
@@ -268,7 +267,7 @@ a {
 	margin-top: 50px;
 	height: 30px;
 	justify-content: space-evenly;
-	padding-left: 150px;
+	padding-left : 130px;
 	padding-top: 10px;
 }
 
@@ -344,7 +343,7 @@ a {
 .modal_body {
 	position: absolute;
 	top: 50%;
-	width: 400px;
+	width: 600px;
 	height: 600px;
 	padding: 40px;
 	text-align: center;
@@ -357,8 +356,8 @@ a {
 
 
 .closeModal {
-	left : 90%;
-	bottom : 93%;
+	left : 94%;
+	bottom : 94%;
 	position: absolute;
 	cursor: pointer;
 }
@@ -369,8 +368,8 @@ a {
 .modalImg {
 	width:100%;
     height:100%;
-	 max-width:380px;
-    max-height: 500px
+	 max-width:600px;
+    max-height: 600px
     object-fit:cover;
 }
 
@@ -383,4 +382,74 @@ a {
 	text-align : center;
 	padding-top: 150px;
 	
+}
+
+.c_pro {
+	text-align : center;
+	padding-top : 50px;
+	padding-bottom : 50px;
+}
+.c_name {
+	font-size :60px;
+}
+.addspan {
+	color : #00f7ff;
+	font-size :50px;
+}
+.addspan2 {
+	color : #ff00bf;
+}
+.c_cnt {
+	font-size : 20px;
+}
+
+.prephoto {
+	width : 70px;
+	height: 70px;
+}
+.prephoto img {
+	width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.pc_cont {
+	display : flex;
+	justify-content : space-between;
+	border : 1px solid ;
+	width : 700px;
+	margin-left : 300px;
+	background-color: #444444;
+}
+.mc_div {
+
+	display : flex;
+	margin : 30px;
+	width : 600px;
+	margin-left : 400px;
+	justify-content: space-between;
+}
+.mc_id {
+	color: #ff00bf;
+}
+.mc_comm {
+	 white-space: nowrap;
+	overflow: hidden;      
+	text-overflow: ellipsis; 
+	max-width: 400px;
+}
+.mcpid {
+	color : #00f7ff;
+	font-size : 20px;
+	margin-top :20px
+}
+.mcpcont {
+	margin-top :12px;
+	color : #ffffff;
+	font-weight: bolder;
+	margin-left :30px;
+	width: 300px;
+	padding: 10px; 
+	overflow: hidden;
+	word-wrap: break-word;
 }

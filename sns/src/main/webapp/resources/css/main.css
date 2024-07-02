@@ -29,7 +29,11 @@ body {
 	box-shadow: 3px 0px 7px 0px #41c4c4;
 	overflow-y: auto;
 }
-
+#main {
+	display: block;
+	width: 100%;
+	height: fit-content;
+}
 .myPost {
 	border: 1px solid #2f3336;
 	color: white;
@@ -119,7 +123,7 @@ body {
 	margin-top: 30px;
 	height: 70px;
 	justify-content: space-evenly;
-	padding-left: 100px;
+	padding-right : 50px;
 	padding-top: 7px;
 }
 
@@ -134,5 +138,26 @@ body {
 .p_alink {
 	text-decoration: none;
 	color: inherit;
+	cursor: pointer;
+}
+.userprofilealink {
+	text-decoration: none;
+  	cursor: pointer;
+}
+
+
+[class*="p_lovebut"] {
+	border: 0;
+ 	background-color: transparent;
+}
+[class*="p_lovebut"]:hover {
+      color:red;
+      transition: 0.7s;
+}
+[class*="p_repostbut"] {
+	border: 0;
+	background-color: transparent;
+}
+[class*="p_repostbut"]:hover {
 	cursor: pointer;
 }

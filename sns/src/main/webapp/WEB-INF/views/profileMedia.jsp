@@ -69,7 +69,7 @@
 		</div>
 	</div>
 	<div id="myMenu" class="theme">
-		<input type="button" class="myMenuItem theme" value="POST" onclick="postbut()"> <input type="button" class="myMenuItem theme" value="REPOST" onclick="repostbut()"> <input type="button" class="myMenuItem theme" value="COMMENT" onclick="commentbut()"> <input type="button" class="myMenuItem theme" value="MEDIA" onclick="mediabut()"> <input type="button" class="myMenuItem theme" value="LOVE" onclick="lovebut()">
+		<input type="button" class="myMenuItem theme" value="POST" onclick="postbut('${profile.id}')"> <input type="button" class="myMenuItem theme" value="REPOST" onclick="repostbut('${profile.id}')"> <input type="button" class="myMenuItem theme" value="COMMENT" onclick="commentbut('${profile.id}')"> <input type="button" class="myMenuItem theme" value="MEDIA" onclick="mediabut('${profile.id}')"> <input type="button" class="myMenuItem theme" value="LOVE" onclick="lovebut('${profile.id}')">
 	</div>
 	<div class="media">
 		<div class="m_intro">
@@ -136,23 +136,26 @@
     window.onload = function() {
         const img = document.querySelector('.proImg');
         const photo = document.querySelector('#photo');
-         
-        if(photo.value != "null") {
+  
+        if(photo.value != "" && photo.value != null) {
             img.src = "download?filename="+photo.value;
-        } else if(photo.value == "null") {
+        } else {
             img.src = "./resources/img/프로필.png";
         }
     }
 
-    function postbut() {
-   	 location.href = "profileShow";
+    function postbut(id) {
+   	 location.href = "profileShow?id="+id;
    }
+    function commentbut(id) {
+    	location.href = "profileComment?id="+id;
+    }
    
-   function mediabut() {
-  	 	location.href = "profileMedia";
+   function mediabut(id) {
+  	 	location.href = "profileMedia?id="+id;
   }
-   function lovebut() {
-  	 	location.href = "profileLove";
+   function lovebut(id) {
+  	 	location.href = "profileLove?id="+id;
   }
     
     

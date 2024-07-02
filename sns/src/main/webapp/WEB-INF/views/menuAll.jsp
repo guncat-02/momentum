@@ -114,22 +114,6 @@
         <br>
         
     </div>
-    <!--내가 팔로우하는 유저 목록 간단하게 보여주는 table-->
-    <div id="simplefollowtable">
-        <table>
-            <thead>
-                <tr>
-                    <th colspan="2">FOLLOWINGS</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td width="20%">photo</td>
-                    <td>username</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
     <div id="logout">
         <a href="/sns/logout" id="menu-logout">
         	<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-power" viewBox="0 0 16 16">

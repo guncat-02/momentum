@@ -498,7 +498,6 @@
 	function hideSheet(){
 		document.getElementById("moveSheet").classList.remove("active");
 	}
-
 	// 댓글 열고 닫기 
 	function opencomm() {
     	console.log("dd")
@@ -748,7 +747,6 @@
 				},
 		 });
 	}
-
 	
 </script>
 </html>

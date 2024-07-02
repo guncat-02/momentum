@@ -13,6 +13,7 @@
     integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer">
 </script>
+<script src="/sns/resources/JS/setTheme.js"></script>
 </head>
 <body class="theme">
 	<input type="hidden" value="${profile.photo}" id="photo">
@@ -48,8 +49,8 @@
 				<table>
 					<tr>
 						<th style="width: calc(100%/ 3);">게시물</th>
-						<th style="width: calc(100%/ 3);"><a href="/sns/followList/followings?id=${profile.id }">FOLLOWING</a></th>
-						<th style="width: calc(100%/ 3);"><a href="/sns/followList/followers?id=${profile.id }">FOLLOWER</a></th>
+						<th style="width: calc(100%/ 3);"><a href="/sns/followList/followings">FOLLOWING</a></th>
+						<th style="width: calc(100%/ 3);"><a href="/sns/followList/followers">FOLLOWER</a></th>
 					</tr>
 					<tr>
 						<td>${postlength}</td>
@@ -76,11 +77,11 @@
 	<div class="myPost">
 		<c:forEach items="${mypostList}" var="mp">
 		<c:set var="filenameLength" value="${fn:length(mp.filename)}" />
-		<a href="myPost?no=${mp.no}" style="cursor:pointer;" class = "p_alink">
+		<a href="myPost?no=${mp.no}" style="cursor:pointer;" class = "p_alink" onclick="p_show(${mp.no})">
 			<div class="p_inf">
 				<div class="proimg">
 				<c:choose>
-					<c:when test ="${ !empty profile.photo }">
+					<c:when test ="${ !empty profile.photo}">
 						<img class="profileImg" src="download?filename=${profile.photo }">
 					</c:when>
 					<c:otherwise>
@@ -184,27 +185,29 @@
 					<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
   <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314" />
 </svg>
-					<span class="footspan">${mp.show}</span>
+					<span class="footspan">${mp.p_love}</span>
 				</div>
 				<div>
 					<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-chat-right-dots-fill" viewBox="0 0 16 16">
   <path d="M16 2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h9.586a1 1 0 0 1 .707.293l2.853 2.853a.5.5 0 0 0 .854-.353zM5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0m3 1a1 1 0 1 1 0-2 1 1 0 0 1 0 2" />
 </svg>
-					<span class="footspan">${mp.show}</span>
+					<span class="footspan">${mp.commCnt}</span>
 				</div>
 				<div>
 					<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-share" viewBox="0 0 16 16">
   <path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.5 2.5 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5m-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3m11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3" />
 </svg>
-					<span class="footspan">${mp.show}</span>
+					<span class="footspan">${mp.reCnt}</span>
 				</div>
 				<div>
-					<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-bar-chart" viewBox="0 0 16 16">
-  <path d="M4 11H2v3h2zm5-4H7v7h2zm5-5v12h-2V2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1z" />
+					<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+  <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
+  <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
 </svg>
 					<span class="footspan">${mp.show}</span>
 				</div>
-				<div></div>
+				<div>
+				</div>
 			</div>
 		</c:forEach>
 	</div>
@@ -225,10 +228,10 @@
     window.onload = function() {
         const img = document.querySelector('.proImg');
         const photo = document.querySelector('#photo');
-         
-        if(photo.value != "null") {
+  
+        if(photo.value != "" && photo.value != null) {
             img.src = "download?filename="+photo.value;
-        } else if(photo.value == "null") {
+        } else {
             img.src = "./resources/img/프로필.png";
         }
     }
@@ -236,13 +239,26 @@
     function postbut() {
     	 location.href = "profileShow";
     }
-    
+    function commentbut() {
+    	location.href = "profileComment";
+    }
     function mediabut() {
    	 	location.href = "profileMedia";
    }
     function lovebut() {
    	 	location.href = "profileLove";
    }
+    
+    function p_show(no) {
+		$.ajax({
+			type:"GET",
+			url:"p_show",
+			data: {"no" : no},
+			cache : false,
+			success:function() {
+				}
+		 })  
+	}
      
     
 </script>

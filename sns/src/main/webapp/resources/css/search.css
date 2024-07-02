@@ -1,0 +1,99 @@
+body {
+    width: auto;
+    margin: 0px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bolder;
+}
+
+/* 메뉴바, 메인 div 포함하는 전체 div */
+#all {
+    display: flex;
+    justify-content: left;
+}
+
+/* 왼쪽 메뉴 바 */
+#menuall {
+    display: block;
+    width: 240px;
+    height: 100vmin;
+    position: sticky;
+    top: 0;
+    border-right: 1px solid #00f7ff;
+    box-shadow: 3px 0px 7px 0px #41c4c4;
+    overflow-y: auto;
+}
+
+/* 메인 컨텐츠 */
+#main {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+}
+
+#searchBar {
+    display: flex;
+    justify-content: space-between;
+    border: 2px solid #00f7ff;
+    border-radius: 15px;
+    width: 95%;
+    height: 60px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 15px;
+}
+
+#searIcon {
+    width: 7%;
+    height: 100%;
+    text-align: center;
+}
+
+.bi-search-heart {
+    width: 80%;
+    height: 80%;
+    margin-top: 10%;
+    color: #ff00bf;
+    margin-left: 10%;
+}
+
+#search {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bolder;
+    width: 92%;
+    border-radius: 15px;
+    background-color: transparent;
+    border: none;
+    color: #ff00bf;
+    font-size: 18px;
+}
+
+#search:focus {
+    outline: none;
+}
+
+#search::-ms-clear,
+#search::-ms-reveal{
+    display: none;
+}
+
+#search::-webkit-search-decoration,
+#search::-webkit-search-cancel-button,
+#search::-webkit-search-results-button,
+#search::-webkit-search-results-decoration{
+    display: none;
+}
+
+#trendyTitle {
+    width: 95%;
+    height: 42px;
+    margin-top: 2%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#trendyTitle span {
+    display: block;
+    font-size: 35px;
+    color: #00f7ff;
+}

@@ -42,7 +42,7 @@ body {
     margin: 50px auto;
 }
 #admin-grid-container > div {
-    /* border: 1px solid red; */
+    border: 1px solid red;
 }
 #title {
     grid-column: 1 / 7;
