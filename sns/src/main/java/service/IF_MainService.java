@@ -1,5 +1,6 @@
 package service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import vo.PostVO;
@@ -26,5 +27,18 @@ public interface IF_MainService {
 	public int takeP_loveCnt(int no) throws Exception;
 	// 글의 리포스트 개수
 	public int takeReCnt(int no) throws Exception;
+	// 좋아요 증가 ajax
+	public void p_love(HashMap<String, Object> params) throws Exception;
+	// 좋아요 취소 ajax
+	public void p_loveCancel(HashMap<String, Object> params) throws Exception;
+	// 좋아요 누른 리스트
+	public List<Integer> chklove(String id) throws Exception;
+	
+	
+	public String[] getAttach(int no) throws Exception;
+	
+	public Integer getLoveCnt(int no) throws Exception;
+	
+	public Integer getRePostedCnt(int no) throws Exception;
 	
 }

@@ -42,7 +42,7 @@
         const chat = $('.proCnt');
         if(chat.length != 0) {
         	for(let i = 0; i < chat.length; i++) {
-                if(chat[i].value.includes(nick)) {
+                if(chat[i].value == nick) {
                     location.href = "chat?nickName="+nick;
                 } else {
                     location.href = "newChat?nickName="+nick;

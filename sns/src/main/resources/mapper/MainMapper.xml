@@ -38,7 +38,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id= "takeReCnt" parameterType = "int" resultType= "int">
 		select count(*) from posttest where re_no = #{no}
 	</select>
+	<select id = "chklove" parameterType = "String" resultType="int">
+		select no from p_lovetest where id = #{id}
+	</select>
 	<update id = "p_show" parameterType="int">
 		update posttest set show = show+1 where no = #{no} 
 	</update>
+	<insert id = "p_love" parameterType="hashmap">
+		insert into p_lovetest values(#{id},#{no}) 
+	</insert>
+	<delete id = "p_loveCancel" parameterType="hashmap">
+		delete from p_lovetest where id= #{id} and no = #{no}
+	</delete>
+	<select id="selectAttachWhere" parameterType="_int" resultType="String">
+		select filename from attachTest where no = #{no}
+	</select>
 </mapper>

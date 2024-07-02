@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import vo.CommVO;
 import vo.ManagerVO;
 import vo.MemberVO;
+import vo.PageVO;
 import vo.PostVO;
 import vo.ProfileVO;
 
@@ -22,53 +24,85 @@ public class ManagerDao implements IF_ManagerDao{
 	SqlSession sql;
 	
 	@Override
-	public List<MemberVO> getAllMembers() throws Exception {
-		return sql.selectList(mapperQuery+".selectAllMembers");
+	public List<MemberVO> getAllMembers(PageVO pvo) throws Exception {
+		return sql.selectList(mapperQuery+".selectAllMembers", pvo);
 	}
 
 	@Override
-	public List<ProfileVO> getAllProfiles() throws Exception {
-		return sql.selectList(mapperQuery+".selectAllProfiles");
+	public List<ProfileVO> getAllProfiles(PageVO pvo) throws Exception {
+		return sql.selectList(mapperQuery+".selectAllProfiles", pvo);
 	}
 
 	@Override
-	public List<PostVO> getAllPosts() throws Exception {
-		return sql.selectList(mapperQuery+".selectAllPosts");
+	public List<PostVO> getAllPosts(PageVO pvo) throws Exception {
+		return sql.selectList(mapperQuery+".selectAllPosts", pvo);
 	}
 
 	@Override
-	public List<CommVO> getAllComms() throws Exception {
-		return sql.selectList(mapperQuery+".selectAllComms");
+	public List<CommVO> getAllComms(PageVO pvo) throws Exception {
+		return sql.selectList(mapperQuery+".selectAllComms", pvo);
 	}
 
 	@Override
-	public List<MemberVO> getAllAdmins() throws Exception {
-		return sql.selectList(mapperQuery+".selectAllAdmins");
+	public List<MemberVO> getAllAdmins(PageVO pvo) throws Exception {
+		return sql.selectList(mapperQuery+".selectAllAdmins", pvo);
 	}
 
 	@Override
-	public List<MemberVO> searchMembers(ManagerVO mvo) throws Exception {
-		return sql.selectList(mapperQuery+".selectMembersWhere", mvo);
+	public List<MemberVO> searchMembers(PageVO pvo) throws Exception {
+		return sql.selectList(mapperQuery+".selectMembersWhere", pvo);
 	}
 
 	@Override
-	public List<ProfileVO> searchProfiles(ManagerVO mvo) throws Exception {
-		return sql.selectList(mapperQuery+".selectProfilesWhere", mvo);
+	public List<ProfileVO> searchProfiles(PageVO pvo) throws Exception {
+		return sql.selectList(mapperQuery+".selectProfilesWhere", pvo);
 	}
 
 	@Override
-	public List<PostVO> searchPosts(ManagerVO mvo) throws Exception {
-		return sql.selectList(mapperQuery+".selectPostsWhere", mvo);
+	public List<PostVO> searchPosts(PageVO pvo) throws Exception {
+		return sql.selectList(mapperQuery+".selectPostsWhere", pvo);
 	}
 
 	@Override
-	public List<CommVO> searchComms(ManagerVO mvo) throws Exception {
-		return sql.selectList(mapperQuery+".selectCommsWhere", mvo);
+	public List<CommVO> searchComms(PageVO pvo) throws Exception {
+		return sql.selectList(mapperQuery+".selectCommsWhere", pvo);
 	}
 
 	@Override
-	public List<MemberVO> searchAdmins(ManagerVO mvo) throws Exception {
-		return sql.selectList(mapperQuery+".selectMembersWhere", mvo);
+	public List<MemberVO> searchAdmins(PageVO pvo) throws Exception {
+		return sql.selectList(mapperQuery+".selectMembersWhere", pvo);
+	}
+	
+	// 검색 X 시 모든 튜플 카운트
+	@Override
+	public int getTotalCount(PageVO pvo) throws Exception {
+		return sql.selectOne(mapperQuery+".selectAllCounts", pvo);
+	}
+
+	// 검색 시 조건에 맞는 튜플 카운트
+	@Override
+	public int getMembersSearchCount(PageVO pvo) throws Exception {
+		return sql.selectOne(mapperQuery+".selectMemberCountWhere", pvo);
+	}
+
+	@Override
+	public int getProfilesSearchCount(PageVO pvo) throws Exception {
+		return sql.selectOne(mapperQuery+".selectProfileCountWhere", pvo);
+	}
+
+	@Override
+	public int getPostsSearchCount(PageVO pvo) throws Exception {
+		return sql.selectOne(mapperQuery+".selectPostCountWhere", pvo);
+	}
+
+	@Override
+	public int getCommsSearchCount(PageVO pvo) throws Exception {
+		return sql.selectOne(mapperQuery+".selectCommCountWhere", pvo);
+	}
+
+	@Override
+	public int getAdminsSearchCount(PageVO pvo) throws Exception {
+		return sql.selectOne(mapperQuery+".selectMemberCountWhere", pvo);
 	}
 
 }

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.IF_ReportDAO">
+
+	<insert id="report" parameterType="vo.ReportVO">
+		insert into reporttest values (#{no}, #{id}, #{reportId}, default, #{r_loc}, #{st_type}, #{nd_type}, #{r_cont})
+
+	</insert>
+	
+</mapper>

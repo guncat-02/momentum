@@ -1,5 +1,6 @@
 package service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -115,6 +116,39 @@ public class MainServiceImpl implements IF_MainService{
 	public int takeReCnt(int no) throws Exception {
 		// TODO Auto-generated method stub
 		return maindao.takeReCnt(no);
+	}
+
+	@Override
+	public void p_love(HashMap<String, Object> params) throws Exception {
+		// TODO Auto-generated method stub
+		maindao.p_love(params);
+	}
+
+	@Override
+	public void p_loveCancel(HashMap<String, Object> params) throws Exception {
+		// TODO Auto-generated method stub
+		maindao.p_loveCancel(params);
+	}
+
+	@Override
+	public List<Integer> chklove(String id) throws Exception {
+		// TODO Auto-generated method stub
+		return maindao.chklove(id);
+	}
+	
+	public String[] getAttach(int no) throws Exception {
+		List<String> fList = maindao.getAttach(no);
+		return fList.toArray(new String[0]);
+	}
+
+	@Override
+	public Integer getLoveCnt(int no) throws Exception {
+		return maindao.getLoveCnt(no);
+	}
+
+	@Override
+	public Integer getRePostedCnt(int no) throws Exception {
+		return maindao.getRePostedCnt(no);
 	}
 	
 

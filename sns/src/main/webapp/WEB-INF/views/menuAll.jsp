@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="kor">
 
@@ -30,9 +30,9 @@
 
         <a href="profileShow">
             <div id="menu-profile-image">
-                <img src="" alt="">
+                <img>
             </div>
-            <span>PROFILE</span>
+            <span id="menu-profile-id">PROFILE</span>
         </a>
         <br>
 
@@ -140,6 +140,26 @@
     </div>
 </body>
 <script>
+
+	$(document).ready(function() {
+		$.ajax({
+			url: 'menu-profile',
+			type: 'get',
+			success: function(result) {
+				let photo = result.photo;
+				if (photo == null) {
+					photo = '/sns/resources/img/프로필.png';
+				} else {
+					photo = `/sns/download?filename=\${photo}`;
+				}
+				$('#menu-profile-image img').attr('src', photo);
+				$('#menu-profile-id').text(result.id);
+			},
+			error: function() {
+				console.log('e');
+			}
+		});
+	});
 
 	$('#theme-change-btn').on('click', function() {
 		switchTheme();

@@ -79,7 +79,11 @@ public class ProfileController {
 			List<PostVO> mypostList = mserve.myPostList(String.valueOf(session.getAttribute("userid")));
 			for(PostVO pvo : mypostList) {
 				int ccnt = mserve.takeCommCnt(pvo.getNo());
+				int p_love = mserve.takeP_loveCnt(pvo.getNo());
+				int reCnt = mserve.takeReCnt(pvo.getNo());
 				pvo.setCommCnt(ccnt);
+				pvo.setP_love(p_love);
+				pvo.setReCnt(reCnt);
 			}
 			model.addAttribute("mypostList",mypostList);
 			// 글 쓴 개수
@@ -93,7 +97,11 @@ public class ProfileController {
 			List<PostVO> mypostList = mserve.myPostList(id);
 			for(PostVO pvo : mypostList) {
 				int ccnt = mserve.takeCommCnt(pvo.getNo());
+				int p_love = mserve.takeP_loveCnt(pvo.getNo());
+				int reCnt = mserve.takeReCnt(pvo.getNo());
 				pvo.setCommCnt(ccnt);
+				pvo.setP_love(p_love);
+				pvo.setReCnt(reCnt);
 			}
 			model.addAttribute("mypostList",mypostList);
 			// 글 쓴 개수
@@ -179,7 +187,11 @@ public class ProfileController {
 			List<PostVO> lovepostList = mserve.lovePostList(String.valueOf(session.getAttribute("userid")));
 			for(PostVO pvo : lovepostList) {
 				int ccnt = mserve.takeCommCnt(pvo.getNo());
+				int p_love = mserve.takeP_loveCnt(pvo.getNo());
+				int reCnt = mserve.takeReCnt(pvo.getNo());
 				pvo.setCommCnt(ccnt);
+				pvo.setP_love(p_love);
+				pvo.setReCnt(reCnt);
 			}
 			model.addAttribute("lovepostList",lovepostList);
 			// 글 쓴 개수
@@ -195,7 +207,11 @@ public class ProfileController {
 			List<PostVO> lovepostList = mserve.lovePostList(id);
 			for(PostVO pvo : lovepostList) {
 				int ccnt = mserve.takeCommCnt(pvo.getNo());
+				int p_love = mserve.takeP_loveCnt(pvo.getNo());
+				int reCnt = mserve.takeReCnt(pvo.getNo());
 				pvo.setCommCnt(ccnt);
+				pvo.setP_love(p_love);
+				pvo.setReCnt(reCnt);
 			}
 			model.addAttribute("lovepostList",lovepostList);
 			// 글 쓴 개수

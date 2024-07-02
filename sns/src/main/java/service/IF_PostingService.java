@@ -1,5 +1,7 @@
 package service;
 
+import java.util.HashMap;
+
 import vo.PostVO;
 
 public interface IF_PostingService {
@@ -13,4 +15,8 @@ public interface IF_PostingService {
 	public void insertRePost(PostVO pvo) throws Exception;
 	
 	public PostVO selectOnePost(int no) throws Exception;
+	
+	public int updatePost(HashMap<String, Object> editMap) throws Exception;
+	
+	public int deletePost(int no) throws Exception;
 }

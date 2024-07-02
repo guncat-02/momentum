@@ -59,6 +59,16 @@ public class PostingService implements IF_PostingService{
 			pdao.insertAttach(fileMap);
 		}
 	}
+
+	@Override
+	public int updatePost(HashMap<String, Object> editMap) throws Exception {
+		return pdao.updatePost(editMap);
+	}
+
+	@Override
+	public int deletePost(int no) throws Exception {
+		return pdao.deletePost(no);
+	}
 	
 	
 

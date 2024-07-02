@@ -6,7 +6,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectCont" parameterType="String" resultType="vo.ChatContVO">
 		select * from chatContTest where chatNum = #{chatNum} order by chatTime asc
 	</select>
+	<select id="selectAttach" parameterType="String" resultType="vo.ChatContVO">
+		select * from chatAttachTest where chatNum = #{chatNum} order by chatTime asc
+	</select>
 	<insert id="insert" parameterType="vo.ChatContVO">
 		insert into chatContTest values (chatTest_no.nextval, #{chatNum}, #{nickName}, #{cont}, default)
+	</insert>
+	<insert id="insertAttach" parameterType="hashmap">
+		<choose>
+			<when test="check != null">
+				insert into chatAttachTest values ((select max(no) from chatAttachTest), #{vo.chatNum}, #{vo.nickName}, #{file}, default)
+			</when>
+			<when test ="check == null">
+				insert into chatAttachTest values (chatTest_no.nextval, #{vo.chatNum}, #{vo.nickName}, #{file}, default)
+			</when>
+		</choose>
 	</insert>
 </mapper>

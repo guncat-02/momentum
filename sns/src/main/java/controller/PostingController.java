@@ -1,6 +1,5 @@
 package controller;
 
-import java.io.IOException;
 import java.util.HashMap;
 
 import javax.inject.Inject;
@@ -12,8 +11,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import service.IF_MainService;
 import service.IF_PostingService;
 import service.IF_ProfileService;
 import util.FileDataUtil;
@@ -32,6 +33,9 @@ public class PostingController {
 	
 	@Inject
 	IF_ProfileService proservice;
+	
+	@Inject
+	IF_MainService mservice;
 
 	@GetMapping("/posting")
 	public String posting() {
@@ -66,6 +70,21 @@ public class PostingController {
 		pvo.setFilename(fileName);
 		pservice.insertRePost(pvo);
 		return "redirect:main";
+	}
+	
+	@PostMapping("edit-save")
+	@ResponseBody
+	public int editSave(@RequestParam("no")int no, @RequestParam("cont")String cont) throws Exception {
+		HashMap<String, Object> editMap = new HashMap<>();
+		editMap.put("no", no);
+		editMap.put("cont", cont);
+		return pservice.updatePost(editMap);
+	}
+	
+	@GetMapping("delete-post")
+	@ResponseBody
+	public int deletePost(@RequestParam("no")int no) throws Exception {
+		return pservice.deletePost(no);
 	}
 	
 }

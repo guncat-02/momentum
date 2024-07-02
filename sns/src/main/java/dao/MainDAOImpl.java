@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -79,6 +80,40 @@ public class MainDAOImpl implements IF_MainDAO{
 		// TODO Auto-generated method stub
 		return sqlsession.selectOne(mapperQuery+".takeReCnt",no);
 	}
+	// 좋아요 추가
+	@Override
+	public void p_love(HashMap<String, Object> params) throws Exception {
+		// TODO Auto-generated method stub
+		sqlsession.insert(mapperQuery+".p_love",params);
+	}
+	// 좋아요 취소
+	@Override
+	public void p_loveCancel(HashMap<String, Object> params) throws Exception {
+		// TODO Auto-generated method stub
+		sqlsession.delete(mapperQuery+".p_loveCancel",params);
+	}
+
+	@Override
+	public List<Integer> chklove(String id) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlsession.selectList(mapperQuery+".chklove", id);
+	}
+
+	@Override
+	public List<String> getAttach(int no) throws Exception {
+		return sqlsession.selectList(mapperQuery+".selectAttachWhere", no);
+	}
+
+	@Override
+	public Integer getLoveCnt(int no) throws Exception {
+		return sqlsession.selectOne(mapperQuery+".selectLoveCnt", no);
+	}
+
+	@Override
+	public Integer getRePostedCnt(int no) throws Exception {
+		return sqlsession.selectOne(mapperQuery+".selectRePostedCnt", no);
+	}
+
 	
 
 	
