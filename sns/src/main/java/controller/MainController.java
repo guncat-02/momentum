@@ -101,6 +101,12 @@ public class MainController {
 		
 		//클릭한 게시물
 		PostVO pvo = mser.takePostVO(no);
+		int ccnt = mser.takeCommCnt(pvo.getNo());
+		int p_love = mser.takeP_loveCnt(pvo.getNo());
+		int reCnt = mser.takeReCnt(pvo.getNo());
+		pvo.setCommCnt(ccnt);
+		pvo.setP_love(p_love);
+		pvo.setReCnt(reCnt);
 		pvo.setFilename(mser.getAttach(no));
 		//게시물 작성자
 		ProfileVO proVO = pser.select(pvo.getId());

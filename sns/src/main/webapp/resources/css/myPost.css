@@ -45,7 +45,7 @@ a {
     width: fit-content;
     height: fit-content;
     margin: 15px auto;
-    padding: 0px;
+    padding-right: 100px;
     grid-auto-flow: row dense;
 }
 
@@ -439,12 +439,15 @@ button[class^=re-arrow-] svg {
 
 #comments {
 	padding-top : 30px;
+	padding-left: 100px;
+	padding-bottom : 50px;
 }
 
 
 .comminput {
 	margin-top : 10px;
-	width : 900px;
+	margin-right :10px;
+	width : 750px;
 	height : 50px;
 	border-radius: 10px;
 	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -485,16 +488,17 @@ button[class^=re-arrow-] svg {
 
 
 #ctablediv {
+	width : 900px;
 	margin-top : 20px;
 	border-radius : 5px;
-	border : 1px solid #00f7ff;
+	border : 1px solid #808080;
 }
 
 [class*="ctable"] {
 	display : block;
-	width : 1000px;
+	width : 880px;
 	margin-left :10px;
-	border-bottom : 1px solid #00f7ff;
+	border-bottom : 1px solid #808080;
 	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; 
 }
 
@@ -503,7 +507,7 @@ button[class^=re-arrow-] svg {
 }
 
 .commcontents {
-	width : 1000px;
+	width : 800px;
 	height : 5px;
 	padding-left : 90px;
 	font-size : 20px;
@@ -559,6 +563,129 @@ button[class^=re-arrow-] svg {
  	background-color: transparent;
 	color: white;
 }
+[class*="p_lovebut"] {
+	border: 0;
+ 	background-color: transparent;
+}
+[class*="p_lovebut"]:hover {
+      color:red;
+      transition: 0.7s;
+  }
 
+/* 모달 시작*/
+.modal_Comm {
+	position: fixed;
+	display: none;
+	justify-content: center;
+	align-items: center;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.4);
+	z-index:1000;
+}
 
+.modal_body_comm {
+	position: absolute;
+	top: 50%;
+	width: 600px;
+	height: 600px;
+	padding: 40px;
+	text-align: center;
+	background-color: rgb(255, 255, 255);
+	border-radius: 10px;
+	box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+	transform: translateY(-50%);
+	z-index : 100;
+}
 
+.modal_Post {
+	position: fixed;
+	display: none;
+	justify-content: center;
+	align-items: center;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.4);
+	z-index:1000;
+}
+
+.modal_body_Post {
+	position: absolute;
+	top: 50%;
+	width: 600px;
+	height: 600px;
+	padding: 40px;
+	text-align: center;
+	background-color: rgb(255, 255, 255);
+	border-radius: 10px;
+	box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+	transform: translateY(-50%);
+	z-index : 100;
+}
+.closeModal {
+	left : 94%;
+	bottom : 94%;
+	position: absolute;
+	cursor: pointer;
+}
+.reportdiv {
+	color: black;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+	font-size : 20px;
+	font-weight: 1000;
+	margin-bottom: 30px;
+}
+.rc_div1 {
+	border-top : 1px solid #e6e6ea;
+	border-bottom : 1px solid #e6e6ea;
+	padding-top : 10px;
+	padding-bottom : 10px;
+	text-align: left;
+}
+.rc_s1 {
+	color : #929294;
+}
+.rc_s2 {
+	color : black;
+}
+.reportdiv1 {
+	text-align: left;
+	color: black;
+	padding-top : 10px;
+	padding-bottom: 10px;
+}
+
+.reportReason {
+	text-align: left;
+	color: black;
+}
+.selectReason2 {
+	display: none;
+	text-align: left;
+	color: black;
+}
+.selectReasonPost2 {
+	display: none;
+	text-align: left;
+	color: black;
+}
+.reportPostText {
+	display :none;
+	width : 500px;
+	height : 200px;
+}
+.reportCommText {
+	display :none;
+	width : 500px;
+	height : 200px;
+}
+.reportPostbut {
+	display: none;
+}
+.reportCommbut {
+	display: none;
+}

@@ -453,3 +453,11 @@ a {
 	overflow: hidden;
 	word-wrap: break-word;
 }
+[class*="p_lovebut"] {
+	border: 0;
+ 	background-color: transparent;
+}
+[class*="p_lovebut"]:hover {
+      color:red;
+      transition: 0.7s;
+  }
