@@ -139,10 +139,6 @@ body {
 #nowChat tr, #chatUser tr {
     display: table;
     width: 100%;
-    margin-bottom: 15px;
-}
-
-#chatUser tr {
     margin-bottom: 10px;
 }
 
@@ -336,6 +332,7 @@ input::-webkit-search-results-decoration{
 
 .chatting {
     margin-right: 1%;
+    margin-top: 15px;
 }
 
 #chattingInput {
@@ -467,27 +464,6 @@ input::-webkit-search-results-decoration{
     height: 100%;
 }
 
-#chatMenu ul{
-    margin: auto;
-    width: 90%;
-    padding-left: 0px;
-    height: 100%;
-}
-
-#chatMenu li {
-    margin-bottom: 5%;
-    margin-top: 5%;
-    list-style: none;
-    display: block;
-    color: #00f7ff;
-    font-size: 30px;
-}
-
-#chatMenu a {
-    text-decoration: none;
-    color: inherit;
-}
-
 #chatSetting {
     position: relative;
 }
@@ -598,4 +574,5 @@ input::-webkit-search-results-decoration{
 	height: 100%;
 	display: flex;
 	flex-direction: column;
+	font-size: 12px;
 }

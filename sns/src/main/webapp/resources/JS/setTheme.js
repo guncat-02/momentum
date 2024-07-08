@@ -22,7 +22,7 @@ function setTheme(value) {
 	}
 }
 
-// 테마 변경. 라이트 -> 다크 또는 다크 -> 라이트의 변경 가능.
+// 테마 변경. 라이트 -> 다크 또는 다크 -> 라이트의 변경 가능.  
 function switchTheme() {
 	let curVal = getCurTheme();
 	if (curVal == 0) {

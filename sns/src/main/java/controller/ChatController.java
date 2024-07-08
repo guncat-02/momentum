@@ -109,4 +109,19 @@ public class ChatController {
 		model.addAttribute("chatList", cServe.chatList(nickName));
 		return "chat";
 	}
+	
+	//채팅 프로필 추가
+	@GetMapping("profileList")
+	public String profileList(HttpSession session, Model model) throws Exception {
+		List<ProfileVO> pro = pServe.selectProfile(String.valueOf(session.getAttribute("userid")));
+		model.addAttribute("profile", pro);
+		return "profileList";
+	}
+	
+	//채팅 프로필 수정
+	@GetMapping("profileUpdate")
+	public String profileUpdate(HttpSession session, Model model) throws Exception {
+		model.addAttribute("profile", pServe.selectSub(String.valueOf(session.getAttribute("userid"))));
+		return "profileUpdate";
+	}
 }

@@ -1,6 +1,7 @@
 package service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -53,5 +54,41 @@ public class ProfileService implements IF_ProfileService{
 	@Override
 	public List<ProfileVO> profileList(List<String> nick) throws Exception {
 		return pDao.profileList(nick);
+	}
+	// 모든 프로필리스트 가져오기
+	@Override
+	public List<ProfileVO> allprofileList() throws Exception {
+		// TODO Auto-generated method stub
+		return pDao.allprofileList();
+	}
+
+	//검색 결과 글 프로필
+	@Override
+	public List<ProfileVO> searchProfile(List<String> id) throws Exception {
+		return pDao.searchProfile(id);
+	}
+
+	//사용자 검색 결과
+	@Override
+	public List<ProfileVO> searchUser(Map map) throws Exception {
+		return pDao.searchUser(map);
+	}
+
+	//서브 프로필 추가
+	@Override
+	public void insertProfile(ProfileVO pVO) throws Exception {
+		pDao.insertProfile(pVO);
+	}
+
+	//서브 프로필 가져오기
+	@Override
+	public List<ProfileVO> selectSub(String id) throws Exception {
+		return pDao.selectSub(id);
+	}
+
+	//서브 프로필 수정
+	@Override
+	public void edit(Map map) throws Exception {
+		pDao.edit(map);
 	}
 }

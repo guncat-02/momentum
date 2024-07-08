@@ -1,0 +1,311 @@
+body {
+    margin: 10px;
+    height: calc(100vh - 18px);
+    overflow: hidden;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bolder;
+    -webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+    width: auto;
+    position: relative;
+}
+
+#chatAll {
+    display: grid;
+    grid-template-columns: 15% 85%;
+    grid-template-rows: 10% 80% 10%;
+    height: 100%;
+    width: 100%;
+    border: 1px solid #00f7ff;
+}
+
+#chatMenu {
+    grid-column: 1 / 2;
+    grid-row: 1 / 4;
+    border-right: 1px solid #00f7ff;
+}
+
+#profileList {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+}
+
+#profileListAll {
+	display: flex;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+#profileListTitle {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    border-bottom: 1px solid #00f7ff;
+    padding-left: 2%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#profileListTitle span {
+    font-size: 38px;
+    color: #00f7ff;
+}
+
+#ProfileInfo {
+    grid-column: 2 / 3;
+    grid-row: 3 / 4;
+    border-top: 1px solid #00f7ff;
+    padding-left: 2%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#ProfileInfo span {
+    font-size: 20px;
+    color: #00f7ff;
+}
+
+#ProfileInfo p {
+    font-size: 13px;
+    margin-top: 0px;
+    color: #ff00bf;
+    margin-bottom: 0px;
+}
+
+#mainProfile {
+    border-right: 1px solid #00f7ff;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#mainProfilePhoto {
+    height: fit-content;
+}
+
+#mainProfileCircle {
+    border: 2px solid #ff00bf;
+    width: 430px;
+    height: 430px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 5%;
+    border-radius: 50%;
+}
+
+#mainProfileInfo {
+    height: 15%;
+    text-align: center;
+    padding-bottom: 3%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#mainNick {
+    font-size: 40px;
+    color: #ff00bf;
+}
+
+#mainProfileImg {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+#userProfileList {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.userProfile, #userPlus {
+    height: 33%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.userProfilePhoto, #userPlusCircle, #userFormImg {
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.userProfileCircle, #userFormCircle {
+    width: 150px;
+    height: 150px;
+    border: 2px solid #ff00bf;
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+}
+
+#userPlusCircle svg {
+    width: 150px;
+    height: 150px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    color: #ff00bf;
+    display: block;
+}
+
+.userProfileImg {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.userProfileInfo, #userPlusInfo, #userFormInfo {
+    width: calc(100% - 200px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.userNick {
+    font-size: 40px;
+    color: #ff00bf;
+}
+
+#userPlusInfo span {
+    font-size: 25px;
+    color: #ff00bf;
+}
+
+#userPlus {
+    cursor: pointer;
+}
+
+#userForm {
+    height: 33%;
+    border-top: 1px solid #00f7ff;
+    display: none;
+}
+
+#proForm {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    position: relative;
+}
+
+#userLabel {
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border-radius: 50%;
+}
+
+#userFormFile {
+    display: none;
+}
+
+#userFormPhoto {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.formText {
+    border: 2px solid #ff00bf;
+    margin-bottom: 3%;
+    width: 50%;
+    background-color: transparent;
+    height: 25px;
+    color: #00f7ff;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bolder;
+}
+
+#userFormInfo span {
+    font-size: 25px;
+}
+
+.formText:-webkit-autofill,
+.formText:-webkit-autofill:hover,
+.formText:-webkit-autofill:focus,
+.formText:-webkit-autofill:active {
+    -webkit-text-fill-color: #00f7ff;
+    -webkit-box-shadow: 0 0 0 1000px transparent inset;
+    box-shadow: 0 0 0 1000px transparent inset;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bolder;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+#formNickAll {
+    width: 100%;
+    display: flex;
+    gap: 1%;
+}
+
+#formChk {
+    width: fit-content;
+    height: 29px;
+    border: none;
+    background-color: transparent;
+    color: #00f7ff;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bolder;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+#cancleForm {
+    position: absolute;
+    right: 0;
+    top: 1%;
+    width: 30px;
+    height: 30px;
+}
+
+#cancleBtn {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background-color: transparent;
+    color: #ff00bf;
+    font-size: 25px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bolder;
+    cursor: pointer;
+}
+
+#createProfile {
+    position: absolute;
+    right: 1%;
+    bottom: 3%;
+    font-size: 40px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bolder;
+    color: #ff00bf;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: none;
+}
+
+#baseImg {
+    font-size: 20px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bolder;
+    background-color: transparent;
+    color: #ff00bf;
+    border: none;
+    width: fit-content;
+    position: absolute;
+    top: -30px;
+    display: none;
+    cursor: pointer;
+}

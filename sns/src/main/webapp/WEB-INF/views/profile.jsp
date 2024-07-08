@@ -12,7 +12,7 @@
 	
 	<input type="hidden" id="chkSave" value="false">
 	
-    <form action="profileSave" method="post" onsubmit="return saveProfile()">
+    <form action="profileSave" method="post" onsubmit="return saveProfile()"  encType="multipart/form-data">
     <input type="hidden" id="takeid" value="${ id }" name = "id">
         <div id="proAll">
             <span id="proTitle">CREATE YOUR PROFILE</span>

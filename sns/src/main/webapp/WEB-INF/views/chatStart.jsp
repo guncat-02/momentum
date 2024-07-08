@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="./resources/css/chatStart.css">
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="/sns/resources/JS/setTheme.js"></script>
 <body class="theme">
     <div id="chatStartTitle">
         <span>기존 M 이 존재하지 않습니다.</span>

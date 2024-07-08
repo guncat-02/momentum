@@ -17,4 +17,9 @@ public interface IF_PostingDao {
 	
 	public List<String> selectAttach(int no) throws Exception;
 	
+	public int updatePost(HashMap<String, Object> editMap) throws Exception;
+
+	public int deletePost(int no) throws Exception;
+	
+	public int selectPosts(String keyWord) throws Exception;
 }

@@ -11,10 +11,14 @@
     <link rel="stylesheet" href="./resources/css/userProfile.css">
     <link rel="stylesheet" href="./resources/css/profileShow.css">
 </head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+    integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer">
+</script>
 <body class="theme">
     <input type="hidden" value="${profile.photo}" id="photo">
     <div id="back" class="theme">
-        <span id="backBtn"><a href="main">&lang;</a></span>
+        <span id="backBtn">&lang;</span>
         <div id="myProInfo">
             <span id="myNick">${profile.nickName}</span>
             <span class="myDetail">( </span>
@@ -59,7 +63,7 @@
         </div>
     </div>
    <div id="myMenu" class="theme">
-		<input type="button" class="myMenuItem theme" value="POST" onclick="postbut(${profile.id})"> <input type="button" class="myMenuItem theme" value="REPOST" onclick="repostbut()"> <input type="button" class="myMenuItem theme" value="COMMENT" onclick="commentbut()"> <input type="button" class="myMenuItem theme" value="MEDIA" onclick="mediabut()"> <input type="button" class="myMenuItem theme" value="LOVE" onclick="lovebut()">
+		<input type="button" class="myMenuItem theme" value="POST" onclick="postbut('${profile.id}')"> <input type="button" class="myMenuItem theme" value="REPOST" onclick="repostbut('${profile.id}')"> <input type="button" class="myMenuItem theme" value="COMMENT" onclick="commentbut('${profile.id}')"> <input type="button" class="myMenuItem theme" value="MEDIA" onclick="mediabut('${profile.id}')"> <input type="button" class="myMenuItem theme" value="LOVE" onclick="lovebut('${profile.id}')">
 	</div>
 	<div class="myPost">
 		<c:forEach items="${mypostList}" var="mp">
@@ -178,7 +182,7 @@
 					<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-chat-right-dots-fill" viewBox="0 0 16 16">
   <path d="M16 2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h9.586a1 1 0 0 1 .707.293l2.853 2.853a.5.5 0 0 0 .854-.353zM5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0m3 1a1 1 0 1 1 0-2 1 1 0 0 1 0 2" />
 </svg>
-					<span class="footspan">${mp.show}</span>
+					<span class="footspan">${mp.commCnt}</span>
 				</div>
 				<div>
 					<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-share" viewBox="0 0 16 16">
@@ -201,8 +205,18 @@
 </body>
 
 <script>
+	let back;
+	let keyWord;
+
 	//프로필 불러오기
 	window.onload = function() {
+		const backHref = document.referrer;
+    	const backArray = backHref.split('?')
+    	const backChk = backArray[0].split('/')
+    	const backWord = backArray[1].split('=')
+    	keyWord = backWord[1];
+    	back = backChk[backChk.length-1];
+    	
     	const img = document.querySelector('.proImg');
     	const photo = document.querySelector('#photo');
     	if(photo.value != "" && photo.value != null) {
@@ -216,13 +230,15 @@
     function postbut(id) {
     	 location.href = "profileShow?id="+id;
     }
-    function commentbut() {
+    function commentbut(id) {
     	location.href = "profileComment?id="+id;
     }
-    function mediabut() {
+    function mediabut(id) {
+    	console.log(id+"dfdf");
+    	console.log("dfdf");
    	 	location.href = "profileMedia?id="+id;
    }
-    function lovebut() {
+    function lovebut(id) {
    	 	location.href = "profileLove?id="+id;
    }
     
@@ -236,5 +252,21 @@
 				}
 		 })  
 	}
+    
+    //뒤로가기 버튼 구현
+    $('#backBtn').click(function() {
+    	const loc = window.location.href;
+    	const locArray = loc.split('?');
+    	const locChk = locArray[0].split('/');
+    	if(locChk[locChk.length-1] == back) {
+    		location.href = "main"
+    	} else {
+    		if(back == "searchList") {
+    			location.href = back+"?keyWord="+keyWord;
+    		} else {
+    			location.href = back;	
+    		}
+    	}
+    })
 </script>
 </html>

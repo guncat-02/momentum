@@ -25,4 +25,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select filename from attachTest where no = #{no}
 	</select>
 	
+	<update id="updatePost" parameterType="hashmap">
+		update postTest set cont = #{cont} where no = #{no}
+	</update>
+	
+	<delete id="deletePost" parameterType="_int">
+		delete from postTest where no = #{no}
+	</delete>
+	
+	<select id="selectPosts" parameterType="String" resultType="int">
+		select count(*) from postTest where cont like '%'||#{keyWord}||'%'
+	</select>
 </mapper>

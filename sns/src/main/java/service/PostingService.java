@@ -1,5 +1,6 @@
 package service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -58,6 +59,26 @@ public class PostingService implements IF_PostingService{
 			fileMap.put("filename", fileName);
 			pdao.insertAttach(fileMap);
 		}
+	}
+
+	@Override
+	public int updatePost(HashMap<String, Object> editMap) throws Exception {
+		return pdao.updatePost(editMap);
+	}
+
+	@Override
+	public int deletePost(int no) throws Exception {
+		return pdao.deletePost(no);
+	}
+
+	//keyWord에 해당하는 글 수 가져오기
+	@Override
+	public List<Integer> selectPosts(List<String> key) throws Exception {
+		List<Integer> posts = new ArrayList<>();
+		for(int i = 0; i < key.size(); i++) {
+			posts.add(pdao.selectPosts(key.get(i)));
+		}
+		return posts;
 	}
 	
 	

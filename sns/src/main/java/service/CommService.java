@@ -8,21 +8,20 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import dao.IF_CommDao;
+import dao.IF_MainDAO;
 import vo.CommVO;
+import vo.PostVO;
 
 @Service
 public class CommService implements IF_CommService{
 	@Inject
 	IF_CommDao cdao;
+	@Inject
+	IF_MainDAO mdao;
 	// 댓글 인서트
 	@Override
 	public void inputComm(CommVO cvo) throws Exception {
-		// TODO Auto-generated method stub
-		/*
-		 * 
-		 * cdao.takedislikecnt(cvo.getC_no()); // 해당 댓글의 싫어요 수
-		 */		cdao.inputComm(cvo);
-		
+	cdao.inputComm(cvo);	
 	}
 	// 해당 글의 댓글 리스트 가져오기
 	@Override
@@ -107,6 +106,30 @@ public class CommService implements IF_CommService{
 		// TODO Auto-generated method stub
 		return cdao.orderdislikecomm(no);
 	}
+	@Override
+	public List<CommVO> myCommList(String id) throws Exception {
+		// TODO Auto-generated method stub
+		return cdao.myCommList(id);
+	}
+	@Override
+	public List<PostVO> mycpList(String id) throws Exception {
+		// TODO Auto-generated method stub
+		List<PostVO> mycpList = cdao.mycpList(id);
+		for (PostVO pvo : mycpList) {
+			List<String> myfileList = mdao.postAttach(pvo.getNo());
+			if (myfileList != null) {
+				String list[] = myfileList.toArray(new String[myfileList.size()]);
+				pvo.setFilename(list);
+			}
+		}
+		return mycpList;
+	}
+	@Override
+	public int mycommcnt(String id) throws Exception {
+		// TODO Auto-generated method stub
+		return cdao.mycommcnt(id);
+	}
+
 	
 
 }
