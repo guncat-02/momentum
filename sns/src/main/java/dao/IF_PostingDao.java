@@ -21,4 +21,5 @@ public interface IF_PostingDao {
 
 	public int deletePost(int no) throws Exception;
 	
+	public int selectPosts(String keyWord) throws Exception;
 }
