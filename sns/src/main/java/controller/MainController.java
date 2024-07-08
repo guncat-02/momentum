@@ -228,6 +228,7 @@ public class MainController {
 		model.addAttribute("fList", followIdList);
 		model.addAttribute("aList", postList);
 		model.addAttribute("profilelist",pser.allprofileList());
+		model.addAttribute("profileimglist",pser.profileimgList());
 		
 		
 		System.out.println("new following page is ready");
@@ -264,6 +265,7 @@ public class MainController {
 		model.addAttribute("fList", followIdList);
 		model.addAttribute("aList", postList);
 		model.addAttribute("profilelist",pser.allprofileList());
+		model.addAttribute("profileimglist",pser.profileimgList());
 		
 		System.out.println("new recom page is ready");
 		return "main";
