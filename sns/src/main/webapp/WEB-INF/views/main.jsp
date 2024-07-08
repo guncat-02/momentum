@@ -31,6 +31,7 @@ pageContext.setAttribute("curId", curId);
 		<div id="menuall">
 			<%@ include file="menuAll.jsp"%>
 		</div>
+		<div id="main">
 		<div class="myPost">
 			<c:forEach items="${aList}" var="mp">
 			<input type = "hidden" value="${mp.id }">
@@ -176,6 +177,7 @@ pageContext.setAttribute("curId", curId);
 
 
 		<div class="footer"></div>
+		</div>
 	</div>
 </body>
 <script>
