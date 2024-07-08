@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.IF_SearchDao">
+	<insert id="insertKeyWord" parameterType="String">
+		insert into searchWordTest values(#{keyWord}, default)
+	</insert>
+	<select id="selectKeyWord" resultType="String">
+		select b.keyWord 
+		from (
+			select rownum as rs, a.* 
+			from (
+				select count(keyWord) as cnt, keyWord 
+				from searchWordTest where keyDate like '%'||to_char(sysdate, 'YY/MM/DD')||'%' 
+				group by keyWord 
+				order by cnt desc ) a
+		) b 
+		where rs between 1 and 10	 
+	</select>
+	<select id="selectSearchList" resultType="vo.PostVO" parameterType="hashmap">
+		<choose>
+			<when test='key.keyType.equals("인기")'>
+				select c.*, d.reCnt, nvl(c.show, 0)+nvl(c.p_love, 0)+nvl(d.reCnt, 0) as cnt
+			</when>
+			<when test='key.keyType.equals("최신")'>
+				select c.*, d.reCnt
+			</when>
+			<when test='key.keyType.equals("마음")'>
+				select c.*, d.reCnt
+			</when>
+			<when test='key.keyType.equals("리포스트")'>
+				select c.*, d.reCnt
+			</when>
+		</choose>
+			from (
+				select a.*, b.p_love, b.commCnt 
+				from  (
+					select * 
+					from postTest 
+					where cont like '%'||#{key.keyWord}||'%' and id != #{id} and privacy = 1
+				) a left outer join (
+					select dd.*, bb.commCnt 
+					from (
+						select no,  count(no) as p_love 
+						from p_loveTest 
+						group by no
+					) dd
+					full outer join (
+						select count(no) as commCnt, no 
+						from commTest 
+						group by no
+					) bb
+					on dd.no = bb.no
+					where dd.no is not null and bb.no is not null
+				) b on a.no = b.no
+			) c
+			left outer join (
+				select count(re_no) as reCnt, re_no 
+				from postTest 
+				group by re_no
+			) d
+			on c.no = d.re_no
+			order by
+		<choose>
+			<when test='key.keyType.equals("인기")'>
+				cnt
+			</when>
+			<when test='key.keyType.equals("최신")'>
+				p_date
+			</when>
+			<when test='key.keyType.equals("마음")'>
+				nvl(p_love, 0)
+			</when>
+			<when test='key.keyType.equals("리포스트")'>
+				nvl(reCnt, 0)
+			</when>
+		</choose>
+			desc
+	</select>
+</mapper>

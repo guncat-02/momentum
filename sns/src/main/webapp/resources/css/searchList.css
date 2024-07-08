@@ -1,111 +1,26 @@
-body {
-    width: auto;
-    margin: 0px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-weight: bolder;
-    -webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-}
-
-/* 메뉴바, 메인 div 포함하는 전체 div */
-#all {
-    display: flex;
-    justify-content: left;
-}
-
-/* 왼쪽 메뉴 바 */
-#menuall {
-    display: block;
-    width: 240px;
-    height: 100vmin;
-    position: sticky;
-    top: 0;
-    border-right: 1px solid #00f7ff;
-    box-shadow: 3px 0px 7px 0px #41c4c4;
-    overflow-y: auto;
-}
-
-/* 메인 컨텐츠 */
-#main {
-    display: block;
-    width: 100%;
-    height: 100%;
-    padding: 15px;
-}
-
-#searchBar {
-    display: flex;
-    justify-content: space-between;
-    border: 2px solid #00f7ff;
-    width: 95%;
-    height: 60px;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 15px;
-}
-
-#searIcon {
-    width: 7%;
-    height: 100%;
-    text-align: center;
-}
-
-.bi-search-heart {
-    width: 80%;
-    height: 80%;
-    margin-top: 10%;
-    color: #ff00bf;
-    margin-left: 10%;
-}
-
-#search {
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-weight: bolder;
-    width: 92%;
-    border-radius: 15px;
-    background-color: transparent;
-    border: none;
-    color: #ff00bf;
-    font-size: 18px;
-}
-
-#search:focus {
-    outline: none;
-}
-
-#search::-ms-clear,
-#search::-ms-reveal{
-    display: none;
-}
-
-#search::-webkit-search-decoration,
-#search::-webkit-search-cancel-button,
-#search::-webkit-search-results-button,
-#search::-webkit-search-results-decoration{
-    display: none;
-}
-
 #searMenuBar {
     margin-top: 1%;
-    width: 95%;
+    width: 80%;
     height: 50px;
     margin-left: auto;
     margin-right: auto;
     border-top: 2px solid #00f7ff;
     border-bottom: 2px solid #00f7ff;
+    top: 95px;
+    position: fixed;
+    margin: 15px;
+    z-index: 10;
 }
 
 #searMenu {
     list-style: none;
     padding-left: 0px;
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
-    width: 100%;
-    height: 100%;
-    margin-top: 0px;
+    height: fit-content;
+	width: 100%;
+	height: 100%;
+	margin-top: 0px;
 }
 
 #searMenu li {
@@ -132,9 +47,65 @@ body {
     color: #ff00bf;
 }
 
-#searList {
+#searResult {
     width: 95%;
-    height: 60px;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 180px;
+}
+
+#searchNone {
+    text-align: center;
+}
+
+#searchNone span {
+    display: block;
+    font-size: 20px;
+    margin-top: 180px;
+}
+
+.searchResultUser {
+    height: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    display: grid;
+    grid-template-columns: 15% 65% 20%;
+    grid-template-rows: 60% 40%;
+    margin-bottom: 30px;
+}
+
+.userPhotoCircle {
+    border: 2px solid #ff00bf;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3px;
+}
+
+.userPhoto {
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+}
+
+.userNick {
+    font-size: 40px;
+}
+
+.userNick, .userBio {
+    padding-left: 2%;
+}
+
+.userBio {
+    padding-top: 1%;
+}
+
+.userId, .userBio {
+    font-size: 18px;
+}
+
+.searUser {
+	cursor: pointer;
 }

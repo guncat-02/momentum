@@ -1,6 +1,8 @@
 package controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -266,5 +268,34 @@ public class ProfileController {
 		}
 		model.addAttribute("mypostList",mypostList);
 		return "userProfile";
+	}
+	
+	//서브 프로필 추가
+	@PostMapping("insertProfile")
+	public void insertProfile(@ModelAttribute ProfileVO pVO, HttpSession session, MultipartFile[] proPhoto) throws Exception {
+		String file = upload.fileUpload(proPhoto)[0];
+		if(file != null) {
+			pVO.setPhoto(file);
+		}
+		pVO.setId(String.valueOf(session.getAttribute("userid")));
+		pServe.insertProfile(pVO);
+	}
+	
+	//서브 프로필 수정
+	@PostMapping("edit")
+	public String eidt(@ModelAttribute ProfileVO pVO, MultipartFile[] proPhoto, @RequestParam("imgChk") String chk, @RequestParam("userNick") String nick) throws Exception {
+		String file = upload.fileUpload(proPhoto)[0];
+		Map<String, Object> map = new HashMap<>();
+		if(file != null) {
+			pVO.setPhoto(file);
+		} else {
+			if(chk.equals("MY IMG")) {
+				pVO.setPhoto(chk);
+			}
+		}
+		map.put("profile", pVO);
+		map.put("nick", nick);
+		pServe.edit(map);
+		return "redirect:/profileList";
 	}
 }

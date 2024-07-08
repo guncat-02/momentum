@@ -10,19 +10,28 @@
 <link id="theme-setting" rel="stylesheet"
 	href="./resources/css/dark_theme.css">
 <link rel="stylesheet" href="./resources/css/chat.css">
+<link rel="stylesheet" href="./resources/css/profileMenu.css">
 </head>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="/sns/resources/JS/setTheme.js"></script>
 <body class="theme">
 	<form id="form">
 		<input type="hidden" value="${nickName}" id="user" name="nickName">
 		<div id="chatAll">
 			<div id="chatMenu" class="chatItem">
-				<ul>
-					<li><a href="main">SNS</a></li>
-					<li>PROFILE</li>
-				</ul>
-			</div>
+            <ul>
+                <li class="proMainMenu"><a href="main">SNS</a></li>
+                <li id="profileSub" class="proMainMenu">
+                    <a href="profileList">PROFILE</a>
+                    <ul id="profileSubDiv">
+                        <li class="proSubMenu"><a href="profileList">SHOW</a></li>
+                        <li class="proSubMenu"><a href="profileUpdate">EDIT</a></li>
+                        <li class="proSubMenu">DELETE</li>
+                    </ul>
+                </li>
+            </ul>
+        	</div>
 			<div id="chatUserTitle" class="chatItem">
 				<div id="chatUserHeader">
 					<span>MESSAGE</span>
@@ -327,6 +336,7 @@
     //채팅 초기화
     function resetChat() {
     	$('#nowChatting').empty();
+    	$('#chatImgList').empty();
     	$('#chattingText').val("");
     	$('#chatAttachBox').css("display", "none");
     	dataSave.items.clear();
@@ -384,9 +394,9 @@
     	$('.userInfo').eq(index).css('display', 'table');
     	for(let i = 0; i < users.length; i++) {
     		if(users[i].nickName == $('#user').val()) {
-    			$('.userListDiv').eq(index).append("<span style='font-size: 15px;'>"+users[i].nickName+"</span>");
+    			$('.userListDiv').eq(index).append("<span style='font-size: 15px; margin-left: 5%;'>"+users[i].nickName+"</span>");
     		} else {
-    			$('.userListDiv').eq(index).append("<span style='font-size: 15px;'>"+users[i].nickName+"</span>");
+    			$('.userListDiv').eq(index).append("<span style='font-size: 15px; margin-left: 5%;'>"+users[i].nickName+"</span>");
     		}
     	}   	
     }
@@ -455,6 +465,7 @@
     //채팅방 검색
     $('#chatSearch').keydown(function(e) {
     	if (e.keyCode == 13) {
+    		$('.userInfo').css('display', 'none')
     		let searWord = $('.infoName')
     		if($('#chatSearch').val().trim != "") {
     			$('.chatInfo').css('display', 'none')
