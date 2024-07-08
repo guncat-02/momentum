@@ -34,9 +34,9 @@ pageContext.setAttribute("curId", curId);
 		<div id="main">
 		<div class="myPost">
 			<c:forEach items="${aList}" var="mp">
-			<input type = "hidden" value="${mp.id }">
 				<c:set var="filenameLength" value="${fn:length(mp.filename)}" />
 				<div class="p_inf">
+				<input type = "hidden" value="${mp.id }">
 					<a href="userprofile?id=${mp.id}" class="userprofilealink">
 						<div class="proimg">
 							<img class="profileImg" src="./resources/img/프로필.png">
@@ -334,8 +334,9 @@ pageContext.setAttribute("curId", curId);
 		btn.val(1);
 		btn.text('FOLLOWING');
 
-		// 추후 수정 필요.
-		let fId = $.trim(btn.closest('.p_inf').find('.p_id').text());
+		
+		let fId = $.trim(btn.prevAll('input[type="hidden"]').val());
+		console.log(fId);
 		
 		$.ajax({
 			url : '/sns/follow',
@@ -369,9 +370,10 @@ pageContext.setAttribute("curId", curId);
 		btn.val(0);
 		btn.text('FOLLOW');
 		
-		// 추후 수정 필요.
-		let fId = $.trim(btn.closest('.p_inf').find('.p_id').text());
-
+		
+		let fId = $.trim(btn.prevAll('input[type="hidden"]').val());
+		console.log(fId);
+		
 		$.ajax({
 			url : '/sns/followcancel',
 			type : 'get',

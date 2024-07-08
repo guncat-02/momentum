@@ -393,6 +393,7 @@
 			$('.one-post-menu-remove').remove();
 		} else {
 			$('.one-post-menu-report').remove();
+			$('.one-post-menu-block').remove();
 		}
 	}
 	// 게시물 작성자 프로필 클릭 시 이동할 페이지에 대한 form action 조정.
