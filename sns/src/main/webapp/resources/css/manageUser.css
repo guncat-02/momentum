@@ -241,6 +241,9 @@ button[value="1"]:hover, input[type=submit]:hover {
 	text-decoration: none;
 	color: white;
 }
+#paging button:hover {
+	cursor: pointer
+}
 
 #reset {
 	grid-column: 0 / 1;
@@ -250,8 +253,12 @@ button[value="1"]:hover, input[type=submit]:hover {
 #reset button {
 	height: 25px;
     margin: 12px 0px;
-    background-color: transparent;
+    background-color: black;
     border: 1px solid white;
+}
+#reset button:hover {
+	transition-duration: 150ms;
+	filter: invert(100%);
 }
 #reset button a {
 	text-decoration: none;

@@ -215,7 +215,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="selectReportCountWhere" resultType="_int">
 		select count(id) from reportTest
-		where r_date = to_char(sysdate, 'yy/mm/dd')
+		where to_char(r_date) = to_char(sysdate)
 	</select>
 	
 	<select id="selectBannedCountWhere" resultType="_int">

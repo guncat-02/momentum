@@ -2,7 +2,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="kor">
 
 <head>
 <meta charset="UTF-8">
@@ -158,9 +158,6 @@
 				<button type="button">
 					<a href="/sns/manager/report/">reset</a>
 				</button>
-			</div>
-			<div id="export-Excel">
-				<button type="button">export as Excel</button>
 			</div>
 		</div>
 	</div>
