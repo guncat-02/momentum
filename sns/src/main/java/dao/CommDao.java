@@ -139,13 +139,19 @@ public class CommDao implements IF_CommDao {
 	@Override
 	public List<PostVO> mycpList(String id) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(mapperQuery + ".mycpList", id);
+		return sqlSession.selectOne(mapperQuery + ".mycommcnt", id);
 	}
 
 	@Override
 	public int mycommcnt(String id) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(mapperQuery + ".mycommcnt", id);
+	}
+
+	@Override
+	public CommVO r_Comm(int no) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(mapperQuery + ".r_Comm", no);
 	}
 
 

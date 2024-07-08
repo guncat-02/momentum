@@ -150,6 +150,22 @@ public class MainServiceImpl implements IF_MainService{
 	public Integer getRePostedCnt(int no) throws Exception {
 		return maindao.getRePostedCnt(no);
 	}
-	
+
+	@Override
+	public int getCurMaxNum(List<String> followIdList) throws Exception {
+		return maindao.getCurMaxNum(followIdList);
+	}
+
+	@Override
+	public List<PostVO> getFollowingPostList(HashMap<String, Object> fPostMap) throws Exception {
+		return maindao.getFollowingPostList(fPostMap);
+	}
+
+	@Override
+	public List<PostVO> getRecommendPostList(HashMap<String, Object> recomMap) throws Exception {
+		return maindao.getRecommendPostList(recomMap);
+	}
+
+
 
 }

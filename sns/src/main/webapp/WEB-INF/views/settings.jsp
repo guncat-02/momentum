@@ -23,39 +23,21 @@
                     <li><h2>Account</h2></li>
                 </label>
                 <ol id="settings-account">
-                    <input type="hidden" value="0">
+                    <input type="hidden" value="1">
                     <li id="settings-member-info"><h4>Member Info</h4></li>
                     <li id="settings-profile"><h4>Profile</h4></li>
                 </ol>
                 <li id="settings-display"><h2>Display</h2></li>
-                <label>
-                    <li><h2>Use</h2></li>
-                </label>
-                <ol id="settings-use">
-                    <input type="hidden" value="0">
-                    <li><h4>Alarm</h4></li>
-                    <ol>
-                        <li id="settings-alarm-activity">Activity</li>
-                    </ol>
-                    <li><h4>Post</h4></li>
-                    <ol>
-                        <li id="settings-post-interaction">Interaction</li>
-                    </ol>
-                </ol>
             </ol>
             <button type="button" id="settings-back-btn" class="theme">&lang; BACK</button>
         </div>
         <div id="settings-cont">
-            this is settings.
+            <%@ include file="./settings_options/settings_profile.jsp"%>
         </div>
     </main>
 </body>
 
 <script>
-
-	$(document).ready(function() {
-	    $('#settings-menu label li > h2').css('color', 'grey');
-	});
 	
 	$('#settings-menu label').on('click', function() {
 	    let cur = $(this).find('h2').text().toLowerCase()
@@ -84,7 +66,7 @@
 	$('#settings-menu li[id^="settings"]').on('click', function() {
 	    let pageName = $(this).attr('id').replaceAll('-','_');
 	    $.ajax({
-	    	url: 'settings_load.do',
+	    	url: 'settings-load.do',
 	    	type: 'post',
 	    	data: {
 	    		page : pageName

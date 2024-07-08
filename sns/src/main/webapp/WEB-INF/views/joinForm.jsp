@@ -32,7 +32,7 @@
 				<span class="loginlabel">비밀번호 확인 </span><span class="essential">*</span><br> <input type="password" name="pwchk" placeholder="비밀번호를 한번 더 입력하세요" class="logintxt tt upwchk" id="pwchk">
 			</div>
 			<div class="intext">
-				<span class="loginlabel namelabel">사용자명 </span><span class="essential">*</span><br> <input type="text" name="name" placeholder="이름을 입력하세요" class="logintxt tt" id="uninput">
+				<span class="loginlabel namelabel">성명 </span><span class="essential">*</span><br> <input type="text" name="name" placeholder="이름을 입력하세요" class="logintxt tt" id="uninput">
 			</div>
 			<div class="intext">
 				<span class="loginlabel">이메일 </span><span class="essential">*</span><br> <input type="text" placeholder="이메일 입력" class="emailInput"><span id="em">@</span> <input class="box" id="domain-txt" type="text"> <select class="box" id="domain-list">

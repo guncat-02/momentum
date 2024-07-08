@@ -9,10 +9,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import service.IF_ManagerService;
 import vo.ManagerVO;
 import vo.PageVO;
+import vo.PostVO;
+import vo.ProfileVO;
 
 @Controller
 public class ManagerController {
@@ -20,9 +23,14 @@ public class ManagerController {
 	@Inject
 	IF_ManagerService mservice;
 	
-	@GetMapping("/manager") 
+	@GetMapping("manager") 
 	public String managePage(HttpSession session, Model model) throws Exception {
 		model.addAttribute("curId", session.getAttribute("userid"));
+		
+		model.addAttribute("memberCnt", mservice.getAllMemberCount());
+		model.addAttribute("reportCnt", mservice.getTodayReportCount());
+		model.addAttribute("bannedCnt", mservice.getCurBannedCount());
+		
 		return "manageDashboard";
 	}
 	
@@ -123,5 +131,36 @@ public class ManagerController {
 		model.addAttribute("cnt", cnt);
 		
 		return "manage"+area;
+	}
+	
+	@GetMapping("/manager/report/*")
+	public String managereport(HttpServletRequest req,HttpSession session, Model model) throws Exception {
+		model.addAttribute("curId", session.getAttribute("userid"));
+		
+		String[] uri = req.getRequestURI().split("/");
+		String curType = uri[uri.length-1].split("\\?")[0];
+		System.out.println(curType);
+		
+		if (curType.equals("report") || curType.equals("report_post")) {
+			System.out.println("1");
+			model.addAttribute("report_post", mservice.getAllreport_post());
+			System.out.println(mservice.getAllreport_post());
+		} else if (curType.equals("report_comm")) {
+			System.out.println("2");
+			model.addAttribute("report_comm", mservice.getAllreport_comm());
+		} else if (curType.equals("report_chat")) {
+			System.out.println("3");
+			model.addAttribute("report_chat", mservice.getAllreport_chat());
+		}
+
+		return "manageReport";
+	}
+	
+	
+	
+	@GetMapping("remove-past-searchword")
+	@ResponseBody
+	public int removePastSearchWord() throws Exception {
+		return mservice.removePastSearchWord();
 	}
 }

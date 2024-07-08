@@ -1,0 +1,40 @@
+#profileSubDiv {
+    display: none;
+    cursor: pointer;
+    font-size: 25px;
+    list-style: none;
+    color: #00f7ff;
+}
+
+#profileSub:hover > #profileSubDiv {
+    display: block;
+}
+
+#profileSub {
+    cursor: pointer;
+}
+
+#chatMenu ul{
+    margin: auto;
+    width: 90%;
+    padding-left: 0px;
+    height: 100%;
+}
+
+.proMainMenu {
+    margin-bottom: 5%;
+    margin-top: 5%;
+    list-style: none;
+    display: block;
+    color: #00f7ff;
+    font-size: 30px;
+}
+
+#chatMenu a {
+    text-decoration: none;
+    color: inherit;
+}
+
+#chatMenu li:hover {
+    color: #ff00bf;
+}

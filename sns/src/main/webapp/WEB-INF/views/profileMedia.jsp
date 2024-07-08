@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="./resources/css/profileShow.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
 </script>
+<script src="/sns/resources/JS/setTheme.js"></script>
 </head>
 <body class="theme">
 	<input type="hidden" value="${profile.photo}" id="photo">
@@ -46,8 +47,8 @@
 				<table>
 					<tr>
 						<th style="width: calc(100%/ 3);">게시물</th>
-						<th style="width: calc(100%/ 3);"><a href="#">FOLLOWING</a></th>
-						<th style="width: calc(100%/ 3);"><a href="#">FOLLOWER</a></th>
+						<th style="width: calc(100%/ 3);"><a href="/sns/followList/followings?id=${profile.id}">FOLLOWING</a></th>
+						<th style="width: calc(100%/ 3);"><a href="/sns/followList/followers?id=${profile.id}">FOLLOWER</a></th>
 					</tr>
 					<tr>
 						<td>${postlength}</td>

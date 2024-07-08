@@ -4,6 +4,9 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <% request.setCharacterEncoding("UTF-8");
+String curId = (String)session.getAttribute("userid");
+// JSTL에서 세션 아이디 사용 할 수 있도록 하는 코드.
+pageContext.setAttribute("curId", curId);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
@@ -23,26 +26,45 @@
 <link rel="stylesheet" href="./resources/css/main.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-<body class="theme">
+<body class="theme theme-scroll">
 	<div id="all">
 		<div id="menuall">
 			<%@ include file="menuAll.jsp"%>
 		</div>
+		<div id="main">
 		<div class="myPost">
 			<c:forEach items="${aList}" var="mp">
 				<c:set var="filenameLength" value="${fn:length(mp.filename)}" />
 				<div class="p_inf">
+				<input type = "hidden" value="${mp.id }">
 					<a href="userprofile?id=${mp.id}" class="userprofilealink">
 						<div class="proimg">
-							<img class="profileImg" src="./resources/img/프로필.png">
-							<c:forEach items="${profilelist }" var="pr">
+						<img class="profileImg" src="./resources/img/프로필.png">
+							<c:forEach items="${profileimglist }" var="pr">
 								<c:if test="${mp.id eq pr.id }">
 									<img class="profileImg" src="download?filename=${pr.photo }">
 								</c:if>
 							</c:forEach>
-						</div> <span class="p_id">${mp.id }</span>
-					</a> <span class="p_date">${mp.p_date} </span>
-
+						</div> 
+					</a>
+						<c:forEach items="${profilelist }" var="ap">
+							<c:if test="${mp.id eq ap.id}">
+								<span class="p_id">${ap.nickName }</span>
+							</c:if>
+						</c:forEach>
+					 <span class="p_date">${mp.p_date} </span>
+						<!-- 해당 게시물 게시 유저를 내가 팔로우 하고 있는 지 여부 true, false -->
+						<c:if test="${mp.id ne curId}">
+							<c:set var="containFlag" value="${fn:contains(fList, mp.id) }" />
+							<c:choose>
+								<c:when test="${containFlag == true }">
+									<button type="button" class="theme main-po-follow-btn" value="1">FOLLOWING</button>
+								</c:when>
+								<c:otherwise>
+									<button type="button" class="theme main-po-follow-btn" value="0">FOLLOW</button>
+								</c:otherwise>
+							</c:choose>
+						</c:if>
 				</div>
 
 				<a href="myPost?no=${mp.no}" style="cursor: pointer;" class="p_alink" onclick="p_show(${mp.no})"> <!-- 프로필 아이디 -->
@@ -140,8 +162,10 @@
 						<span class="footspan">${mp.commCnt}</span>
 					</div>
 					<div>
-						<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-share" viewBox="0 0 16 16"> <path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.5 2.5 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5m-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3m11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3" /> </svg>
-						<span class="footspan">${mp.reCnt}</span>
+						<button type="button" class="p_repostbut theme" onclick="repost(${mp.no})">
+							<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-share" viewBox="0 0 16 16"> <path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.5 2.5 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5m-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3m11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3" /> </svg>
+							<span class="footspan">${mp.reCnt}</span>
+						</button>
 					</div>
 					<div>
 						<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16"> <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z" /> <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0" /> </svg>
@@ -155,6 +179,7 @@
 
 
 		<div class="footer"></div>
+		</div>
 	</div>
 </body>
 <script>
@@ -237,6 +262,151 @@
 			success:function() {
 				}
 		 })  
+	}
+	function repost(no) {
+		location.href = `/sns/reposting?no=\${no}`;
+	}
+   	
+    
+    // 로그인 유저의 팔로우 유저가 작성한 게시물 중 가장 최신 게시물의 rownum.
+    const maxNum = ${maxNum};
+    // 로그인 유저의 팔로우 유저가 작성한 게시물 다음 페이지 시작 번호.
+    let curFollowPage = maxNum - 10;
+    // 추천 게시물 시작 번호
+    let curRecomPage = 1;
+    // 이미 로딩된 기존 컨텐츠
+    let prevCont;
+	function scrollEventHandler() {
+		if ((window.scrollY + window.innerHeight)/document.body.clientHeight > 0.8) { // 마지막까지 스크롤 했을 때.
+        	// 이벤트 지워준다.
+        	/* $('body').off('mousewheel.paging'); */
+        	document.removeEventListener('scroll', scrollEventHandler);
+        	// 이미 로딩된 기존 컨텐츠의 html 객체 저장.
+    		prevCont = $('.myPost').html();
+        	console.log(curFollowPage);
+        	console.log(maxNum);
+       		// 게시물 로딩되는 부분 새로 고침.
+       		if (curFollowPage > 0 && maxNum != -1) { // 팔로우 한 유저의 최근 게시물이 남아 있거나, 팔로우한 유저가 있을 경우
+       			console.log('followpage loading');
+           		$('#main').load(`newFollowingPost?pageNo=\${curFollowPage} .myPost`, function() {
+           			// 새로 고침 성공 시 실행.
+           			// 기존 게시물을 새로 로딩된 게시물 위에 추가.
+           			$('.myPost').prepend(prevCont);
+           			// 다음 페이지 시작 번호 갱신.
+           			curFollowPage -= 10;
+           			// 제거했던 이벤트 다시 생성.
+           			document.addEventListener('scroll', scrollEventHandler);
+           		});
+       		} else { // 팔로우 한 유저의 최근 게시물을 전부 출력 했거나, 팔로우한 유저가 없을 경우
+       			console.log('recompage loading');
+       			$('#main').load(`newRecomPost?pageNo=\${curRecomPage} .myPost`, function() {
+           			// 새로 고침 성공 시 실행.
+           			console.log($('.p_inf').length);
+           			if ($('.p_inf').length != 0) { // 새로운 게시물이 로딩될 때
+               			// 다음 페이지 시작 번호 갱신.
+               			curRecomPage += 10;
+               			// 제거했던 이벤트 다시 생성.
+               			document.addEventListener('scroll', scrollEventHandler);
+           			}
+           			// 기존 게시물을 새로 로딩된 게시물 위에 추가.
+           			$('.myPost').prepend(prevCont);
+           		});
+       		}
+       		// 두 경우 모두에 속하지 않는 경우 스크롤 페이징 중단.
+        }
+	}
+	document.addEventListener('scroll', scrollEventHandler);
+    
+	// 현재 세션 로그인 아이디. 현 페이지 최상단에 변수 추가.
+	let curId = "${curId}";
+    // 게시자 아이디 옆 follow-following 버튼 클릭 시
+    $('body').on('click', '.main-po-follow-btn', function() {
+    	console.log('clicked')
+    	let btn = $(this);
+    	btn.css('pointer-events', 'none');
+    	if (btn.val() == 0) {
+    		follow(btn);
+    	} else {
+    		followCancel(btn);
+    	}
+    });
+    function follow(btn) {
+		btn.val(1);
+		btn.text('FOLLOWING');
+
+		// 추후 수정 필요.
+		let fId = $.trim(btn.closest('.p_inf').find('.p_id').text());
+		
+		$.ajax({
+			url : '/sns/follow',
+			type : 'get',
+			data : {
+				'id' : curId,
+				'followId' : fId,
+			},
+			success : function(result) {
+				if (result == 1) { // 팔로우 성공 시
+					btn.css('pointer-events', 'auto');
+					$('#menuall').load('<c:url value="menuReload" />');
+					adjustFollowBtn(btn.val(), fId);
+					return;
+				} else if (result == -1) { // 차단 유저 팔로우 시
+					alert('차단한 유저는 팔로우 할 수 없습니다.\n차단 해제 후 다시 시도해주세요.');
+				} else { // 이 외 오류 발생 시
+					alert('잠시 후 다시 시도해주세요.');
+				}
+				btn.val(0);
+				btn.text('FOLLOW');
+			},
+			error : function() {
+				alert('잠시 후 다시 시도해주세요.');
+				btn.val(0);
+				btn.text('FOLLOW');
+			}
+		});
+	}
+	function followCancel(btn) {
+		btn.val(0);
+		btn.text('FOLLOW');
+		
+		// 추후 수정 필요.
+		let fId = $.trim(btn.closest('.p_inf').find('.p_id').text());
+
+		$.ajax({
+			url : '/sns/followcancel',
+			type : 'get',
+			data : {
+				'id' : curId,
+				'followId' : fId
+			},
+			success : function(result) {
+				btn.css('pointer-events', 'auto');
+				$('#menuall').load('<c:url value="menuReload" />');
+				adjustFollowBtn(btn.val(), fId);
+			},
+			error : function() {
+				alert('잠시 후 다시 시도해주세요.');
+				btn.val(1);
+				btn.text('FOLLOWING');
+			}
+		});
+	}
+	function adjustFollowBtn(btnVal, fId) {
+		let allPosts = $('.p_inf');
+		let pId;
+		$.each(allPosts, function(idx) {
+			pId = $.trim(allPosts.eq(idx).find('.p_id').text());
+			if (pId == fId) {
+				let curBtn = allPosts.eq(idx).find('.main-po-follow-btn')
+				if (btnVal == 0) { // 팔로우 취소 한 뒤
+					curBtn.val(0);
+					curBtn.text('FOLLOW');
+				} else { // 팔로우 한 뒤
+					curBtn.val(1);
+					curBtn.text('FOLLOWING');
+				}
+			}
+		});
 	}
 
 </script>

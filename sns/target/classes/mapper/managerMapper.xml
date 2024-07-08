@@ -199,5 +199,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</when>
 		</choose>
 	</select>
+	<select id="getAllreport_post" resultType="vo.ReportVO">
+		select * from reporttest where r_loc = 'POST'
+	</select>
+	<select id="getAllreport_comm" resultType="vo.ReportVO">
+		select * from reporttest where r_loc = 'COMM'
+	</select>
+	<select id="getAllreport_chat" resultType="vo.ReportVO">
+		select * from reporttest where r_loc = 'CHAT'
+	</select>
+	
+	<select id="selectMemberCount" resultType="_int">
+		select count(id) from memberTest
+	</select>
+	
+	<select id="selectReportCountWhere" resultType="_int">
+		select count(id) from reportTest
+		where to_char(r_date) = to_char(sysdate)
+	</select>
+	
+	<select id="selectBannedCountWhere" resultType="_int">
+		select count(id) from banTest
+		where sysdate between s_date and f_date
+	</select>
+	
+	<delete id="deleteKeyWordWhere">
+		delete from searchWordTest where keyDate <![CDATA[ < ]]> sysdate
+	</delete>
 	
 </mapper>

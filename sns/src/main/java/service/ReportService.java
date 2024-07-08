@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import dao.IF_ReportDAO;
+import vo.BanVO;
 import vo.ReportVO;
 
 @Service
@@ -15,6 +16,11 @@ public class ReportService implements IF_ReportService {
 	public void Report(ReportVO rvo) throws Exception {
 		// TODO Auto-generated method stub
 		rdao.report(rvo);
+	}
+	@Override
+	public void banmember(BanVO bvo) throws Exception {
+		// TODO Auto-generated method stub
+		rdao.banmember(bvo);
 	}
 
 }

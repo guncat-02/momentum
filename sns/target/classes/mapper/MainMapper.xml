@@ -53,4 +53,47 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectAttachWhere" parameterType="_int" resultType="String">
 		select filename from attachTest where no = #{no}
 	</select>
+	
+	<select id="selectMaxWhere" parameterType="java.util.List" resultType="_int">
+		select max(rn) from
+		(select o.*, rownum as rn from
+		(select * from postTest where id in
+		<foreach collection="list" item="one" open="(" separator="," close=")">
+			#{one}
+		</foreach>
+		and p_date between localtimestamp - (interval '10' day) and localtimestamp
+		order by p_date) o)
+	</select>
+	
+	<select id="selectFollowingPostRN" parameterType="hashmap" resultType="vo.PostVO">
+		select * from
+		(select o.*, rownum as rn from
+		(select * from postTest where id in
+		<foreach collection="fList" item="one" open="(" separator="," close=")">
+			#{one}
+		</foreach>
+		and p_date between localtimestamp - (interval '10' day) and localtimestamp
+		order by p_date) o)
+		where rn between #{pageNo}-9 and #{pageNo}
+		order by rn desc
+	</select>
+	
+	<select id="selectRecomPostRN" parameterType="hashmap" resultType="vo.PostVO">
+		select * from
+		(select rownum as rn, o.* from
+		(select * from postTest where
+		<if test="exList != null and exList.size() != 0">
+			no not in
+			<foreach collection="exList" item="one" open="(" separator="," close=")">
+				#{one}
+			</foreach>
+			and
+		</if>
+		id not in
+		(select blockId from blockTest where id = #{sessionId})
+		and p_date between localtimestamp - (interval '31' day) and localtimestamp
+		order by p_date desc)o
+		)
+		where rn between #{pageNo} and #{pageNo} +9
+	</select>
 </mapper>

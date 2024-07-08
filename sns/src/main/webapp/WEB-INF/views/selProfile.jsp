@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="./resources/css/selProfile.css">
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="/sns/resources/JS/setTheme.js"></script>
 <body class="theme">
 	<c:forEach var="chatCnt" items="${cnt}">
 		<input type="hidden" class="proCnt" value="${chatCnt}">

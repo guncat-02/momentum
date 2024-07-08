@@ -13,6 +13,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
 </script>
 <link id="theme-setting" rel="stylesheet" href="/sns/resources/css/dark_theme.css">
+<script src="/sns/resources/JS/setTheme.js"></script>
 <%
 String curId = (String)session.getAttribute("userid");
 pageContext.setAttribute("curId", curId);
@@ -46,7 +47,7 @@ pageContext.setAttribute("curId", curId);
 				</tr>
 			</thead>
 			<tbody id="followingsList">
-				<c:if test="${not empty fList && not empty followFlag}">
+				<c:if test="${not empty fList && followFlag ne null }">
 					<c:set var="curIdList" value="${followFlag }" />
 					<c:forEach items="${fList }" var="fProf">
 						<tr>
@@ -200,7 +201,6 @@ pageContext.setAttribute("curId", curId);
 				}
 			});
 		}
-
 	}
 	function followCancel(btn) {
 

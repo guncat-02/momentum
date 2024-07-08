@@ -22,7 +22,7 @@
             <h2><a href="/sns/main">SNS</a></h2>
             <h2><a href="/sns/manager">DashBoard</a></h2>
             <h2><a href="/sns/manager/user/">User Info</a></h2>
-            <h2><a href="#">Report Info</a></h2>
+            <h2><a href="/sns/manager/report/">Report Info</a></h2>
         </div>
         <form action="/sns/manager/search" method="get" onsubmit="return validation();">
             <div id="admin-grid-container">
@@ -197,6 +197,26 @@
 		                            </c:forEach>
 		                        </tbody>
 	                        </c:when>
+	                        <c:when test="${not empty banned }">
+	                        	<thead>
+	                        		<tr>
+	                        			<th>ID</th>
+	                        			<th>S_DATE</th>
+	                        			<th>F_DATE</th>
+	                        			<th>PERIOD</th>
+                        			</tr>
+                       			</thead>
+                       			<tbody>
+                       				<c:forEach items="${banned }" var="one">
+                       					<tr>
+                       						<td>${one.id }</td>
+                       						<td class="tac">${one.s_date }</td>
+                       						<td class="tac">${one.f_date }</td>
+                       						<td>${one.period }</td>
+                       					</tr>
+                       				</c:forEach>
+                       			</tbody>
+	                        </c:when>
                         </c:choose>
                     </table>
                 </div>
@@ -221,9 +241,6 @@
                 </div>
                 <div id="reset">
                 	<button type="button"><a href="/sns/manager/user/">reset</a></button>
-                </div>
-                <div id="export-Excel">
-                    <button type="button">export as Excel</button>
                 </div>
             </div>
 		</form>           

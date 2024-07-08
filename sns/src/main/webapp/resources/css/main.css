@@ -29,7 +29,11 @@ body {
 	box-shadow: 3px 0px 7px 0px #41c4c4;
 	overflow-y: auto;
 }
-
+#main {
+	display: block;
+	width: 100%;
+	height: fit-content;
+}
 .myPost {
 	border: 1px solid #2f3336;
 	color: white;
@@ -92,7 +96,7 @@ body {
 	margin-left: 130px;
 	width: 700px;
 	height: 400px;
-	auto-fit;
+	/* auto-fit; */
 }
 
 .item {
@@ -149,4 +153,21 @@ body {
 [class*="p_lovebut"]:hover {
       color:red;
       transition: 0.7s;
-  }
+}
+[class*="p_repostbut"] {
+	border: 0;
+	background-color: transparent;
+}
+[class*="p_repostbut"]:hover {
+	cursor: pointer;
+}
+.main-po-follow-btn {
+	margin-left: 5px;
+	border: 1px solid #00f7ff;
+	border-radius: 7.5px;
+	font-weight: bold;
+}
+.main-po-follow-btn[value="0"] {
+	background-color: #00f7ff;
+	color: black;
+}

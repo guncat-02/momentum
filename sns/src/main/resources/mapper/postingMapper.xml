@@ -33,4 +33,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from postTest where no = #{no}
 	</delete>
 	
+	<select id="selectPosts" parameterType="String" resultType="int">
+		select count(*) from postTest where cont like '%'||#{keyWord}||'%'
+	</select>
 </mapper>

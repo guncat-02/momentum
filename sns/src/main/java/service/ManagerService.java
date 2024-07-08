@@ -14,6 +14,7 @@ import vo.MemberVO;
 import vo.PageVO;
 import vo.PostVO;
 import vo.ProfileVO;
+import vo.ReportVO;
 
 @Service
 public class ManagerService implements IF_ManagerService{
@@ -100,5 +101,45 @@ public class ManagerService implements IF_ManagerService{
 	public int getAdminsSearchCount(PageVO pvo) throws Exception {
 		return mdao.getAdminsSearchCount(pvo);
 	}
+	// 신고 글 가져오기
+	@Override
+	public List<ReportVO> getAllreport_post() throws Exception {
+		// TODO Auto-generated method stub
+		return mdao.getAllreport_post();
+	}
+
+	@Override
+	public List<ReportVO> getAllreport_comm() throws Exception {
+		// TODO Auto-generated method stub
+		return mdao.getAllreport_comm();
+	}
+
+	@Override
+	public List<ReportVO> getAllreport_chat() throws Exception {
+		// TODO Auto-generated method stub
+		return mdao.getAllreport_chat();
+	}
+
+	@Override
+	public int getAllMemberCount() throws Exception {
+		return mdao.getAllMemberCount();
+	}
+
+	@Override
+	public int getTodayReportCount() throws Exception {
+		return mdao.getTodayReportCount();
+	}
+
+	@Override
+	public int getCurBannedCount() throws Exception {
+		return mdao.getCurBannedCount();
+	}
+
+	@Override
+	public int removePastSearchWord() throws Exception {
+		return mdao.removePastSearchWord();
+	}
+
+
 
 }

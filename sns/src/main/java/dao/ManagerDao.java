@@ -14,6 +14,7 @@ import vo.MemberVO;
 import vo.PageVO;
 import vo.PostVO;
 import vo.ProfileVO;
+import vo.ReportVO;
 
 @Repository
 public class ManagerDao implements IF_ManagerDao{
@@ -104,5 +105,44 @@ public class ManagerDao implements IF_ManagerDao{
 	public int getAdminsSearchCount(PageVO pvo) throws Exception {
 		return sql.selectOne(mapperQuery+".selectMemberCountWhere", pvo);
 	}
+
+	@Override
+	public List<ReportVO> getAllreport_post() {
+		// TODO Auto-generated method stub
+		return sql.selectList(mapperQuery+".getAllreport_post");
+	}
+
+	@Override
+	public List<ReportVO> getAllreport_comm() {
+		// TODO Auto-generated method stub
+		return sql.selectList(mapperQuery+".getAllreport_comm");
+	}
+
+	@Override
+	public List<ReportVO> getAllreport_chat() {
+		// TODO Auto-generated method stub
+		return sql.selectList(mapperQuery+".getAllreport_chat");
+	}
+
+	public int getAllMemberCount() throws Exception {
+		return sql.selectOne(mapperQuery+".selectMemberCount");
+	}
+
+	@Override
+	public int getTodayReportCount() throws Exception {
+		return sql.selectOne(mapperQuery+".selectReportCountWhere");
+	}
+
+	@Override
+	public int getCurBannedCount() throws Exception {
+		return sql.selectOne(mapperQuery+".selectBannedCountWhere");
+	}
+
+	@Override
+	public int removePastSearchWord() throws Exception {
+		return sql.delete(mapperQuery+".deleteKeyWordWhere");
+	}
+
+
 
 }

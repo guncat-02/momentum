@@ -6,8 +6,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="dao.IF_ReportDAO">
 
 	<insert id="report" parameterType="vo.ReportVO">
-		insert into reporttest values (#{no}, #{id}, #{reportId}, default, #{r_loc}, #{st_type}, #{nd_type}, #{r_cont})
-
+	<choose>
+		<when test='st_type== "curse"'>
+			insert into reporttest values (#{no}, #{id}, #{reportId}, default, #{r_loc}, #{st_type}, '욕설', #{r_cont})
+		</when>
+		<otherwise>
+			insert into reporttest values (#{no}, #{id}, #{reportId}, default, #{r_loc}, #{st_type}, #{nd_type}, #{r_cont})
+		</otherwise>
+	</choose>	
+	</insert>
+	<insert id = "banmember" parameterType="vo.BanVO">
+		insert into bantest values(#{id},default,#{f_date},TO_DATE(#{f_date},'YY-MM-DD') - TO_DATE(sysdate,'YY-MM-DD'))
 	</insert>
 	
 </mapper>

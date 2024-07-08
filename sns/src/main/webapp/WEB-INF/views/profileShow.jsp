@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="./resources/css/profileShow.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
 </script>
+<script src="/sns/resources/JS/setTheme.js"></script>
 </head>
 <body class="theme">
 	<input type="hidden" value="${profile.photo}" id="photo">
@@ -46,8 +47,8 @@
 				<table>
 					<tr>
 						<th style="width: calc(100%/ 3);">게시물</th>
-						<th style="width: calc(100%/ 3);"><a href="#">FOLLOWING</a></th>
-						<th style="width: calc(100%/ 3);"><a href="#">FOLLOWER</a></th>
+						<th style="width: calc(100%/ 3);"><a href="/sns/followList/followings">FOLLOWING</a></th>
+						<th style="width: calc(100%/ 3);"><a href="/sns/followList/followers">FOLLOWER</a></th>
 					</tr>
 					<tr>
 						<td>${postlength}</td>
@@ -88,7 +89,7 @@
 						</c:choose>
 
 					</div>
-					<span class="p_id">${mp.id }</span> <span class="p_date">${mp.p_date} </span>
+					<span class="p_id">${profile.nickName }</span> <span class="p_date">${mp.p_date} </span>
 				</div> <!-- 프로필 아이디 -->
 				<div class="p_cont">${mp.cont }</div> <c:choose>
 					<c:when test="${filenameLength eq 0}">
@@ -207,26 +208,16 @@
 </body>
 
 <script>
-    //설정 버튼 클릭 시 메뉴 띄우는 메서드
-    document.querySelector('#myProfileSetting').addEventListener('click', () => {
-        const menu = document.querySelector('#settingMenu');
-        if (menu.style.display == "block") {
-            menu.style.display = "none";
-        } else {
-            menu.style.display = "block";
-        }
-    })
-    
     //프로필 불러오기
     window.onload = function() {
-        const img = document.querySelector('.proImg');
-        const photo = document.querySelector('#photo');
-        var uid = '<%=(String) session.getAttribute("userid")%>';
-        if(photo.value != "" && photo.value != null) {
-            img.src = "download?filename="+photo.value;
-        } else {
-            img.src = "./resources/img/프로필.png";
-        }
+    	const img = document.querySelector('.proImg');
+    	const photo = document.querySelector('#photo');
+    	var uid = '<%=(String) session.getAttribute("userid")%>';
+    	if(photo.value != "" && photo.value != null) {
+        	img.src = "download?filename="+photo.value;
+    	} else {
+        	img.src = "./resources/img/프로필.png";
+    	}
         // 좋아요 확인
         $.ajax({
 			type:"POST",
@@ -247,7 +238,15 @@
 				},
 		 });
     }
-
+    //설정 버튼 클릭 시 메뉴 띄우는 메서드
+    document.querySelector('#myProfileSetting').addEventListener('click', () => {
+        const menu = document.querySelector('#settingMenu');
+        if (menu.style.display == "block") {
+            menu.style.display = "none";
+        } else {
+            menu.style.display = "block";
+        }
+    })
     function postbut() {
     	 location.href = "profileShow";
     }

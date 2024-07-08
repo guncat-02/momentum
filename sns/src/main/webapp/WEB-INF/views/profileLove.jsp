@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="./resources/css/profileShow.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
 </script>
+<script src="/sns/resources/JS/setTheme.js"></script>
 </head>
 <body class="theme">
 	<input type="hidden" value="${profile.photo}" id="photo">
@@ -46,8 +47,8 @@
 				<table>
 					<tr>
 						<th style="width: calc(100%/ 3);">게시물</th>
-						<th style="width: calc(100%/ 3);"><a href="#">FOLLOWING</a></th>
-						<th style="width: calc(100%/ 3);"><a href="#">FOLLOWER</a></th>
+						<th style="width: calc(100%/ 3);"><a href="/sns/followList/followings?id=${profile.id}">FOLLOWING</a></th>
+						<th style="width: calc(100%/ 3);"><a href="/sns/followList/followers?id=${profile.id}">FOLLOWER</a></th>
 					</tr>
 					<tr>
 						<td>${postlength}</td>
@@ -81,13 +82,18 @@
 						<div class="p_inf">
 							<div class="proimg">
 								<img class="profileImg" src="./resources/img/프로필.png">
-								<c:forEach items="${profilelist }" var="pr">
+								<c:forEach items="${profileimglist }" var="pr">
 									<c:if test="${mp.id eq pr.id }">
 										<img class="profileImg" src="download?filename=${pr.photo }">
 									</c:if>
 								</c:forEach>
 							</div>
-							<span class="p_id">${mp.id }</span> <span class="p_date">${mp.p_date} </span>
+							<c:forEach items="${profilelist }" var="ap">
+							<c:if test="${mp.id eq ap.id}">
+								<span class="p_id">${ap.nickName }</span> 
+							</c:if>
+						</c:forEach>
+							<span class="p_date">${mp.p_date} </span>
 						</div> <!-- 프로필 아이디 -->
 						<div class="p_cont">${mp.cont }</div> <c:choose>
 							<c:when test="${filenameLength eq 0}">

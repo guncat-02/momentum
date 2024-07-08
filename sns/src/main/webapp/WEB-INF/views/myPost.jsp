@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html lang="kor">
 
@@ -78,6 +79,12 @@
 							</svg>
 							REPORT
 						</button>
+						<button type="button" class="theme one-post-menu-block">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-ban" viewBox="0 0 16 16">
+							  <path d="M15 8a6.97 6.97 0 0 0-1.71-4.584l-9.874 9.875A7 7 0 0 0 15 8M2.71 12.584l9.874-9.875a7 7 0 0 0-9.874 9.874ZM16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0"/>
+							</svg>
+							BLOCK
+						</button>
 					</div>
 				</div>
 
@@ -94,19 +101,24 @@
 				<div class="one-post-attach">
 					<c:if test="${not empty postvo.filename }">
 						<div class="attach-div">
-							<button class="arrow-left">
-								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
-			                        <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z" />
-			                    </svg>
-							</button>
+							<c:set var="pFileLength" value="${fn:length(postvo.filename)}" />
+							<c:if test="${pFileLength gt 1 }">
+								<button class="arrow-left">
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
+				                        <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z" />
+				                    </svg>
+								</button>
+							</c:if>
 							<c:forEach items="${postvo.filename }" var="file">
 								<img src="/sns/download?filename=${file}">
 							</c:forEach>
-							<button class="arrow-right">
-								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
-			                        <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z" />
-			                    </svg>
-							</button>
+							<c:if test="${pFileLength gt 1 }">
+								<button class="arrow-right">
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
+				                        <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z" />
+				                    </svg>
+								</button>
+							</c:if>
 						</div>
 					</c:if>
 				</div>
@@ -122,23 +134,32 @@
 							<div class="reposted-container">
 								<div class="reposted-attach">
 									<c:if test="${not empty repvo.filename }">
-										<div class="re-attach-div">
-											<button class="re-arrow-left">
-												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
-			                                    <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z" />
-			                                </svg>
-											</button>
-											<c:forEach items="${repvo.filename }" var="file">
-												<img src="/sns/download?filename=${file }">
-											</c:forEach>
-											<button class="re-arrow-right">
-												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
-			                                    <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z" />
-			                                </svg>
-											</button>
-										</div>
-									</c:if>
-								</div>
+			                        <div class="re-attach-div">
+				                        <c:set var="rpFileLength" value="${fn:length(repvo.filename)}" />
+				                        <c:if test="${rpFileLength gt 1 }">
+				                            <button class="re-arrow-left">
+				                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+				                                    class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
+				                                    <path fill-rule="evenodd"
+				                                        d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z" />
+				                                </svg>
+				                            </button>
+			                            </c:if>
+			                            <c:forEach items="${repvo.filename }" var="file">
+			                            	<img src="/sns/download?filename=${file }">
+			                            </c:forEach>
+			                            <c:if test="${rpFileLength gt 1 }">
+				                            <button class="re-arrow-right">
+				                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+				                                    class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
+				                                    <path fill-rule="evenodd"
+				                                        d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z" />
+				                                </svg>
+				                            </button>
+			                            </c:if>
+			                        </div>
+			                        </c:if>
+			                    </div>
 								<div class="reposted-photo">
 									<div class="re-photo-div">
 										<c:choose>
@@ -170,12 +191,15 @@
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
 		                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
 		                </svg>
-						</button> <span class="like-cnt-span">${postvo.p_love }</span> <!-- 좋아요 수 --> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-right-dots" viewBox="0 0 16 16">
+						</button> <span class="like-cnt-span">${postvo.p_love }</span> <!-- 좋아요 수 -->
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-right-dots" viewBox="0 0 16 16">
 		                    <path d="M2 1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h9.586a2 2 0 0 1 1.414.586l2 2V2a1 1 0 0 0-1-1zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z" />
 		                    <path d="M5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
-		                </svg> <span class="comm-cnt-span">${postvo.commCnt }</span> <!-- 댓글 수 --> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-share" viewBox="0 0 16 16">
+		                </svg> <span class="comm-cnt-span">${postvo.commCnt }</span> <!-- 댓글 수 -->
+		                <svg id="interactions-svg-repost" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-share" viewBox="0 0 16 16">
 		                    <path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.5 2.5 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5m-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3m11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3" />
-		                </svg> <span class="repost-cnt-span">${postvo.reCnt }</span> <!-- 해당 게시물이 리포스트 된 수 --> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-index-thumb" viewBox="0 0 16 16">
+		                </svg> <span class="repost-cnt-span">${postvo.reCnt }</span> <!-- 해당 게시물이 리포스트 된 수 -->
+		                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-index-thumb" viewBox="0 0 16 16">
 		                    <path d="M6.75 1a.75.75 0 0 1 .75.75V8a.5.5 0 0 0 1 0V5.467l.086-.004c.317-.012.637-.008.816.027.134.027.294.096.448.182.077.042.15.147.15.314V8a.5.5 0 0 0 1 0V6.435l.106-.01c.316-.024.584-.01.708.04.118.046.3.207.486.43.081.096.15.19.2.259V8.5a.5.5 0 1 0 1 0v-1h.342a1 1 0 0 1 .995 1.1l-.271 2.715a2.5 2.5 0 0 1-.317.991l-1.395 2.442a.5.5 0 0 1-.434.252H6.118a.5.5 0 0 1-.447-.276l-1.232-2.465-2.512-4.185a.517.517 0 0 1 .809-.631l2.41 2.41A.5.5 0 0 0 6 9.5V1.75A.75.75 0 0 1 6.75 1M8.5 4.466V1.75a1.75 1.75 0 1 0-3.5 0v6.543L3.443 6.736A1.517 1.517 0 0 0 1.07 8.588l2.491 4.153 1.215 2.43A1.5 1.5 0 0 0 6.118 16h6.302a1.5 1.5 0 0 0 1.302-.756l1.395-2.441a3.5 3.5 0 0 0 .444-1.389l.271-2.715a2 2 0 0 0-1.99-2.199h-.581a5 5 0 0 0-.195-.248c-.191-.229-.51-.568-.88-.716-.364-.146-.846-.132-1.158-.108l-.132.012a1.26 1.26 0 0 0-.56-.642 2.6 2.6 0 0 0-.738-.288c-.31-.062-.739-.058-1.05-.046zm2.094 2.025" />
 		                </svg> <span class="show-cnt-span">${postvo.show }</span> <!-- 조회수 -->
 						<button type="button" class="edit-confirm-btn theme">EDIT POST</button>
@@ -400,20 +424,23 @@
 	// 메뉴 클릭 시 이벤트 처리
 	$('.one-post-menu-box button').on('click', function() {
 		let status = $(this).attr('class');
-		if (status.indexOf('edit') != -1) {
+		if (status.indexOf('edit') != -1) { // edit 클릭
 			$('.contents-span').css('display', 'none');
 			$('.edit-contents-textarea').css('display', 'block');
 			$('.interactions-span svg, .interactions-span span').css('display', 'none');
 			$('.interactions-span button[class^=edit-]').css('display', 'block');
-		} else if (status.indexOf('remove') != -1) {
+		} else if (status.indexOf('remove') != -1) { // remove 클릭
 			if (confirm('해당 작업은 되돌릴 수 없습니다. 게시물을 삭제하시겠습니까?')) {
 				deletePost();
 			}
-		} else if (status.indexOf('report') != -1) {
+		} else if (status.indexOf('report') != -1) { // report 클릭
 			
+		} else if (status.indexOf('block') != -1) { // block 클릭
+			blockUser();
 		}
 		onOffMenu();
 	});
+	// edit 버튼 클릭 후 동작 제어.
 	$('.interactions-span button[class^=edit-]').on('click', function() {
 		let status = $(this).attr('class');
 		console.log(status);
@@ -429,6 +456,7 @@
 			}
 		}
 	});
+	
 	function updatePost() {
 		$.ajax({
 			url: 'edit-save',
@@ -464,6 +492,32 @@
 			}
 		});
 	}
+	function blockUser() {
+    	if (confirm('차단한 유저의 게시물이 더 이상 표시되지 않습니다.\n차단하시겠습니까?')) {
+    		let bId = '${postvo.id}';
+        	let blockReason = prompt('차단 사유를 입력해주세요. 서비스 개선에 도움이 됩니다.', '');
+        	
+        	$.ajax({
+        		url: '/sns/block',
+        		type: 'get',
+        		data: {
+        			blockId: bId,
+        			reason: blockReason
+        		},
+        		success: function() {
+        			location.href = '/sns/main';
+        		},
+        		error: function() {
+        			alert('잠시 후 다시 시도해주세요.');
+        		}
+        	});
+    	}
+    }
+	//리포스트 아이콘 클릭 시 해당 게시물 리포스트 되도록.
+	$('#interactions-svg-repost').on('click', function() {
+		$(this).css('pointer-events', 'none'); // 여러번 클릭 방지.
+		location.href = `/sns/reposting?no=${postvo.no}`;
+	});
 
 	
 	
@@ -564,13 +618,6 @@
     });
 	
 	
-	function showSheet(){
-		document.getElementById("moveSheet").classList.add("active");
-	}
-
-	function hideSheet(){
-		document.getElementById("moveSheet").classList.remove("active");
-	}
 	// 댓글 열고 닫기 
 	function opencomm() {
     	console.log("dd")
@@ -902,6 +949,8 @@
 	                    // 성공적으로 응답을 받았을 때 할 일
 	                    alert('신고가 완료되었습니다.');
 	                	$(".modal_Post").css("display","none");
+	                	$("#commreportform")[0].reset();
+	            		$("#postreportform")[0].reset();
 	                },
 	                error: function(xhr, status, error) {
 	                    // 오류 발생 시 처리할 코드
@@ -931,6 +980,9 @@
 	                    // 성공적으로 응답을 받았을 때 할 일
 	                    alert('신고가 완료되었습니다.');
 	                    $(".modal_Comm").css("display","none");
+	                    $("#commreportform")[0].reset();
+	                    $("#postreportform")[0].reset();
+	            		
 	                },
 	                error: function(xhr, status, error) {
 	                    // 오류 발생 시 처리할 코드
@@ -981,7 +1033,8 @@
 			var changeItem;
 			
 			if(reason == "curse") {
-				console.log(reason);
+				
+				$(".selectReason2").val("curse");
 				$(".reportCommText").css("display","block");
 				$(".reportCommbut").css("display","block");
 				$(".selectReason2").css("display","none");
@@ -1036,6 +1089,7 @@
 			
 			if(reason == "curse") {
 				console.log(reason);
+				$(".selectReasonPost2").val("curse");
 				$(".reportPostbut").css("display","block");
 				$(".reportPostText").css("display","block");
 				$(".selectReasonPost2").css("display","none");

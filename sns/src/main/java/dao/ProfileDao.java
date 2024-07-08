@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -61,5 +62,40 @@ public class ProfileDao implements IF_ProfileDao{
 	public List<ProfileVO> allprofileList() throws Exception {
 		// TODO Auto-generated method stub
 		return sql.selectList(mapperQuery+".allprofileList");
+	}
+	@Override
+	public List<ProfileVO> profileimgList() throws Exception {
+		// TODO Auto-generated method stub
+		return sql.selectList(mapperQuery+".profileimgList");
+	}
+
+	//검색 결과 글 프로필
+	@Override
+	public List<ProfileVO> searchProfile(List<String> id) throws Exception {
+		return sql.selectList(mapperQuery+".searchProfile", id);
+	}
+
+	//검색 결과 사용자
+	@Override
+	public List<ProfileVO> searchUser(Map map) throws Exception {
+		return sql.selectList(mapperQuery+".searchUser", map);
+	}
+
+	//서브 프로필 추가
+	@Override
+	public void insertProfile(ProfileVO pVO) throws Exception {
+		sql.insert(mapperQuery+".insertProfile", pVO);
+	}
+
+	//서브 프로필 가져오기
+	@Override
+	public List<ProfileVO> selectSub(String id) throws Exception {
+		return sql.selectList(mapperQuery+".selectSub", id);
+	}
+
+	//서브 프로필 수정
+	@Override
+	public void edit(Map map) throws Exception {
+		sql.update(mapperQuery+".edit", map);
 	}
 }
