@@ -62,13 +62,24 @@
 											<img class="profileImg" src="./resources/img/프로필.png">
 											<c:forEach items="${profile}" var="pr">
 												<c:if test="${mp.id eq pr.id }">
-													<img class="profileImg"
-														src="download?filename=${pr.photo }">
+													<c:choose>
+														<c:when test="${pr.photo != null}">
+															<img class="profileImg" src="download?filename=${pr.photo }">
+														</c:when>
+														<c:when test="${pr.photo == null}">
+															<img class="profileImg" src="./resources/img/프로필.png">
+														</c:when>
+													</c:choose>
 												</c:if>
 											</c:forEach>
-										</div> <span class="p_id">${mp.id }</span>
-									</a> <span class="p_date">${mp.p_date} </span>
-
+										</div>
+									</a> 
+									<c:forEach items="${profile }" var="ap">
+										<c:if test="${mp.id eq ap.id}">
+											<span class="p_id">${ap.nickName }</span>
+										</c:if>
+									</c:forEach>
+									<span class="p_date">${mp.p_date} </span>
 								</div>
 
 								<a href="myPost?no=${mp.no}" style="cursor: pointer;"
