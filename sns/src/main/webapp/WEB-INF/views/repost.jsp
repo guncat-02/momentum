@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page session="true" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -23,7 +24,7 @@
             <%@ include file="menuAll.jsp"%>
         </div>
         <div id="main">
-            <form action="repostingSave" method="post" encType="multipart/form-data" onsubmit="return test()">
+            <form action="repostingSave" method="post" encType="multipart/form-data">
             	<input type="hidden" name="id" value="<%=(String)session.getAttribute("userid") %>">
                 <!--글 작성, 사진 등록 하는 영역-->
                 <div id="create-post">
@@ -45,14 +46,19 @@
                     <div id="repost-grid-cont">
                         <div class="repost-grid-item">
                         	<input type="hidden" name="re_no" value="${map.rePVO.no }">
+                        	<c:set var="rpFileLength" value="${fn:length(map.rePVO.filename) }" />
                             <div id="reposted-photo">
-                                <div id="left-arrow">&lang;</div>
+                            	<c:if test="${rpFileLength gt 1 }">
+                                	<div id="left-arrow">&lang;</div>
+                                </c:if>
                                 <c:if test="${not empty map.rePVO.filename }">
                                 	<c:forEach items="${map.rePVO.filename }" var="file">
                                 		<img src="download?filename=${file }">
                                 	</c:forEach>
                                 </c:if>
-                                <div id="right-arrow">&rang;</div>
+                                <c:if test="${rpFileLength gt 1 }">
+                                	<div id="right-arrow">&rang;</div>
+                                </c:if>
                             </div>
                         </div>
                         <div class="repost-grid-item" id="reposted-user">
@@ -82,13 +88,13 @@
                     <span id="privacy-setting">
                         게시물 공개 여부
                         <label class="privacy-label">
-                            <input type="radio" name="privacy" value="0" required>비공개
+                            <input type="radio" name="privacy" value="0">비공개
                         </label>
                         <label class="privacy-label">
-                            <input type="radio" name="privacy" value="1">공개
+                            <input type="radio" name="privacy" value="1" checked>공개
                         </label>
                     </span>
-                    <button type="submit" id="postbtn" class="theme theme-font">
+                    <button type="button" id="postbtn" class="theme theme-font">
                         <h1>REPOST ></h1>
                     </button>
                 </div>
@@ -105,6 +111,22 @@
     $(document).ready(function () {
         imgTest();
     });
+    
+	$('#postbtn').on('dblclick', function() {
+		document.querySelector('#postbtn').setAttribute('disabled', '');
+		if ($.trim($('#create-post-cont').val()) != '') {
+			let fList = $('.attach-one-div .file');
+			for (let f of fList) {
+				if (f.files.length != 0) {
+					f.removeAttribute('disabled');
+				} else {
+					f.setAttribute('disabled', '');
+				}
+			}
+			$('form').submit();
+		}
+		document.querySelector('#postbtn').removeAttribute('disabled');
+	});
 
     function imgTest() {
         allImg.css('display', 'none');
@@ -151,17 +173,6 @@
 
 
 
-    function test() {
-        let fList = $('.attach-one-div .file');
-        for (let f of fList) {
-            if (f.files.length != 0) {
-                f.removeAttribute('disabled');
-            } else {
-                f.setAttribute('disabled', '');
-            }
-        }
-        return true;
-    }
 
     $('.privacy-label').on('click', function () {
         $('.privacy-label').css('color', '');

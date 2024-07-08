@@ -114,6 +114,20 @@ public class MainDAOImpl implements IF_MainDAO{
 		return sqlsession.selectOne(mapperQuery+".selectRePostedCnt", no);
 	}
 
+	@Override
+	public int getCurMaxNum(List<String> followIdList) throws Exception {
+		return sqlsession.selectOne(mapperQuery+".selectMaxWhere", followIdList);
+	}
+
+	@Override
+	public List<PostVO> getFollowingPostList(HashMap<String, Object> fPostMap) throws Exception {
+		return sqlsession.selectList(mapperQuery+".selectFollowingPostRN", fPostMap);
+	}
+
+	@Override
+	public List<PostVO> getRecommendPostList(HashMap<String, Object> recomMap) throws Exception {
+		return sqlsession.selectList(mapperQuery+".selectRecomPostRN", recomMap);
+	}
 	
 
 	

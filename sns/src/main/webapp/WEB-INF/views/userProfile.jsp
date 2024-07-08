@@ -6,58 +6,60 @@
 <head>
 <meta charset="UTF-8">
 <title>momentum</title>
-<!-- 다크 테마를 기본 값으로-->
-<link id="theme-setting" rel="stylesheet" href="./resources/css/dark_theme.css">
-<link rel="stylesheet" href="./resources/css/userProfile.css">
-<link rel="stylesheet" href="./resources/css/profileShow.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
-</script>
+    <!-- 다크 테마를 기본 값으로-->
+    <link id="theme-setting" rel="stylesheet" href="./resources/css/dark_theme.css">
+    <link rel="stylesheet" href="./resources/css/userProfile.css">
+    <link rel="stylesheet" href="./resources/css/profileShow.css">
+    <script src="/sns/resources/JS/setTheme.js"></script>
 </head>
 <body class="theme">
-	<input type="hidden" value="${profile.photo}" id="photo">
-	<div id="back" class="theme">
-		<span id="backBtn"><a href="main">&lang;</a></span>
-		<div id="myProInfo">
-			<span id="myNick">${profile.nickName}</span> <span class="myDetail">( </span> <span id="myId" class="myDetail">${profile.id}</span> <span class="myDetail"> )</span>
-		</div>
-	</div>
-	<div id="userFollowBtn">
-		<input type="button" id="userFollow" value="FOLLOW">
-	</div>
-	<div id="myProfile">
-		<div id="myImg">
-			<div id="myImgCircle">
-				<img class="proImg">
-			</div>
-		</div>
-		<div id="myInfo">
-			<div id="myFollow">
-				<table>
-					<tr>
-						<th style="width: calc(100%/ 3);">게시물</th>
-						<th style="width: calc(100%/ 3);"><a href="#">FOLLOWING</a></th>
-						<th style="width: calc(100%/ 3);"><a href="#">FOLLOWER</a></th>
-					</tr>
-					<tr>
+    <input type="hidden" value="${profile.photo}" id="photo">
+    <div id="back" class="theme">
+        <span id="backBtn"><a href="main">&lang;</a></span>
+        <div id="myProInfo">
+            <span id="myNick">${profile.nickName}</span>
+            <span class="myDetail">( </span>
+            <span id="myId" class="myDetail">${profile.id}</span>
+            <span class="myDetail"> )</span>
+        </div>
+    </div>
+    <div id="userFollowBtn">
+        <input type="button" id="userFollow" value="FOLLOW">
+    </div>
+    <div id="myProfile">
+        <div id="myImg">
+            <div id="myImgCircle">
+                <img class="proImg">
+            </div>
+        </div>
+        <div id="myInfo">
+            <div id="myFollow">
+                <table>
+                    <tr>
+                        <th style="width: calc(100% / 3);">게시물</th>
+                        <th style="width: calc(100% / 3);"><a href="/sns/followList/followings?id=${profile.id}">FOLLOWING</a></th>
+                        <th style="width: calc(100% / 3);"><a href="/sns/followList/followers?id=${profile.id}">FOLLOWER</a></th>
+                    </tr>
+                    <tr>
 						<td>${postlength}</td>
 						<td>${following}</td>
 						<td>${follower}</td>
-					</tr>
-				</table>
-			</div>
-			<div id="myBio">
-				<table>
-					<tr>
-						<td><span>${profile.tel}</span></td>
-					</tr>
-					<tr>
-						<td><span>${profile.bio}</span></td>
-					</tr>
-				</table>
-			</div>
-		</div>
-	</div>
-	<div id="myMenu" class="theme">
+                    </tr>
+                </table>
+            </div>
+            <div id="myBio">
+                <table>
+                    <tr>
+                        <td><span>${profile.tel}</span></td>
+                    </tr>
+                    <tr>
+                        <td><span>${profile.bio}</span></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+   <div id="myMenu" class="theme">
 		<input type="button" class="myMenuItem theme" value="POST" onclick="postbut('${profile.id}')"> <input type="button" class="myMenuItem theme" value="REPOST" onclick="repostbut('${profile.id}')"> <input type="button" class="myMenuItem theme" value="COMMENT" onclick="commentbut('${profile.id}')"> <input type="button" class="myMenuItem theme" value="MEDIA" onclick="mediabut('${profile.id}')"> <input type="button" class="myMenuItem theme" value="LOVE" onclick="lovebut('${profile.id}')">
 	</div>
 	<div class="myPost">

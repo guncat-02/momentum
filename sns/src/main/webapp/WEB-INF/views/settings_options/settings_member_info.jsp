@@ -296,7 +296,7 @@
     $('#change-name').on('click', function () {
     	let passTr = $(this).closest('tr');
         $.ajax({
-            url: 'settings_certifyPass',
+            url: 'settings-certifyPass',
             type: 'post',
             data: {
                 id: 'brian332',
@@ -316,7 +316,7 @@
     $('#change-name-complete').on('click', function () {
     	let nameTr = $(this);
         $.ajax({
-            url: 'settings_change_name',
+            url: 'settings-change-name',
             type: 'post',
             data: {
                 id: 'brian332',
@@ -360,17 +360,15 @@
     });
 	// 팝업 창 두번째 페이지의 삭제 버튼 클릭 시
 	$('#deletion-confirm-btn').on('click', function() {
+		$(this).css('pointer-events', 'none');
 		let input = $('#idnicktext').val();
 		if ($.trim($('#idAndNick').text()) == input) {
 			$.ajax({
-				url: 'settings_delete_account',
-				type: post,
-				data: {
-					id : 'brian332'
-				},
+				url: 'settings-delete-account',
+				type: 'post',
 				success: function(result) {
-					if(result == 1) {
-						alert('삭제되었습니다.');
+					if(result) {
+						alert('삭제되었습니다.\nMomentumSNS를 이용해주셔서 감사합니다.');
 						location.href='/sns';
 					} else {
 						alert('잠시 후 다시 시도해주세요.');
@@ -384,6 +382,7 @@
 			});
 		} else {
 			alert('잘못 입력되었습니다.\n삭제 취소를 원할 경우 \'취소\' 버튼을 눌러주세요.');
+			$(this).css('pointer-events', 'auto');
 		}
 	});
 	// 팝업 창 두번째 화면의 취소 버튼 클릭 시 input:text 값 지우고 팝업 창 닫는다

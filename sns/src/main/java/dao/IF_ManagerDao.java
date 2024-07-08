@@ -56,4 +56,13 @@ public interface IF_ManagerDao {
 	public List<ReportVO> getAllreport_chat();
 	
 //	public int getMemberSearchCount(PageVO pvo) throws Exception;
+	
+	public int getAllMemberCount() throws Exception;
+	
+	public int getTodayReportCount() throws Exception;
+	
+	public int getCurBannedCount() throws Exception;
+	
+	public int removePastSearchWord() throws Exception;
+	
 }

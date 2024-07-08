@@ -87,4 +87,10 @@ public class PostVO {
 	public void setReCnt(int reCnt) {
 		this.reCnt = reCnt;
 	}
+	@Override
+	public String toString() {
+		return "PostVO [no=" + no + ", re_no=" + re_no + ", cont=" + cont + ", show=" + show + ", filename="
+				+ Arrays.toString(filename) + ", privacy=" + privacy + ", c_block=" + c_block + ", id=" + id
+				+ ", p_date=" + p_date + ", commCnt=" + commCnt + ", p_love=" + p_love + ", reCnt=" + reCnt + "]";
+	}
 }

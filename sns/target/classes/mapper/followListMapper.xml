@@ -6,27 +6,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 나를 팔로우하는 id 중 나도 팔로우하는 id의 profile select -->
 	<select id="selectInterFollowersProfile" parameterType="String" resultType="vo.ProfileVO">
-		select p.* from
-		(select id from
-		(select a.id as id, a.followid as followid, b.id as fid, b.followid as ffollowid
-		from followTest a, followTest b
-		where a.id = b.followid
-		and a.followid = #{followid})
-		where followid = fid) f, profileTest p
-		where f.id = p.id and p.p_main = 1
+		select p.* from profileTest p,
+		(select id from followTest
+		where followId = #{followId}
+		and id in (
+		select followid from followTest
+		where id = #{followId})
+		) f
+		where p.id = f.id and p.p_main = 1
 	</select>
 	
 	<!-- 나를 팔로우하는 id 중 나는 팔로우하지 않는 id의 profile select -->
 	<select id="selectFollowersProfile" parameterType="String" resultType="vo.ProfileVO">
-		select p.* from profileTest p, (
-		select id from followTest where followid = #{followid} and id not in (
-		select id from
-		(select a.id as id, a.followid as followid, b.id as fid, b.followid as ffollowid
-		from followTest a, followTest b
-		where a.id = b.followid
-		and a.followid = #{followid})
-		where followid = fid)
-		)f
+		select p.* from profileTest p,
+		(select id from followTest
+		where followId = #{followId}
+		and id not in (
+		select followid from followTest
+		where id = #{followId})
+		) f
 		where p.id = f.id and p.p_main = 1
 	</select>
 	
