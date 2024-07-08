@@ -42,7 +42,7 @@
                 <input type="button" id="editNickChk" value="CHECK">
             </div>
             <div id="editNickCont" class="editCont">
-                <input type="text" name="nick" class="editItem" value="${profile.nickName}" placeholder="${profile.nickName}"  minlength="1" maxlength="8" pattern="^[ㄱ-ㅎ가-힣a-zA-Z\d_]+$" title="한글, 영어, 숫자, 언더바만 사용 가능합니다." id="editNickWord">
+                <input type="text" name="nickName" class="editItem" value="${profile.nickName}" placeholder="${profile.nickName}"  minlength="1" maxlength="8" pattern="^[ㄱ-ㅎ가-힣a-zA-Z\d_]+$" title="한글, 영어, 숫자, 언더바만 사용 가능합니다." id="editNickWord">
             </div>
         </div>
         <div id="editTel" class="edit">

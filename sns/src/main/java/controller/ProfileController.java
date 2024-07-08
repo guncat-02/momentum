@@ -233,7 +233,6 @@ public class ProfileController {
 	@PostMapping("/profileUpdate")
 	public String update(@ModelAttribute ProfileVO pVO, MultipartFile[] proPhoto, HttpSession session) throws Exception {
 		pVO.setId(String.valueOf(session.getAttribute("userid")));
-		pVO.setNickName(String.valueOf(session.getAttribute("nickName")));
 		String file = upload.fileUpload(proPhoto)[0];
 		if (file != null) {
 			pVO.setPhoto(file);
