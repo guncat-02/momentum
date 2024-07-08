@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import service.IF_PostingService;
 import service.IF_ProfileService;
@@ -52,6 +53,42 @@ public class SearchController {
 		Map<String, Object> map = new HashMap<>();
 		map.put("key", sVO);
 		map.put("id", id);
+		map.put("pageNo", 1);
+		if(!sVO.getKeyType().equals("사용자")) {
+			List<PostVO> pVO = sServe.selectSearchList(map);
+			if(pVO != null && pVO.size() != 0) {
+				List<String> idList = new ArrayList<>();
+				for(int i = 0; i < pVO.size(); i++) {
+					idList.add(pVO.get(i).getId());
+				}
+				List<ProfileVO> ppVO = proServe.searchProfile(idList);
+				model.addAttribute("info", pVO);
+				model.addAttribute("profile", ppVO);
+			}
+		} else {
+			List<ProfileVO> proVO = proServe.searchUser(map);
+			if(proVO != null && proVO.size() != 0) {
+				model.addAttribute("info", proVO);
+			}
+		}
+		return "searchList";
+	}
+	
+	//searchList 무한 스크롤 페이징
+	@GetMapping("newSearchList")
+	public String newSearchList(@ModelAttribute SearchVO sVO, HttpSession session, Model model,
+			@RequestParam("pageNo")int pageNo) throws Exception {
+		String id = String.valueOf(session.getAttribute("userid"));
+		sServe.insertKeyWord(sVO.getKeyWord());
+		model.addAttribute("key", sVO);
+		model.addAttribute("id", id);
+		if(sVO.getKeyType() == null || sVO.getKeyType().trim().equals("")) {
+			sVO.setKeyType("인기");
+		}
+		Map<String, Object> map = new HashMap<>();
+		map.put("key", sVO);
+		map.put("id", id);
+		map.put("pageNo", pageNo);
 		if(!sVO.getKeyType().equals("사용자")) {
 			List<PostVO> pVO = sServe.selectSearchList(map);
 			if(pVO != null && pVO.size() != 0) {

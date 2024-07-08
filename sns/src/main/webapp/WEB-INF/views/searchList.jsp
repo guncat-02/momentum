@@ -480,35 +480,38 @@
 		location.href = `/sns/reposting?no=\${no}`;
 	}
 	
-    $('body').on('mousewheel', function() {
-		mousewheelEvent();
-    });
     
     // 추천 게시물 시작 번호
-    let curRecomPage = 1;
+    let curRecomPage = 11;
     // 이미 로딩된 기존 컨텐츠
     let prevCont;
-    function mousewheelEvent() {
-        if ((window.scrollY + window.innerHeight)/document.body.clientHeight > 0.85) { // 마지막까지 스크롤 했을 때.
+	function scrollEventHandler() {
+		if ((window.scrollY + window.innerHeight)/document.body.clientHeight > 0.8) { // 마지막까지 스크롤 했을 때.
         	// 이벤트 지워준다.
-        	$('body').off('mousewheel');
+        	document.removeEventListener('scroll', scrollEventHandler);
         	// 이미 로딩된 기존 컨텐츠의 html 객체 저장.
-    		prevCont = $('.myPost').html();
-        	// 0.25초 뒤 다음 코드 실행.
-        	setTimeout(() => {        		
-        		$('#searchResultAll').load(`newRecomPost?pageNo=\${curRecomPage} #searMain`, function() {
-        			// 새로 고침 성공 시 실행.
-        			// 기존 게시물을 새로 로딩된 게시물 위에 추가.
-        			$('#searMain').prepend(prevCont);
-        			// 다음 페이지 시작 번호 갱신.
-        			curRecomPage += 10;
-        			// 제거했던 이벤트 다시 생성.
-        			$('body').on('mousewheel', function() { mousewheelEvent(); });
-        		});
-        		// 두 경우 모두에 속하지 않는 경우 스크롤 페이징 중단.
-        	}, '250');
+    		prevCont = $('#searchResultAll').html();
+       		// 게시물 로딩되는 부분 새로 고침.
+       		// 팔로우 한 유저의 최근 게시물을 전부 출력 했거나, 팔로우한 유저가 없을 경우
+  			$('#searResult').load(`newSearchList?pageNo=\${curRecomPage}&keyWord=${key.keyWord}&keyType=${key.keyType} #searchResultAll`, function() {
+  				// 새로 고침 성공 시 실행.           		
+      			if ($('.p_inf').length != 0) { // 새로운 게시물이 로딩될 때
+          			// 다음 페이지 시작 번호 갱신.
+          			curRecomPage += 10;
+          			// 제거했던 이벤트 다시 생성.
+          			document.addEventListener('scroll', scrollEventHandler);
+      			} else {
+      				$('#searchNone').remove();
+      			}
+      			// 기존 게시물을 새로 로딩된 게시물 위에 추가.
+      			$('#searchResultAll').prepend(prevCont);
+      		});
         }
-    }
+	}
+	// 최초 검색 결과가 존재 할 경우
+	if ($('.p_inf').length != 0) {
+		document.addEventListener('scroll', scrollEventHandler);
+	}
     
     //검색어마다 결과 가져오기
     $('.keyType').click(function() {

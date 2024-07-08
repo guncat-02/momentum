@@ -19,6 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where rs between 1 and 10	 
 	</select>
 	<select id="selectSearchList" resultType="vo.PostVO" parameterType="hashmap">
+		select * from (
 		select rownum rn, post.*
 		from (
 			<choose>
@@ -80,5 +81,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</choose>
 				desc
 			) post
+			)
+			where rn between #{pageNo} and #{pageNo} + 9
 	</select>
 </mapper>
