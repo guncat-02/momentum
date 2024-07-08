@@ -39,10 +39,13 @@ public class MainController {
 	// 세션 로그인 유저가 팔로우하는 아이디 리스트
 	List<String> followIdList;
 	// 세션 로그인 유저가 팔로우하는 아이디에 대해 출력된 게시물 번호
-	List<Integer> selectedPostNoList = new ArrayList<>();
+	List<Integer> selectedPostNoList;
 
 	@GetMapping("main")
 	public String mint(Model model, HttpSession session) throws Exception {
+		
+		selectedPostNoList = new ArrayList<>();
+		
 		String sessionId = (String)session.getAttribute("userid");
 		// 로그인 유저가 팔로우하는 아이디
 		followIdList = fser.getFollowingsId(sessionId);
@@ -50,16 +53,38 @@ public class MainController {
 		// main에서 나의 게시물도 볼 수 있도록.
 		followIdList.add(sessionId);
 		
-		// 로그인 유저가 팔로우하는 아이디의 게시물의 rownum max값.
-		int maxNum = mser.getCurMaxNum(followIdList);
+		List<PostVO> postList;
+		
+		System.out.println(followIdList);
+		System.out.println(followIdList.size());
+		
+		if (followIdList.size() != 1) { // 팔로우한 계정이 있을 경우
+			System.out.println("there are some followings");
+			// 로그인 유저가 팔로우하는 아이디의 게시물의 rownum max값.
+			int maxNum = mser.getCurMaxNum(followIdList);
+			model.addAttribute("maxNum", maxNum);
+			
+			// Paging을 위한 번호와 where절의 id 저장한 hashmap 사용.
+			HashMap<String, Object> fPostMap = new HashMap<>();
+			fPostMap.put("pageNo", maxNum);
+			fPostMap.put("fList", followIdList);
+			
+			
+			postList = mser.getFollowingPostList(fPostMap);
+		} else { // 팔로우한 계정이 없을 경우
+			System.out.println("theres no followings");
+			model.addAttribute("maxNum", -1);
+			
+			HashMap<String, Object> recomMap = new HashMap<>();
+			recomMap.put("exList", null);
+			recomMap.put("pageNo", 1);
+			recomMap.put("sessionId", sessionId);
+			
+			postList = mser.getRecommendPostList(recomMap);
+		}
 		
 		
-		// Paging을 위한 번호와 where절의 id 저장한 hashmap 사용.
-		HashMap<String, Object> fPostMap = new HashMap<>();
-		fPostMap.put("pageNo", maxNum);
-		fPostMap.put("fList", followIdList);
 		
-		List<PostVO> postList = mser.getFollowingPostList(fPostMap);
 		for (PostVO pvo : postList) {
 			// 파일 추가
 			pvo.setFilename(mser.getAttach(pvo.getNo()));
@@ -80,9 +105,10 @@ public class MainController {
 			pvo.setReCnt(reCnt);
 		}
 		
+		model.addAttribute("fList", followIdList);
 		model.addAttribute("aList", postList);
-		model.addAttribute("profilelist",pser.allprofileList());
-		model.addAttribute("maxNum", maxNum);
+		model.addAttribute("profilelist", pser.allprofileList());
+		
 		return "main";
 	}
 	
@@ -124,6 +150,13 @@ public class MainController {
 		String curId = (String)session.getAttribute("userid");
 		ProfileVO pvo = pser.select(curId);
 		return pvo;
+	}
+	
+	@GetMapping("menu-followings")
+	@ResponseBody
+	public List<ProfileVO> menuFollowings(HttpSession session) throws Exception {
+		String curId = (String)session.getAttribute("userid");
+		return fser.getFollowingsProfile(curId);
 	}
 
 	@GetMapping("myPost")
@@ -184,7 +217,7 @@ public class MainController {
 			pvo.setReCnt(reCnt);
 		}
 	
-		
+		model.addAttribute("fList", followIdList);
 		model.addAttribute("aList", postList);
 		model.addAttribute("profilelist",pser.allprofileList());
 		
@@ -195,16 +228,14 @@ public class MainController {
 	
 	// 팔로우한 유저 게시물 페이징 이후 추천 게시물 페이징
 	@GetMapping("newRecomPost")
-	public String newRecomPost(@RequestParam("pageNo")int pageNo, Model model) throws Exception {
-		
-		for (Integer i : selectedPostNoList) {
-			System.out.print(i+" ");			
-		}
-		System.out.println();
+	public String newRecomPost(@RequestParam("pageNo")int pageNo, HttpSession session, Model model) throws Exception {
+
+		String sessionId = (String)session.getAttribute("userid");
 		
 		HashMap<String, Object> recomMap = new HashMap<>();
 		recomMap.put("exList", selectedPostNoList);
 		recomMap.put("pageNo", pageNo);
+		recomMap.put("sessionId", sessionId);
 		
 		List<PostVO> postList = mser.getRecommendPostList(recomMap);
 		for(PostVO pvo : postList) {
@@ -222,11 +253,18 @@ public class MainController {
 			// 해당 글의 리포스트 수
 			pvo.setReCnt(reCnt);
 		}
+		model.addAttribute("fList", followIdList);
 		model.addAttribute("aList", postList);
 		model.addAttribute("profilelist",pser.allprofileList());
 		
 		System.out.println("new recom page is ready");
 		return "main";
+	}
+	
+	// 메뉴 새로고침
+	@GetMapping("menuReload")
+	public String menuReload() {
+		return "menuAll";
 	}
 	
 

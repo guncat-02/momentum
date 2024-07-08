@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page session="true" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -45,14 +46,19 @@
                     <div id="repost-grid-cont">
                         <div class="repost-grid-item">
                         	<input type="hidden" name="re_no" value="${map.rePVO.no }">
+                        	<c:set var="rpFileLength" value="${fn:length(map.rePVO.filename) }" />
                             <div id="reposted-photo">
-                                <div id="left-arrow">&lang;</div>
+                            	<c:if test="${rpFileLength gt 1 }">
+                                	<div id="left-arrow">&lang;</div>
+                                </c:if>
                                 <c:if test="${not empty map.rePVO.filename }">
                                 	<c:forEach items="${map.rePVO.filename }" var="file">
                                 		<img src="download?filename=${file }">
                                 	</c:forEach>
                                 </c:if>
-                                <div id="right-arrow">&rang;</div>
+                                <c:if test="${rpFileLength gt 1 }">
+                                	<div id="right-arrow">&rang;</div>
+                                </c:if>
                             </div>
                         </div>
                         <div class="repost-grid-item" id="reposted-user">

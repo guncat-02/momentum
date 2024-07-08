@@ -294,25 +294,26 @@ String id = (String)session.getAttribute("userid");
     	return flag.val();
     }
     function block(btn) {
-    	
-    	let bId = $.trim(btn.closest('tr').find('.fnb-id').text());
-    	let blockReason = prompt('차단 사유를 입력해주세요. 서비스 개선에 도움이 됩니다.', '');
-    	
-    	$.ajax({
-    		url: '/sns/block',
-    		type: 'get',
-    		data: {
-    			blockId: bId,
-    			reason: blockReason
-    		},
-    		success: function() {
-    			btn.css('pointer-events', 'auto');
-    		},
-    		error: function() {
-    			alert('잠시 후 다시 시도해주세요.');
-    			btn.val(0);
-    		}
-    	});
+    	if (confirm('차단한 유저의 게시물이 더 이상 표시되지 않습니다.\n차단하시겠습니까?')) {
+    		let bId = $.trim(btn.closest('tr').find('.fnb-id').text());
+        	let blockReason = prompt('차단 사유를 입력해주세요. 서비스 개선에 도움이 됩니다.', '');
+        	
+        	$.ajax({
+        		url: '/sns/block',
+        		type: 'get',
+        		data: {
+        			blockId: bId,
+        			reason: blockReason
+        		},
+        		success: function() {
+        			btn.css('pointer-events', 'auto');
+        		},
+        		error: function() {
+        			alert('잠시 후 다시 시도해주세요.');
+        			btn.val(0);
+        		}
+        	});
+    	}
     }
     function blockCancel(btn) {
     	

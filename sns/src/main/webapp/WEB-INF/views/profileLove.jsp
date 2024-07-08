@@ -48,8 +48,8 @@
 				<table>
 					<tr>
 						<th style="width: calc(100%/ 3);">게시물</th>
-						<th style="width: calc(100%/ 3);"><a href="#">FOLLOWING</a></th>
-						<th style="width: calc(100%/ 3);"><a href="#">FOLLOWER</a></th>
+						<th style="width: calc(100%/ 3);"><a href="/sns/followList/followings?id=${profile.id}">FOLLOWING</a></th>
+						<th style="width: calc(100%/ 3);"><a href="/sns/followList/followers?id=${profile.id}">FOLLOWER</a></th>
 					</tr>
 					<tr>
 						<td>${postlength}</td>

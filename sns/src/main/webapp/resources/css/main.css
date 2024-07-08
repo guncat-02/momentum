@@ -96,7 +96,7 @@ body {
 	margin-left: 130px;
 	width: 700px;
 	height: 400px;
-	auto-fit;
+	/* auto-fit; */
 }
 
 .item {
@@ -160,4 +160,14 @@ body {
 }
 [class*="p_repostbut"]:hover {
 	cursor: pointer;
+}
+.main-po-follow-btn {
+	margin-left: 5px;
+	border: 1px solid #00f7ff;
+	border-radius: 7.5px;
+	font-weight: bold;
+}
+.main-po-follow-btn[value="0"] {
+	background-color: #00f7ff;
+	color: black;
 }

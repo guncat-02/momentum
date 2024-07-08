@@ -99,6 +99,51 @@ body {
 	box-shadow: none;
 }
 
+/* 내가 팔로우하는 유저 목록 간단히 보여주는 table의 div */
+#simplefollowtable {
+    display: block;
+    width: 80%;
+    height: fit-content;
+    margin: 0px auto;
+}
+
+#simplefollowtable table {
+    width: 100%;
+    height: fit-content;
+    border-collapse: collapse;
+}
+
+
+.menu-following-photo-div {
+    display: block;
+    width: 40px;
+    height: 40px;
+    margin: 2px;
+    position: relative;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    background-image: linear-gradient(#fff, #fff),
+    linear-gradient(to right, #00f7ff 0%, #ff00bf 100%);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    overflow: hidden;
+}
+.menu-following-photo-div img {
+    width: 100%;
+    height: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.menu-following-name {
+	padding-left: 7px;
+}
+
+#simplefollowtable table,tr,th,td {
+    padding: 5px 0px;
+}
+
 
 
 /* 로그 아웃 글자 */
@@ -107,7 +152,7 @@ body {
     justify-content: center;
     width: fit-content;
     height: fit-content;
-    margin: 50px auto 0px auto;
+    margin: 50px auto;
     /* border: 1px solid black; */
 }
 #logout a {

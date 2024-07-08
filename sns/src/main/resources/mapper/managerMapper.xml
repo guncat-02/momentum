@@ -200,4 +200,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</choose>
 	</select>
 	
+	<select id="selectMemberCount" resultType="_int">
+		select count(id) from memberTest
+	</select>
+	
+	<select id="selectReportCountWhere" resultType="_int">
+		select count(id) from reportTest
+		where r_date = to_char(sysdate, 'yy/mm/dd')
+	</select>
+	
+	<select id="selectBannedCountWhere" resultType="_int">
+		select count(id) from banTest
+		where sysdate between s_date and f_date
+	</select>
+	
+	<delete id="deleteKeyWordWhere">
+		delete from searchWordTest where keyDate <![CDATA[ < ]]> sysdate
+	</delete>
+	
 </mapper>

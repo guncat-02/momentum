@@ -46,17 +46,6 @@
         </a>
         <br>
 
-        <a href="/sns/allList">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-compass"
-                viewBox="0 0 16 16">
-                <path
-                    d="M8 16.016a7.5 7.5 0 0 0 1.962-14.74A1 1 0 0 0 9 0H7a1 1 0 0 0-.962 1.276A7.5 7.5 0 0 0 8 16.016m6.5-7.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0" />
-                <path d="m6.94 7.44 4.95-2.83-2.83 4.95-4.949 2.83 2.828-4.95z" />
-            </svg>
-            <span>FIND</span>
-        </a>
-        <br>
-
         <a href="/sns/chatStart">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-send"
                 viewBox="0 0 16 16">
@@ -64,16 +53,6 @@
                     d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z" />
             </svg>
             <span>MESSAGE</span>
-        </a>
-        <br>
-
-        <a href="/sns/alarm">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bell"
-                viewBox="0 0 16 16">
-                <path
-                    d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6" />
-            </svg>
-            <span>ALARM</span>
         </a>
         <br>
 
@@ -113,6 +92,20 @@
         <button type="button" id="theme-change-btn" class="">theme change</button>
         <br>
         
+		<!--내가 팔로우하는 유저 목록 간단하게 보여주는 table-->
+	    <div id="simplefollowtable">
+	        <table>
+	            <thead>
+	                <tr>
+	                    <th colspan="2">FOLLOWINGS</th>
+	                </tr>
+	            </thead>
+	            <tbody>
+	                
+	            </tbody>
+	        </table>
+	    </div>
+        
     </div>
     <div id="logout">
         <a href="/sns/logout" id="menu-logout">
@@ -126,6 +119,11 @@
 <script>
 
 	$(document).ready(function() {
+		getMyProfile();
+		getFollowings();
+	});
+	
+	function getMyProfile() {
 		$.ajax({
 			url: 'menu-profile',
 			type: 'get',
@@ -137,13 +135,47 @@
 					photo = `/sns/download?filename=\${photo}`;
 				}
 				$('#menu-profile-image img').attr('src', photo);
-				$('#menu-profile-id').text(result.id);
+				$('#menu-profile-id').text(result.nickName);
 			},
 			error: function() {
-				console.log('e');
+				alert('프로필 로딩 중 오류가 발생했습니다.');
 			}
 		});
-	});
+	}
+	
+	function getFollowings() {
+		$.ajax({
+			url: 'menu-followings',
+			type: 'get',
+			success: function(result) {
+				if (result != null && result.length != 0) {
+					let proText;
+					let proPhoto;
+					for (let pvo of result) {
+						if (pvo.photo == null) {
+							proPhoto = '/sns/resources/img/프로필.png';
+						} else {
+							proPhoto = `/sns/download?filename=\${pvo.photo}`;
+						}
+						proText = `<tr>
+		                    <td width="20%">
+			                    <div class="menu-following-photo-div">
+			                    	<img src="\${proPhoto}">
+			                    </div>
+		                    </td>
+		                    <td style="text-align: left" class="menu-following-name">\${pvo.nickName}</td>
+		                </tr>`;
+		                $('#simplefollowtable tbody').append(proText);
+					}
+				} else {
+					$('#simplefollowtable').remove();					
+				}
+			},
+			error: function() {
+				alert('팔로윙 유저 로딩 중 오류가 발생했습니다.');
+			}
+		});
+	}
 
 	$('#theme-change-btn').on('click', function() {
 		switchTheme();

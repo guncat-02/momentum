@@ -89,7 +89,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</foreach>
 			and
 		</if>
-		p_date between localtimestamp - (interval '31' day) and localtimestamp
+		id not in
+		(select blockId from blockTest where id = #{sessionId})
+		and p_date between localtimestamp - (interval '31' day) and localtimestamp
 		order by p_date desc)o
 		)
 		where rn between #{pageNo} and #{pageNo} +9
