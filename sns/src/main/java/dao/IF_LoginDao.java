@@ -10,4 +10,7 @@ public interface IF_LoginDao {
 	
 	// 업데이트 비밀번호
 	public void updatepw(MemberVO mvo) throws Exception;
+
+	public String chkBan(String id) throws Exception;
+
 }

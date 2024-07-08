@@ -9,4 +9,6 @@ public interface IF_LoginService {
 	public String chkidser(String id) throws Exception;
 	
 	public void updatepw(MemberVO mvo) throws Exception;
+
+	public String chkBan(String id) throws Exception;
 }

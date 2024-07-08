@@ -35,5 +35,10 @@ public class LoginDao implements IF_LoginDao{
 		System.out.println(mvo.getId()+ "/" + mvo.getPass());
 		sqlsession.update(mapperQuery+".updatepw", mvo);
 	}
+	@Override
+	public String chkBan(String id) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

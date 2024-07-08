@@ -78,7 +78,10 @@ public class LoginController {
 				// 해당 cookie 유효 기간 갱신.
 				cookieUtil.setCookie(res, "curTheme", cookieVal);
 			}
-			
+			if(lservice.chkBan(id) == "ban") {
+				
+				return "redirect:loginpage";
+			}
 			if (mvo.getAdmin() != null) {
 				if (session.getAttribute("userid") != null) {
 					session.removeAttribute("userid");
@@ -101,7 +104,6 @@ public class LoginController {
 				session.setAttribute("userid", mvo.getId());
 				session.setAttribute("username", mvo.getName());
 				session.setAttribute("nickName", pServe.matchId(mvo.getId()));
-				
 				return "redirect:main";
 			}
 		}else {

@@ -31,4 +31,10 @@ public class LoginService implements IF_LoginService{
 		System.out.println(mvo.getId()+ "/" + mvo.getPass());
 		ldao.updatepw(mvo);
 	}
+
+	@Override
+	public String chkBan(String id) throws Exception {
+		// TODO Auto-generated method stub
+		return ldao.chkBan(id);
+	}
 }
