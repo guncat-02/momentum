@@ -206,7 +206,7 @@
 		const backHref = document.referrer;
     	const backArray = backHref.split('?')
     	const backChk = backArray[0].split('/')
-    	const backWord = backArray[1].split('=')
+    	const backWord = backChk[1].split('=')
     	keyWord = backWord[1];
     	back = backChk[backChk.length-1];
     	
@@ -266,7 +266,7 @@
 		 })  
 	}
     
-<<<<<<< HEAD
+
     // 게시물 좋아요 누르기
 	function p_love(no) {
 		let lovenum = $(".p_lovecnt"+no).text();
@@ -309,7 +309,7 @@
 			}
 		})
 	}
-=======
+
     //뒤로가기 버튼 구현
     $('#backBtn').click(function() {
     	const loc = window.location.href;
@@ -325,6 +325,6 @@
     		}
     	}
     })
->>>>>>> origin/cat
+
 </script>
 </html>
