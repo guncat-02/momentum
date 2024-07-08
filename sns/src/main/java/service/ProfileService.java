@@ -60,4 +60,10 @@ public class ProfileService implements IF_ProfileService{
 		// TODO Auto-generated method stub
 		return pDao.allprofileList();
 	}
+
+	@Override
+	public List<ProfileVO> profileimgList() throws Exception {
+		// TODO Auto-generated method stub
+		return pDao.profileimgList();
+	}
 }

@@ -48,6 +48,7 @@ public class MainController {
 		}
 		model.addAttribute("aList", attachList);
 		model.addAttribute("profilelist",pser.allprofileList());
+		model.addAttribute("profileimglist",pser.profileimgList());
 		return "main";
 	}
 	

@@ -199,5 +199,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</when>
 		</choose>
 	</select>
+	<select id="getAllreport_post" resultType="vo.ReportVO">
+		select * from reporttest where r_loc = 'POST'
+	</select>
+	<select id="getAllreport_comm" resultType="vo.ReportVO">
+		select * from reporttest where r_loc = 'COMM'
+	</select>
+	<select id="getAllreport_chat" resultType="vo.ReportVO">
+		select * from reporttest where r_loc = 'CHAT'
+	</select>
 	
 </mapper>

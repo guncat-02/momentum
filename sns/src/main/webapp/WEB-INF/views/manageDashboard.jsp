@@ -20,7 +20,7 @@
             <h2><a href="/sns/main">SNS</a></h2>
             <h2><a href="/sns/manager">DashBoard</a></h2>
             <h2><a href="/sns/manager/user/">User Info</a></h2>
-            <h2><a href="#">Report Info</a></h2>
+            <h2><a href="/sns/manager/report/">Report Info</a></h2>
         </div>
         <div id="manage-dashboard-container">
             <div id="dashboard-title">

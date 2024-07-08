@@ -30,18 +30,25 @@
 		</div>
 		<div class="myPost">
 			<c:forEach items="${aList}" var="mp">
+			<input type = "hidden" value="${mp.id }">
 				<c:set var="filenameLength" value="${fn:length(mp.filename)}" />
 				<div class="p_inf">
 					<a href="userprofile?id=${mp.id}" class="userprofilealink">
 						<div class="proimg">
 							<img class="profileImg" src="./resources/img/프로필.png">
-							<c:forEach items="${profilelist }" var="pr">
+							<c:forEach items="${profileimglist }" var="pr">
 								<c:if test="${mp.id eq pr.id }">
 									<img class="profileImg" src="download?filename=${pr.photo }">
 								</c:if>
 							</c:forEach>
-						</div> <span class="p_id">${mp.id }</span>
-					</a> <span class="p_date">${mp.p_date} </span>
+						</div> 
+					</a>
+						<c:forEach items="${profilelist }" var="ap">
+							<c:if test="${mp.id eq ap.id}">
+								<span class="p_id">${ap.nickName }</span>
+							</c:if>
+						</c:forEach>
+					 <span class="p_date">${mp.p_date} </span>
 
 				</div>
 

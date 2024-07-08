@@ -7,6 +7,7 @@ import vo.MemberVO;
 import vo.PageVO;
 import vo.PostVO;
 import vo.ProfileVO;
+import vo.ReportVO;
 
 public interface IF_ManagerService {
 
@@ -45,6 +46,12 @@ public interface IF_ManagerService {
 	public int getCommsSearchCount(PageVO pvo) throws Exception;
 	
 	public int getAdminsSearchCount(PageVO pvo) throws Exception;
+	// 신고 가져오기
+	public List<ReportVO> getAllreport_post() throws Exception;
+
+	public List<ReportVO> getAllreport_comm() throws Exception;
+
+	public List<ReportVO> getAllreport_chat() throws Exception;
 	
 //	public int getMemberSearchCount(PageVO pvo) throws Exception;
 	

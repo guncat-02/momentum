@@ -4,6 +4,7 @@ public class ReportVO {
 	private int no; //글 번호
 	private String id; // 작성자
 	private String reportId; // 신고자
+	private String r_date; // 신고날짜
 	private String r_loc; // 신고 위치
 	private String st_type; // 신고 사유
 	private String nd_type; // 사유 2
@@ -49,6 +50,12 @@ public class ReportVO {
 	}
 	public void setR_loc(String r_loc) {
 		this.r_loc = r_loc;
+	}
+	public String getR_date() {
+		return r_date;
+	}
+	public void setR_date(String r_date) {
+		this.r_date = r_date;
 	}
 
 	

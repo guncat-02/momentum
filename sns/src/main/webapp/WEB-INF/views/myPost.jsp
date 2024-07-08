@@ -429,6 +429,7 @@
 			}
 		}
 	});
+	
 	function updatePost() {
 		$.ajax({
 			url: 'edit-save',
@@ -902,6 +903,8 @@
 	                    // 성공적으로 응답을 받았을 때 할 일
 	                    alert('신고가 완료되었습니다.');
 	                	$(".modal_Post").css("display","none");
+	                	$("#commreportform")[0].reset();
+	            		$("#postreportform")[0].reset();
 	                },
 	                error: function(xhr, status, error) {
 	                    // 오류 발생 시 처리할 코드
@@ -931,6 +934,9 @@
 	                    // 성공적으로 응답을 받았을 때 할 일
 	                    alert('신고가 완료되었습니다.');
 	                    $(".modal_Comm").css("display","none");
+	                    $("#commreportform")[0].reset();
+	                    $("#postreportform")[0].reset();
+	            		
 	                },
 	                error: function(xhr, status, error) {
 	                    // 오류 발생 시 처리할 코드
@@ -981,7 +987,8 @@
 			var changeItem;
 			
 			if(reason == "curse") {
-				console.log(reason);
+				
+				$(".selectReason2").val("curse");
 				$(".reportCommText").css("display","block");
 				$(".reportCommbut").css("display","block");
 				$(".selectReason2").css("display","none");
@@ -1036,6 +1043,7 @@
 			
 			if(reason == "curse") {
 				console.log(reason);
+				$(".selectReasonPost2").val("curse");
 				$(".reportPostbut").css("display","block");
 				$(".reportPostText").css("display","block");
 				$(".selectReasonPost2").css("display","none");

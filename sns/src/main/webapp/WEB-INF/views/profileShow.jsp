@@ -88,7 +88,7 @@
 						</c:choose>
 
 					</div>
-					<span class="p_id">${mp.id }</span> <span class="p_date">${mp.p_date} </span>
+					<span class="p_id">${profile.nickName }</span> <span class="p_date">${mp.p_date} </span>
 				</div> <!-- 프로필 아이디 -->
 				<div class="p_cont">${mp.cont }</div> <c:choose>
 					<c:when test="${filenameLength eq 0}">

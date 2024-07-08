@@ -124,4 +124,29 @@ public class ManagerController {
 		
 		return "manage"+area;
 	}
+	
+	@GetMapping("/manager/report/*")
+	public String managereport(HttpServletRequest req,HttpSession session, Model model) throws Exception {
+		model.addAttribute("curId", session.getAttribute("userid"));
+		
+		String[] uri = req.getRequestURI().split("/");
+		String curType = uri[uri.length-1].split("\\?")[0];
+		System.out.println(curType);
+		
+		if (curType.equals("report") || curType.equals("report_post")) {
+			System.out.println("1");
+			model.addAttribute("report_post", mservice.getAllreport_post());
+			System.out.println(mservice.getAllreport_post());
+		} else if (curType.equals("report_comm")) {
+			System.out.println("2");
+			model.addAttribute("report_comm", mservice.getAllreport_comm());
+		} else if (curType.equals("report_chat")) {
+			System.out.println("3");
+			model.addAttribute("report_chat", mservice.getAllreport_chat());
+		}
+		return "manageReport";
+	}
+	
+	
+	
 }

@@ -197,6 +197,8 @@ public class ProfileController {
 			// 글 쓴 개수
 			model.addAttribute("postlength", mserve.postLength(String.valueOf(session.getAttribute("userid"))));
 			// 프로필 사진이 있는 모든 프로필 리스트
+			model.addAttribute("profileimglist",pServe.profileimgList());
+			// 닉네임할라고 가져오는 리스트
 			model.addAttribute("profilelist",pServe.allprofileList());
 		}else {
 			ProfileVO p = pServe.select(id);
@@ -216,6 +218,9 @@ public class ProfileController {
 			model.addAttribute("lovepostList",lovepostList);
 			// 글 쓴 개수
 			model.addAttribute("postlength", mserve.postLength(id));
+			// 프로필 사진이 있는 모든 프로필 리스트
+			model.addAttribute("profileimglist",pServe.profileimgList());
+						// 닉네임할라고 가져오는 리스트
 			model.addAttribute("profilelist",pServe.allprofileList());
 		}
 		

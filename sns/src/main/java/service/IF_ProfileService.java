@@ -14,4 +14,6 @@ public interface IF_ProfileService {
 	public List<ProfileVO> profileList(List<String> nick) throws Exception;
 	// 모든 프로필 리스트 가져오기
 	public List<ProfileVO> allprofileList() throws Exception;
+	// 프로필이미지가 있는 리스트 가져오기
+	public List<ProfileVO> profileimgList() throws Exception;
 }

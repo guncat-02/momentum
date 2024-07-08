@@ -22,7 +22,7 @@
             <h2><a href="/sns/main">SNS</a></h2>
             <h2><a href="/sns/manager">DashBoard</a></h2>
             <h2><a href="/sns/manager/user/">User Info</a></h2>
-            <h2><a href="#">Report Info</a></h2>
+            <h2><a href="/sns/manager/report/">Report Info</a></h2>
         </div>
         <form action="/sns/manager/search" method="get" onsubmit="return validation();">
             <div id="admin-grid-container">

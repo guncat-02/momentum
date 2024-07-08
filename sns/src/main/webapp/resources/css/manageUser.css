@@ -277,4 +277,297 @@ button[value="1"]:hover, input[type=submit]:hover {
     color: black;
     cursor: pointer;
 }
+.r_cont {
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+/* 모달 시작*/
+.modal_block {
+	position: fixed;
+	display: none;
+	justify-content: center;
+	align-items: center;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.4);
+	z-index:1000;
+}
+.modal_block span {
+	color : black;
+}
 
+.modal_body_block {
+	position: absolute;
+	top: 50%;
+	width: 600px;
+	height: 600px;
+	padding: 40px;
+	text-align: center;
+	background-color: rgb(255, 255, 255);
+	border-radius: 10px;
+	box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+	transform: translateY(-50%);
+	z-index : 100;
+}
+
+.closeModal {
+	left : 90%;
+	bottom : 90%;
+	position: absolute;
+	cursor: pointer;
+}
+.reportdiv {
+	color: black;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+	font-size : 20px;
+	font-weight: 1000;
+	margin-bottom: 30px;
+}
+.rc_div1 {
+	border-top : 1px solid #e6e6ea;
+	border-bottom : 1px solid #e6e6ea;
+	padding-top : 10px;
+	padding-bottom : 10px;
+	text-align: left;
+}
+.rc_s1 {
+	color : #929294;
+}
+.rc_s2 {
+	color : black;
+}
+label {
+	color: black;
+        display: block;
+        margin-bottom: 5px;
+    }
+input[type="date"] {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+}
+.b_div{
+	text-align: left;	
+	padding-top :30px;
+	margin-bottom: 30px;
+}
+.b_date_div {
+	padding-top :30px;
+}
+
+#reported_post{
+	background-color:black;
+	border: 1px solid black;
+    height: 200px; 
+    overflow: auto; 
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+// 모달
+.one-post-container {
+    display: grid;
+    grid-template-columns: 100px 500px 50px;
+    grid-template-rows: 50px 50px 25px minmax(0px, auto) minmax(0px, auto) minmax(0px, auto);
+    border-bottom: 1px solid grey;
+    width: fit-content;
+    height: fit-content;
+    margin: 15px auto;
+    padding-right: 100px;
+    grid-auto-flow: row dense;
+}
+
+/* 게시자 프로필사진 영역 */
+.one-post-photo {
+    grid-column: 1 / 2;
+    grid-row: 1 / 3;
+}
+.one-post-photo .photo-div {
+    display: block;
+    width: 80px;
+    height: 80px;
+    margin: 8px;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    background-image: linear-gradient(#fff, #fff),
+    linear-gradient(to right, #00f7ff 0%, #ff00bf 100%);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    position: relative;
+}
+.photo-div:hover {
+	cursor: pointer;
+}
+.one-post-photo .photo-div img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+}
+
+/* 게시자 닉네임, 아이디 영역 */
+.one-post-names {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    display: flex;
+}
+.one-post-names:hover {
+	cursor: pointer;
+}
+.one-post-names .nickname-span {
+    font-size: 25px;
+    margin: 12.5px 0px;
+    margin-left: 5px;
+    color: #ff00bf;
+}
+.one-post-names .id-span {
+    font-size: 15px;
+    margin: 17.5px 0px;
+    margin-left: 5px;
+}
+
+/* 게시물 메뉴 영역 */
+.one-post-menu {
+    grid-column: 3 / 4;
+    grid-row: 1 / 2;
+    text-align: end;
+    position: relative;
+}
+.one-post-menu > svg {
+    width: 20px;
+    height: 20px;
+    margin: 15px 0px;
+    color: #00f7ff;
+}
+.one-post-menu > svg:hover {
+    cursor: pointer;         
+}
+.one-post-menu-box {        
+    display: none;
+    width: fit-content;
+    height: fit-content;
+    position: absolute;
+    right: 0px;
+    text-align: center;
+    border: 1px solid #00f7ff;
+}
+.one-post-menu-box button {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    display: flex;
+    flex-direction: row;
+    vertical-align: middle;
+    justify-content: center;
+    width: 100%;
+    height: 26px;
+    border: none;
+    font-size: 17px;
+}
+.one-post-menu-box button > svg {
+    width: 17px;
+    height: 17px;
+    margin-top: 1px;
+    margin-right: 5px;
+    /* border: 1px solid blue; */
+    
+}
+.one-post-menu button:hover {
+    transition-duration: 150ms;
+    filter: invert(100%);
+}
+
+
+/* 게시물 내용 영역 */
+.one-post-cont {
+    grid-column: 2 / 4;
+    grid-row: 2 / 4;
+    padding: 10px;
+    overflow: auto;
+}
+.one-post-cont::-webkit-scrollbar {
+    width: 0px;
+}
+.one-post-cont .contents-span {
+    word-wrap: break-word;
+    word-break: keep-all;
+}
+.one-post-cont .edit-contents-textarea {
+    display: none;
+    width: 525px;
+    height: 50px;
+    resize: none;
+    word-wrap: break-word;
+    word-break: keep-all;
+    border: 1px solid #00f7ff;
+}
+.one-post-cont .edit-contents-textarea::-webkit-scrollbar {
+    width: 0px;
+}
+
+
+/* 리포스트 마크 아래 공백 영역 */
+.one-post-space {
+    grid-column: 1 / 2;
+    grid-row: 3 / span 4;
+}
+
+/* 게시물 사진 영역 */
+.one-post-attach {
+    grid-column: 2 / 4;
+    grid-row: 4 / 5;
+}
+.one-post-attach .attach-div {
+    display: inline-block;
+    width: 550px;
+    height: 550px;
+    margin-top: 15px;
+    position: relative;
+}
+.attach-div img {
+    position: absolute;
+    border-radius: 15px;
+}
+/* 게시물 사진 이동 버튼 */
+.attach-div button[class^=arrow-] {
+    border: none;
+    background-color: transparent;
+    width: 24px;
+    height: 24px;
+    text-align: center;
+    padding: 0px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    margin-top: -12px;
+    z-index: 3;
+}
+button[class^=arrow-] svg {
+    width: 25px;
+    height: 25px;
+    color: #ff00bf;
+}
+.arrow-left {
+    left: 10px;
+}
+.arrow-right {
+    right: 10px;
+}
+
+/* 게시물의 리포스트 게시물 영역 */
+.one-post-reposted {
+    grid-column: 2 / 4;
+    grid-row: auto / span 1;
+}
+
+.one-post-reposted .reposted-div {
+    width: 550px;
+    height: 225px;
+    margin-top: 10px;
+}
