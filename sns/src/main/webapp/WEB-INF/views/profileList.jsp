@@ -190,7 +190,11 @@
             	contentType: false,
             	async: false
         	})
-        	$('#profileList').load("profileList #profileListAll")
+        	$('#profileList').load("profileList #profileListAll", function() {
+        		if($('.userProfile').length == 2) {
+                    $('#userPlus').css('display', 'none');
+                }
+        	});
     	} else {
     		alert('중복 체크를 해주세요.')
     	}
