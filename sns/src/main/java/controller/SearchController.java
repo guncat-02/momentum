@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import service.IF_FollowListService;
 import service.IF_PostingService;
 import service.IF_ProfileService;
 import service.IF_SearchService;
@@ -29,6 +30,8 @@ public class SearchController {
 	IF_PostingService pServe;
 	@Inject
 	IF_ProfileService proServe;
+	@Inject
+	IF_FollowListService fserve;
 	
 	//search로 가기 위한 메서드
 	@GetMapping("search")
@@ -71,6 +74,7 @@ public class SearchController {
 				model.addAttribute("info", proVO);
 			}
 		}
+		model.addAttribute("fList", fserve.getFollowingsId(id));
 		return "searchList";
 	}
 	
@@ -106,6 +110,7 @@ public class SearchController {
 				model.addAttribute("info", proVO);
 			}
 		}
+		model.addAttribute("fList", fserve.getFollowingsId(id));
 		return "searchList";
 	}
 }

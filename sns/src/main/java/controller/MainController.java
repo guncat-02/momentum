@@ -241,6 +241,8 @@ public class MainController {
 
 		String sessionId = (String)session.getAttribute("userid");
 		
+		followIdList = fser.getFollowingsId(sessionId);
+		
 		HashMap<String, Object> recomMap = new HashMap<>();
 		recomMap.put("exList", selectedPostNoList);
 		recomMap.put("pageNo", pageNo);

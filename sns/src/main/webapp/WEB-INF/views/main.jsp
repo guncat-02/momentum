@@ -52,19 +52,14 @@ pageContext.setAttribute("curId", curId);
 								<span class="p_id">${ap.nickName }</span>
 							</c:if>
 						</c:forEach>
-					 <span class="p_date">${mp.p_date} </span>
-						<!-- 해당 게시물 게시 유저를 내가 팔로우 하고 있는 지 여부 true, false -->
-						<c:if test="${mp.id ne curId}">
-							<c:set var="containFlag" value="${fn:contains(fList, mp.id) }" />
-							<c:choose>
-								<c:when test="${containFlag == true }">
-									<button type="button" class="theme main-po-follow-btn" value="1">FOLLOWING</button>
-								</c:when>
-								<c:otherwise>
-									<button type="button" class="theme main-po-follow-btn" value="0">FOLLOW</button>
-								</c:otherwise>
-							</c:choose>
+					<span class="p_date">${mp.p_date} </span>
+					<!-- 해당 게시물 게시 유저를 내가 팔로우 하고 있는 지 여부 true, false -->
+					<c:if test="${mp.id ne curId}">
+						<c:set var="containFlag" value="${fn:contains(fList, mp.id) }" />
+						<c:if test="${containFlag == false }">
+							<button type="button" class="theme main-po-follow-btn" value="0">FOLLOW</button>
 						</c:if>
+					</c:if>
 				</div>
 
 				<a href="myPost?no=${mp.no}" style="cursor: pointer;" class="p_alink" onclick="p_show(${mp.no})"> <!-- 프로필 아이디 -->
@@ -397,7 +392,7 @@ pageContext.setAttribute("curId", curId);
 		let allPosts = $('.p_inf');
 		let pId;
 		$.each(allPosts, function(idx) {
-			pId = $.trim(allPosts.eq(idx).find('.p_id').text());
+			pId = $.trim(allPosts.eq(idx).find('input[type="hidden"]').val());
 			if (pId == fId) {
 				let curBtn = allPosts.eq(idx).find('.main-po-follow-btn')
 				if (btnVal == 0) { // 팔로우 취소 한 뒤
