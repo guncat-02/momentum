@@ -442,9 +442,9 @@ button[class^=re-arrow-] svg {
 
 
 #comments {
-	padding-top : 30px;
-	padding-left: 100px;
-	padding-bottom : 50px;
+	display: block;
+	margin: 15px auto;
+	width : 880px;
 }
 
 
@@ -492,7 +492,7 @@ button[class^=re-arrow-] svg {
 
 
 #ctablediv {
-	width : 900px;
+	width : 880px;
 	margin-top : 20px;
 	border-radius : 5px;
 	border : 1px solid #808080;
@@ -500,7 +500,7 @@ button[class^=re-arrow-] svg {
 
 [class*="ctable"] {
 	display : block;
-	width : 880px;
+	width : 870px;
 	margin-left :10px;
 	border-bottom : 1px solid #808080;
 	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; 
@@ -511,7 +511,7 @@ button[class^=re-arrow-] svg {
 }
 
 .commcontents {
-	width : 800px;
+	width : 700px;
 	height : 5px;
 	padding-left : 90px;
 	font-size : 20px;

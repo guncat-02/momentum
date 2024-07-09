@@ -196,7 +196,8 @@ public class MainController {
 		ProfileVO proVO = pser.select(pvo.getId());
 		model.addAttribute("postvo", pvo);
 		model.addAttribute("proVO", proVO);
-		
+		model.addAttribute("profilelist",pser.allprofileList());
+		model.addAttribute("profileimglist",pser.profileimgList());
 		int re_no = pvo.getRe_no();
 		if (re_no != 0) { // 리포스트한 게시물일 경우
 			//클릭한 게시물의 리포스트 게시물

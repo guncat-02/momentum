@@ -15,4 +15,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updatepw" parameterType="vo.MemberVO">
 		update membertest set pass=#{pass} where id = #{id}
 	</update>
+	
+	<select id = "chkBan" parameterType="String" resultType = "String">
+		select MAX(f_date) from bantest where id = #{id} and f_date > sysdate
+	</select>
 </mapper>

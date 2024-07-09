@@ -48,7 +48,8 @@ public interface IF_CommDao {
 	public List<PostVO> mycpList(String id) throws Exception;
 	// 내가 쓴 댓글 개수
 	public int mycommcnt(String id) throws Exception;
-	 
+	// 신고 당한 댓글
+	public CommVO r_Comm(int no) throws Exception;
 
 	
 }

@@ -73,8 +73,7 @@ public class ProfileController {
 	// 각 개인의 profile 보기
 	@GetMapping("/profileShow")
 	public String profileShow(Model model, HttpSession session, @RequestParam(value="id", required = false) String id) throws Exception {
-		
-		if(id==null) {
+		if(id==null || id.equals(String.valueOf(session.getAttribute("userid")))) {
 			ProfileVO p = pServe.select(String.valueOf(session.getAttribute("userid")));
 			model.addAttribute("profile", p);
 			model.addAttribute("following", fServe.followingSelect(String.valueOf(session.getAttribute("userid"))));
@@ -117,7 +116,7 @@ public class ProfileController {
 	// 프로필 댓글 정보
 	@GetMapping("/profileComment")
 	public String profileComment(Model model, HttpSession session, @RequestParam(value="id", required = false) String id) throws Exception {
-		if(id==null) {
+		if(id==null || id==String.valueOf(session.getAttribute("userid"))) {
 			ProfileVO p = pServe.select(String.valueOf(session.getAttribute("userid")));
 			
 			model.addAttribute("profile", p);
@@ -155,8 +154,7 @@ public class ProfileController {
 	// 프로필 날짜별 media 정보
 	@GetMapping("/profileMedia")
 	public String profileMedia(Model model, HttpSession session, @RequestParam(value="id", required = false) String id) throws Exception {
-		System.out.println(id+"dfdf");
-		if(id==null) {
+		if(id==null || id==String.valueOf(session.getAttribute("userid"))) {
 			ProfileVO p = pServe.select(String.valueOf(session.getAttribute("userid")));
 
 			model.addAttribute("profile", p);
@@ -180,10 +178,8 @@ public class ProfileController {
 	// 좋아요 누른 게시물 모음집
 	@GetMapping("/profileLove")
 	public String profileLove(Model model, HttpSession session, @RequestParam(value="id", required = false) String id) throws Exception {
-		System.out.println(id+"dfdf");
-		if(id==null) {
+		if(id==null || id==String.valueOf(session.getAttribute("userid"))) {
 			ProfileVO p = pServe.select(String.valueOf(session.getAttribute("userid")));
-
 			model.addAttribute("profile", p);
 			model.addAttribute("following", fServe.followingSelect(String.valueOf(session.getAttribute("userid"))));
 			model.addAttribute("follower", fServe.followerSelect(String.valueOf(session.getAttribute("userid"))));

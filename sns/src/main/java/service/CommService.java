@@ -129,6 +129,11 @@ public class CommService implements IF_CommService{
 		// TODO Auto-generated method stub
 		return cdao.mycommcnt(id);
 	}
+	@Override
+	public CommVO r_Comm(int no) throws Exception {
+		// TODO Auto-generated method stub
+		return cdao.r_Comm(no);
+	}
 
 	
 

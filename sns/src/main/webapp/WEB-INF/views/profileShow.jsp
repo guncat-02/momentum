@@ -70,7 +70,7 @@
 		</div>
 	</div>
 	<div id="myMenu" class="theme">
-		<input type="button" class="myMenuItem theme" value="POST" onclick="postbut()"> <input type="button" class="myMenuItem theme" value="REPOST" onclick="repostbut()"> <input type="button" class="myMenuItem theme" value="COMMENT" onclick="commentbut()"> <input type="button" class="myMenuItem theme" value="MEDIA" onclick="mediabut()"> <input type="button" class="myMenuItem theme" value="LOVE" onclick="lovebut()">
+		<input type="button" class="myMenuItem theme" value="POST" onclick="postbut()"> <input type="button" class="myMenuItem theme" value="COMMENT" onclick="commentbut()"> <input type="button" class="myMenuItem theme" value="MEDIA" onclick="mediabut()"> <input type="button" class="myMenuItem theme" value="LOVE" onclick="lovebut()">
 	</div>
 	<div class="myPost">
 		<c:forEach items="${mypostList}" var="mp">
@@ -208,6 +208,36 @@
 </body>
 
 <script>
+    //프로필 불러오기
+    window.onload = function() {
+    	const img = document.querySelector('.proImg');
+    	const photo = document.querySelector('#photo');
+    	var uid = '<%=(String) session.getAttribute("userid")%>';
+    	if(photo.value != "" && photo.value != null) {
+        	img.src = "download?filename="+photo.value;
+    	} else {
+        	img.src = "./resources/img/프로필.png";
+    	}
+        // 좋아요 확인
+        $.ajax({
+			type:"POST",
+			url:"chklove",
+			data: {"id" : uid},
+			dataType : 'json',
+			cache : false,
+			success:function(data) {
+				$.each(data, function(index, no) {
+					console.log(no);
+					if($("#p_lovehid"+no).val() == no ) {
+						$(".p_lovehid"+no).val(1)
+						$(".p_lovebut"+no).html(`<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="red" class="bi bi-heart-fill" viewBox="0 0 16 16">
+						  <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314" />
+						</svg>`);	
+					}
+				})
+				},
+		 });
+    }
     //설정 버튼 클릭 시 메뉴 띄우는 메서드
     document.querySelector('#myProfileSetting').addEventListener('click', () => {
         const menu = document.querySelector('#settingMenu');

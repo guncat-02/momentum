@@ -42,15 +42,21 @@
 <script>
 $(document).ready(function() {
 	let message = "${ msg }"; // msg
-	
-	if(message == "manager") {
-		$("#loginbox").css("opacity","0.3");
-		$('#loginbox').css('pointer-events', "none");
+	let banmessage = "${ banmsg }";
 
-		$("#selbox").css("display", "block");
-	}else if(message != "") {
-		alert("${ msg }");
+	if(banmessage != "") {
+		alert("${ banmsg } 까지 이용이 정지된 계정입니다.")
+	}else {
+		if(message == "manager") {
+			$("#loginbox").css("opacity","0.3");
+			$('#loginbox').css('pointer-events', "none");
+
+			$("#selbox").css("display", "block");
+		}else if(message != "") {
+			alert("${ msg }");
+		}
 	}
+	
 })
 
 

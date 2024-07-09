@@ -181,7 +181,7 @@ body {
 	display: grid;
 	border: 1px solid;
 	margin-left: 130px;
-	width: 700px;
+	width: 80%;
 	height: 400px;
 	/* auto-fit; */
 }

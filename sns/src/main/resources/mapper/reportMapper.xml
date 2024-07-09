@@ -15,5 +15,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</otherwise>
 	</choose>	
 	</insert>
+	<insert id = "banmember" parameterType="vo.BanVO">
+		insert into bantest values(#{id},default,#{f_date},TO_DATE(#{f_date},'YY-MM-DD') - TO_DATE(sysdate,'YY-MM-DD'))
+	</insert>
+	<delete id ="innocence" parameterType="hashmap">
+		delete from reporttest where reportId =#{id} and r_cont = #{r_cont} 
+	</delete>
 	
 </mapper>

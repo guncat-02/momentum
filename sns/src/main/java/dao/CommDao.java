@@ -148,5 +148,11 @@ public class CommDao implements IF_CommDao {
 		return sqlSession.selectOne(mapperQuery + ".mycommcnt", id);
 	}
 
+	@Override
+	public CommVO r_Comm(int no) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(mapperQuery + ".r_Comm", no);
+	}
+
 
 }

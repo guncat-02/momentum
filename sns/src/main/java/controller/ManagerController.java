@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import service.IF_ManagerService;
 import vo.ManagerVO;
 import vo.PageVO;
+import vo.PostVO;
+import vo.ProfileVO;
 
 @Controller
 public class ManagerController {

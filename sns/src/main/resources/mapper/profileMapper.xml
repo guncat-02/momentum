@@ -60,4 +60,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <delete id="profileDel" parameterType="String">
 	delete from profileTest where nickName = #{nickName}
 </delete>
+<select id="r_Comm" parameterType="int" resultType="vo.CommVO">	
+	select * from commtest where c_no = #{no}
+</select>
 </mapper>
