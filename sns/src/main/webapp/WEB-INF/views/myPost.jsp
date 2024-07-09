@@ -228,7 +228,29 @@
 
 						<table class="ctable${comm.c_no}" style="word-break: break-all" id="commtablelist">
 							<tr>
-								<td class="commpro_radius"><img src="./resources/img/프로필.png"> <b>${comm.id}</b> <br>
+								<td class="commpro_radius">
+								<c:set var="p_proimg" value="" />
+								<c:forEach items="${profileimglist}" var="pr">
+									<c:choose>
+										<c:when test="${comm.id eq pr.id}">
+											<img class="profileImg" src="download?filename=${pr.photo}">
+											<c:set var="p_proimg" value="true" />
+										</c:when>
+									</c:choose>
+								</c:forEach>
+
+								<c:choose>
+									<c:when test="${p_proimg ne 'true'}">
+										<img class="profileImg" src="./resources/img/프로필.png">
+										<c:set var="p_proimg" value="flase" />
+									</c:when>
+								</c:choose>
+
+								<c:forEach items="${profilelist }" var="ap">
+									<c:if test="${comm.id eq ap.id}">
+										<b>${ap.nickName }</b>
+									</c:if>
+								</c:forEach>
 									<p class="comm_date">${comm.c_date}</p></td>
 
 								<td width="5%">
