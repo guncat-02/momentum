@@ -78,6 +78,7 @@ public class ChatController {
 		String file = upload.fileUpload(chatPhoto)[0];
 		if(file != null) {
 			cVO.setChatImg(file);
+			
 		}
 		if(cVO.getChatName() == null || cVO.getChatName().equals("")) {
 			cVO.setChatName(cVO.getNickName()+"님의 M");

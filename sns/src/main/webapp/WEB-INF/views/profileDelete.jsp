@@ -18,6 +18,7 @@
         <div id="chatMenu">
             <ul>
                 <li class="proMainMenu"><a href="main">SNS</a></li>
+                <li class="proMainMenu"><a href="selProfile">CHAT</a></li>
                 <li id="profileSub" class="proMainMenu">
                     <a href="profileList">PROFILE</a>
                     <ul id="profileSubDiv">

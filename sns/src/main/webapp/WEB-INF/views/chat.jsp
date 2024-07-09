@@ -22,6 +22,7 @@
 			<div id="chatMenu" class="chatItem">
             <ul>
                 <li class="proMainMenu"><a href="main">SNS</a></li>
+                <li class="proMainMenu"><a href="selProfile">CHAT</a></li>
                 <li id="profileSub" class="proMainMenu">
                     <a href="profileList">PROFILE</a>
                     <ul id="profileSubDiv">
@@ -145,7 +146,10 @@
 					</div>
 				</div>
 			</div>
-			<div id="chatCover" class="chatItem theme">
+			<div id="imgDiv">
+				<img id="bigImg">
+			</div>
+			<div id="chatCover" class="theme">
 				<div id="chatCoverDiv"><span>M</span></div>
             </div>
 		</div>
@@ -160,9 +164,6 @@
 			<div id="chatImgList"></div>
 		</div>
 	</form>
-	<div id="imgDiv">
-		<img id="bigImg">
-	</div>
 </body>
 <script>
 	let chatNum;
@@ -174,6 +175,7 @@
         $('#chatFollow').css("background-color", color)
         $('#chatFollowerBtn').css("background-color", color)
         $('#chatFollowingBtn').css("background-color", color)
+        $('.proMainMenu').eq(1).css('color', '#ff00bf');
     };
 
     //follow div 띄우기
@@ -453,7 +455,7 @@
     
     //이미지 크게보기
     $('#nowChatting').on('click', '.chattingImg', function() {
-    	$('#imgDiv').css('display', 'block');
+    	$('#imgDiv').css('display', 'flex');
     	$('#bigImg').attr('src', $(this).attr('src'));
     })
     
