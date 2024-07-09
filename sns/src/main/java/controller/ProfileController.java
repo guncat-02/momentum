@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -296,5 +297,12 @@ public class ProfileController {
 		map.put("nick", nick);
 		pServe.edit(map);
 		return "redirect:/profileList";
+	}
+	
+	//서브프로필 삭제
+	@GetMapping("profileDel")
+	public void profileDel(HttpServletRequest request) throws Exception {
+		String[] nick = request.getParameterValues("nickName");
+		pServe.profileDel(nick);
 	}
 }

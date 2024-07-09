@@ -1,0 +1,139 @@
+body {
+    margin: 10px;
+    height: calc(100vh - 18px);
+    overflow: hidden;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bolder;
+    -webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+    width: auto;
+    position: relative;
+}
+
+#chatAll {
+    display: grid;
+    grid-template-columns: 15% 85%;
+    grid-template-rows: 10% 5% 75% 10%;
+    height: 100%;
+    width: 100%;
+    border: 1px solid #00f7ff;
+}
+
+#chatMenu {
+    grid-column: 1 / 2;
+    grid-row: 1 / 5;
+    border-right: 1px solid #00f7ff;
+}
+
+#profileDeleteTitle {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    border-bottom: 1px solid #00f7ff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 2%;
+}
+
+#profileDeleteTitle span {
+    font-size: 38px;
+    color: #00f7ff;
+}
+
+#profileDeleteInfo {
+    text-align: center;
+    border-bottom: 1px solid #00f7ff;
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#profileDelSel {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    border-bottom: 1px solid #00f7ff;
+}
+
+.proDelSel {
+    height: 40%;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.delSelPhoto {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.delSelCircle {
+    border: 2px solid #ff00bf;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.delSelInfo {
+    width: calc(80% - 200px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.delNick {
+    font-size: 40px;
+    color: #ff00bf;
+}
+
+.delBio {
+    font-size: 20px;   
+}
+
+.delChk {
+    width: 20%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.delChk svg {
+    width: 80%;
+    height: 80%;
+    color: #00f7ff;
+    margin-top: 0px;
+    display: none;
+}
+
+#delComplete {
+    text-align: center;
+}
+
+#delBtn {
+    font-size: 45px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    height: 100%;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bolder;
+    color: #ff00bf;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.delImg {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}

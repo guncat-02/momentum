@@ -27,7 +27,7 @@
                     <ul id="profileSubDiv">
                         <li class="proSubMenu"><a href="profileList">SHOW</a></li>
                         <li class="proSubMenu"><a href="profileUpdate">EDIT</a></li>
-                        <li class="proSubMenu">DELETE</li>
+                        <li class="proSubMenu"><a href="profileDelete">DELETE</a></li>
                     </ul>
                 </li>
             </ul>

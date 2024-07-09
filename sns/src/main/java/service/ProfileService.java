@@ -97,4 +97,12 @@ public class ProfileService implements IF_ProfileService{
 	public void edit(Map map) throws Exception {
 		pDao.edit(map);
 	}
+
+	//서브프로필 삭제
+	@Override
+	public void profileDel(String[] nick) throws Exception {
+		for(int i = 0; i < nick.length; i++) {
+			pDao.profileDel(nick[i]);
+		}
+	}
 }

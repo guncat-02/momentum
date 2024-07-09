@@ -57,4 +57,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</if>
  	bio = #{profile.bio, jdbcType=VARCHAR} where nickName = #{nick}
 </update>
+<delete id="profileDel" parameterType="String">
+	delete from profileTest where nickName = #{nickName}
+</delete>
 </mapper>

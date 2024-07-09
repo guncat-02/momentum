@@ -134,4 +134,19 @@ public class ChatController {
 		model.addAttribute("profile", pVO);
 		return "profileUpdate";
 	}
+	
+	@GetMapping("profileDelete")
+	public String profileDelete(HttpSession session, Model model, HttpServletResponse response) throws Exception {
+		List<ProfileVO> pVO = pServe.selectSub(String.valueOf(session.getAttribute("userid")));
+		if(pVO.size() == 0 || pVO == null) {
+			response.setCharacterEncoding("utf-8");
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script> alert('삭제하실 프로필이 존재하지 않습니다.');");
+			out.println("history.go(-1); </script>");
+			out.close();
+		}
+		model.addAttribute("profile", pVO);
+		return "profileDelete";
+	}
 }

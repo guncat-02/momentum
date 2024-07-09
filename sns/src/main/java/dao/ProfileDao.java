@@ -98,4 +98,10 @@ public class ProfileDao implements IF_ProfileDao{
 	public void edit(Map map) throws Exception {
 		sql.update(mapperQuery+".edit", map);
 	}
+
+	//서브 프로필 삭제
+	@Override
+	public void profileDel(String nickName) throws Exception {
+		sql.delete(mapperQuery+".profileDel", nickName);
+	}
 }

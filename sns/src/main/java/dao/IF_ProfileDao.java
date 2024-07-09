@@ -22,4 +22,5 @@ public interface IF_ProfileDao {
 	public void insertProfile(ProfileVO pVO) throws Exception;
 	public List<ProfileVO> selectSub(String id) throws Exception;
 	public void edit(Map map) throws Exception;
+	public void profileDel(String nickName) throws Exception;
 }
