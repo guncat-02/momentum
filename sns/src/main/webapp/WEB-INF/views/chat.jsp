@@ -45,11 +45,11 @@
 				<table id="chatUserTable">
 					<c:forEach var="chat" items="${chatList}">
 						<tr style="cursor: pointer;" class="chatInfo">
-							<td style="width: 80%;"><span style="font-size: 16px;"
-								class="infoName">${chat.chatName}</span> <input type="hidden"
-								value="${chat.chatNum}" class="infoNum" name="chatNum">
-								<input type="hidden" value="${chat.chatImg}" class="infoImg"
-								name="chatImg"></td>
+							<td style="width: 80%;">
+								<span style="font-size: 16px;" class="infoName">${chat.chatName}</span> 
+								<input type="hidden" value="${chat.chatNum}" class="infoNum" name="chatNum">
+								<input type="hidden" value="${chat.chatImg}" class="infoImg" name="chatImg">
+							</td>
 							<td
 								style="width: 20%; font-size: 20px; text-align: center; color: #ff00bf;">
 								<span style="display: none; color: #ff00bf;" class="userSel">
@@ -82,6 +82,7 @@
 			</div>
 			<div id="nowUserInfo" class="chatItem">
 				<span id="nowUserName"></span>
+				<input type="hidden" id="nowUserChat">
 			</div>
 			<div id="chatSetting" class="chatItem">
 				<div id="chatSet">
@@ -327,6 +328,7 @@
     	$('.userSel').css("display","none")
     	$('.userSel').eq(chatIndex).css("display", "block");
     	$('#nowUserName').text($('.infoName').eq(chatIndex).text())
+    	$('#nowUserChat').val($('.infoNum').eq(chatIndex).val())
     	if(img != null && img.trim() != "") {
     		$('#nowUserImg').attr('src', "download?filename="+img)
     	} else {
@@ -481,6 +483,11 @@
     			$('.chatInfo').css('display', 'table')
     		}
     	}
+    })
+    
+    //보관함으로 이동
+    $('#storageIcon').click(function() {
+    	location.href = "chatImg?chatName="+$('#nowUserName').text()+"&chatNum="+$('#nowUserChat').val();
     })
 </script>
 </html>
