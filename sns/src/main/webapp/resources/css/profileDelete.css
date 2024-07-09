@@ -137,3 +137,68 @@ body {
     height: 100%;
     border-radius: 50%;
 }
+
+#delAll {
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    top: 0;
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#delChkDiv {
+    width: 50%;
+    height: 40%;
+    margin-left: auto;
+    margin-right: auto;
+    border: 3px solid #00f7ff;
+    border-radius: 15px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#delChkDiv span {
+    font-size: 30px;
+    color: #00f7ff;
+}
+
+#delChkDiv p {
+    margin-top: 10px;
+    margin-bottom: 0px;
+    color: #ff00bf;
+    font-size: 15px;
+}
+
+#delBtnAll {
+    margin-top: 20px;
+    height: fit-content;
+    display: flex;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    gap: 50px;
+}
+
+#delYes {
+    color: #ff00bf;
+}
+
+#delNo {
+    color: #00f7ff;
+}
+
+.delChkBtn {
+    font-size: 50px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bolder;
+    background-color: transparent;
+    border: none;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+}

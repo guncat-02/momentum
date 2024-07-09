@@ -70,6 +70,17 @@
             <input type="button" value="DELETE" id="delBtn">
         </div>
     </div>
+    <div id="delAll" class="theme">
+        <div id="delChkDiv" class="theme">
+            <span>프로필을 삭제하시겠습니까?</span>
+            <p>해당 프로필의 M 도 사라지게 됩니다.</p>
+            <p>삭제된 프로필은 다시 복구하실 수 없습니다.</p>
+            <div id="delBtnAll">
+                <input type="button" value="YES" id="delYes" class="delChkBtn">
+                <input type="button" value="NO" id="delNo" class="delChkBtn">
+            </div>
+        </div>
+    </div>
 </body>
 <script>
     window.onload = function() {
@@ -86,26 +97,35 @@
         }
     })
 
+    let nick = new Array();
+    
+    $('#delYes').click(function() {
+    	$.ajax({
+            url: "profileDel",
+            type: "get",
+            data: {nickName: nick},
+            traditional: true,
+            async: false
+        })
+        location.href="profileList";
+    })
+    
+    $('#delNo').click(function() {
+    	$('#delAll').css('display', 'none');
+    })
+    
     $('#delBtn').click(function() {
-        const svg = $('svg')
-        let nick = new Array();
-        for(let i = 0; i < svg.length; i++) {
-            if(svg.eq(i).css('display') == "block") {
-                nick.push($('.delNick').eq(i).text())
-            }
-        }
-        if(nick.length == 0) {
-            alert('삭제하실 프로필을 선택해주세요.')
-        } else {
-            $.ajax({
-                url: "profileDel",
-                type: "get",
-                data: {nickName: nick},
-                traditional: true,
-                async: false
-            })
-            location.href="profileList";
-        }
+    	 const svg = $('svg')
+         for(let i = 0; i < svg.length; i++) {
+             if(svg.eq(i).css('display') == "block") {
+                 nick.push($('.delNick').eq(i).text())
+             }
+         }
+         if(nick.length == 0) {
+             alert('삭제하실 프로필을 선택해주세요.')
+         } else {
+        	 $('#delAll').css('display', 'flex');
+         }
     })
 </script>
 </html>
