@@ -17,6 +17,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<select id = "chkBan" parameterType="String" resultType = "String">
-		select f_date from bantest where id = #{id}
+		select MAX(f_date) from bantest where id = #{id} and f_date > sysdate
 	</select>
 </mapper>

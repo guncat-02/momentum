@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.HashMap;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -22,6 +24,11 @@ public class ReportDAO implements IF_ReportDAO{
 	public void banmember(BanVO bvo) throws Exception {
 		// TODO Auto-generated method stub
 		sqlsession.insert(mapperQuery+".banmember",bvo);
+	}
+	@Override
+	public void innocence(HashMap<String, Object> params) throws Exception {
+		// TODO Auto-generated method stub
+		sqlsession.delete(mapperQuery+".innocence",params);
 	}
 
 }

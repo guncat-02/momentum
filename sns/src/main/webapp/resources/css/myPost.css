@@ -442,9 +442,9 @@ button[class^=re-arrow-] svg {
 
 
 #comments {
-	padding-top : 30px;
-	padding-left: 100px;
-	padding-bottom : 50px;
+	display: block;
+	margin: 15px auto;
+	width : 880px;
 }
 
 

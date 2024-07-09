@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.HashMap;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import service.IF_CommService;
 import service.IF_MainService;
@@ -55,8 +58,23 @@ public class ReportController {
     }
 	
 	@PostMapping("/banmember")
-	@ResponseBody
-	public void banmember(@ModelAttribute BanVO bvo,Model model) throws Exception {
+	public String banmember(@ModelAttribute BanVO bvo,Model model,RedirectAttributes rt) throws Exception {
+		System.out.println(bvo.getF_date());
+		System.out.println(bvo.getId());
 		rser.banmember(bvo);
+		rt.addFlashAttribute("msg", bvo.getId());
+		return "redirect:/manager/report/";
 	}
+	
+	@GetMapping("/innocence")
+	@ResponseBody
+	public void innocence(@RequestParam("id") String id,@RequestParam("r_cont") String r_cont) throws Exception {
+		System.out.println(id);
+		System.out.println(r_cont);
+		HashMap<String, Object> params = new HashMap<>();
+		params.put("id", id);
+		params.put("r_cont", r_cont);
+		rser.innocence(params);
+	}
+	
 }

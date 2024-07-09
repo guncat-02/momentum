@@ -1,5 +1,7 @@
 package service;
 
+import java.util.HashMap;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -21,6 +23,11 @@ public class ReportService implements IF_ReportService {
 	public void banmember(BanVO bvo) throws Exception {
 		// TODO Auto-generated method stub
 		rdao.banmember(bvo);
+	}
+	@Override
+	public void innocence(HashMap<String, Object> params) throws Exception {
+		// TODO Auto-generated method stub
+		rdao.innocence(params);
 	}
 
 }

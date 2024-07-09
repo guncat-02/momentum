@@ -460,10 +460,9 @@ input[type="date"] {
 
 /* 게시물 내용 영역 */
 .one-post-cont {
-    grid-column: 2 / 4;
-    grid-row: 2 / 4;
-    padding: 10px;
-    overflow: auto;
+	position: absolute;
+	font-size : 20px;
+
 }
 .one-post-cont::-webkit-scrollbar {
     width: 0px;
@@ -494,8 +493,9 @@ input[type="date"] {
     width: 350px;
     height: 350px;
     margin-top: 15px;
-    position: relative;
-	top : -140px;
+    position: absolute;
+	top: 20%;
+	left: 35%;
 }
 .attach-div img {
     position: absolute;
@@ -649,4 +649,8 @@ img {
 	margin-top : 10px;
 	margin-right :20px;
 	margin-bottom :-15px;
+}
+#rspan {
+	color: red;
+	font-size :25px;
 }

@@ -36,24 +36,6 @@
 			<div id="admin-info">
 				<span id="cur-date-span"></span> <span id="cur-adminId-span">Admin : ${curId }</span>
 			</div>
-			<!-- <div id="search-type">
-                	<input type="hidden" name="searchArea" value="User">
-                	<input type="hidden" name="searchLoc" value="">
-                    <select id="searchType" name="searchType">
-                        <option value="id" selected>user-Id</option>
-                        <option value="cont">contents</option>
-                        <option value="period">period</option>
-                    </select>
-                </div> -->
-			<!-- <div id="search-cont">
-                    <input type="text" id="searchWord" name="searchWord">
-                    <input type="date" id="stDate" name="stDate">
-                    <input type="date" id="ndDate" name="ndDate">
-                    <button value="1" id="searchBtn">Search</button>
-                </div> -->
-			<!-- <div id="search-result">
-                	<span id="result-span">총 조회 결과 : ${cnt }건.</span>
-                </div>  -->
 			<div id="menu-user-member">
 				<button type="button" value="1" id="report-post-btn" onclick="report_post()">POST</button>
 			</div>
@@ -162,71 +144,72 @@
 		</div>
 	</div>
 	<form id="banMemberForm" action="/sns/banmember" method="post">
-	<div class="modal_block">
-		<div class="modal_body_block">
-			<svg class="closeModal" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="black" class="bi bi-x-lg" viewBox="0 0 16 16">
+		<div class="modal_block">
+			<div class="modal_body_block">
+				<svg class="closeModal" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="black" class="bi bi-x-lg" viewBox="0 0 16 16">
   <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
 </svg>
-			<div class="Commreport">
-				<div class="reportdiv">POST 정지</div>
-				<div id="reported_post">
-					<div class="one-post-container">
-						<!-- 게시물 프로필 사진 -->
-						<!-- 게시물 글 내용 -->
-						
-						<div class="one-post-photo">
-							<div class="photo-div">
-								<c:choose>
-									<c:when test="${not empty proVO.photo}">
-										<img src="/sns/download?filename=${proVO.photo}">
-									</c:when>
-									<c:otherwise>
-										<img src="/sns/resources/img/프로필.png">
-									</c:otherwise>
-								</c:choose>
+				<div class="Commreport">
+					<div class="reportdiv">POST 정지</div>
+					<div id="reported_post">
+						<div class="one-post-container">
+							<!-- 게시물 프로필 사진 -->
+							<!-- 게시물 글 내용 -->
+							<div id ="rspan"><b>신고 글</b></div>
+							<div class="one-post-photo">
+								<div class="photo-div">
+									<c:choose>
+										<c:when test="${not empty proVO.photo}">
+											<img src="/sns/download?filename=${proVO.photo}">
+										</c:when>
+										<c:otherwise>
+											<img src="/sns/resources/img/프로필.png">
+										</c:otherwise>
+									</c:choose>
+								</div>
 							</div>
-						</div>
 
-						<!-- 게시물 닉네임, 아이디 -->
-						<div class="one-post-names">
-							<span class="nickname-span">${proVO.nickName }</span> <span class="id-span">${proVO.id }</span>
-							<input type = "hidden" value="${proVO.id }" name = "id">
-						</div>
-						<c:if test="${not empty postvo.filename }">
+							<!-- 게시물 닉네임, 아이디 -->
+							<div class="one-post-names">
+								<span class="nickname-span">작성자 : ${proVO.nickName }</span> <span class="id-span">${proVO.id }</span> 
+								<input type="hidden" value="${proVO.id }" name="id">
+								
+							</div>
+							<c:if test="${not empty postvo.filename }">
 								<div class="attach-div">
 									<c:forEach items="${postvo.filename }" var="file">
-									<div>
-										<img src="/sns/download?filename=${file}">
-									</div>
+										<div>
+											<img src="/sns/download?filename=${file}">
+										</div>
 									</c:forEach>
 								</div>
 							</c:if>
-						
-						<div class="one-post-cont">
-							<span>POST CONTENTS : </span><span class="contents-span">${postvo.cont }</span>
+
+							<div class="one-post-cont">
+								<span><b>글 내용 : </b></span><span class="contents-span">${postvo.cont }</span>
+							</div>
+						</div>
+
+					</div>
+					<div class="b_div">
+						<div>
+							<span>신고 유형 | &nbsp; </span><span class="b_type"></span>
+						</div>
+						<br>
+						<div>
+							<span>신고 내용 | &nbsp;</span><span class="b_cont"></span>
+						</div>
+						<div class="b_date_div">
+							<label for="endDate">정지 종료 날짜:</label> <input type="date" id="endDate" name="f_date">
 						</div>
 					</div>
-					
 				</div>
-				<div class="b_div">
-					<div>
-						<span>신고 유형 | &nbsp; </span><span class="b_type"></span>
-					</div>
-					<br>
-					<div>
-						<span>신고 내용 | &nbsp;</span><span class="b_cont"></span>
-					</div>
-					<div class="b_date_div">
-						<label for="endDate">정지 종료 날짜:</label> <input type="date" id="endDate" name="f_date">
-					</div>
+				<div class="reportCommbut">
+					<button type="submit" class="guiltybut">유죄</button>
+					<button type="button" class="innocencebut" onclick="innocencebut('${proVO.id }')">무죄</button>
 				</div>
-			</div>
-			<div class="reportCommbut">
-				<button type="submit" class="guiltybut">유죄</button>
-				<button type="button" class="innocencebut">무죄</button>
 			</div>
 		</div>
-	</div>
 	</form>
 	<!-- 댓글 부분 정지 모달 -->
 
@@ -236,7 +219,11 @@
 
     $(document).ready(function () {
         connTime(); // 접속 시간 갱신
-       
+        let message = "${ msg }"; // msg
+		console.log(message);
+    	if(message != "") {
+    		alert(message +"님의 정지가 완료되었습니다.")
+    	}
     });
     
     // table 위 버튼 클릭 시 버튼 디자인 변경 및 table 영역 새로고침
@@ -279,6 +266,7 @@
 	            $(".modal_block").css("display","flex");
 	            $(".b_type").text(type);
 	    		$(".b_cont").text(r_cont);
+	    		$(".b_cont").val(r_cont);
 	        },
 	        error: function() {
 	            alert('게시물 정보를 가져오는 중 오류가 발생했습니다.');
@@ -293,31 +281,28 @@
 		$(".c_modal_block").css("display","none");
 	});
 	
-	$('.guiltybut').click(function() {
-	    $('#banMemberForm').submit(function(event) {
-	    // 폼 데이터 직렬화
-	     event.preventDefault();
-	    var formData = $(this).serialize();
-		console.log(formData);
-	    // AJAX 요청 설정
-	    $.ajax({
-	        type: 'POST',
-	        url: '/sns/banmember', // 실제 매핑된 URL로 변경해야 합니다.
-	        data: formData,
+
+	
+	function innocencebut(id) {
+		let r_id = id;
+		let r_cont = $(".b_cont").val();
+		
+		$.ajax({
+			url: '/sns/innocence',
+    		type: 'get',
+    		data: {
+    			id: r_id,
+    			r_cont: r_cont
+    		},
 	        success: function(response) {
-	            // 성공 시 처리할 코드
-	            alert('게시물 정지가 성공적으로 처리되었습니다.');
-	            // 모달 닫기 (옵션)
-	            $(".modal_block").css("display", "none");
+	            alert("신고 글이 삭제되었습니다.")
+	            $(".modal_block").css("display","none");
 	        },
-	        error: function(xhr, status, error) {
-	            // 오류 발생 시 처리할 코드
-	            console.error('AJAX 오류: ', status, error);
-	            alert('게시물 정지 처리 중 오류가 발생하였습니다.');
+	        error: function() {
+	            alert('게시물 정보를 가져오는 중 오류가 발생했습니다.');
 	        }
 	    });
-	    });
-	});
+	}
 	
 
     
