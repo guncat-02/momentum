@@ -142,6 +142,56 @@ pageContext.setAttribute("curId", curId);
 						</c:when>
 					</c:choose>
 				</a>
+								
+				<c:if test="${mp.re_no != 0 }">
+					<div class="repost-container theme">
+						<input type="hidden" value="${mp.re_no }">
+						<c:set var="repFlag" value="false" />
+						<c:forEach items="${repList }" var="repost">
+							<c:if test="${not repFlag }">
+								<c:if test="${repost.no == mp.re_no }">
+									<c:set var="repFlag" value="true" />
+									<div class="repost-attach-div">
+										<c:if test="${not empty repost.filename}">
+											<div class="repost-attach-img-div">
+												<img src="download?filename=${repost.filename[0] }">
+											</div>
+										</c:if>
+									</div>					
+									<div class="repost-profile-div">
+										<c:set var="flag" value="false" />
+										<c:forEach items="${reproList }" var="reprof">
+											<c:if test="${not flag }">
+												<c:if test="${repost.id eq reprof.id }">
+													<div class="repost-profile-img-div">
+														<c:choose>
+															<c:when test="${not empty reprof.photo }">
+																<img src="download?filename=${reprof.photo }">
+															</c:when>
+															<c:otherwise>
+																<img src="/sns/resources/img/프로필.png">
+															</c:otherwise>
+														</c:choose>
+													</div>
+													<div class="repost-names-div">
+														<input type="hidden" value="${reprof.id }">
+														<span class="repost-nickname-span">${reprof.nickName }</span>
+													</div>																							
+													<c:set var="flag" value="true" /> 
+												</c:if>
+											</c:if>
+										</c:forEach>
+									</div>
+									<div class="repost-cont-div">
+										<span class="repost-cont-span">
+											${repost.cont }
+										</span>
+									</div>
+								</c:if>
+							</c:if>
+						</c:forEach>
+					</div>
+				</c:if>
 
 				<input type="hidden" value="0" class="p_lovehid${mp.no}">
 				<input type="hidden" value="${mp.no}" id="p_lovehid${mp.no}">
@@ -178,6 +228,19 @@ pageContext.setAttribute("curId", curId);
 	</div>
 </body>
 <script>
+
+	$('body').on('click', '.repost-attach-div, .repost-cont-div', function() {
+		let no = $(this).closest('.repost-container').find('input[type="hidden"]').val();
+		location.href = `/sns/myPost?no=\${no}`;
+	});
+	
+	$('body').on('click', '.repost-profile-div', function() {
+		let id = $(this).find('input[type="hidden"]').val();
+		location.href = `/sns/userprofile?id=\${id}`;
+	});
+	
+
+
 	$(document).ready(function(){
 		setting();
 	})
@@ -229,10 +292,7 @@ pageContext.setAttribute("curId", curId);
 		$.ajax({
 			type:"POST",
 			url:"p_love",
-			data: {"no" : no},
-			success:function() {
-				alert("성공")
-			}
+			data: {"no" : no}
 		})
 	}
 	// 좋아요 취소 ajax
@@ -240,10 +300,7 @@ pageContext.setAttribute("curId", curId);
 		$.ajax({
 			type:"POST",
 			url:"p_loveCancel",
-			data: {"no" : no},
-			success:function() {
-				alert("성공")
-			}
+			data: {"no" : no}
 		})
 	}
 	

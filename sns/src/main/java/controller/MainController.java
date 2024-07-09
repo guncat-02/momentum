@@ -84,6 +84,7 @@ public class MainController {
 		}
 		
 		
+		List<PostVO> rePostList = new ArrayList<>();
 		
 		for (PostVO pvo : postList) {
 			// 파일 추가
@@ -91,6 +92,16 @@ public class MainController {
 			// 현재 출력 된 게시물 번호 미리 저장. 추후 추천 게시물에서는 출력되지 않도록 하기 위함.
 			selectedPostNoList.add((Integer)pvo.getNo());
 			System.out.println(pvo.toString());
+			if (pvo.getRe_no() != 0) {
+				rePostList.add(mser.takePostVO(pvo.getRe_no()));
+			}
+		}
+		System.out.println("repost");
+		List<ProfileVO> reProfList = new ArrayList<>();
+		for (PostVO repvo : rePostList) {
+			repvo.setFilename(mser.getAttach(repvo.getNo()));
+			reProfList.add(pser.select(repvo.getId()));
+			System.out.println(repvo.toString());
 		}
 		
 		for(PostVO pvo : postList) {
@@ -110,6 +121,9 @@ public class MainController {
 		
 		model.addAttribute("fList", followIdList);
 		model.addAttribute("aList", postList);
+		
+		model.addAttribute("repList", rePostList);
+		model.addAttribute("reproList", reProfList);
 		
 		return "main";
 	}
@@ -205,6 +219,7 @@ public class MainController {
 		fPostMap.put("fList", followIdList);
 		
 		List<PostVO> postList = mser.getFollowingPostList(fPostMap);
+		List<PostVO> rePostList = new ArrayList<>();
 		System.out.println("followingPost");
 		for (PostVO pvo : postList) {
 			// 파일 선택
@@ -212,6 +227,16 @@ public class MainController {
 			// 현재 출력 된 게시물 번호 미리 저장. 추후 추천 게시물에서는 출력되지 않도록 하기 위함.
 			selectedPostNoList.add((Integer)pvo.getNo());
 			System.out.println(pvo.toString());
+			if (pvo.getRe_no() != 0) {
+				rePostList.add(mser.takePostVO(pvo.getRe_no()));
+			}
+		}
+		System.out.println("repost");
+		List<ProfileVO> reProfList = new ArrayList<>();
+		for (PostVO repvo : rePostList) {
+			repvo.setFilename(mser.getAttach(repvo.getNo()));
+			reProfList.add(pser.select(repvo.getId()));
+			System.out.println(repvo.toString());
 		}
 		for(PostVO pvo : postList) {
 			int ccnt = mser.takeCommCnt(pvo.getNo());
@@ -229,6 +254,8 @@ public class MainController {
 		model.addAttribute("aList", postList);
 		model.addAttribute("profilelist",pser.allprofileList());
 		model.addAttribute("profileimglist",pser.profileimgList());
+		model.addAttribute("repList", rePostList);
+		model.addAttribute("reproList", reProfList);
 		
 		
 		System.out.println("new following page is ready");
@@ -249,9 +276,20 @@ public class MainController {
 		recomMap.put("sessionId", sessionId);
 		
 		List<PostVO> postList = mser.getRecommendPostList(recomMap);
+		List<PostVO> rePostList = new ArrayList<>();
 		for(PostVO pvo : postList) {
 			pvo.setFilename(mser.getAttach(pvo.getNo()));
 			System.out.println(pvo.toString());
+			if (pvo.getRe_no() != 0) {
+				rePostList.add(mser.takePostVO(pvo.getRe_no()));
+			}
+		}
+		System.out.println("repost");
+		List<ProfileVO> reProfList = new ArrayList<>();
+		for (PostVO repvo : rePostList) {
+			repvo.setFilename(mser.getAttach(repvo.getNo()));
+			reProfList.add(pser.select(repvo.getId()));
+			System.out.println(repvo.toString());
 		}
 		for(PostVO pvo : postList) {
 			int ccnt = mser.takeCommCnt(pvo.getNo());
@@ -268,6 +306,8 @@ public class MainController {
 		model.addAttribute("aList", postList);
 		model.addAttribute("profilelist",pser.allprofileList());
 		model.addAttribute("profileimglist",pser.profileimgList());
+		model.addAttribute("repList", rePostList);
+		model.addAttribute("reproList", reProfList);
 		
 		System.out.println("new recom page is ready");
 		return "main";

@@ -64,7 +64,7 @@ public class ChatContService implements IF_ChatContService {
 	}
 
 	
-	//수정해야 함
+	//이미지 가져오기
 	@Override
 	public List<ChatContVO> selectAttach(String chatNum) throws Exception {
 		List<ChatContVO> ccVO = ccDao.selectAttach(chatNum);
