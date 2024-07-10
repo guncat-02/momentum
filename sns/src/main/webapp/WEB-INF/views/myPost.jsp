@@ -1078,7 +1078,7 @@
 			}else if(reason == "badContents") {
 				$(".selectReason2").css("display","inline-block");
 				changeItem = badContents;
-				$('selectReason2').children('option:not(:first)').remove();
+				$('.selectReason2').children('option:not(:first)').remove();
 				for(var i = 0; i < changeItem.length;i++) {
 					var option = $("<option>"+changeItem[i]+"</option>");               
 					option.val(changeItem[i]);
@@ -1088,7 +1088,7 @@
 			}else if(reason == "spam") {
 				$(".selectReason2").css("display","inline-block");
 				changeItem = spam;
-				$('selectReason2').children('option:not(:first)').remove();  
+				$('.selectReason2').children('option:not(:first)').remove();  
 				for(var i = 0; i < changeItem.length;i++) {
 					var option = $("<option>"+changeItem[i]+"</option>");       
 					option.val(changeItem[i]);
@@ -1097,7 +1097,7 @@
 			}else if(reason == "badNick") {
 				$(".selectReason2").css("display","inline-block");
 				changeItem = badNick;
-				$('selectReason2').children('option:not(:first)').remove();  
+				$('.selectReason2').children('option:not(:first)').remove();  
 				for(var i = 0; i < changeItem.length;i++) {
 					var option = $("<option>"+changeItem[i]+"</option>");     
 					option.val(changeItem[i]);  
@@ -1133,7 +1133,7 @@
 			}else if(reason == "badContents") {
 				$(".selectReasonPost2").css("display","inline-block");
 				changeItem = badContents;
-				$('selectReasonPost2').children('option:not(:first)').remove();
+				$('.selectReasonPost2').children('option:not(:first)').remove();
 				for(var i = 0; i < changeItem.length;i++) {
 					var option = $("<option>"+changeItem[i]+"</option>");   
 					option.val(changeItem[i]);            
@@ -1143,7 +1143,7 @@
 			}else if(reason == "spam") {
 				$(".selectReasonPost2").css("display","inline-block");
 				changeItem = spam;
-				$('selectReasonPost2').children('option:not(:first)').remove();  
+				$('.selectReasonPost2').children('option:not(:first)').remove();  
 				for(var i = 0; i < changeItem.length;i++) {
 					var option = $("<option>"+changeItem[i]+"</option>");       
 					option.val(changeItem[i]);
@@ -1152,7 +1152,7 @@
 			}else if(reason == "badNick") {
 				$(".selectReasonPost2").css("display","inline-block");
 				changeItem = badNick;
-				$('selectReasonPost2').children('option:not(:first)').remove();  
+				$('.selectReasonPost2').children('option:not(:first)').remove();  
 				for(var i = 0; i < changeItem.length;i++) {
 					var option = $("<option>"+changeItem[i]+"</option>");   
 					option.val(changeItem[i]);    
