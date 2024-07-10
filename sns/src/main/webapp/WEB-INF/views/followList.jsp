@@ -58,7 +58,7 @@ pageContext.setAttribute("curId", curId);
 											<img src="/sns/resources/img/프로필.png">
 										</c:when>
 										<c:otherwise>
-											<img src="/download?filename=${fProf.photo }">
+											<img src="/sns/download?filename=${fProf.photo }">
 										</c:otherwise>
 									</c:choose>
 								</div>
@@ -146,90 +146,60 @@ pageContext.setAttribute("curId", curId);
 	function follow(btn) {
 		// 버튼 값 변경
 		btn.val(1);
-
-		let fPriv = btn.closest('tr').find('.followList-privacy').val();
+		// 버튼 텍스트 변경
+		btn.children('b').text('FOLLOWING');
+	
 		let fId = $.trim(btn.closest('tr').find('.followList-id').text());
-
-		// ajax 통해 Request
-		if (fPriv == 0) { // 비공개 계정일 때 팔로우 요청 (기능 구현 중)
-			// 버튼 텍스트 변경
-			btn.children('b').text('REQUESTED');
-			$.ajax({
-				url : '/sns/follow_request',
-				type : 'get',
-				data : {
-					'id' : curId,
-					'followId' : fId,
-				},
-				success : function() {
-					// 차단한 마우스 이벤트 재활성화
-					btn.css('pointer-events', 'auto');
-				},
-				error : function() {
+		
+		$.ajax({
+			url : '/sns/follow',
+			type : 'get',
+			data : {
+				'id' : curId,
+				'followId' : fId,
+			},
+			success : function(result) {
+				if (result == 1) {
+					btn.css('pointer-events', 'auto');		
+					return;
+				} else if (result == -1) {
+					alert('차단한 유저는 팔로우 할 수 없습니다.\n차단 해제 후 다시 시도해주세요.');
+				} else {
 					alert('잠시 후 다시 시도해주세요.');
-					// 버튼 값 및 텍스트 되돌리기
-					btn.val(0);
-					btn.children('b').text('FOLLOW');
 				}
-			});
-		} else { // 공개 계정일 때 즉시 팔로우
-			//  버튼 텍스트 변경
-			btn.children('b').text('FOLLOWING');
-			$.ajax({
-				url : '/sns/follow',
-				type : 'get',
-				data : {
-					'id' : curId,
-					'followId' : fId,
-				},
-				success : function(result) {
-					if (result == 1) {
-						btn.css('pointer-events', 'auto');		
-						return;
-					} else if (result == -1) {
-						alert('차단한 유저는 팔로우 할 수 없습니다.\n차단 해제 후 다시 시도해주세요.');
-					} else {
-						alert('잠시 후 다시 시도해주세요.');
-					}
-					btn.val(0);
-					btn.children('b').text('FOLLOW');
-				},
-				error : function() {
-					alert('잠시 후 다시 시도해주세요.');
-					btn.val(0);
-					btn.children('b').text('FOLLOW');
-				}
-			});
-		}
+				btn.val(0);
+				btn.children('b').text('FOLLOW');
+			},
+			error : function() {
+				alert('잠시 후 다시 시도해주세요.');
+				btn.val(0);
+				btn.children('b').text('FOLLOW');
+			}
+		});
 	}
 	function followCancel(btn) {
 
-		let fPriv = btn.closest('tr').find('.followList-privacy').val();
 		let fId = $.trim(btn.closest('tr').find('.followList-id').text());
-		let message = `다시 팔로우하려면 \${fId}에게 팔로우 요청을 다시 보내야 합니다.\n팔로우를 취소하시겠습니까?`;
 
-		// 계정이 공개 상태이거나, 비공개 계정의 언팔로우에 동의 할 경우
-		if ((fPriv == 0 && confirm(message)) || fPriv == 1) {
-			btn.val(0);
-			btn.children('b').text('FOLLOW');
+		btn.val(0);
+		btn.children('b').text('FOLLOW');
 
-			$.ajax({
-				url : '/sns/followcancel',
-				type : 'get',
-				data : {
-					'id' : curId,
-					'followId' : fId
-				},
-				success : function(result) {
-					btn.css('pointer-events', 'auto');
-				},
-				error : function() {
-					alert('잠시 후 다시 시도해주세요.');
-					btn.val(1);
-					btn.children('b').text('FOLLOWING');
-				}
-			});
-		}
+		$.ajax({
+			url : '/sns/followcancel',
+			type : 'get',
+			data : {
+				'id' : curId,
+				'followId' : fId
+			},
+			success : function(result) {
+				btn.css('pointer-events', 'auto');
+			},
+			error : function() {
+				alert('잠시 후 다시 시도해주세요.');
+				btn.val(1);
+				btn.children('b').text('FOLLOWING');
+			}
+		});
 	}
 </script>
 </html>
