@@ -218,7 +218,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where to_char(r_date) = to_char(sysdate)
 	</select>
 	
-	<select id="selectBannedCountWhere" resultType="_int">
+	<select id="selectSysdateBannedCount" resultType="_int">
 		select count(id) from banTest
 		where sysdate between s_date and f_date
 	</select>
@@ -226,5 +226,46 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteKeyWordWhere">
 		delete from searchWordTest where keyDate <![CDATA[ < ]]> sysdate
 	</delete>
+	
+		<select id="selectAllBanned" parameterType="vo.PageVO" resultType="vo.BanVO">
+		select a.* from (
+		select sub.*, rownum as rn from (
+		select * from banTest order by s_date
+		) sub
+		) a
+		where rn between #{startNo} and #{endNo}
+	</select>
+	
+	<select id="selectBannedCountWhere" parameterType="vo.PageVO" resultType="_int">
+		select count(*) from banTest where
+		<choose>
+			<when test="searchType == 'id'">
+				id like '%'||#{searchWord}||'%'
+			</when>
+			<when test="searchType == 'period'">
+				(s_date between #{stDate} and #{ndDate}) or
+				(f_date between #{stDate} and #{ndDate})
+			</when>
+		</choose>
+	</select>
+	
+	<select id="selectBannedWhere" parameterType="vo.PageVO" resultType="vo.BanVO">
+		select a.* from (
+		select sub.*, rownum as rn from (
+		select * from banTest where
+		<choose>
+			<when test="searchType == 'id'">
+				id like '%'||#{searchWord}||'%'
+			</when>
+			<when test="searchType == 'period'">
+				(s_date between #{stDate} and #{ndDate}) or
+				(f_date between #{stDate} and #{ndDate})
+			</when>
+		</choose>
+		order by s_date desc
+		) sub
+		) a
+		where rn between #{startNo} and #{endNo}
+	</select>
 	
 </mapper>

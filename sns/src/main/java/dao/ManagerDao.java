@@ -1,6 +1,5 @@
 package dao;
 
-import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -8,8 +7,8 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import vo.BanVO;
 import vo.CommVO;
-import vo.ManagerVO;
 import vo.MemberVO;
 import vo.PageVO;
 import vo.PostVO;
@@ -135,7 +134,7 @@ public class ManagerDao implements IF_ManagerDao{
 
 	@Override
 	public int getCurBannedCount() throws Exception {
-		return sql.selectOne(mapperQuery+".selectBannedCountWhere");
+		return sql.selectOne(mapperQuery+".selectSysdateBannedCount");
 	}
 
 	@Override
@@ -143,6 +142,21 @@ public class ManagerDao implements IF_ManagerDao{
 		return sql.delete(mapperQuery+".deleteKeyWordWhere");
 	}
 
+	@Override
+	public List<BanVO> getAllBanned(PageVO pvo) throws Exception {
+		return sql.selectList(mapperQuery+".selectAllBanned", pvo);
+	}
+
+	@Override
+	public List<BanVO> searchBanned(PageVO pvo) throws Exception {
+		return sql.selectList(mapperQuery+".selectBannedWhere", pvo);
+	}
+
+	@Override
+	public int getBannedSearchCount(PageVO pvo) throws Exception {
+		System.out.println(pvo);
+		return sql.selectOne(mapperQuery+".selectBannedCountWhere", pvo);
+	}
 
 
 }

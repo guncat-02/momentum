@@ -461,7 +461,7 @@ a {
       color:red;
       transition: 0.7s;
   }
-  #userFollow {
+#userFollow {
     cursor: pointer;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-weight: bolder;
@@ -472,12 +472,23 @@ a {
     width: 210px;
 }
 
-#userFollowBtn {
+#userFollowBtn button {
     position: absolute;
-    left: 82%;
-    top: 0;
+    right: 75px;
+    top: 7.5px;
     width: 150px;
-    height: 65px;
+    height: 50px;
     text-align: center;
+    border: 1px solid #00f7ff;
+    border-radius: 15px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 20px;
     z-index: 10;
+}
+#userFollowBtn button[value="0"] {
+	color: black;
+	background-color: #00f7ff;
+}
+#userFollowBtn button:hover {
+	cursor: pointer;
 }

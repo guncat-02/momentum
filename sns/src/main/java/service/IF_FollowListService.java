@@ -26,4 +26,6 @@ public interface IF_FollowListService {
 	public List<ProfileVO> followingList(String id) throws Exception;
 	
 	public List<ProfileVO> followerList(String id) throws Exception;
+	
+	public int chkFollowing(FollowVO fvo) throws Exception;
 }

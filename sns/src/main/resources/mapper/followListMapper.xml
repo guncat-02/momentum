@@ -71,4 +71,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		on a.id = b.id
 		where a.followid = #{id}
 	</select>
+	
+	<select id="chkFollowing" parameterType="vo.FollowVO" resultType="_int">
+		select count(id) from followTest
+		where id = #{id} and followId = #{followId}
+	</select>
 </mapper>

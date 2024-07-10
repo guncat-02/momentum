@@ -2,6 +2,7 @@ package service;
 
 import java.util.List;
 
+import vo.BanVO;
 import vo.CommVO;
 import vo.MemberVO;
 import vo.PageVO;
@@ -21,7 +22,7 @@ public interface IF_ManagerService {
 	
 	public List<MemberVO> getAllAdmins(PageVO pvo) throws Exception;
 	
-	// public List<BanVO> getAllBanned(PageVO pvo) throws Exception;
+	public List<BanVO> getAllBanned(PageVO pvo) throws Exception;
 	
 	public List<MemberVO> searchMembers(PageVO pvo) throws Exception;
 	
@@ -33,7 +34,7 @@ public interface IF_ManagerService {
 	
 	public List<MemberVO> searchAdmins(PageVO pvo) throws Exception;
 	
-//	public List<MemberVO> searchBanned(PageVO pvo) throws Exception;
+	public List<BanVO> searchBanned(PageVO pvo) throws Exception;
 	
 	public int getTotalCount(PageVO pvo) throws Exception;
 	
@@ -46,6 +47,8 @@ public interface IF_ManagerService {
 	public int getCommsSearchCount(PageVO pvo) throws Exception;
 	
 	public int getAdminsSearchCount(PageVO pvo) throws Exception;
+	
+	public int getBannedSearchCount(PageVO pvo) throws Exception;
 	// 신고 가져오기
 	public List<ReportVO> getAllreport_post() throws Exception;
 

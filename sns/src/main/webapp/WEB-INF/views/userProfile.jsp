@@ -27,9 +27,18 @@
             <span class="myDetail"> )</span>
         </div>
     </div>
-    <div id="userFollowBtn">
-        <input type="button" id="userFollow" value="FOLLOW">
-    </div>
+	<div id="userFollowBtn">
+		<c:if test="${followFlag ne null }">
+			<c:choose>
+	        	<c:when test="${followFlag == 1 }">
+	        		<button type="button" value="1" class="theme">FOLLOWING</button>
+	        	</c:when>
+	        	<c:otherwise>
+	        		<button type="button" value="0" class="theme">FOLLOW</button>
+	        	</c:otherwise>
+	        </c:choose>
+        </c:if>
+	</div>
     <div id="myProfile">
         <div id="myImg">
             <div id="myImgCircle">
