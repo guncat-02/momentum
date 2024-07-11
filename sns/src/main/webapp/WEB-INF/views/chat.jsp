@@ -161,29 +161,42 @@
 	let chatNum;
 	let lastNum;
 	let sock;
+	let lastDay;
 
 	function connect() {
 		sock = new SockJS("chat");
 
 		sock.onmessage = function (e) {
 			const data = JSON.parse(e.data);
-			console.log(data.chatName)
-			let time = "미정"
 			console.log(data);
+			let allDate = data.chatTime.split(' ');
+			let day = allDate[0];
+			let time = allDate[1];
 			let usersProfile = proAjax(data.chatNum)
-			for (let i = 0; i < usersProfile.length; i++) {
-				if (data.nickName == usersProfile[i].nickName) {
-					if (usersProfile[i].photo != null) {
-						if (data.cont != null && data.cont.trim() != "") {
-							$('#nowChatting').append("<tr><td class='chatProfile'><div class='chatProfileYou'><img src='download?filename=" + usersProfile[i].photo + "'></div></td><td class='chatCont'><div class='chatting yourChatting'><div class='userNick'>" + usersProfile[i].nickName + "</div><div class='userChat'>" + data.cont + "</div><div class='chatUserDate'><span>" + time + "</span></div></div></td></tr>")
+			if(day != lastDay) {
+				$('#nowChatting').append("<thead><tr><td colspan='2' class='allDate'><div><hr>" + day + "<hr></div></td></tr></thead>")
+			}
+			if(data.nickName == $('#user').val()) {
+				if (data.cont != null && data.cont.trim() != "") {
+					$('#nowChatting').append("<tr><td class='chatCont'><div class='chatting myChatting'><div class='chatUserDate myChatDate'><span>" + time + "</span></div><div class='userChat myChat'>" + data.cont + "</div></div></td></tr>");
+				} else {
+					$('#nowChatting').append("<tr><td class='chatCont'><div class='chatting myChatting'><div class='chatUserDate myChatDate'><span>" + time + "</span></div><div class='userChat myChat'><img src=download?filename=" + data.chatAttach + " class='chattingImg'></div></div></td></tr>");
+				}
+			} else {
+				for (let i = 0; i < usersProfile.length; i++) {
+					if (data.nickName == usersProfile[i].nickName) {
+						if (usersProfile[i].photo != null) {
+							if (data.cont != null && data.cont.trim() != "") {
+								$('#nowChatting').append("<tr><td class='chatProfile'><div class='chatProfileYou'><img src='download?filename=" + usersProfile[i].photo + "'></div></td><td class='chatCont'><div class='chatting yourChatting'><div class='userNick'>" + usersProfile[i].nickName + "</div><div class='userChat'>" + data.cont + "</div><div class='chatUserDate'><span>" + time + "</span></div></div></td></tr>")
+							} else {
+								$('#nowChatting').append("<tr><td class='chatProfile'><div class='chatProfileYou'><img src='download?filename=" + usersProfile[i].photo + "'></div></td><td class='chatCont'><div class='chatting yourChatting'><div class='userNick'>" + usersProfile[i].nickName + "</div><div class='userChat'><img src=download?filename=" + data.chatAttach + " class='chattingImg'></div><div class='chatUserDate'><span>" + time + "</span></div></div></td></tr>")
+							}
 						} else {
-							$('#nowChatting').append("<tr><td class='chatProfile'><div class='chatProfileYou'><img src='download?filename=" + usersProfile[i].photo + "'></div></td><td class='chatCont'><div class='chatting yourChatting'><div class='userNick'>" + usersProfile[i].nickName + "</div><div class='userChat'><img src=download?filename=" + data.chatAttach + " class='chattingImg'></div><div class='chatUserDate'><span>" + time + "</span></div></div></td></tr>")
-						}
-					} else {
-						if (data.cont != null && data.cont.trim() != "") {
-							$('#nowChatting').append("<tr><td class='chatProfile'><div class='chatProfileYou'><img src='./resources/img/프로필.png'></div></td><td class='chatCont'><div class='chatting yourChatting'><div class='userNick'>" + usersProfile[i].nickName + "</div><div class='userChat'>" + data.cont + "</div><div class='chatUserDate'><span>" + time + "</span></div></div></td></tr>")
-						} else {
-							$('#nowChatting').append("<tr><td class='chatProfile'><div class='chatProfileYou'><img src='./resources/img/프로필.png'></div></td><td class='chatCont'><div class='chatting yourChatting'><div class='userNick'>" + usersProfile[i].nickName + "</div><div class='userChat'><img src=download?filename=" + data.chatAttach + " class='chattingImg'></div><div class='chatUserDate'><span>" + time + "</span></div></div></td></tr>")
+							if (data.cont != null && data.cont.trim() != "") {
+								$('#nowChatting').append("<tr><td class='chatProfile'><div class='chatProfileYou'><img src='./resources/img/프로필.png'></div></td><td class='chatCont'><div class='chatting yourChatting'><div class='userNick'>" + usersProfile[i].nickName + "</div><div class='userChat'>" + data.cont + "</div><div class='chatUserDate'><span>" + time + "</span></div></div></td></tr>")
+							} else {
+								$('#nowChatting').append("<tr><td class='chatProfile'><div class='chatProfileYou'><img src='./resources/img/프로필.png'></div></td><td class='chatCont'><div class='chatting yourChatting'><div class='userNick'>" + usersProfile[i].nickName + "</div><div class='userChat'><img src=download?filename=" + data.chatAttach + " class='chattingImg'></div><div class='chatUserDate'><span>" + time + "</span></div></div></td></tr>")
+							}
 						}
 					}
 				}
@@ -334,29 +347,8 @@
 				cont: text,
 				chatAttach: fileName
 			}
-			let time = "미정"
-			if (data.cont != null && data.cont.trim() != "") {
-				$('#nowChatting').append("<tr><td class='chatCont'><div class='chatting myChatting'><div class='chatUserDate myChatDate'><span>" + time + "</span></div><div class='userChat myChat'>" + data.cont + "</div></div></td></tr>");
-			} else {
-				$('#nowChatting').append("<tr><td class='chatCont'><div class='chatting myChatting'><div class='chatUserDate myChatDate'><span>" + time + "</span></div><div class='userChat myChat'><img src=download?filename=" + data.chatAttach + " class='chattingImg'></div></div></td></tr>");
-			}
 			sock.send(JSON.stringify(data));
 			resetChat();
-			/* if ((text != null && text.trim() != "")|| file.files.length != 0) {
-					  const form = $('#form')[0];
-					  const formData = new FormData(form);
-				$.ajax({
-					url: "/sns/chat/chatting",
-					type: "post",
-					enctype: "multipart/form_data",
-					data: formData,
-					async: false,
-					processData: false,
-					contentType: false
-				})
-			}
-			resetChat();
-			contAjax(chatNum); */
 		}
 	})
 
@@ -454,6 +446,8 @@
 	//cont 내용 추가
 	function chatInsert(chatCont, usersProfile, user) {
 		userList(chatIndex, usersProfile);
+		const l_date = chatCont[chatCont.length-1].chatTime.split(' ')
+		lastDay = l_date[0];
 		if (chatCont != null && chatCont.length != 0) {
 			let spDate = chatCont[0].chatTime.split(' ');
 			let firstDate = spDate[0];

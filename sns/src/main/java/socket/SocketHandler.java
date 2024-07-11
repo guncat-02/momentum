@@ -37,24 +37,23 @@ public class SocketHandler extends TextWebSocketHandler {
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		System.out.println("보내기 성공");
+		for(WebSocketSession s : userList) {
+			System.out.println(s.getAttributes().get("nowChat"));
+		}
 		System.out.println(message.getPayload());
 		super.handleTextMessage(session, message);
 		ObjectMapper mapper = new ObjectMapper();
-		try {
-			ChatContVO ccVO = mapper.readValue(message.getPayload(), ChatContVO.class);
-			System.out.println(ccVO.getChatNum());
-			System.out.println(ccVO.getChatAttach());
-			System.out.println(ccVO.getNickName());
-			System.out.println(ccVO.getCont());
-			ccServe.insert(ccVO);
-		} catch (JsonProcessingException e) {
-		    e.printStackTrace(); // 예외 메시지 출력
-		} catch (Exception e) {
-		    e.printStackTrace();
-		}
+		ChatContVO ccVO = mapper.readValue(message.getPayload(), ChatContVO.class);
+		ChatContVO cc = ccServe.insert(ccVO);
+		System.out.println("여기까지 성공");
 		for(WebSocketSession s : userList) {
 			if(s.getAttributes().get("nowChat").equals(session.getAttributes().get("nowChat"))) {
-				s.sendMessage(new TextMessage(message.getPayload()));
+				System.out.println("성공");
+				try {
+					s.sendMessage(new TextMessage(mapper.writeValueAsString(cc)));
+				} catch(Exception e) {
+					System.out.println(e+"오류메세지");
+				}
 			}
 		}
 	}

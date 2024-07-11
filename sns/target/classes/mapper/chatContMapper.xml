@@ -22,4 +22,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</when>
 		</choose>
 	</insert>
+	<select id="selectContOne" parameterType="vo.ChatContVO" resultType="vo.ChatContVO">
+		select * 
+		from chatContTest 
+		where no = (
+			select max(no) 
+			from chatContTest
+			where nickName = #{nickName} and chatNum = #{chatNum}
+		)
+	</select>
 </mapper>

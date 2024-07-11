@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 
@@ -45,8 +46,11 @@ public class ChatContService implements IF_ChatContService {
 
 	//chatcont table에 insert
 	@Override
-	public void insert(ChatContVO ccVO) throws Exception {
+	public ChatContVO insert(ChatContVO ccVO) throws Exception {
 		ccDao.insert(ccVO);
+		ChatContVO cc = ccDao.selectContOne(ccVO);
+		cc.setChatTime(cc.getChatTime().substring(0, 16));
+		return cc;
 	}
 
 	//chatAttach table에 insert

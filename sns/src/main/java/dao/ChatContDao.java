@@ -40,4 +40,10 @@ public class ChatContDao implements IF_ChatContDao {
 	public List<ChatContVO> selectAttach(String chatNum) throws Exception {
 		return sql.selectList(mapperQuery+".selectAttach", chatNum);
 	}
+
+	//보낸 채팅 바로 불러오기
+	@Override
+	public ChatContVO selectContOne(ChatContVO ccVO) throws Exception {
+		return sql.selectOne(mapperQuery+".selectContOne", ccVO);
+	}
 }
