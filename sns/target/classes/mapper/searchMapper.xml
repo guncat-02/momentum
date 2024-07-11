@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			from (
 				select count(keyWord) as cnt, keyWord 
 				from searchWord 
-				where keyDate like '%'||to_char(sysdate, 'YY/MM/DD')||'%' 
+				where keyDate like '%'||to_char(sysdate(), 'YY/MM/DD')||'%' 
 				group by keyWord 
 				order by cnt desc 
 			) a
@@ -27,7 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			from (
 				<choose>
 					<when test='key.keyType.equals("인기")'>
-						select c.*, d.reCnt, nvl(c.show, 0)+nvl(c.p_love, 0)+nvl(d.reCnt, 0) as cnt
+						select c.*, d.reCnt, coalesce(c.shows, 0)+coalesce(c.p_love, 0)+coalesce(d.reCnt, 0) cnt
 					</when>
 					<when test='key.keyType.equals("최신")'>
 						select c.*, d.reCnt
@@ -46,24 +46,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 								from post 
 								where cont like '%'||#{key.keyWord}||'%' and id != #{id} and privacy = 1
 							) a left outer join (
+								select dd1.*, bb1.commCnt 
+								from (
+									select no,  count(no) as p_love 
+									from p_love 
+									group by no
+								) dd1
+								left outer join (
+									select count(no) as commCnt, no 
+									from comm 
+									group by no
+								) bb1
+								on dd1.no = bb1.no
+								union
 								select dd.*, bb.commCnt 
 								from (
 									select no,  count(no) as p_love 
-									from p_love
+									from p_love 
 									group by no
 								) dd
-								full outer join (
+								left outer join (
 									select count(no) as commCnt, no 
-									from comm
+									from comm 
 									group by no
 								) bb
 								on dd.no = bb.no
-								where dd.no is not null and bb.no is not null
-							) b on a.no = b.no
+							) b 
+							on a.no = b.no
 						) c
 						left outer join (
-							select count(re_no) as reCnt, re_no 
-							from post
+							select count(re_no) reCnt, re_no 
+							from post 
 							group by re_no
 						) d
 						on c.no = d.re_no
