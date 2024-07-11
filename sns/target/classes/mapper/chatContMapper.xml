@@ -24,7 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				insert into chatAttach values ((select max(no) from chatAttach), #{vo.chatNum}, #{vo.nickName}, #{file}, default)
 			</when>
 			<when test ="check == null">
-				insert into chatAttach values (chat_no.nextval, #{vo.chatNum}, #{vo.nickName}, #{file}, default)
+				insert into chatAttach values (nextval(chat_no), #{vo.chatNum}, #{vo.nickName}, #{file}, default)
 			</when>
 		</choose>
 	</insert>

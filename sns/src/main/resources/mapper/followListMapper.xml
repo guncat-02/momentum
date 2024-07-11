@@ -61,7 +61,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<select id="followingSelect" resultType="int">
-		select count(followId) from followTest where id = #{id}
+		select count(followId) from follow where id = #{id}
 	</select>
 	
 	<select id="followerSelect" resultType="int">

@@ -6,16 +6,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertKeyWord" parameterType="String">
 		insert into searchWord values(#{keyWord}, default)
 	</insert>
-	<select id="selectKeyWord" resultType="String">
-		select keyWord
-		from (
-			select count(keyWord) as cnt, keyWord 
-			from searchWord 
-			where keyDate like '%'||to_char(sysdate(), 'YY/MM/DD')||'%' 
-			group by keyWord 
-		)
-		order by cnt desc
-		limit 0, 10
+	<select id="selectKeyWord" resultType="vo.SearchVO">
+		select count(keyWord) as cnt, keyWord 
+		from searchWord 
+		where keyDate like '%'||to_char(sysdate(), 'YY/MM/DD')||'%' 
+		group by keyWord 
 	</select>
 	<select id="selectSearchList" resultType="vo.PostVO" parameterType="hashmap">
 		<choose>
@@ -37,7 +32,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					from  (
 						select * 
 						from post 
-						where cont like '%'||#{key.keyWord}||'%' and id != #{id} and privacy = 1
+						where cont like concat('%',#{key.keyWord},'%') and id != #{id} and privacy = 1
 					) a left outer join (
 						select dd1.*, bb1.commCnt 
 						from (

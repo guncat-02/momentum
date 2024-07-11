@@ -168,39 +168,41 @@
 
 		sock.onmessage = function (e) {
 			const data = JSON.parse(e.data);
-			let allDate = data.chatTime.split(' ');
-			let day = allDate[0];
-			let time = allDate[1];
-			let usersProfile = proAjax(data.chatNum)
-			if(day != lastDay) {
-				$('#nowChatting').append("<thead><tr><td colspan='2' class='allDate'><div><hr>" + day + "<hr></div></td></tr></thead>")
-			}
-			if(data.nickName == $('#user').val()) {
-				if (data.cont != null && data.cont.trim() != "") {
-					$('#nowChatting').append("<tr><td class='chatCont'><div class='chatting myChatting'><div class='chatUserDate myChatDate'><span>" + time + "</span></div><div class='userChat myChat'>" + data.cont + "</div></div></td></tr>");
-				} else {
-					$('#nowChatting').append("<tr><td class='chatCont'><div class='chatting myChatting'><div class='chatUserDate myChatDate'><span>" + time + "</span></div><div class='userChat myChat'><img src=download?filename=" + data.chatAttach + " class='chattingImg'></div></div></td></tr>");
+			if(chatNum == data.chatNum) {
+				let allDate = data.chatTime.split(' ');
+				let day = allDate[0];
+				let time = allDate[1];
+				let usersProfile = proAjax(data.chatNum)
+				if(day != lastDay) {
+					$('#nowChatting').append("<thead><tr><td colspan='2' class='allDate'><div><hr>" + day + "<hr></div></td></tr></thead>")
 				}
-			} else {
-				for (let i = 0; i < usersProfile.length; i++) {
-					if (data.nickName == usersProfile[i].nickName) {
-						if (usersProfile[i].photo != null) {
-							if (data.cont != null && data.cont.trim() != "") {
-								$('#nowChatting').append("<tr><td class='chatProfile'><div class='chatProfileYou'><img src='download?filename=" + usersProfile[i].photo + "'></div></td><td class='chatCont'><div class='chatting yourChatting'><div class='userNick'>" + usersProfile[i].nickName + "</div><div class='userChat'>" + data.cont + "</div><div class='chatUserDate'><span>" + time + "</span></div></div></td></tr>")
+				if(data.nickName == $('#user').val()) {
+					if (data.cont != null && data.cont.trim() != "") {
+						$('#nowChatting').append("<tr><td class='chatCont'><div class='chatting myChatting'><div class='chatUserDate myChatDate'><span>" + time + "</span></div><div class='userChat myChat'>" + data.cont + "</div></div></td></tr>");
+					} else {
+						$('#nowChatting').append("<tr><td class='chatCont'><div class='chatting myChatting'><div class='chatUserDate myChatDate'><span>" + time + "</span></div><div class='userChat myChat'><img src=download?filename=" + data.chatAttach + " class='chattingImg'></div></div></td></tr>");
+					}
+				} else {
+					for (let i = 0; i < usersProfile.length; i++) {
+						if (data.nickName == usersProfile[i].nickName) {
+							if (usersProfile[i].photo != null) {
+								if (data.cont != null && data.cont.trim() != "") {
+									$('#nowChatting').append("<tr><td class='chatProfile'><div class='chatProfileYou'><img src='download?filename=" + usersProfile[i].photo + "'></div></td><td class='chatCont'><div class='chatting yourChatting'><div class='userNick'>" + usersProfile[i].nickName + "</div><div class='userChat'>" + data.cont + "</div><div class='chatUserDate'><span>" + time + "</span></div></div></td></tr>")
+								} else {
+									$('#nowChatting').append("<tr><td class='chatProfile'><div class='chatProfileYou'><img src='download?filename=" + usersProfile[i].photo + "'></div></td><td class='chatCont'><div class='chatting yourChatting'><div class='userNick'>" + usersProfile[i].nickName + "</div><div class='userChat'><img src=download?filename=" + data.chatAttach + " class='chattingImg'></div><div class='chatUserDate'><span>" + time + "</span></div></div></td></tr>")
+								}
 							} else {
-								$('#nowChatting').append("<tr><td class='chatProfile'><div class='chatProfileYou'><img src='download?filename=" + usersProfile[i].photo + "'></div></td><td class='chatCont'><div class='chatting yourChatting'><div class='userNick'>" + usersProfile[i].nickName + "</div><div class='userChat'><img src=download?filename=" + data.chatAttach + " class='chattingImg'></div><div class='chatUserDate'><span>" + time + "</span></div></div></td></tr>")
-							}
-						} else {
-							if (data.cont != null && data.cont.trim() != "") {
-								$('#nowChatting').append("<tr><td class='chatProfile'><div class='chatProfileYou'><img src='./resources/img/프로필.png'></div></td><td class='chatCont'><div class='chatting yourChatting'><div class='userNick'>" + usersProfile[i].nickName + "</div><div class='userChat'>" + data.cont + "</div><div class='chatUserDate'><span>" + time + "</span></div></div></td></tr>")
-							} else {
-								$('#nowChatting').append("<tr><td class='chatProfile'><div class='chatProfileYou'><img src='./resources/img/프로필.png'></div></td><td class='chatCont'><div class='chatting yourChatting'><div class='userNick'>" + usersProfile[i].nickName + "</div><div class='userChat'><img src=download?filename=" + data.chatAttach + " class='chattingImg'></div><div class='chatUserDate'><span>" + time + "</span></div></div></td></tr>")
+								if (data.cont != null && data.cont.trim() != "") {
+									$('#nowChatting').append("<tr><td class='chatProfile'><div class='chatProfileYou'><img src='./resources/img/프로필.png'></div></td><td class='chatCont'><div class='chatting yourChatting'><div class='userNick'>" + usersProfile[i].nickName + "</div><div class='userChat'>" + data.cont + "</div><div class='chatUserDate'><span>" + time + "</span></div></div></td></tr>")
+								} else {
+									$('#nowChatting').append("<tr><td class='chatProfile'><div class='chatProfileYou'><img src='./resources/img/프로필.png'></div></td><td class='chatCont'><div class='chatting yourChatting'><div class='userNick'>" + usersProfile[i].nickName + "</div><div class='userChat'><img src=download?filename=" + data.chatAttach + " class='chattingImg'></div><div class='chatUserDate'><span>" + time + "</span></div></div></td></tr>")
+								}
 							}
 						}
 					}
 				}
+				$('#nowChat').scrollTop($('#nowChat')[0].scrollHeight);	
 			}
-			$('#nowChat').scrollTop($('#nowChat')[0].scrollHeight);
 		}
 	}
 
