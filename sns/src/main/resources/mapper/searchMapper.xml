@@ -9,7 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectKeyWord" resultType="vo.SearchVO">
 		select count(keyWord) as cnt, keyWord 
 		from searchWord 
-		where keyDate like '%'||to_char(sysdate(), 'YY/MM/DD')||'%' 
+		where keyDate like concat('%',to_char(sysdate(), 'YY/MM/DD'),'%') 
 		group by keyWord 
 	</select>
 	<select id="selectSearchList" resultType="vo.PostVO" parameterType="hashmap">
