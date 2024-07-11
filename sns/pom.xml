@@ -115,11 +115,6 @@
 			<version>4.7</version>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>com.oracle.database.jdbc</groupId>
-			<artifactId>ojdbc8</artifactId>
-			<version>12.2.0.1</version>
-		</dependency>
 
 		<!-- mybatis 라이브러리 -->
 		<!-- MyBatis 연동 라이브러리 -->
@@ -202,6 +197,13 @@
 			<artifactId>jackson-annotations</artifactId>
 			<version>2.11.0</version>
 		</dependency>
+		
+		<!-- mariadb -->
+		<dependency>
+            <groupId>org.mariadb.jdbc</groupId>
+            <artifactId>mariadb-java-client</artifactId>
+            <version>3.0.8</version>
+        </dependency>
 	</dependencies>
 	<build>
 		<plugins>

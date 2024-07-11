@@ -6,11 +6,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="dao.IF_PostingDao">
 
 	<insert id="insertPost" parameterType="vo.PostVO">
-		insert into post values (post_no.nextval, null, #{id}, #{cont}, 0, #{privacy}, default, default)
+		insert into post values (nextval(post_no), null, #{id}, #{cont}, 0, #{privacy}, default, default)
 	</insert>
 	
 	<insert id="insertRePost" parameterType="vo.PostVO">
-		insert into post values (post_no.nextval, #{re_no}, #{id}, #{cont}, 0, #{privacy}, default, default)
+		insert into post values (nextval(post_no), #{re_no}, #{id}, #{cont}, 0, #{privacy}, default, default)
 	</insert>
 	
 	<insert id="insertAttach" parameterType="map">

@@ -16,7 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		order by chatTime asc
 	</select>
 	<insert id="insert" parameterType="vo.ChatContVO">
-		insert into chatCont values (chat_no.nextval, #{chatNum}, #{nickName}, #{cont}, default)
+		insert into chatCont values (nextval(chat_no), #{chatNum}, #{nickName}, #{cont}, default)
 	</insert>
 	<insert id="insertAttach" parameterType="hashmap">
 		<choose>

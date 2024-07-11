@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="dao.IF_JoinDao">
 	
 	<insert id="inputMember" parameterType="vo.MemberVO">
-		insert into member values (#{id},#{pass},#{name},#{b_date},#{email},default)
+		insert into member values (#{id},#{pass},#{name},#{email},#{b_date},default)
 	</insert>
 	
 	<select id="chkid" parameterType="String" resultType="String">

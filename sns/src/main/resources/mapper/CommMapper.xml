@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="dao.IF_CommDao">
 	
 	<insert id = "inputComm" parameterType="vo.CommVO">
-		insert into comm values(comm_no.nextval,#{no},#{c_cont},#{id},default,default,default) 
+		insert into comm values(nextval(comm_no),#{no},#{c_cont},#{id},default,default,default) 
 	</insert>
 	
 	<insert id = "incommlike" parameterType="vo.CommVO">
