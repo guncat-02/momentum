@@ -46,4 +46,10 @@ public class ChatContDao implements IF_ChatContDao {
 	public ChatContVO selectContOne(ChatContVO ccVO) throws Exception {
 		return sql.selectOne(mapperQuery+".selectContOne", ccVO);
 	}
+
+	//보낸 채팅사진 불러오기
+	@Override
+	public List<ChatContVO> selectAttachList(ChatContVO ccVO) throws Exception {
+		return sql.selectList(mapperQuery+".selectAttachList", ccVO);
+	}
 }

@@ -9,4 +9,5 @@ public interface IF_ChatContService {
 	public ChatContVO insert(ChatContVO ccVO) throws Exception;
 	public void insertAttach(ChatContVO ccVO) throws Exception;
 	public List<ChatContVO> selectAttach(String chatNum) throws Exception;
+	public List<ChatContVO> selectAttachList(ChatContVO ccVO) throws Exception;
 }

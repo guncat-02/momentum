@@ -96,5 +96,15 @@ public class ChatContService implements IF_ChatContService {
 		}
 		return null;
 	}
+
+	//채팅 사진을 가져오기 위한 메서드
+	@Override
+	public List<ChatContVO> selectAttachList(ChatContVO ccVO) throws Exception {
+		List<ChatContVO> fileList = ccDao.selectAttachList(ccVO);
+		for(ChatContVO file : fileList) {
+			file.setChatTime(file.getChatTime().substring(0, 16));
+		}
+		return fileList;
+	}
 	
 }

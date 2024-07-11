@@ -31,4 +31,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			where nickName = #{nickName} and chatNum = #{chatNum}
 		)
 	</select>
+	<select id="selectAttachList" parameterType="vo.ChatContVO" resultType="vo.ChatContVO">
+		select * 
+		from chatAttachTest
+		where no = (
+			select max(no) 
+			from chatAttachTest
+			where nickName = #{nickName} and chatNum = #{chatNum}
+		)
+	</select>
 </mapper>

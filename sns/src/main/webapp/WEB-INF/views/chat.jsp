@@ -201,7 +201,7 @@
 					}
 				}
 			}
-			$('#nowChat').scrollTop($('#nowChat')[0].scrollHeight)
+			$('#nowChat').scrollTop($('#nowChat')[0].scrollHeight);
 		}
 	}
 
@@ -331,24 +331,38 @@
 	//채팅 추가
 	$('#chattingText').keydown(function (e) {
 		if (e.keyCode == 13) {
-			const fileArray = Array.from(file.files);
-			let fileName = "";
-			for (let i = 0; i < fileArray.length; i++) {
-				if (i != fileArray.length - 1) {
-					fileName += fileArray[i].name + "&&"
-				} else {
-					fileName += fileArray[i].name
-				}
-			}
 			text = $('#chattingText').val();
-			let data = {
-				chatNum: chatNum,
-				nickName: $('#user').val(),
-				cont: text,
-				chatAttach: fileName
-			}
-			sock.send(JSON.stringify(data));
-			resetChat();
+            if ((text != null && text.trim() != "")|| file.files.length != 0) {
+            	const fileArray = Array.from(file.files);
+    			let fileName = "";
+    			if(fileArray.length != 0) {
+    				fileName = "YES"
+    			} else {
+    				fileName = "NO"
+    			}
+    			const form = $('#form')[0];
+               	const formData = new FormData(form);
+    			text = $('#chattingText').val();
+    			let data = {
+    				chatNum: chatNum,
+    				nickName: $('#user').val(),
+    				cont: text,
+    				chatAttach: fileName
+    			}
+    			if(fileName == "YES") {
+    				$.ajax({
+                		url: "/sns/chat/chatting",
+                		type: "post",
+                		enctype: "multipart/form_data",
+                		data: formData,
+                		async: false,
+                		processData: false,
+                    	contentType: false
+                	})
+    			}
+    			sock.send(JSON.stringify(data));
+    			resetChat();	
+            }
 		}
 	})
 
@@ -357,6 +371,8 @@
 	//그룹방 선택 시
 	$('.chatInfo').click(function () {
 		$('#chatCover').css("display", "none");
+		$('#nowChatting').empty();
+		$('#chatImgList').empty();
 		resetChat();
 		chatIndex = $('.chatInfo').index($(this));
 		chatNum = $('.infoNum').eq(chatIndex).val();
@@ -376,8 +392,7 @@
 
 	//채팅 초기화
 	function resetChat() {
-		/* $('#nowChatting').empty();
-		$('#chatImgList').empty(); */
+		$('#chatImgList').empty();
 		$('#chattingText').val("");
 		$('#chatAttachBox').css("display", "none");
 		dataSave.items.clear();
@@ -446,9 +461,9 @@
 	//cont 내용 추가
 	function chatInsert(chatCont, usersProfile, user) {
 		userList(chatIndex, usersProfile);
-		const l_date = chatCont[chatCont.length-1].chatTime.split(' ')
-		lastDay = l_date[0];
 		if (chatCont != null && chatCont.length != 0) {
+			const l_date = chatCont[chatCont.length-1].chatTime.split(' ')
+			lastDay = l_date[0];
 			let spDate = chatCont[0].chatTime.split(' ');
 			let firstDate = spDate[0];
 			$('#nowChatting').append("<thead><tr><td colspan='2' class='allDate'><div><hr>" + firstDate + "<hr></div></td></tr></thead>")
