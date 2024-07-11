@@ -480,7 +480,7 @@
 	
     
     // 추천 게시물 시작 번호
-    let curRecomPage = 11;
+    let curRecomPage = 10;
     // 이미 로딩된 기존 컨텐츠
     let prevCont;
 	function scrollEventHandler() {

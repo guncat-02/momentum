@@ -56,7 +56,7 @@ public class SearchController {
 		Map<String, Object> map = new HashMap<>();
 		map.put("key", sVO);
 		map.put("id", id);
-		map.put("pageNo", 1);
+		map.put("pageNo", 0);
 		if(!sVO.getKeyType().equals("사용자")) {
 			List<PostVO> pVO = sServe.selectSearchList(map);
 			if(pVO != null && pVO.size() != 0) {

@@ -22,7 +22,7 @@ public class PostingService implements IF_PostingService{
 		pdao.insertPost(pvo);
 		HashMap<String, Object> fileMap = new HashMap<>();
 		fileMap.put("id", pvo.getId());
-		for (String fileName : pvo.getFilename()) {
+		for (String fileName : pvo.getFileName()) {
 			fileMap.put("filename", fileName);
 			pdao.insertAttach(fileMap);
 		}
@@ -45,7 +45,7 @@ public class PostingService implements IF_PostingService{
 		PostVO rePVO = pdao.selectOnePost(no);
 		List<String> files = pdao.selectAttach(no);
 		if (files != null && files.size() != 0) { // 사진 있는 경우
-			rePVO.setFilename(files.toArray(new String[files.size()]));
+			rePVO.setFileName(files.toArray(new String[files.size()]));
 		}
 		return rePVO;
 	}
@@ -55,7 +55,7 @@ public class PostingService implements IF_PostingService{
 		pdao.insertRePost(pvo);
 		HashMap<String, Object> fileMap = new HashMap<>();
 		fileMap.put("id", pvo.getId());
-		for (String fileName : pvo.getFilename()) {
+		for (String fileName : pvo.getFileName()) {
 			fileMap.put("filename", fileName);
 			pdao.insertAttach(fileMap);
 		}

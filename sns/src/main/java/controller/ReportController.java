@@ -49,7 +49,7 @@ public class ReportController {
             PostVO pvo = mser.takePostVO(no);
             // 게시물 작성자 정보 조회
             ProfileVO proVO = pser.select(pvo.getId());
-            pvo.setFilename(mser.getAttach(no));
+            pvo.setFileName(mser.getAttach(no));
             // 모달에 전달할 데이터 설정
             model.addAttribute("postvo", pvo);
             model.addAttribute("proVO", proVO);

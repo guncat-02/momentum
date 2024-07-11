@@ -36,7 +36,7 @@ public class SearchService implements IF_SearchService {
 		List<PostVO> pVO = sDao.selectSearchList(map);
 		for(PostVO p : pVO) {
 			List<String> file = mDao.postAttach(p.getNo());
-			p.setFilename(file.toArray(new String[file.size()]));
+			p.setFileName(file.toArray(new String[file.size()]));
 		}
 		return pVO;
 	}

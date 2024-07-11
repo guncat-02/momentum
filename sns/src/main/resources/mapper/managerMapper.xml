@@ -4,166 +4,89 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.IF_ManagerDao">
 
-	<select id="selectAllMembers" parameterType="vo.PageVO" resultType="vo.MemberVO">
-		select a.* 
-		from (
-			select sub.*, rownum as rn 
-			from (
-				select * 
-				from member 
-				order by id
-			) sub
-		) a
-		where rn between #{startNo} and #{endNo}
+	<select id="selectAllMembers" resultType="vo.MemberVO">
+		select * from member
 	</select>
 	
-	<select id="selectAllProfiles" parameterType="vo.PageVO" resultType="vo.ProfileVO">
-		select a.* 
-		from (
-			select sub.*, rownum as rn 
-			from (
-				select * 
-				from profile 
-				order by id
-			) sub
-		) a
-		where rn between #{startNo} and #{endNo}
+	<select id="selectAllProfiles" resultType="vo.ProfileVO">
+		select * from profile
 	</select>
 	
-	<select id="selectAllPosts" parameterType="vo.PageVO" resultType="vo.PostVO">
-		select a.* 
-		from (
-			select sub.*, rownum as rn 
-			from (
-				select * 
-				from post 
-				order by no desc
-			) sub
-		) a
-		where rn between #{startNo} and #{endNo}
+	<select id="selectAllPosts" resultType="vo.PostVO">
+		select * from post
 	</select>
 	
-	<select id="selectAllComms" parameterType="vo.PageVO" resultType="vo.CommVO">
-		select a.* 
-		from (
-			select sub.*, rownum as rn 
-			from (
-				select * 
-				from comm 
-				order by c_no desc
-			) sub
-		) a
-		where rn between #{startNo} and #{endNo}
+	<select id="selectAllComms" resultType="vo.CommVO">
+		select * from comm
 	</select>
 	
-	<select id="selectAllAdmins" parameterType="vo.PageVO" resultType="vo.MemberVO">
-		select a.* 
-		from (
-			select sub.*, rownum as rn 
-			from (
-				select * 
-				from member 
-				where admin is not null order by id
-			) sub
-		) a
-		where rn between #{startNo} and #{endNo}
+	<select id="selectAllAdmins" resultType="vo.MemberVO">
+		select * from member where admin is not null
 	</select>
 	
+	<select id="selectAllBanned" resultType="vo.BanVO">
+		select * from ban
+	</select>
 	
 	<select id="selectMembersWhere" parameterType="vo.PageVO" resultType="vo.MemberVO">
-		select a.* 
-		from (
-			select sub.*, rownum as rn 
-			from (
-				select * 
-				from member 
-				where 
-					<if test="searchLoc == 'admin'">
-						admin is not null and
-					</if>
-					<choose>
-						<when test="searchType == 'id'">
-							id like '%'||#{searchWord}||'%' order by id
-						</when>
-						<when test="searchType == 'period'">
-							b_date between #{stDate} and #{ndDate} order by b_date
-						</when>
-					</choose>
-			) sub
-		) a
-		where rn between #{startNo} and #{endNo}
+		select * from member where 
+		<if test="searchLoc == 'admin'">
+			admin is not null and
+		</if>
+		<choose>
+			<when test="searchType == 'id'">
+				id like '%'||#{searchWord}||'%' order by id
+			</when>
+			<when test="searchType == 'period'">
+				b_date between #{stDate} and #{ndDate} order by b_date
+			</when>
+		</choose>
+		order by id
 	</select>
 
 	<select id="selectProfilesWhere" parameterType="vo.PageVO" resultType="vo.ProfileVO">
-		select a.* 
-		from (
-			select sub.*, rownum as rn 
-			from (
-				select * 
-				from profile 
-				where 
-					<choose>
-						<when test="searchType == 'id'">
-							id like '%'||#{searchWord}||'%'
-						</when>
-						<when test="searchType == 'cont'">
-							bio like '%'||#{searchWord}||'%'
-						</when>
-					</choose>
-				order by id
-			) sub
-		) a
-		where rn between #{startNo} and #{endNo}
+		select * from profile where 
+		<choose>
+			<when test="searchType == 'id'">
+				id like '%'||#{searchWord}||'%'
+			</when>
+			<when test="searchType == 'cont'">
+				bio like '%'||#{searchWord}||'%'
+			</when>
+		</choose>
+		order by id
 	</select>
 	
 	<select id="selectPostsWhere" parameterType="vo.PageVO" resultType="vo.PostVO">
-		select a.* 
-		from (
-			select sub.*, rownum as rn 
-			from (
-				select * 
-				from post 
-				where
-					<choose>
-						<when test="searchType == 'id'">
-							id like '%'||#{searchWord}||'%'
-						</when>
-						<when test="searchType == 'cont'">
-							cont like '%'||#{searchWord}||'%'
-						</when>
-						<when test="searchType == 'period'">
-							p_date between #{stDate} and #{ndDate}
-						</when>
-					</choose>
-				order by no desc
-			) sub
-		) a
-		where rn between #{startNo} and #{endNo}
+		select * from post where
+		<choose>
+			<when test="searchType == 'id'">
+				id like '%'||#{searchWord}||'%'
+			</when>
+			<when test="searchType == 'cont'">
+				cont like '%'||#{searchWord}||'%'
+			</when>
+			<when test="searchType == 'period'">
+				p_date between #{stDate} and #{ndDate}
+			</when>
+		</choose>
+		order by no desc
 	</select>
 	
 	<select id="selectCommsWhere" parameterType="vo.PageVO" resultType="vo.CommVO">
-		select a.* 
-		from (
-			select sub.*, rownum as rn 
-			from (
-				select * 
-				from comm 
-				where
-					<choose>
-						<when test="searchType == 'id'">
-							id like '%'||#{searchWord}||'%'
-						</when>
-						<when test="searchType == 'cont'">
-							c_cont like '%'||#{searchWord}||'%'
-						</when>
-						<when test="searchType == 'period'">
-							c_date between #{stDate} and #{ndDate}
-						</when>
-					</choose>
-				order by c_no desc
-			) sub
-		) a
-		where rn between #{startNo} and #{endNo}
+		select * from comm where
+		<choose>
+			<when test="searchType == 'id'">
+				id like '%'||#{searchWord}||'%'
+			</when>
+			<when test="searchType == 'cont'">
+				c_cont like '%'||#{searchWord}||'%'
+			</when>
+			<when test="searchType == 'period'">
+				c_date between #{stDate} and #{ndDate}
+			</when>
+		</choose>
+		order by c_no desc
 	</select>
 
 
@@ -282,18 +205,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where keyDate <![CDATA[ < ]]> sysdate()
 	</delete>
 	
-		<select id="selectAllBanned" parameterType="vo.PageVO" resultType="vo.BanVO">
-		select a.* 
-		from (
-			select sub.*, rownum as rn 
-			from (
-				select * 
-				from ban 
-				order by s_date
-			) sub
-		) a
-		where rn between #{startNo} and #{endNo}
-	</select>
+
 	
 	<select id="selectBannedCountWhere" parameterType="vo.PageVO" resultType="_int">
 		select count(*) 
@@ -311,25 +223,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectBannedWhere" parameterType="vo.PageVO" resultType="vo.BanVO">
-		select a.* 
-		from (
-			select sub.*, rownum as rn 
-			from (
-				select * from ban 
-				where
-					<choose>
-						<when test="searchType == 'id'">
-							id like '%'||#{searchWord}||'%'
-						</when>
-						<when test="searchType == 'period'">
-							(s_date between #{stDate} and #{ndDate}) or
-							(f_date between #{stDate} and #{ndDate})
-						</when>
-					</choose>
-				order by s_date desc
-			) sub
-		) a
-		where rn between #{startNo} and #{endNo}
+		select * from ban where
+		<choose>
+			<when test="searchType == 'id'">
+				id like '%'||#{searchWord}||'%'
+			</when>
+			<when test="searchType == 'period'">
+				(s_date between #{stDate} and #{ndDate}) or
+				(f_date between #{stDate} and #{ndDate})
+			</when>
+		</choose>
+		order by s_date desc
 	</select>
 	
 </mapper>

@@ -26,7 +26,7 @@ public class MainServiceImpl implements IF_MainService{
 			List<String> fileList = maindao.postAttach(pvo.getNo());
 			if(fileList != null) {
 				String list[] = fileList.toArray(new String[fileList.size()]);
-				pvo.setFilename(list);
+				pvo.setFileName(list);
 			}
 		}
 		return attach;
@@ -40,7 +40,7 @@ public class MainServiceImpl implements IF_MainService{
 			List<String> myfileList = maindao.postAttach(pvo.getNo());
 			if (myfileList != null) {
 				String list[] = myfileList.toArray(new String[myfileList.size()]);
-				pvo.setFilename(list);
+				pvo.setFileName(list);
 			}
 		}
 		return mypostList;
@@ -60,7 +60,7 @@ public class MainServiceImpl implements IF_MainService{
 			List<String> myfileList = maindao.postAttach(pvo.getNo());
 			if (myfileList != null) {
 				String list[] = myfileList.toArray(new String[myfileList.size()]);
-				pvo.setFilename(list);
+				pvo.setFileName(list);
 			}
 			pvo.setP_date(trunc(pvo.getP_date()));
 		}
@@ -86,7 +86,7 @@ public class MainServiceImpl implements IF_MainService{
 			List<String> myfileList = maindao.postAttach(pvo.getNo());
 			if (myfileList != null) {
 				String list[] = myfileList.toArray(new String[myfileList.size()]);
-				pvo.setFilename(list);
+				pvo.setFileName(list);
 			}
 		}
 		return lovepostList;

@@ -59,17 +59,17 @@ public class ManagerController {
 		
 		
 		if (curType.equals("user") || curType.equals("member")) {
-			model.addAttribute("users", mservice.getAllMembers(pvo));
+			model.addAttribute("users", mservice.getAllMembers());
 		} else if (curType.equals("profile")) {
-			model.addAttribute("profiles", mservice.getAllProfiles(pvo));
+			model.addAttribute("profiles", mservice.getAllProfiles());
 		} else if (curType.equals("post")) {
-			model.addAttribute("posts", mservice.getAllPosts(pvo));
+			model.addAttribute("posts", mservice.getAllPosts());
 		} else if (curType.equals("admin")) {
-			model.addAttribute("users", mservice.getAllAdmins(pvo));
+			model.addAttribute("users", mservice.getAllAdmins());
 		} else if (curType.equals("banned")) {
-			model.addAttribute("banned", mservice.getAllBanned(pvo));
+			model.addAttribute("banned", mservice.getAllBanned());
 		} else if (curType.equals("comm")) {
-			model.addAttribute("comms", mservice.getAllComms(pvo));
+			model.addAttribute("comms", mservice.getAllComms());
 		} else {
 			return "redirect:/manager";
 		}

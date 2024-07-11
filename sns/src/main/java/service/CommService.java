@@ -119,7 +119,7 @@ public class CommService implements IF_CommService{
 			List<String> myfileList = mdao.postAttach(pvo.getNo());
 			if (myfileList != null) {
 				String list[] = myfileList.toArray(new String[myfileList.size()]);
-				pvo.setFilename(list);
+				pvo.setFileName(list);
 			}
 		}
 		return mycpList;

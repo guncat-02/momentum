@@ -22,30 +22,35 @@ public class ManagerDao implements IF_ManagerDao{
 	
 	@Inject
 	SqlSession sql;
-	
+
 	@Override
-	public List<MemberVO> getAllMembers(PageVO pvo) throws Exception {
-		return sql.selectList(mapperQuery+".selectAllMembers", pvo);
+	public List<MemberVO> getAllMembers() throws Exception {
+		return sql.selectList(mapperQuery+".selectAllMembers");
 	}
 
 	@Override
-	public List<ProfileVO> getAllProfiles(PageVO pvo) throws Exception {
-		return sql.selectList(mapperQuery+".selectAllProfiles", pvo);
+	public List<ProfileVO> getAllProfiles() throws Exception {
+		return sql.selectList(mapperQuery+".selectAllProfiles");
 	}
 
 	@Override
-	public List<PostVO> getAllPosts(PageVO pvo) throws Exception {
-		return sql.selectList(mapperQuery+".selectAllPosts", pvo);
+	public List<PostVO> getAllPosts() throws Exception {
+		return sql.selectList(mapperQuery+".selectAllPosts");
 	}
 
 	@Override
-	public List<CommVO> getAllComms(PageVO pvo) throws Exception {
-		return sql.selectList(mapperQuery+".selectAllComms", pvo);
+	public List<CommVO> getAllComms() throws Exception {
+		return sql.selectList(mapperQuery+".selectAllComms");
 	}
 
 	@Override
-	public List<MemberVO> getAllAdmins(PageVO pvo) throws Exception {
-		return sql.selectList(mapperQuery+".selectAllAdmins", pvo);
+	public List<MemberVO> getAllAdmins() throws Exception {
+		return sql.selectList(mapperQuery+".selectAllAdmins");
+	}
+
+	@Override
+	public List<BanVO> getAllBanned() throws Exception {
+		return sql.selectList(mapperQuery+".selectAllBanned");
 	}
 
 	@Override
@@ -140,11 +145,6 @@ public class ManagerDao implements IF_ManagerDao{
 	@Override
 	public int removePastSearchWord() throws Exception {
 		return sql.delete(mapperQuery+".deleteKeyWordWhere");
-	}
-
-	@Override
-	public List<BanVO> getAllBanned(PageVO pvo) throws Exception {
-		return sql.selectList(mapperQuery+".selectAllBanned", pvo);
 	}
 
 	@Override

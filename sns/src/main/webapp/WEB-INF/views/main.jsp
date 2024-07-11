@@ -324,12 +324,12 @@ pageContext.setAttribute("curId", curId);
 	}
    	
     
-    // 로그인 유저의 팔로우 유저가 작성한 게시물 중 가장 최신 게시물의 rownum.
-    const maxNum = ${maxNum};
+    // 팔로우 한 사람 있는 여부 true/false
+    let fListFlag = ${fListFlag};
     // 로그인 유저의 팔로우 유저가 작성한 게시물 다음 페이지 시작 번호.
-    let curFollowPage = maxNum - 10;
+    let curFollowPage = 10;
     // 추천 게시물 시작 번호
-    let curRecomPage = 1;
+    let curRecomPage = 0;
     // 이미 로딩된 기존 컨텐츠
     let prevCont;
 	function scrollEventHandler() {
@@ -340,15 +340,18 @@ pageContext.setAttribute("curId", curId);
         	// 이미 로딩된 기존 컨텐츠의 html 객체 저장.
     		prevCont = $('.myPost').html();
        		// 게시물 로딩되는 부분 새로 고침.
-       		if (curFollowPage > 0 && maxNum != -1) { // 팔로우 한 유저의 최근 게시물이 남아 있거나, 팔로우한 유저가 있을 경우
+       		if (fListFlag) { // 팔로우 한 유저의 최근 게시물이 남아 있거나, 팔로우한 유저가 있을 경우
            		$('#main').load(`newFollowingPost?pageNo=\${curFollowPage} .myPost`, function() {
            			// 새로 고침 성공 시 실행.
-           			// 리포스트 된 이미지 css 조정
-           			adjustRepostImgs();
+           			if ($('.p_inf').length == 0) { // 새롭게 로딩된 게시물 없었을 경우
+           				fListFlag = false;
+           			}
+       				// 다음 페이지 시작 번호 갱신.
+           			curFollowPage += 10;
+        			// 리포스트 된 이미지 css 조정
+        			adjustRepostImgs();
            			// 기존 게시물을 새로 로딩된 게시물 위에 추가.
            			$('.myPost').prepend(prevCont);
-           			// 다음 페이지 시작 번호 갱신.
-           			curFollowPage -= 10;
            			// 제거했던 이벤트 다시 생성.
            			document.addEventListener('scroll', scrollEventHandler);
            		});

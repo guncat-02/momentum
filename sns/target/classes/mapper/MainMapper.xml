@@ -104,48 +104,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectFollowingPostRN" parameterType="hashmap" resultType="vo.PostVO">
-		select * 
-		from (
-			select o.*, rownum as rn 
-			from (
-				select * 
-				from post 
-				where id in
-					<foreach collection="fList" item="one" open="(" separator="," close=")">
-						#{one}
-					</foreach>
-				and p_date between localtimestamp - (interval '10' day) and localtimestamp
-				order by p_date
-			) o
-		)
-		where rn between #{pageNo}-9 and #{pageNo}
-		order by rn desc
+		select * from post where id in
+			<foreach collection="fList" item="one" open="(" separator="," close=")">
+				#{one}
+			</foreach>
+		and p_date between localtimestamp - interval 10 day and localtimestamp
+		order by p_date desc limit 0, 10
 	</select>
 	
 	<select id="selectRecomPostRN" parameterType="hashmap" resultType="vo.PostVO">
-		select * 
-		from (
-			select rownum as rn, o.* 
-			from (
-				select * 
-				from post 
-				where
-					<if test="exList != null and exList.size() != 0">
-						no not in
-						<foreach collection="exList" item="one" open="(" separator="," close=")">
-							#{one}
-						</foreach>
-						and
-					</if>
-				id not in (
-					select blockId 
-					from block 
-					where id = #{sessionId}
-				)
-				and p_date between localtimestamp - (interval '31' day) and localtimestamp
-				order by p_date desc
-			)o
+		select * from post where
+			<if test="exList != null and exList.size() != 0">
+				no not in
+				<foreach collection="exList" item="one" open="(" separator="," close=")">
+					#{one}
+				</foreach>
+				and
+			</if>
+		id not in (
+			select blockId 
+			from block 
+			where id = #{sessionId}
 		)
-		where rn between #{pageNo} and #{pageNo} +9
+		and p_date between localtimestamp - interval 31 day and localtimestamp
+		order by p_date desc limit #{pageNo}, 10
 	</select>
 </mapper>

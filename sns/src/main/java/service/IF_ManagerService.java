@@ -12,17 +12,17 @@ import vo.ReportVO;
 
 public interface IF_ManagerService {
 
-	public List<MemberVO> getAllMembers(PageVO pvo) throws Exception;
+	public List<MemberVO> getAllMembers() throws Exception;
 	
-	public List<ProfileVO> getAllProfiles(PageVO pvo) throws Exception;
+	public List<ProfileVO> getAllProfiles() throws Exception;
 	
-	public List<PostVO> getAllPosts(PageVO pvo) throws Exception;
+	public List<PostVO> getAllPosts() throws Exception;
 	
-	public List<CommVO> getAllComms(PageVO pvo) throws Exception;
+	public List<CommVO> getAllComms() throws Exception;
 	
-	public List<MemberVO> getAllAdmins(PageVO pvo) throws Exception;
+	public List<MemberVO> getAllAdmins() throws Exception;
 	
-	public List<BanVO> getAllBanned(PageVO pvo) throws Exception;
+	public List<BanVO> getAllBanned() throws Exception;
 	
 	public List<MemberVO> searchMembers(PageVO pvo) throws Exception;
 	

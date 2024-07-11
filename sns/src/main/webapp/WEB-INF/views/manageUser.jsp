@@ -33,6 +33,7 @@
                     <span id="cur-date-span"></span>
                     <span id="cur-adminId-span">Admin : ${curId }</span>
                 </div>
+                <!-- 
                 <div id="search-type">
                 	<input type="hidden" name="searchArea" value="User">
                 	<input type="hidden" name="searchLoc" value="">
@@ -51,6 +52,7 @@
                 <div id="search-result">
                 	<span id="result-span">총 조회 결과 : ${cnt }건.</span>
                 </div>
+                 -->
                 <div id="menu-user-member">
                     <button type="button" value="1" id="member-btn">MEMBER</button>
                 </div>
@@ -220,25 +222,6 @@
                         </c:choose>
                     </table>
                 </div>
-                <div id="paging">
-                	<c:if test="${pagevo.prev }">
-                		<button type="button">[prev]</button>
-					</c:if> 
-					<c:forEach begin="${pagevo.startPage }" end="${pagevo.endPage }" var="idx">
-						<c:choose>
-							<c:when test="${idx == pagevo.page }">
-								<!-- 현재 페이지 굵은 글씨 -->
-								<button type="button"><b>${idx }</b></button>
-							</c:when>
-							<c:otherwise>
-							<button type="button">${idx }</button>
-							</c:otherwise>
-						</c:choose>
-					</c:forEach> 
-					<c:if test="${pagevo.next }">
-						<button type="button">[next]</button>
-					</c:if>
-                </div>
                 <div id="reset">
                 	<button type="button"><a href="/sns/manager/user/">reset</a></button>
                 </div>
@@ -277,7 +260,7 @@
         $('input[name=searchLoc]').val(curList);
        	let result = searchFlag();
        	searchTypeChange(); // 검색 타입 지정
-       	searchPaging(result);
+       	// searchPaging(result);
     });
     
     function searchFlag() {
@@ -305,6 +288,7 @@
     	return null;
     }
     
+    /*
     function searchPaging(result) {
 		$('#paging').on('click', 'button', function() {
 			let idx = $.trim($(this).text());
@@ -331,6 +315,7 @@
 
 		});
     }
+    */
     
     
     // 선택한 검색 유형에 따라 검색어 input display 변환
