@@ -84,6 +84,7 @@ public class MainController {
 		for (PostVO pvo : postList) {
 			// 파일 추가
 			pvo.setFileName(mser.getAttach(pvo.getNo()));
+			System.out.println(pvo.toString());
 			// 현재 출력 된 게시물 번호 미리 저장. 추후 추천 게시물에서는 출력되지 않도록 하기 위함.
 			selectedPostNoList.add((Integer)pvo.getNo());
 			if (pvo.getRe_no() != 0) {

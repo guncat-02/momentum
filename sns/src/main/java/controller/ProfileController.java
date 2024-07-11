@@ -74,6 +74,7 @@ public class ProfileController {
 	@GetMapping("/profileShow")
 	public String profileShow(Model model, HttpSession session, @RequestParam(value="id", required = false) String id) throws Exception {
 		if(id==null || id.equals(String.valueOf(session.getAttribute("userid")))) {
+			System.out.println("same");
 			ProfileVO p = pServe.select(String.valueOf(session.getAttribute("userid")));
 			model.addAttribute("profile", p);
 			model.addAttribute("following", fServe.followingSelect(String.valueOf(session.getAttribute("userid"))));
@@ -92,6 +93,7 @@ public class ProfileController {
 			model.addAttribute("postlength", mserve.postLength(String.valueOf(session.getAttribute("userid"))));
 			return "profileShow";
 		}else {
+			System.out.println("diff");
 			ProfileVO p = pServe.select(id);
 			model.addAttribute("profile", p);
 			model.addAttribute("following", fServe.followingSelect(id));

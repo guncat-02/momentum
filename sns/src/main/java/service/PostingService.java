@@ -23,7 +23,7 @@ public class PostingService implements IF_PostingService{
 		HashMap<String, Object> fileMap = new HashMap<>();
 		fileMap.put("id", pvo.getId());
 		for (String fileName : pvo.getFileName()) {
-			fileMap.put("filename", fileName);
+			fileMap.put("fileName", fileName);
 			pdao.insertAttach(fileMap);
 		}
 	}

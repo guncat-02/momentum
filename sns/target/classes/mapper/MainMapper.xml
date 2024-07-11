@@ -109,7 +109,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				#{one}
 			</foreach>
 		and p_date between localtimestamp - interval 10 day and localtimestamp
-		order by p_date desc limit 0, 10
+		order by p_date desc limit #{pageNo}, 10
 	</select>
 	
 	<select id="selectRecomPostRN" parameterType="hashmap" resultType="vo.PostVO">

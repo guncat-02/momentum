@@ -339,10 +339,12 @@ pageContext.setAttribute("curId", curId);
         	document.removeEventListener('scroll', scrollEventHandler);
         	// 이미 로딩된 기존 컨텐츠의 html 객체 저장.
     		prevCont = $('.myPost').html();
+        	console.log(fListFlag);
        		// 게시물 로딩되는 부분 새로 고침.
        		if (fListFlag) { // 팔로우 한 유저의 최근 게시물이 남아 있거나, 팔로우한 유저가 있을 경우
            		$('#main').load(`newFollowingPost?pageNo=\${curFollowPage} .myPost`, function() {
            			// 새로 고침 성공 시 실행.
+           			console.log($('.p_inf').length);
            			if ($('.p_inf').length == 0) { // 새롭게 로딩된 게시물 없었을 경우
            				fListFlag = false;
            			}
@@ -358,6 +360,7 @@ pageContext.setAttribute("curId", curId);
        		} else { // 팔로우 한 유저의 최근 게시물을 전부 출력 했거나, 팔로우한 유저가 없을 경우
        			$('#main').load(`newRecomPost?pageNo=\${curRecomPage} .myPost`, function() {
            			// 새로 고침 성공 시 실행.
+           			console.log($('.p_inf').length);
            			if ($('.p_inf').length != 0) { // 새로운 게시물이 로딩될 때
            				// 리포스트 된 이미지 css 조정
            				adjustRepostImgs();
