@@ -95,7 +95,7 @@
 			<a href="myPost?no=${mcp.no }">
 			<div class = "pc_cont"><div class="mcpid">${mcp.id}</div> <div class = "mcpcont"><b>${mcp.cont }</b></div>
 				<div class="prephoto">
-					 <img src="download?filename=${mcp.filename[0]}"> 
+					 <img src="download?filename=${mcp.fileName[0]}"> 
 				</div> 
 			</div>
 			</a>
@@ -166,9 +166,7 @@
 			type:"GET",
 			url:"p_show",
 			data: {"no" : no},
-			cache : false,
-			success:function() {
-				}
+			cache : false
 		 })  
 	}
      

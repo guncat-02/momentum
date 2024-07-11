@@ -99,9 +99,9 @@
 
 				<!-- 게시물 사진 -->
 				<div class="one-post-attach">
-					<c:if test="${not empty postvo.filename }">
+					<c:if test="${not empty postvo.fileName }">
 						<div class="attach-div">
-							<c:set var="pFileLength" value="${fn:length(postvo.filename)}" />
+							<c:set var="pFileLength" value="${fn:length(postvo.fileName)}" />
 							<c:if test="${pFileLength gt 1 }">
 								<button class="arrow-left">
 									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
@@ -109,7 +109,7 @@
 				                    </svg>
 								</button>
 							</c:if>
-							<c:forEach items="${postvo.filename }" var="file">
+							<c:forEach items="${postvo.fileName }" var="file">
 								<img src="/sns/download?filename=${file}">
 							</c:forEach>
 							<c:if test="${pFileLength gt 1 }">
@@ -133,9 +133,9 @@
 							</span>
 							<div class="reposted-container">
 								<div class="reposted-attach">
-									<c:if test="${not empty repvo.filename }">
+									<c:if test="${not empty repvo.fileName }">
 			                        <div class="re-attach-div">
-				                        <c:set var="rpFileLength" value="${fn:length(repvo.filename)}" />
+				                        <c:set var="rpFileLength" value="${fn:length(repvo.fileName)}" />
 				                        <c:if test="${rpFileLength gt 1 }">
 				                            <button class="re-arrow-left">
 				                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -145,7 +145,7 @@
 				                                </svg>
 				                            </button>
 			                            </c:if>
-			                            <c:forEach items="${repvo.filename }" var="file">
+			                            <c:forEach items="${repvo.fileName }" var="file">
 			                            	<img src="/sns/download?filename=${file }">
 			                            </c:forEach>
 			                            <c:if test="${rpFileLength gt 1 }">
@@ -201,7 +201,7 @@
 		                </svg> <span class="repost-cnt-span">${postvo.reCnt }</span> <!-- 해당 게시물이 리포스트 된 수 -->
 		                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-index-thumb" viewBox="0 0 16 16">
 		                    <path d="M6.75 1a.75.75 0 0 1 .75.75V8a.5.5 0 0 0 1 0V5.467l.086-.004c.317-.012.637-.008.816.027.134.027.294.096.448.182.077.042.15.147.15.314V8a.5.5 0 0 0 1 0V6.435l.106-.01c.316-.024.584-.01.708.04.118.046.3.207.486.43.081.096.15.19.2.259V8.5a.5.5 0 1 0 1 0v-1h.342a1 1 0 0 1 .995 1.1l-.271 2.715a2.5 2.5 0 0 1-.317.991l-1.395 2.442a.5.5 0 0 1-.434.252H6.118a.5.5 0 0 1-.447-.276l-1.232-2.465-2.512-4.185a.517.517 0 0 1 .809-.631l2.41 2.41A.5.5 0 0 0 6 9.5V1.75A.75.75 0 0 1 6.75 1M8.5 4.466V1.75a1.75 1.75 0 1 0-3.5 0v6.543L3.443 6.736A1.517 1.517 0 0 0 1.07 8.588l2.491 4.153 1.215 2.43A1.5 1.5 0 0 0 6.118 16h6.302a1.5 1.5 0 0 0 1.302-.756l1.395-2.441a3.5 3.5 0 0 0 .444-1.389l.271-2.715a2 2 0 0 0-1.99-2.199h-.581a5 5 0 0 0-.195-.248c-.191-.229-.51-.568-.88-.716-.364-.146-.846-.132-1.158-.108l-.132.012a1.26 1.26 0 0 0-.56-.642 2.6 2.6 0 0 0-.738-.288c-.31-.062-.739-.058-1.05-.046zm2.094 2.025" />
-		                </svg> <span class="show-cnt-span">${postvo.show }</span> <!-- 조회수 -->
+		                </svg> <span class="show-cnt-span">${postvo.shows }</span> <!-- 조회수 -->
 						<button type="button" class="edit-confirm-btn theme">EDIT POST</button>
 						<button type="button" class="edit-cancel-btn theme">CANCEL EDIT</button>
 					</span>
@@ -466,7 +466,6 @@
 	// edit 버튼 클릭 후 동작 제어.
 	$('.interactions-span button[class^=edit-]').on('click', function() {
 		let status = $(this).attr('class');
-		console.log(status);
 		if (status.indexOf('confirm') != -1) { // edit post 버튼 클릭 시
 			if ($.trim($('.edit-contents-textarea').val()) == '') { // 빈칸 입력 시
 				alert('게시물은 필수로 작성해야 합니다.');
@@ -641,9 +640,7 @@
     });
 	
 	
-	function showSheet(){
-		document.getElementById("moveSheet").classList.add("active");
-	}
+
 	// 게시물 작성자 프로필 클릭 시 이동할 페이지에 대한 form action 조정.
 	function limitProfileShow() {
 		if ('${proVO.id}' == curId) { // 게시물 작성자 아이디와 현재 로그인 아이디 같을 때
@@ -657,7 +654,6 @@
 	}
 	// 댓글 열고 닫기 
 	function opencomm() {
-    	console.log("dd")
     	if($("[class*='ctable']").css("display") == "block") {
     		$("[class*='ctable']").css('display', 'none');
     	}else if($("[class*='ctable']").css("display") == 'none') {
@@ -695,15 +691,11 @@
 		}
 	 }
 	 function likeajax(c_no,chkno) {
-		 console.log(c_no);
-		 console.log(chkno+"체크")
 		 $.ajax({
 				type:"POST",
 				url:"c_like",
 				data: {"c_no" : c_no, "chkno" : chkno},
-				cache : false,
-				success:function() {
-					}
+				cache : false
 			 })  
 	 }
 	 
@@ -746,11 +738,7 @@
 				type:"POST",
 				url:"c_dislike",
 				data: {"c_no" : c_no, "chkno" : chkno},
-				cache : false,
-				success:function() {
-					
-					alert("성공");
-					}
+				cache : false
 			 })  
 	 }
 	 
@@ -768,7 +756,6 @@
 				contentType:'application/json; charset=utf-8',
 				data : JSON.stringify(param),
 				success:function(data) {
-					console.log("여기 안됨?");
 					document.location.reload();
 					}
 			 }) 
@@ -834,7 +821,6 @@
 	} 
 	// 댓글 삭제
 	function delcomm(c_no) {
-		console.log(c_no +"이거 지움")
 		$.ajax({
 			type:"GET",
 			url:"delcomm?c_no="+c_no,
@@ -913,7 +899,6 @@
 			cache : false,
 			success:function(data) {
 				$.each(data, function(index, no) {
-					console.log(no);
 					if($("#p_lovehid"+no).val() == no ) {
 						$(".p_lovehid"+no).val(1)
 						$(".p_lovebut"+no).html(`<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="red" class="bi bi-heart-fill" viewBox="0 0 16 16">
@@ -950,10 +935,7 @@
 		$.ajax({
 			type:"POST",
 			url:"p_love",
-			data: {"no" : no},
-			success:function() {
-				alert("성공")
-			}
+			data: {"no" : no}
 		})
 	}
 	// 좋아요 취소 ajax
@@ -961,10 +943,7 @@
 		$.ajax({
 			type:"POST",
 			url:"p_loveCancel",
-			data: {"no" : no},
-			success:function() {
-				alert("성공")
-			}
+			data: {"no" : no}
 		})
 	}
 	
@@ -988,10 +967,6 @@
 	                	$(".modal_Post").css("display","none");
 	                	$("#commreportform")[0].reset();
 	            		$("#postreportform")[0].reset();
-	                },
-	                error: function(xhr, status, error) {
-	                    // 오류 발생 시 처리할 코드
-	                    alert('오류 발생: ' + error);
 	                }
 	            });
 	        }else {
@@ -1020,10 +995,6 @@
 	                    $("#commreportform")[0].reset();
 	                    $("#postreportform")[0].reset();
 	            		
-	                },
-	                error: function(xhr, status, error) {
-	                    // 오류 발생 시 처리할 코드
-	                    alert('오류 발생: ' + error);
 	                }
 	            });
 	        }else {
@@ -1041,7 +1012,6 @@
 		modal_Comm.style.display="flex";
 		$(".rc_id").text(id);
 		$(".rc_cont").text(c_cont);
-		console.log($(".rc_id").text());
 		let a = $(".rc_id").text(); 
 		$("#reportC_id").val(a);
 	}
@@ -1125,7 +1095,6 @@
 			var changeItem;
 			
 			if(reason == "curse") {
-				console.log(reason);
 				$(".selectReasonPost2").val("curse");
 				$(".reportPostbut").css("display","block");
 				$(".reportPostText").css("display","block");

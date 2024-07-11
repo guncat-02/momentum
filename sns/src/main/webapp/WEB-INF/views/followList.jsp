@@ -111,7 +111,6 @@ pageContext.setAttribute("curId", curId);
 	
 	const curId = '<%=curId %>';
 	const reqId = '${reqId}';
-	console.log(reqId);
 
 	// 화면 로딩 될 때 식별자에 따라 리스트 다르게 띄운다.
 	$(document).ready(function() {

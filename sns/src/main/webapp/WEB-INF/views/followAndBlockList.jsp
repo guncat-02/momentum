@@ -199,7 +199,6 @@ String id = (String)session.getAttribute("userid");
         $('label[id^=type-]').css('color', 'grey');
         $(this).css('color', '');
         let curType = $.trim($(this).text().substring(5).toLowerCase());
-        console.log(curType);
         location.href = `/sns/list_fnb/\${curType}`;
     });
     
@@ -236,7 +235,6 @@ String id = (String)session.getAttribute("userid");
     			followId: fId
     		},
     		success: function(result) {
-    			console.log(result);
     			btn.css('pointer-events', 'auto');
     		},
     		error: function() {
@@ -258,7 +256,6 @@ String id = (String)session.getAttribute("userid");
     			followId: fId
     		},
     		success: function(result) {
-    			console.log(result);
     			btn.css('pointer-events', 'auto');
     		},
     		error: function() {

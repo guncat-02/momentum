@@ -90,7 +90,7 @@
 		</div>
 
 		<c:forEach items="${myfiles}" var="mf" varStatus="loop">
-			<c:set var="filenameLength" value="${fn:length(mf.filename)}" />
+			<c:set var="filenameLength" value="${fn:length(mf.fileName)}" />
 			
 			<c:choose>
 				<c:when test="${loop.index == 0 or mf.p_date ne myfiles[loop.index - 1].p_date}">
@@ -104,7 +104,7 @@
 					</c:choose>
 				</c:when>
 			</c:choose>
-			<c:forEach items="${mf.filename}" var="file" varStatus="status">
+			<c:forEach items="${mf.fileName}" var="file" varStatus="status">
 				<div class="p_item">
 					<a onclick="openModal('${status.current}')"><img src="download?filename=${status.current}"></a>
 				</div>
@@ -182,9 +182,7 @@
 
     function openModal(filename) {
     	modal.style.display="flex";
-    	console.log(filename);
     	$(".modalImg").attr("src", "download?filename="+filename);
-    	console.log("download?filename="+filename);
     }
     
 	$(".closeModal").click(function() {

@@ -146,7 +146,7 @@
 		                                <th style="width: 5%;">RE_NO</th>
 		                                <th style ="width: 10%">ID</th>
 		                                <th style="width: 50%;">CONT</th>
-		                                <th>SHOW</th>
+		                                <th>SHOWS</th>
 		                                <th style="width: 5%;">PRIV.</th>
 		                                <th style="width: 5%;">C_BLOCK</th>
 		                                <th>P_DATE</th>
@@ -163,7 +163,7 @@
 			                                </td>
 			                                <td>${one.id }</td>
 			                                <td>${one.cont }</td>
-			                                <td class="tac">${one.show }</td>
+			                                <td class="tac">${one.shows }</td>
 			                                <td class="tac">${one.privacy }</td>
 			                                <td class="tac">${one.c_block }</td>
 			                                <td class="tac">${one.p_date }</td>
@@ -366,7 +366,6 @@
     		$('div[id^=menu-] button').removeAttr('disabled');
     		$('div[id^=menu-] button').val(1);
     	}
-    	console.log($('button[value=0]').text().toLowerCase().indexOf('${pagevo.searchLoc}'));
     	if ($('button[value=0]').text().toLowerCase().indexOf('${pagevo.searchLoc}') != -1) {
     		$('#searchBtn').attr('disabled', '');
     		$('#searchBtn').val(0);
@@ -392,7 +391,6 @@
     // table 영역 새로고침 및 리턴 결과 개수 갱신
     function updateTable(flag) {
 		let searchFlag = window.location.href;
-		console.log(searchFlag);
 		if (searchFlag.indexOf('search') == -1) {
 			location.href = `/sns/manager/user/\${flag}`;
 		} else {

@@ -178,7 +178,6 @@
     
     //submit
     $('#chatAll').on('click', '#createProfile', function() {
-    	console.log($('#formChk').css('color'))
     	if($('#formChk').css('color') == 'rgb(255, 0, 191)') {
     		const form = $('form')[0];
         	const formData = new FormData(form);

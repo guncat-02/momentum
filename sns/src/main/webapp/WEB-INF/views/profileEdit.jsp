@@ -90,7 +90,6 @@
         file.value = null;
         base.value = "REMOVE IMG";
         base.disabled = false;
-        console.log(file.value)
         if(photo.value == "null") {
         	img.src = "./resources/img/프로필.png";
         } else {

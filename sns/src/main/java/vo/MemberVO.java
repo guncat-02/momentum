@@ -10,10 +10,6 @@ public class MemberVO {
 	private String email; //이메일
 	private String admin; // 관리자
 	
-	@Override
-	public String toString() {
-		return "MemberVO [id=" + id + ", pass=" + pass + ", name=" + name + ", b_date=" + b_date + "]";
-	}
 	//getter
 	public String getId() {
 		return id;

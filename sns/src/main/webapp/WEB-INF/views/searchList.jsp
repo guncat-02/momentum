@@ -55,7 +55,7 @@
 							<c:choose>
 							<c:when test='${key.keyType ne "사용자"}'>
 								<c:forEach items="${info}" var="mp">
-								<c:set var="filenameLength" value="${fn:length(mp.filename)}" />
+								<c:set var="filenameLength" value="${fn:length(mp.fileName)}" />
 								<div class="p_inf">
 									<a href="userprofile?id=${mp.id}" class="userprofilealink">
 										<div class="proimg">
@@ -87,7 +87,7 @@
 									<div class="p_cont theme">${mp.cont }</div> <c:choose>
 										<c:when test="${filenameLength eq 0}">
 											<div class="p_files" style="display: none">
-												<c:forEach items="${mp.filename }" var="file"
+												<c:forEach items="${mp.fileName }" var="file"
 													varStatus="status">
 													<div class="item">
 														<img src="download?filename=${status.current}">
@@ -97,7 +97,7 @@
 										</c:when>
 										<c:when test="${filenameLength eq 1}">
 											<div class="p_files">
-												<c:forEach items="${mp.filename }" var="file"
+												<c:forEach items="${mp.fileName }" var="file"
 													varStatus="status">
 													<div class="item">
 														<img src="download?filename=${status.current}">
@@ -108,7 +108,7 @@
 										<c:when test="${filenameLength eq 2}">
 											<div class="p_files"
 												style="display: grid; grid-template-columns: 1fr 1fr">
-												<c:forEach items="${mp.filename }" var="file"
+												<c:forEach items="${mp.fileName }" var="file"
 													varStatus="status">
 													<div class="item" style="">
 														<img src="download?filename=${status.current}">
@@ -119,7 +119,7 @@
 										<c:when test="${filenameLength eq 3}">
 											<div class="p_files"
 												style="display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr">
-												<c:forEach items="${mp.filename }" var="file"
+												<c:forEach items="${mp.fileName }" var="file"
 													varStatus="status">
 													<c:choose>
 														<c:when test="${status.index eq 0}">
@@ -140,7 +140,7 @@
 										<c:when test="${filenameLength eq 4}">
 											<div class="p_files"
 												style="display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr;">
-												<c:forEach items="${mp.filename }" var="file"
+												<c:forEach items="${mp.fileName }" var="file"
 													varStatus="status">
 													<div class="item">
 														<img src="download?filename=${status.current}">
@@ -151,7 +151,7 @@
 										<c:when test="${filenameLength eq 5}">
 											<div class="p_files"
 												style="display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr">
-												<c:forEach items="${mp.filename }" var="file"
+												<c:forEach items="${mp.fileName }" var="file"
 													varStatus="status">
 													<c:choose>
 														<c:when test="${status.index eq 3}">
@@ -213,7 +213,7 @@
 											fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16"> <path
 												d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z" /> <path
 												d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0" /> </svg>
-										<span class="footspan">${mp.show}</span>
+										<span class="footspan">${mp.shows}</span>
 									</div>
 								</div>
 							</c:forEach>
@@ -405,8 +405,6 @@
     
     	$(document).ready(function(){
 		setting();
-		console.log('no : ${aList[0].no}');
-	})
 	
 	// 좋아요 누른거 확인
 	function setting() {
@@ -420,7 +418,6 @@
 			cache : false,
 			success:function(data) {
 				$.each(data, function(index, no) {
-					console.log(no);
 					if($("#p_lovehid"+no).val() == no ) {
 						$(".p_lovehid"+no).val(1)
 						$(".p_lovebut"+no).html(`<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="red" class="bi bi-heart-fill" viewBox="0 0 16 16">
@@ -456,10 +453,7 @@
 		$.ajax({
 			type:"POST",
 			url:"p_love",
-			data: {"no" : no},
-			success:function() {
-				alert("성공")
-			}
+			data: {"no" : no}
 		})
 	}
 	// 좋아요 취소 ajax
@@ -467,10 +461,7 @@
 		$.ajax({
 			type:"POST",
 			url:"p_loveCancel",
-			data: {"no" : no},
-			success:function() {
-				alert("성공")
-			}
+			data: {"no" : no}
 		})
 	}
 	
@@ -480,9 +471,7 @@
 			type:"GET",
 			url:"p_show",
 			data: {"no" : no},
-			cache : false,
-			success:function() {
-				}
+			cache : false
 		 })  
 	}
 	function repost(no) {
@@ -554,7 +543,6 @@
 		btn.text('FOLLOWING');
 		
 		let fId = $.trim(btn.prev('input[type="hidden"]').val());
-		console.log(fId);
 		
 		$.ajax({
 			url : '/sns/follow',
@@ -589,7 +577,6 @@
 		btn.text('FOLLOW');
 		
 		let fId = $.trim(btn.prev('input[type="hidden"]').val());
-		console.log(fId);
 
 		$.ajax({
 			url : '/sns/followcancel',

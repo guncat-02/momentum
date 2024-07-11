@@ -168,7 +168,6 @@
 
 		sock.onmessage = function (e) {
 			const data = JSON.parse(e.data);
-			console.log(data);
 			let allDate = data.chatTime.split(' ');
 			let day = allDate[0];
 			let time = allDate[1];

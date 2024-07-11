@@ -21,15 +21,6 @@ public class PageVO {
 	private String stDate;
 	private String ndDate;
 
-
-	@Override
-	public String toString() {
-		return "PageVO [startNo=" + startNo + ", endNo=" + endNo + ", perPageNum=" + perPageNum + ", page=" + page
-				+ ", totalCount=" + totalCount + ", endPage=" + endPage + ", startPage=" + startPage + ", prev=" + prev
-				+ ", next=" + next + ",\nsearchType=" + searchType + ", searchWord=" + searchWord + ", searchLoc="
-				+ searchLoc + "]";
-	}
-
 	
 	public String getStDate() {
 		return stDate;
