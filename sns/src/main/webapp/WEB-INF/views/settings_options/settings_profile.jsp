@@ -123,7 +123,7 @@
     });
     // 해당 계정의 서브 프로필
     $('#show-sub-profile').on('click', function() {
-        location.href = "#"
+        location.href = "/sns/profileList";
     });
 </script>
 </html>

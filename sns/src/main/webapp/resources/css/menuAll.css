@@ -113,6 +113,10 @@ body {
     border-collapse: collapse;
 }
 
+#simplefollowtable table tbody tr:hover {
+	cursor: pointer;
+}
+
 
 .menu-following-photo-div {
     display: block;
