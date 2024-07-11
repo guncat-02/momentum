@@ -53,28 +53,6 @@ public class FileDataUtil {
 		response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
 		return new FileSystemResource(file);
 	}
-	/*
-	@RequestMapping(value = "/download.do", method = RequestMethod.GET)
-	public void fileDownload(@RequestParam("filename") String fileName, HttpServletResponse response) {
-	//	File file = new File(uploadPath + "/" + fileName);
-		response.setContentType("application/download; utf-8");
-		response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
-		final File fileToDownload = new File(uploadPath + "/" + fileName);
-		InputStream inputStream = null;  //스트림 객체를
-		try {
-			inputStream = new FileInputStream(fileToDownload); //파일에서 넣어주고
-			IOUtils.copy(inputStream, response.getOutputStream());
-			response.flushBuffer();  //응답해준다.
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				inputStream.close();  //닫아준다.
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}*/
 
 	/**
 	 * 파일 업로드 메서드(공통)

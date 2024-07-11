@@ -4,63 +4,90 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.IF_ProfileDao">
 <insert id="insert" parameterType="vo.ProfileVO">
-	insert into profileTest values(#{id}, #{nickName}, #{photo, jdbcType=VARCHAR}, #{tel, jdbcType=VARCHAR}, #{bio, jdbcType=VARCHAR}, #{privacy}, default)
+	insert into profile values(#{id}, #{nickName}, #{photo, jdbcType=VARCHAR}, #{tel, jdbcType=VARCHAR}, #{bio, jdbcType=VARCHAR}, #{privacy}, default)
 </insert>
 <select id="chk" resultType="int">
-	select count(nickname) from profileTest where nickname = #{nickName}
+	select count(nickName) 
+	from profile 
+	where nickName = #{nickName}
 </select>
 <select id="select" resultType="vo.ProfileVO" parameterType="String">
-	select * from profileTest where p_main = 1 and id = #{id}
+	select * 
+	from profile 
+	where p_main = 1 and id = #{id}
 </select>
 <update id="update" parameterType="vo.ProfileVO">
-	update profileTest set nickName = #{nickName}, photo = #{photo, jdbcType=VARCHAR}, tel = #{tel, jdbcType=VARCHAR}, bio = #{bio, jdbcType=VARCHAR}, privacy = #{privacy} where id = #{id} and p_main = 1
+	update profile 
+	set nickName = #{nickName}, photo = #{photo, jdbcType=VARCHAR}, tel = #{tel, jdbcType=VARCHAR}, bio = #{bio, jdbcType=VARCHAR}, privacy = #{privacy} 
+	where id = #{id} and p_main = 1
 </update>
 <select id="matchId" resultType="String"  parameterType="String">
-	select nickName from profileTest where id = #{id} and p_main =1
+	select nickName 
+	from profile 
+	where id = #{id} and p_main =1
 </select>
 <select id="selectProfile" resultType="vo.ProfileVO" parameterType="String">
-	select * from profileTest where id = #{id}
+	select * 
+	from profile 
+	where id = #{id}
 </select>
 <select id="profileList" resultType="vo.ProfileVO" parameterType="java.util.List">
-	select * from profileTest where nickName in
+	select * 
+	from profile 
+	where nickName in
 		<foreach collection="list" item="item" separator="," open="(" close=")">
 			#{item}
 		</foreach>
 </select>
 
 <select id ="allprofileList" resultType="vo.ProfileVO">
-	select id,nickname from profiletest where p_main = 1
+	select id, nickName 
+	from profile 
+	where p_main = 1
 </select>
 <!-- 프로필 사진이 있는 프로필 리스트만 개져오기 -->
 <select id ="profileimgList" resultType="vo.ProfileVO">
-	select * from profileTest where photo is not null and p_main = 1
+	select * 
+	from profile 
+	where photo is not null and p_main = 1
 </select>
 <select id="searchProfile" resultType="vo.ProfileVO" parameterType="java.util.List">
-	select id, nickName, photo from profileTest where p_main = 1 and id in
+	select id, nickName, photo 
+	from profile 
+	where p_main = 1 and id in
 	<foreach collection="list" item="item" separator="," open="(" close=")">
 		#{item}
 	</foreach>
 </select>
 <select id="searchUser" resultType="vo.ProfileVO" parameterType="hashmap">
-	select * from profileTest where (privacy = 1 and p_main = 1 and id != #{id}) and (id like '%'||#{key.keyWord}||'%' or nickName like '%'||#{key.keyWord}||'%')
+	select * 
+	from profile 
+	where (privacy = 1 and p_main = 1 and id != #{id}) and (id like '%'||#{key.keyWord}||'%' or nickName like '%'||#{key.keyWord}||'%')
 </select>
 <insert id="insertProfile" parameterType="vo.ProfileVO">
-	insert into profileTest values(#{id}, #{nickName}, #{photo, jdbcType=VARCHAR}, #{tel, jdbcType=VARCHAR}, #{bio, jdbcType=VARCHAR}, 0, 0)
+	insert into profile values(#{id}, #{nickName}, #{photo, jdbcType=VARCHAR}, #{tel, jdbcType=VARCHAR}, #{bio, jdbcType=VARCHAR}, 0, 0)
 </insert>
 <select id="selectSub" parameterType="String" resultType="vo.ProfileVO">
-	select * from profileTest where p_main = 0 and id = #{id}
+	select * 
+	from profile 
+	where p_main = 0 and id = #{id}
 </select>
 <update id="edit" parameterType="hashmap">
-	update profileTest set nickName = #{profile.nickName}, 
-	<if test='profile.photo != "MY IMG"'>
+	update profile 
+	set nickName = #{profile.nickName}, 
+		<if test='profile.photo != "MY IMG"'>
 			photo = #{profile.photo, jdbcType=VARCHAR},
-	</if>
- 	bio = #{profile.bio, jdbcType=VARCHAR} where nickName = #{nick}
+		</if>
+ 	bio = #{profile.bio, jdbcType=VARCHAR} 
+ 	where nickName = #{nick}
 </update>
 <delete id="profileDel" parameterType="String">
-	delete from profileTest where nickName = #{nickName}
+	delete from profile 
+	where nickName = #{nickName}
 </delete>
 <select id="r_Comm" parameterType="int" resultType="vo.CommVO">	
-	select * from commtest where c_no = #{no}
+	select * 
+	from comm 
+	where c_no = #{no}
 </select>
 </mapper>

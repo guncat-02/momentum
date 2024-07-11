@@ -4,12 +4,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.IF_SettingsDao">
 	<select id="selectCountPass" parameterType="vo.MemberVO" resultType="_int">
-		select count(pass) from memberTest where id = #{id} and pass = #{pass}
+		select count(pass) 
+		from member 
+		where id = #{id} and pass = #{pass}
 	</select>
 	<update id="updateMemberName" parameterType="vo.MemberVO">
-		update memberTest set name = #{name} where id = #{id}
+		update member 
+		set name = #{name} 
+		where id = #{id}
 	</update>
 	<delete id="deleteMember" parameterType="String">
-		delete from memberTest where id = #{id}
+		delete from member 
+		where id = #{id}
 	</delete>
 </mapper>

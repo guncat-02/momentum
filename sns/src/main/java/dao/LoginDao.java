@@ -31,7 +31,6 @@ public class LoginDao implements IF_LoginDao{
 	@Override
 	public void updatepw(MemberVO mvo) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println(mvo.getId()+ "/" + mvo.getPass());
 		sqlsession.update(mapperQuery+".updatepw", mvo);
 	}
 	@Override

@@ -5,13 +5,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="dao.IF_BlockDao">
 
 	<select id="selectBlocked" parameterType="String" resultType="vo.ProfileVO">
-		select * from profileTest where id in (
-		select blockId from blockTest where id = #{id}
+		select * 
+		from profile 
+		where id in (
+			select blockId 
+			from block 
+			where id = #{id}
 		)
 	</select>
 	
 	<insert id="insertBlock" parameterType="map">
-		insert into blockTest values(#{id}, #{bvo.blockId}, 
+		insert into block values(#{id}, #{bvo.blockId}, 
 		<choose>
 			<when test='bvo.reason == null'>
 				default
@@ -24,11 +28,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<delete id="deleteBlock" parameterType="map">
-		delete from blockTest where id = #{id} and blockId = #{blockId}
+		delete from block 
+		where id = #{id} and blockId = #{blockId}
 	</delete>
 	
 	<select id="selectBlockedCnt" parameterType="vo.BlockVO" resultType="_int">
-		select count(blockId) from blockTest where id = #{id} and blockId = #{blockId}
+		select count(blockId) 
+		from block 
+		where id = #{id} and blockId = #{blockId}
 	</select>
 	
 </mapper>

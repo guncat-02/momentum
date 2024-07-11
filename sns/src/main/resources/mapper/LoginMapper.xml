@@ -5,18 +5,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="dao.IF_LoginDao">
 	
 	<select id="loginchk" resultType="vo.MemberVO" parameterType="String">
-		select * from membertest where id=#{id}
+		select * 
+		from member 
+		where id=#{id}
 	</select>
 	
 	<select id="changechkid" resultType="String" parameterType="String">
-		select * from membertest where id=#{id}
+		select * 
+		from member 
+		where id=#{id}
 	</select>
 	
 	<update id="updatepw" parameterType="vo.MemberVO">
-		update membertest set pass=#{pass} where id = #{id}
+		update member 
+		set pass=#{pass} 
+		where id = #{id}
 	</update>
 	
 	<select id = "chkBan" parameterType="String" resultType = "String">
-		select MAX(f_date) from bantest where id = #{id} and f_date > sysdate
+		select MAX(f_date) 
+		from ban 
+		where id = #{id} and f_date > sysdate()
 	</select>
 </mapper>

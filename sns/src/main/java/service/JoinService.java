@@ -24,7 +24,6 @@ public class JoinService implements IF_JoinService{
 	@Override
 	public String chkemail(String id) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println(jdao.chkemail(id)+"ser");
 		return jdao.chkemail(id);
 	}
 	@Override

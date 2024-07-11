@@ -154,7 +154,6 @@ public class ManagerDao implements IF_ManagerDao{
 
 	@Override
 	public int getBannedSearchCount(PageVO pvo) throws Exception {
-		System.out.println(pvo);
 		return sql.selectOne(mapperQuery+".selectBannedCountWhere", pvo);
 	}
 

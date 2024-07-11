@@ -28,7 +28,7 @@ public class PostVO {
 	public int getShows() {
 		return shows;
 	}
-	public String[] getFileName() {
+	public String[] getFilename() {
 		return fileName;
 	}
 	public int getPrivacy() {
@@ -65,7 +65,7 @@ public class PostVO {
 	public void setShows(int shows) {
 		this.shows = shows;
 	}
-	public void setFileName(String[] filename) {
+	public void setFilename(String[] filename) {
 		this.fileName = filename;
 	}
 	public void setPrivacy(int privacy) {

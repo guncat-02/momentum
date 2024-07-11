@@ -6,45 +6,58 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 나를 팔로우하는 id 중 나도 팔로우하는 id의 profile select -->
 	<select id="selectInterFollowersProfile" parameterType="String" resultType="vo.ProfileVO">
-		select p.* from profileTest p,
-		(select id from followTest
-		where followId = #{followId}
-		and id in (
-		select followid from followTest
-		where id = #{followId})
+		select p.* 
+		from profile p, (
+			select id 
+			from follow
+			where followId = #{followId}
+			and id in (
+				select followId 
+				from follow
+				where id = #{followId}
+			)
 		) f
 		where p.id = f.id and p.p_main = 1
 	</select>
 	
 	<!-- 나를 팔로우하는 id 중 나는 팔로우하지 않는 id의 profile select -->
 	<select id="selectFollowersProfile" parameterType="String" resultType="vo.ProfileVO">
-		select p.* from profileTest p,
-		(select id from followTest
-		where followId = #{followId}
-		and id not in (
-		select followid from followTest
-		where id = #{followId})
+		select p.* 
+		from profile p, (
+			select id 
+			from follow
+			where followId = #{followId}
+			and id not in (
+				select followId 
+				from follow
+				where id = #{followId}
+			)
 		) f
 		where p.id = f.id and p.p_main = 1
 	</select>
 	
 	<!-- 내가 팔로우하는 id의 profile select -->
 	<select id="selectFollowingsProfile" parameterType="String" resultType="vo.ProfileVO">
-		select p.* from profileTest p, followTest f where f.id = #{id} and p.p_main = 1 and f.followid = p.id
+		select p.* 
+		from profile p, follow f 
+		where f.id = #{id} and p.p_main = 1 and f.followId = p.id
 	</select>
 	
 	<select id="selectFollowingsId" parameterType="String" resultType="String">
-		select followId from followTest where id = #{id}
+		select followId 
+		from follow 
+		where id = #{id}
 	</select>
 	
 	<!-- 팔로우 취소 -->
 	<delete id="deleteFollowId" parameterType="vo.FollowVO">
-		delete from followTest where id = #{id} and followid = #{followId}
+		delete from follow 
+		where id = #{id} and followId = #{followId}
 	</delete>
 	
 	<!-- 팔로우 -->
 	<insert id="insertFollowId" parameterType="vo.FollowVO">
-		insert into followTest values (#{id}, #{followId})
+		insert into follow values (#{id}, #{followId})
 	</insert>
 	
 	<select id="followingSelect" resultType="int">
@@ -52,28 +65,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="followerSelect" resultType="int">
-		select count(id) from followTest where followId = #{id}
+		select count(id) 
+		from follow 
+		where followId = #{id}
 	</select>
 	
 	<!-- 팔로우 리스트 chat -->
 	<select id="followingList" resultType="vo.ProfileVO">
 		select b.*
-		from followTest a
-		inner join profileTest b
-		on a.followid = b.id
+		from follow a
+		inner join profile b
+		on a.followId = b.id
 		where a.id = #{id}
 	</select>
 	
 	<select id="followerList" resultType="vo.ProfileVO">
 		select b.*
-		from followTest a
-		inner join profileTest b
+		from follow a
+		inner join profile b
 		on a.id = b.id
-		where a.followid = #{id}
+		where a.followId = #{id}
 	</select>
 	
 	<select id="chkFollowing" parameterType="vo.FollowVO" resultType="_int">
-		select count(id) from followTest
+		select count(id) 
+		from follow
 		where id = #{id} and followId = #{followId}
 	</select>
 </mapper>
