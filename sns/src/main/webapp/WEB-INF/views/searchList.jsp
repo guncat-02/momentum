@@ -403,8 +403,9 @@
     	}
     })
     
-    	$(document).ready(function(){
+    $(document).ready(function(){
 		setting();
+    })
 	
 	// 좋아요 누른거 확인
 	function setting() {
@@ -537,6 +538,7 @@
 			followCancel(btn);
 		}
 	});
+    
 	function follow(btn) {
 		// 버튼 값 변경
 		btn.val(1);
@@ -594,7 +596,7 @@
 				btn.val(1);
 				btn.text('FOLLOWING');
 			}
-		});
+		})
 	}
 </script>
 </html>
