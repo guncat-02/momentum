@@ -144,6 +144,11 @@ pageContext.setAttribute("curId", curId);
 				</a>
 								
 				<c:if test="${mp.re_no != 0 }">
+					<span class="reposted-mark-span">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-share" viewBox="0 0 16 16">
+                   			<path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.5 2.5 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5m-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3m11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3" />
+               			</svg> REPOSTED
+					</span>
 					<div class="repost-container theme">
 						<input type="hidden" value="${mp.re_no }">
 						<c:set var="repFlag" value="false" />
@@ -228,8 +233,8 @@ pageContext.setAttribute("curId", curId);
 	</div>
 </body>
 <script>
-
-	$('body').on('click', '.repost-attach-div, .repost-cont-div', function() {
+	
+	$('body').on('click', '.repost-attach-div, .repost-cont-div', function() {		
 		let no = $(this).closest('.repost-container').find('input[type="hidden"]').val();
 		location.href = `/sns/myPost?no=\${no}`;
 	});
@@ -243,6 +248,8 @@ pageContext.setAttribute("curId", curId);
 
 	$(document).ready(function(){
 		setting();
+		// 리포스트 된 이미지 css 조정
+		adjustRepostImgs();
 	})
 	// 좋아요 누른거 확인
 	function setting() {
@@ -342,6 +349,8 @@ pageContext.setAttribute("curId", curId);
        			console.log('followpage loading');
            		$('#main').load(`newFollowingPost?pageNo=\${curFollowPage} .myPost`, function() {
            			// 새로 고침 성공 시 실행.
+           			// 리포스트 된 이미지 css 조정
+           			adjustRepostImgs();
            			// 기존 게시물을 새로 로딩된 게시물 위에 추가.
            			$('.myPost').prepend(prevCont);
            			// 다음 페이지 시작 번호 갱신.
@@ -355,6 +364,8 @@ pageContext.setAttribute("curId", curId);
            			// 새로 고침 성공 시 실행.
            			console.log($('.p_inf').length);
            			if ($('.p_inf').length != 0) { // 새로운 게시물이 로딩될 때
+           				// 리포스트 된 이미지 css 조정
+           				adjustRepostImgs();
                			// 다음 페이지 시작 번호 갱신.
                			curRecomPage += 10;
                			// 제거했던 이벤트 다시 생성.
@@ -461,6 +472,41 @@ pageContext.setAttribute("curId", curId);
 				}
 			}
 		});
+	}
+	
+	//게시물 사진 css 적용
+	function adjustRepostImgs() {
+		let allImg = $('.repost-attach-img-div img');
+	    if (allImg.length != 0) {
+	        for (let one of allImg) {
+	            let imgObj = new Image();
+	            imgObj.src = one.getAttribute('src');
+	            imgObj.onload = function() {
+	                let width = this.width;
+	                let height = this.height;
+	                let ratio; // 기존 대비 사진 크기 증감 비율.
+	                if (width <= height) {
+	                    ratio = 250/width;
+	                    let changedTop = ((250-height*ratio)/2) + 'px';
+	                    one.style.width = '100%';
+	                    one.style.height = 'auto';
+	                    /*
+	                    one.style.top = changedTop;
+	                    one.style.left = '0';
+	                    */
+	                } else {
+	                    ratio = 250/height;
+	                    let changedLeft = ((250-width*ratio)/2) + 'px';
+	                    one.style.width = 'auto';
+	                    one.style.height = '100%';
+	                    /*
+	                    one.style.top = '0';
+	                    one.style.left = changedLeft;
+	                    */
+	                }
+	            }
+	        }
+	    }
 	}
 
 </script>
