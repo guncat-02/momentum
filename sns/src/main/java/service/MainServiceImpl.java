@@ -49,7 +49,6 @@ public class MainServiceImpl implements IF_MainService{
 	@Override
 	public int postLength(String id) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println(maindao.postLength(id));
 		return maindao.postLength(id);
 	}
 	

@@ -54,12 +54,9 @@ public class MainController {
 		followIdList.add(sessionId);
 		
 		List<PostVO> postList;
-		
-		System.out.println(followIdList);
-		System.out.println(followIdList.size());
+
 		
 		if (followIdList.size() != 1) { // 팔로우한 계정이 있을 경우
-			System.out.println("there are some followings");
 			// 로그인 유저가 팔로우하는 아이디의 게시물의 rownum max값.
 			int maxNum = mser.getCurMaxNum(followIdList);
 			model.addAttribute("maxNum", maxNum);
@@ -72,7 +69,6 @@ public class MainController {
 			
 			postList = mser.getFollowingPostList(fPostMap);
 		} else { // 팔로우한 계정이 없을 경우
-			System.out.println("theres no followings");
 			model.addAttribute("maxNum", -1);
 			
 			HashMap<String, Object> recomMap = new HashMap<>();
@@ -91,17 +87,14 @@ public class MainController {
 			pvo.setFilename(mser.getAttach(pvo.getNo()));
 			// 현재 출력 된 게시물 번호 미리 저장. 추후 추천 게시물에서는 출력되지 않도록 하기 위함.
 			selectedPostNoList.add((Integer)pvo.getNo());
-			System.out.println(pvo.toString());
 			if (pvo.getRe_no() != 0) {
 				rePostList.add(mser.takePostVO(pvo.getRe_no()));
 			}
 		}
-		System.out.println("repost");
 		List<ProfileVO> reProfList = new ArrayList<>();
 		for (PostVO repvo : rePostList) {
 			repvo.setFilename(mser.getAttach(repvo.getNo()));
 			reProfList.add(pser.select(repvo.getId()));
-			System.out.println(repvo.toString());
 		}
 		
 		for(PostVO pvo : postList) {
@@ -221,23 +214,19 @@ public class MainController {
 		
 		List<PostVO> postList = mser.getFollowingPostList(fPostMap);
 		List<PostVO> rePostList = new ArrayList<>();
-		System.out.println("followingPost");
 		for (PostVO pvo : postList) {
 			// 파일 선택
 			pvo.setFilename(mser.getAttach(pvo.getNo()));
 			// 현재 출력 된 게시물 번호 미리 저장. 추후 추천 게시물에서는 출력되지 않도록 하기 위함.
 			selectedPostNoList.add((Integer)pvo.getNo());
-			System.out.println(pvo.toString());
 			if (pvo.getRe_no() != 0) {
 				rePostList.add(mser.takePostVO(pvo.getRe_no()));
 			}
 		}
-		System.out.println("repost");
 		List<ProfileVO> reProfList = new ArrayList<>();
 		for (PostVO repvo : rePostList) {
 			repvo.setFilename(mser.getAttach(repvo.getNo()));
 			reProfList.add(pser.select(repvo.getId()));
-			System.out.println(repvo.toString());
 		}
 		for(PostVO pvo : postList) {
 			int ccnt = mser.takeCommCnt(pvo.getNo());
@@ -258,8 +247,6 @@ public class MainController {
 		model.addAttribute("repList", rePostList);
 		model.addAttribute("reproList", reProfList);
 		
-		
-		System.out.println("new following page is ready");
 		return "main";
 	}
 	
@@ -280,17 +267,14 @@ public class MainController {
 		List<PostVO> rePostList = new ArrayList<>();
 		for(PostVO pvo : postList) {
 			pvo.setFilename(mser.getAttach(pvo.getNo()));
-			System.out.println(pvo.toString());
 			if (pvo.getRe_no() != 0) {
 				rePostList.add(mser.takePostVO(pvo.getRe_no()));
 			}
 		}
-		System.out.println("repost");
 		List<ProfileVO> reProfList = new ArrayList<>();
 		for (PostVO repvo : rePostList) {
 			repvo.setFilename(mser.getAttach(repvo.getNo()));
 			reProfList.add(pser.select(repvo.getId()));
-			System.out.println(repvo.toString());
 		}
 		for(PostVO pvo : postList) {
 			int ccnt = mser.takeCommCnt(pvo.getNo());
@@ -310,7 +294,7 @@ public class MainController {
 		model.addAttribute("repList", rePostList);
 		model.addAttribute("reproList", reProfList);
 		
-		System.out.println("new recom page is ready");
+
 		return "main";
 	}
 	

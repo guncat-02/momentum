@@ -108,7 +108,6 @@ public class LoginController {
 				return "redirect:main";
 			}
 		}else {
-			System.out.println("비밀번호 일치 x");
 			rt.addFlashAttribute("msg", "비밀번호가 일치하지 않습니다.");
 			return "redirect:loginpage";
 		}

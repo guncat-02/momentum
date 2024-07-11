@@ -40,8 +40,6 @@ public class ManagerController {
 		
 		model.addAttribute("curId", (String)session.getAttribute("userid"));
 		
-		System.out.println(mvo.toString());
-		
 		String[] uri = req.getRequestURI().split("/");
 		String curType = uri[uri.length-1].split("\\?")[0];
 		
@@ -56,10 +54,7 @@ public class ManagerController {
 		} else {
 			pvo.setSearchLoc(curType);
 		}
-		System.out.println(mvo.toString());
-		System.out.println(pvo.toString());
 		int cnt = mservice.getTotalCount(pvo);
-		System.out.println(cnt);
 		pvo.setTotalCount(cnt);
 		
 		
@@ -94,9 +89,6 @@ public class ManagerController {
 			pvo.setPage(1);
 		}
 		int cnt = 0;
-		System.out.println(pvo.toString());
-
-		System.out.println(area);
 		if (area.equals("User")) {
 			if (loc.equals("member")) {
 				cnt = mservice.getMembersSearchCount(pvo);
@@ -141,17 +133,12 @@ public class ManagerController {
 		
 		String[] uri = req.getRequestURI().split("/");
 		String curType = uri[uri.length-1].split("\\?")[0];
-		System.out.println(curType);
 		
 		if (curType.equals("report") || curType.equals("report_post")) {
-			System.out.println("1");
 			model.addAttribute("report_post", mservice.getAllreport_post());
-			System.out.println(mservice.getAllreport_post());
 		} else if (curType.equals("report_comm")) {
-			System.out.println("2");
 			model.addAttribute("report_comm", mservice.getAllreport_comm());
 		} else if (curType.equals("report_chat")) {
-			System.out.println("3");
 			model.addAttribute("report_chat", mservice.getAllreport_chat());
 		}
 		return "manageReport";
