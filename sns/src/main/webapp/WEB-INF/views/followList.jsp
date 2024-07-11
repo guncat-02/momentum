@@ -95,15 +95,6 @@ pageContext.setAttribute("curId", curId);
 					</c:forEach>
 				</c:if>
 			</tbody>
-			<tfoot>
-				<tr>
-					<td colspan="4">
-						<button type="button">
-							<a href="/sns/follow-new"><b>Find new Follow</b></a>
-						</button>
-					</td>
-				</tr>
-			</tfoot>
 		</table>
 	</div>
 </body>

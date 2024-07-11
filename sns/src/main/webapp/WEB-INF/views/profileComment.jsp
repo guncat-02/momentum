@@ -94,9 +94,13 @@
 		<c:forEach items="${mycpList }" var = "mcp">
 			<a href="myPost?no=${mcp.no }">
 			<div class = "pc_cont"><div class="mcpid">${mcp.id}</div> <div class = "mcpcont"><b>${mcp.cont }</b></div>
-				<div class="prephoto">
-					 <img src="download?filename=${mcp.fileName[0]}"> 
-				</div> 
+			<c:choose>
+					<c:when test="${mcp.fileName[0] ne null}">
+						<div class="prephoto">
+					 		<img src="download?filename=${mcp.fileName[0]}"> 
+						</div>
+					</c:when>
+				</c:choose> 
 			</div>
 			</a>
 			<c:forEach items="${myCommList }" var = "mc">
