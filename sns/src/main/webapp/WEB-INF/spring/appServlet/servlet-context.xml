@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+<beans:beans
+	xmlns="http://www.springframework.org/schema/mvc"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
@@ -47,11 +48,21 @@
 	<context:component-scan base-package="socket" />
 	<beans:bean id="interceptor" class="interceptor.Interceptor"></beans:bean>
 
-	<!-- <interceptors> <interceptor> <mapping path="/**"></mapping> <exclude-mapping 
-		path="/**/*.css"/> <exclude-mapping path="/**/*.js"/> <exclude-mapping path="/img/**/*.*"/> 
-		<exclude-mapping path="/lo*"/> <exclude-mapping path="/join*"/> <exclude-mapping 
-		path="/chkid"/> <exclude-mapping path="/sendMail.do"/> <exclude-mapping path="/profile*"/> 
-		<beans:ref bean="interceptor" /> </interceptor> </interceptors> -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/**"></mapping>
+			<exclude-mapping path="/**/*.css" />
+			<exclude-mapping path="/**/*.js" />
+			<exclude-mapping path="/img/**/*.*" />
+			<exclude-mapping path="/lo*" />
+			<exclude-mapping path="/join*" />
+			<exclude-mapping path="/chkid" />
+			<exclude-mapping path="/sendJoinMail.do" />
+			<exclude-mapping path="/profile*" />
+			<beans:ref bean="interceptor" />
+		</interceptor>
+	</interceptors>
+
 	<beans:bean id="chatHandler" class="socket.SocketHandler" />
 	<websocket:handlers>
 		<websocket:mapping handler="chatHandler"
