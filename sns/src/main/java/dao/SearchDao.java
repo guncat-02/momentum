@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import vo.PostVO;
+import vo.SearchVO;
 
 @Repository
 public class SearchDao implements IF_SearchDao {
@@ -25,7 +26,7 @@ public class SearchDao implements IF_SearchDao {
 
 	//keyWord를 가져오기
 	@Override
-	public List<String> selectKeyWord() throws Exception {
+	public List<SearchVO> selectKeyWord() throws Exception {
 		return sql.selectList(mapperQuery+".selectKeyWord");
 	}
 
