@@ -127,6 +127,8 @@
 				localStorage.setItem('${id}', $('#search').val())
 			}
 			return true;
+		} else {
+			alert('입력된 검색어가 존재하지 않습니다.')
 		}
 		return false;
 	}

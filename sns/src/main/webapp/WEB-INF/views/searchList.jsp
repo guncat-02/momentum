@@ -515,11 +515,15 @@
     //검색어마다 결과 가져오기
     $('.keyType').click(function() {
     	let word = $('#search').val();
-    	let type = $(this).text();
-    	const index = $('.keyType').index($(this))
-    	$('#searResult').load(`searchList?keyWord=\${word}&keyType=\${type} #searchResultAll`)
-    	$('.keyType').removeAttr("id");
-    	$('.keyType').eq(index).attr("id", "nowKeyType")
+    	if(word != null && word.trim() != "") {
+    		let type = $(this).text();
+        	const index = $('.keyType').index($(this))
+        	$('#searResult').load(`searchList?keyWord=\${word}&keyType=\${type} #searchResultAll`)
+        	$('.keyType').removeAttr("id");
+        	$('.keyType').eq(index).attr("id", "nowKeyType")	
+    	} else {
+    		alert('입력된 검색어가 존재하지 않습니다.')
+    	}
     })
     
     //프로필 이동
