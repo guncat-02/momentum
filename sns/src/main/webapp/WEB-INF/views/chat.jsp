@@ -176,6 +176,7 @@
 				if(day != lastDay) {
 					$('#nowChatting').append("<thead><tr><td colspan='2' class='allDate'><div><hr>" + day + "<hr></div></td></tr></thead>")
 				}
+				lastDay = day;
 				if(data.nickName == $('#user').val()) {
 					if (data.cont != null && data.cont.trim() != "") {
 						$('#nowChatting').append("<tr><td class='chatCont'><div class='chatting myChatting'><div class='chatUserDate myChatDate'><span>" + time + "</span></div><div class='userChat myChat'>" + data.cont + "</div></div></td></tr>");
@@ -201,7 +202,7 @@
 						}
 					}
 				}
-				$('#nowChat').scrollTop($('#nowChat')[0].scrollHeight);	
+				$('#nowChat').scrollTop($('#nowChat')[0].scrollHeight);
 			}
 		}
 	}
