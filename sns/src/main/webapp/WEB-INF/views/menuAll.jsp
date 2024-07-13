@@ -129,7 +129,7 @@
 			type: 'get',
 			success: function(result) {
 				let photo = result.photo;
-				if (photo == null) {
+				if (photo == null || $.trim(photo) == '') {
 					photo = '/sns/resources/img/프로필.png';
 				} else {
 					photo = `/sns/download?filename=\${photo}`;

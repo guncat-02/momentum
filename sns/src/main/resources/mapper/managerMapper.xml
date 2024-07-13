@@ -4,28 +4,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.IF_ManagerDao">
 
-	<select id="selectAllMembers" resultType="vo.MemberVO">
-		select * from member
+	<select id="selectAllMembers" parameterType="_int" resultType="vo.MemberVO">
+		select * from member order by id limit #{pageNo}, 20
 	</select>
 	
-	<select id="selectAllProfiles" resultType="vo.ProfileVO">
-		select * from profile
+	<select id="selectAllProfiles" parameterType="_int" resultType="vo.ProfileVO">
+		select * from profile order by id limit #{pageNo}, 20
 	</select>
 	
-	<select id="selectAllPosts" resultType="vo.PostVO">
-		select * from post
+	<select id="selectAllPosts" parameterType="_int" resultType="vo.PostVO">
+		select * from post order by no desc limit #{pageNo}, 20
 	</select>
 	
-	<select id="selectAllComms" resultType="vo.CommVO">
-		select * from comm
+	<select id="selectAllComms" parameterType="_int" resultType="vo.CommVO">
+		select * from comm order by c_no desc limit #{pageNo}, 20
 	</select>
 	
-	<select id="selectAllAdmins" resultType="vo.MemberVO">
-		select * from member where admin is not null
+	<select id="selectAllAdmins" parameterType="_int" resultType="vo.MemberVO">
+		select * from member where admin is not null order by id limit #{pageNo}, 20
 	</select>
 	
-	<select id="selectAllBanned" resultType="vo.BanVO">
-		select * from ban
+	<select id="selectAllBanned" parameterType="_int" resultType="vo.BanVO">
+		select * from ban order by s_date desc limit #{pageNo}, 20
 	</select>
 	
 	<select id="selectMembersWhere" parameterType="vo.PageVO" resultType="vo.MemberVO">

@@ -87,13 +87,18 @@ public class MainController {
 			System.out.println(pvo.toString());
 			// 현재 출력 된 게시물 번호 미리 저장. 추후 추천 게시물에서는 출력되지 않도록 하기 위함.
 			selectedPostNoList.add((Integer)pvo.getNo());
+			
+			// 불러온 게시물에 리포스트 번호가 있을 경우 리포스트 게시물도 불러 온다.
 			if (pvo.getRe_no() != 0) {
 				rePostList.add(mser.takePostVO(pvo.getRe_no()));
 			}
 		}
+		// 리포스트 된 게시물의 첨부 파일명 및 게시자 프로필 정보를 불러온다.
 		List<ProfileVO> reProfList = new ArrayList<>();
 		for (PostVO repvo : rePostList) {
+			// 첨부 파일 들고온다.
 			repvo.setFileName(mser.getAttach(repvo.getNo()));
+			// 게시자 프로필 들고온다.
 			reProfList.add(pser.select(repvo.getId()));
 		}
 		
@@ -115,6 +120,7 @@ public class MainController {
 		model.addAttribute("fList", followIdList);
 		model.addAttribute("aList", postList);
 		
+		// 리포스트 게시물 리스트와 그 게시자 프로필 리스트
 		model.addAttribute("repList", rePostList);
 		model.addAttribute("reproList", reProfList);
 		
@@ -219,13 +225,18 @@ public class MainController {
 			pvo.setFileName(mser.getAttach(pvo.getNo()));
 			// 현재 출력 된 게시물 번호 미리 저장. 추후 추천 게시물에서는 출력되지 않도록 하기 위함.
 			selectedPostNoList.add((Integer)pvo.getNo());
+			
+			// 불러온 게시물에 리포스트 번호가 있을 경우 리포스트 게시물도 불러 온다.
 			if (pvo.getRe_no() != 0) {
 				rePostList.add(mser.takePostVO(pvo.getRe_no()));
 			}
 		}
+		// 리포스트 된 게시물의 첨부 파일명 및 게시자 프로필 정보를 불러온다.
 		List<ProfileVO> reProfList = new ArrayList<>();
 		for (PostVO repvo : rePostList) {
+			// 첨부 파일
 			repvo.setFileName(mser.getAttach(repvo.getNo()));
+			// 게시자 프로필
 			reProfList.add(pser.select(repvo.getId()));
 		}
 		for(PostVO pvo : postList) {
@@ -244,6 +255,8 @@ public class MainController {
 		model.addAttribute("aList", postList);
 		model.addAttribute("profilelist",pser.allprofileList());
 		model.addAttribute("profileimglist",pser.profileimgList());
+		
+		// 리포스트 게시물 리스트와 그 게시자 프로필 리스트
 		model.addAttribute("repList", rePostList);
 		model.addAttribute("reproList", reProfList);
 		
@@ -267,13 +280,18 @@ public class MainController {
 		List<PostVO> rePostList = new ArrayList<>();
 		for(PostVO pvo : postList) {
 			pvo.setFileName(mser.getAttach(pvo.getNo()));
+			
+			// 불러온 게시물에 리포스트 번호가 있을 경우 리포스트 게시물도 불러 온다.
 			if (pvo.getRe_no() != 0) {
 				rePostList.add(mser.takePostVO(pvo.getRe_no()));
 			}
 		}
+		// 리포스트 된 게시물의 첨부 파일명 및 게시자 프로필 정보를 불러온다.
 		List<ProfileVO> reProfList = new ArrayList<>();
 		for (PostVO repvo : rePostList) {
+			// 첨부 파일
 			repvo.setFileName(mser.getAttach(repvo.getNo()));
+			// 게시자 프로필
 			reProfList.add(pser.select(repvo.getId()));
 		}
 		for(PostVO pvo : postList) {
@@ -291,6 +309,8 @@ public class MainController {
 		model.addAttribute("aList", postList);
 		model.addAttribute("profilelist",pser.allprofileList());
 		model.addAttribute("profileimglist",pser.profileimgList());
+		
+		// 리포스트 게시물 리스트와 그 게시자 프로필 리스트
 		model.addAttribute("repList", rePostList);
 		model.addAttribute("reproList", reProfList);
 		

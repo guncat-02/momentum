@@ -59,17 +59,17 @@ public class ManagerController {
 		
 		
 		if (curType.equals("user") || curType.equals("member")) {
-			model.addAttribute("users", mservice.getAllMembers());
+			model.addAttribute("users", mservice.getAllMembers(0));
 		} else if (curType.equals("profile")) {
-			model.addAttribute("profiles", mservice.getAllProfiles());
+			model.addAttribute("profiles", mservice.getAllProfiles(0));
 		} else if (curType.equals("post")) {
-			model.addAttribute("posts", mservice.getAllPosts());
+			model.addAttribute("posts", mservice.getAllPosts(0));
 		} else if (curType.equals("admin")) {
-			model.addAttribute("users", mservice.getAllAdmins());
+			model.addAttribute("users", mservice.getAllAdmins(0));
 		} else if (curType.equals("banned")) {
-			model.addAttribute("banned", mservice.getAllBanned());
+			model.addAttribute("banned", mservice.getAllBanned(0));
 		} else if (curType.equals("comm")) {
-			model.addAttribute("comms", mservice.getAllComms());
+			model.addAttribute("comms", mservice.getAllComms(0));
 		} else {
 			return "redirect:/manager";
 		}
@@ -150,5 +150,35 @@ public class ManagerController {
 	@ResponseBody
 	public int removePastSearchWord() throws Exception {
 		return mservice.removePastSearchWord();
+	}
+	
+	@GetMapping("/manager/paging/user/*")
+	public String newPage(HttpSession session, Model model, HttpServletRequest req,
+			@RequestParam("pageNo")int pageNo, @ModelAttribute PageVO pvo) throws Exception {
+		model.addAttribute("curId", (String)session.getAttribute("userid"));
+		
+		String[] uri = req.getRequestURI().split("/");
+		String curType = uri[uri.length-1].split("\\?")[0];
+		
+		pvo.setSearchLoc(curType);
+		model.addAttribute("pagevo", pvo);
+		
+		if (curType.equals("user") || curType.equals("member")) {
+			model.addAttribute("users", mservice.getAllMembers(pageNo));
+		} else if (curType.equals("profile")) {
+			model.addAttribute("profiles", mservice.getAllProfiles(pageNo));
+		} else if (curType.equals("post")) {
+			model.addAttribute("posts", mservice.getAllPosts(pageNo));
+		} else if (curType.equals("admin")) {
+			model.addAttribute("users", mservice.getAllAdmins(pageNo));
+		} else if (curType.equals("banned")) {
+			model.addAttribute("banned", mservice.getAllBanned(pageNo));
+		} else if (curType.equals("comm")) {
+			model.addAttribute("comms", mservice.getAllComms(pageNo));
+		} else {
+			return "redirect:/manager";
+		}
+		
+		return "manageUser";
 	}
 }

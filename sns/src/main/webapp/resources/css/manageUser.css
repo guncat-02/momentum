@@ -357,7 +357,7 @@ input[type="date"] {
     padding: 10px;
 }
 
-// 모달
+/* 모달 */
 .one-post-container {
     display: grid;
     grid-template-columns: 100px 500px 50px;

@@ -142,7 +142,8 @@ pageContext.setAttribute("curId", curId);
 						</c:when>
 					</c:choose>
 				</a>
-								
+				
+				<!-- 여기부터 리포스트 -->
 				<c:if test="${mp.re_no != 0 }">
 					<span class="reposted-mark-span">
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-share" viewBox="0 0 16 16">
@@ -197,6 +198,7 @@ pageContext.setAttribute("curId", curId);
 						</c:forEach>
 					</div>
 				</c:if>
+				<!-- 여기까지 리포스트 -->
 
 				<input type="hidden" value="0" class="p_lovehid${mp.no}">
 				<input type="hidden" value="${mp.no}" id="p_lovehid${mp.no}">
