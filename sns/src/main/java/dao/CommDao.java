@@ -72,15 +72,12 @@ public class CommDao implements IF_CommDao {
 	@Override
 	public void cancelcommlike(CommVO cvo) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println(cvo.getC_no());
-		System.out.println(cvo.getId());
 		sqlSession.delete(mapperQuery + ".cancelcommlike", cvo);
 	}
 
 	@Override
 	public void setlike(HashMap<String, Integer> params) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println(params);
 		sqlSession.update(mapperQuery + ".updatelike", params);
 	}
 

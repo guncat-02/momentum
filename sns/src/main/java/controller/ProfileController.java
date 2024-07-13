@@ -22,6 +22,7 @@ import service.IF_FollowListService;
 import service.IF_MainService;
 import service.IF_ProfileService;
 import util.FileDataUtil;
+import vo.FollowVO;
 import vo.PostVO;
 import vo.ProfileVO;
 
@@ -73,6 +74,7 @@ public class ProfileController {
 	@GetMapping("/profileShow")
 	public String profileShow(Model model, HttpSession session, @RequestParam(value="id", required = false) String id) throws Exception {
 		if(id==null || id.equals(String.valueOf(session.getAttribute("userid")))) {
+			System.out.println("same");
 			ProfileVO p = pServe.select(String.valueOf(session.getAttribute("userid")));
 			model.addAttribute("profile", p);
 			model.addAttribute("following", fServe.followingSelect(String.valueOf(session.getAttribute("userid"))));
@@ -91,6 +93,7 @@ public class ProfileController {
 			model.addAttribute("postlength", mserve.postLength(String.valueOf(session.getAttribute("userid"))));
 			return "profileShow";
 		}else {
+			System.out.println("diff");
 			ProfileVO p = pServe.select(id);
 			model.addAttribute("profile", p);
 			model.addAttribute("following", fServe.followingSelect(id));
@@ -104,17 +107,23 @@ public class ProfileController {
 				pvo.setP_love(p_love);
 				pvo.setReCnt(reCnt);
 			}
+			FollowVO fvo = new FollowVO();
+			fvo.setId((String)session.getAttribute("userid"));
+			fvo.setFollowId(id);
+			int followFlag = fServe.chkFollowing(fvo);
+			model.addAttribute("followFlag", followFlag);
 			model.addAttribute("mypostList",mypostList);
 			// 글 쓴 개수
 			model.addAttribute("postlength", mserve.postLength(id));
 			return "userProfile";
 		}
+		
 	}
 
 	// 프로필 댓글 정보
 	@GetMapping("/profileComment")
 	public String profileComment(Model model, HttpSession session, @RequestParam(value="id", required = false) String id) throws Exception {
-		if(id==null || id==String.valueOf(session.getAttribute("userid"))) {
+		if(id==null || id.equals(String.valueOf(session.getAttribute("userid")))) {
 			ProfileVO p = pServe.select(String.valueOf(session.getAttribute("userid")));
 			
 			model.addAttribute("profile", p);
@@ -144,7 +153,11 @@ public class ProfileController {
 			model.addAttribute("mycpList", cserve.mycpList(id));
 			// 내가 쓴 댓글 개수
 			model.addAttribute("mycommcnt", cserve.mycommcnt(id));
-			
+			FollowVO fvo = new FollowVO();
+			fvo.setId((String)session.getAttribute("userid"));
+			fvo.setFollowId(id);
+			int followFlag = fServe.chkFollowing(fvo);
+			model.addAttribute("followFlag", followFlag);
 		}
 		
 		return "profileComment";
@@ -153,7 +166,7 @@ public class ProfileController {
 	// 프로필 날짜별 media 정보
 	@GetMapping("/profileMedia")
 	public String profileMedia(Model model, HttpSession session, @RequestParam(value="id", required = false) String id) throws Exception {
-		if(id==null || id==String.valueOf(session.getAttribute("userid"))) {
+		if(id==null || id.equals(String.valueOf(session.getAttribute("userid")))) {
 			ProfileVO p = pServe.select(String.valueOf(session.getAttribute("userid")));
 
 			model.addAttribute("profile", p);
@@ -170,6 +183,11 @@ public class ProfileController {
 			model.addAttribute("myfiles", mserve.myfiles(id));
 			// 글 쓴 개수
 			model.addAttribute("postlength", mserve.postLength(id));
+			FollowVO fvo = new FollowVO();
+			fvo.setId((String)session.getAttribute("userid"));
+			fvo.setFollowId(id);
+			int followFlag = fServe.chkFollowing(fvo);
+			model.addAttribute("followFlag", followFlag);
 		}
 		
 		return "profileMedia";
@@ -177,7 +195,7 @@ public class ProfileController {
 	// 좋아요 누른 게시물 모음집
 	@GetMapping("/profileLove")
 	public String profileLove(Model model, HttpSession session, @RequestParam(value="id", required = false) String id) throws Exception {
-		if(id==null || id==String.valueOf(session.getAttribute("userid"))) {
+		if(id==null || id.equals(String.valueOf(session.getAttribute("userid")))) {
 			ProfileVO p = pServe.select(String.valueOf(session.getAttribute("userid")));
 			model.addAttribute("profile", p);
 			model.addAttribute("following", fServe.followingSelect(String.valueOf(session.getAttribute("userid"))));
@@ -220,6 +238,11 @@ public class ProfileController {
 			model.addAttribute("profileimglist",pServe.profileimgList());
 						// 닉네임할라고 가져오는 리스트
 			model.addAttribute("profilelist",pServe.allprofileList());
+			FollowVO fvo = new FollowVO();
+			fvo.setId((String)session.getAttribute("userid"));
+			fvo.setFollowId(id);
+			int followFlag = fServe.chkFollowing(fvo);
+			model.addAttribute("followFlag", followFlag);
 		}
 		
 		return "profileLove";
@@ -229,7 +252,6 @@ public class ProfileController {
 	@PostMapping("/profileUpdate")
 	public String update(@ModelAttribute ProfileVO pVO, MultipartFile[] proPhoto, HttpSession session) throws Exception {
 		pVO.setId(String.valueOf(session.getAttribute("userid")));
-		pVO.setNickName(String.valueOf(session.getAttribute("nickName")));
 		String file = upload.fileUpload(proPhoto)[0];
 		if (file != null) {
 			pVO.setPhoto(file);
@@ -252,7 +274,7 @@ public class ProfileController {
 	
 	//다른 유저 프로필
 	@GetMapping("userprofile")
-	public String userProfile(@RequestParam("id") String id, Model model) throws Exception {
+	public String userProfile(@RequestParam("id") String id, Model model, HttpSession session) throws Exception {
 		model.addAttribute("profile", pServe.select(id));
 		model.addAttribute("following", fServe.followingSelect(id));
 		model.addAttribute("follower", fServe.followerSelect(id));
@@ -263,7 +285,11 @@ public class ProfileController {
 			pvo.setCommCnt(ccnt);
 		}
 		model.addAttribute("mypostList",mypostList);
-		
+		FollowVO fvo = new FollowVO();
+		fvo.setId((String)session.getAttribute("userid"));
+		fvo.setFollowId(id);
+		int followFlag = fServe.chkFollowing(fvo);
+		model.addAttribute("followFlag", followFlag);
 		return "userProfile";
 	}
 	
@@ -294,5 +320,12 @@ public class ProfileController {
 		map.put("nick", nick);
 		pServe.edit(map);
 		return "redirect:/profileList";
+	}
+	
+	//서브프로필 삭제
+	@GetMapping("profileDel")
+	public void profileDel(HttpServletRequest request) throws Exception {
+		String[] nick = request.getParameterValues("nickName");
+		pServe.profileDel(nick);
 	}
 }

@@ -175,9 +175,9 @@
 								<input type="hidden" value="${proVO.id }" name="id">
 								
 							</div>
-							<c:if test="${not empty postvo.filename }">
+							<c:if test="${not empty postvo.fileName }">
 								<div class="attach-div">
-									<c:forEach items="${postvo.filename }" var="file">
+									<c:forEach items="${postvo.fileName }" var="file">
 										<div>
 											<img src="/sns/download?filename=${file}">
 										</div>
@@ -220,7 +220,6 @@
     $(document).ready(function () {
         connTime(); // 접속 시간 갱신
         let message = "${ msg }"; // msg
-		console.log(message);
     	if(message != "") {
     		alert(message +"님의 정지가 완료되었습니다.")
     	}

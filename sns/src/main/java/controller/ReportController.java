@@ -49,7 +49,7 @@ public class ReportController {
             PostVO pvo = mser.takePostVO(no);
             // 게시물 작성자 정보 조회
             ProfileVO proVO = pser.select(pvo.getId());
-            pvo.setFilename(mser.getAttach(no));
+            pvo.setFileName(mser.getAttach(no));
             // 모달에 전달할 데이터 설정
             model.addAttribute("postvo", pvo);
             model.addAttribute("proVO", proVO);
@@ -59,8 +59,6 @@ public class ReportController {
 	
 	@PostMapping("/banmember")
 	public String banmember(@ModelAttribute BanVO bvo,Model model,RedirectAttributes rt) throws Exception {
-		System.out.println(bvo.getF_date());
-		System.out.println(bvo.getId());
 		rser.banmember(bvo);
 		rt.addFlashAttribute("msg", bvo.getId());
 		return "redirect:/manager/report/";
@@ -69,8 +67,6 @@ public class ReportController {
 	@GetMapping("/innocence")
 	@ResponseBody
 	public void innocence(@RequestParam("id") String id,@RequestParam("r_cont") String r_cont) throws Exception {
-		System.out.println(id);
-		System.out.println(r_cont);
 		HashMap<String, Object> params = new HashMap<>();
 		params.put("id", id);
 		params.put("r_cont", r_cont);

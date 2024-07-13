@@ -169,8 +169,6 @@
 	function chkpw() {
 		let pw = $('#pw').val();
 		let pwchk = $('#pwchk').val();
-		console.log(pw);
-		console.log(pwchk);
 		
 		if(pw!=pwchk) {
 			alert("비밀번호가 일치하지 않습니다.")
@@ -194,14 +192,11 @@
 	    	day = $("#birth-day").val();
 	    }
 	    if($("#chkdup").val()=="false") {
-	    	console.log($("#chkdup").val());
 	    	alert("아이디 중복체크를 해주세요");
 	    	return false;
 	    };
 	    let bdate = $("#birth-year").val() + month + day; 
-	    console.log(bdate);
 	    $("#bdate").val(bdate);
-	    console.log($("#emailDoubleChk").val());
 	    if($("#emailDoubleChk").val()==false) {
 	    	alert("이메일 인증이 필요합니다.")
 	    	return false;
@@ -242,7 +237,7 @@
 					alert("중복된 이메일입니다.");
 				}
 				
-				}
+			}
 		 })
 	 });
 	 
@@ -263,7 +258,6 @@
 	 // 아이디 중복체크하고 아이디 변경하면 중복체크 다시 하게 만드는 메소드
 	 $("#idinput").change(function() {
 		 $("#chkdup").val("false");
-		 console.log($("#chkdup").val());
 	 });
 	 
 	 // ajax 사용 아이디 중콕 체크
@@ -280,12 +274,11 @@
 			success:function(data) {
 				if(data=="true") {
 					$("#chkdup").val("true");
-					console.log($("#chkdup").val());
 					alert("중복되지않은 아이디입니다.")
 				}else {
 					alert("중복된 아이디입니다.")
 				}
-				}
+			}
 		 })
 	 });
 	 

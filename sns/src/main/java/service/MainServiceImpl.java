@@ -26,7 +26,7 @@ public class MainServiceImpl implements IF_MainService{
 			List<String> fileList = maindao.postAttach(pvo.getNo());
 			if(fileList != null) {
 				String list[] = fileList.toArray(new String[fileList.size()]);
-				pvo.setFilename(list);
+				pvo.setFileName(list);
 			}
 		}
 		return attach;
@@ -40,7 +40,7 @@ public class MainServiceImpl implements IF_MainService{
 			List<String> myfileList = maindao.postAttach(pvo.getNo());
 			if (myfileList != null) {
 				String list[] = myfileList.toArray(new String[myfileList.size()]);
-				pvo.setFilename(list);
+				pvo.setFileName(list);
 			}
 		}
 		return mypostList;
@@ -49,7 +49,6 @@ public class MainServiceImpl implements IF_MainService{
 	@Override
 	public int postLength(String id) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println(maindao.postLength(id));
 		return maindao.postLength(id);
 	}
 	
@@ -61,7 +60,7 @@ public class MainServiceImpl implements IF_MainService{
 			List<String> myfileList = maindao.postAttach(pvo.getNo());
 			if (myfileList != null) {
 				String list[] = myfileList.toArray(new String[myfileList.size()]);
-				pvo.setFilename(list);
+				pvo.setFileName(list);
 			}
 			pvo.setP_date(trunc(pvo.getP_date()));
 		}
@@ -87,7 +86,7 @@ public class MainServiceImpl implements IF_MainService{
 			List<String> myfileList = maindao.postAttach(pvo.getNo());
 			if (myfileList != null) {
 				String list[] = myfileList.toArray(new String[myfileList.size()]);
-				pvo.setFilename(list);
+				pvo.setFileName(list);
 			}
 		}
 		return lovepostList;
@@ -164,6 +163,19 @@ public class MainServiceImpl implements IF_MainService{
 	@Override
 	public List<PostVO> getRecommendPostList(HashMap<String, Object> recomMap) throws Exception {
 		return maindao.getRecommendPostList(recomMap);
+	}
+
+	@Override
+	public String takePhoto(String id) throws Exception {
+		// TODO Auto-generated method stub
+		return maindao.takePhoto(id);
+	}
+
+	@Override
+	public String takeNick(String id) throws Exception {
+		// TODO Auto-generated method stub
+		System.out.println(id+"ser");
+		return maindao.takeNick(id);
 	}
 
 

@@ -159,6 +159,7 @@
 						}
 						proText = `<tr>
 		                    <td width="20%">
+		                    <input type="hidden" value="\${pvo.id}">
 			                    <div class="menu-following-photo-div">
 			                    	<img src="\${proPhoto}">
 			                    </div>
@@ -181,7 +182,10 @@
 		switchTheme();
 	});
 	
-
+	$('body').on('click', '#simplefollowtable table tbody tr', function() {
+		let id = $.trim($(this).find('input[type="hidden"]').val());
+		location.href = `/sns/profileShow?id=\${id}`;
+	});
 	
 	
 </script>

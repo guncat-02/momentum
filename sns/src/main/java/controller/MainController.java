@@ -54,55 +54,65 @@ public class MainController {
 		followIdList.add(sessionId);
 		
 		List<PostVO> postList;
-		
-		System.out.println(followIdList);
-		System.out.println(followIdList.size());
+
 		
 		if (followIdList.size() != 1) { // 팔로우한 계정이 있을 경우
-			System.out.println("there are some followings");
 			// 로그인 유저가 팔로우하는 아이디의 게시물의 rownum max값.
-			int maxNum = mser.getCurMaxNum(followIdList);
-			model.addAttribute("maxNum", maxNum);
+			model.addAttribute("fListFlag", true);
 			
 			// Paging을 위한 번호와 where절의 id 저장한 hashmap 사용.
 			HashMap<String, Object> fPostMap = new HashMap<>();
-			fPostMap.put("pageNo", maxNum);
+			fPostMap.put("pageNo", 0);
 			fPostMap.put("fList", followIdList);
 			
 			
 			postList = mser.getFollowingPostList(fPostMap);
 		} else { // 팔로우한 계정이 없을 경우
-			System.out.println("theres no followings");
-			model.addAttribute("maxNum", -1);
+			model.addAttribute("fListFlag", false);
 			
 			HashMap<String, Object> recomMap = new HashMap<>();
 			recomMap.put("exList", null);
-			recomMap.put("pageNo", 1);
+			recomMap.put("pageNo", 0);
 			recomMap.put("sessionId", sessionId);
 			
 			postList = mser.getRecommendPostList(recomMap);
 		}
 		
 		
+		List<PostVO> rePostList = new ArrayList<>();
 		
 		for (PostVO pvo : postList) {
 			// 파일 추가
-			pvo.setFilename(mser.getAttach(pvo.getNo()));
+			pvo.setFileName(mser.getAttach(pvo.getNo()));
 			// 현재 출력 된 게시물 번호 미리 저장. 추후 추천 게시물에서는 출력되지 않도록 하기 위함.
 			selectedPostNoList.add((Integer)pvo.getNo());
-			System.out.println(pvo.toString());
+			if (pvo.getRe_no() != 0) {
+				rePostList.add(mser.takePostVO(pvo.getRe_no()));
+			}
 		}
-		
+		List<ProfileVO> reProfList = new ArrayList<>();
+		for (PostVO repvo : rePostList) {
+			repvo.setFileName(mser.getAttach(repvo.getNo()));
+			reProfList.add(pser.select(repvo.getId()));
+		}
+		// 여기부분 넣음 채윤아 pvo에 nickname이랑 photo 넣을라고
 		for(PostVO pvo : postList) {
 			int ccnt = mser.takeCommCnt(pvo.getNo());
 			int p_love = mser.takeP_loveCnt(pvo.getNo());
 			int reCnt = mser.takeReCnt(pvo.getNo());
+			String nickName = mser.takeNick(pvo.getId());
+			String photo = mser.takePhoto(pvo.getId());
+			
 			// 해당 글의 댓글 수
 			pvo.setCommCnt(ccnt);
 			// 해당 글의 좋아요 수
 			pvo.setP_love(p_love);
 			// 해당 글의 리포스트 수
 			pvo.setReCnt(reCnt);
+			// 해당 글의 닉네임
+			pvo.setNickName(nickName);
+			// 해당 글의 프로필 사진
+			pvo.setPhoto(photo);
 		}
 
 		model.addAttribute("profilelist",pser.allprofileList());
@@ -110,6 +120,9 @@ public class MainController {
 		
 		model.addAttribute("fList", followIdList);
 		model.addAttribute("aList", postList);
+		
+		model.addAttribute("repList", rePostList);
+		model.addAttribute("reproList", reProfList);
 		
 		return "main";
 	}
@@ -177,7 +190,7 @@ public class MainController {
 		pvo.setCommCnt(ccnt);
 		pvo.setP_love(p_love);
 		pvo.setReCnt(reCnt);
-		pvo.setFilename(mser.getAttach(no));
+		pvo.setFileName(mser.getAttach(no));
 		//게시물 작성자
 		ProfileVO proVO = pser.select(pvo.getId());
 		model.addAttribute("postvo", pvo);
@@ -188,7 +201,7 @@ public class MainController {
 		if (re_no != 0) { // 리포스트한 게시물일 경우
 			//클릭한 게시물의 리포스트 게시물
 			PostVO repvo = mser.takePostVO(re_no);
-			repvo.setFilename(mser.getAttach(re_no));
+			repvo.setFileName(mser.getAttach(re_no));
 			// 클릭한 게시물의 리포스트 게시물 작성자
 			ProfileVO reProVO = pser.select(repvo.getId());
 			model.addAttribute("repvo", repvo);
@@ -206,13 +219,20 @@ public class MainController {
 		fPostMap.put("fList", followIdList);
 		
 		List<PostVO> postList = mser.getFollowingPostList(fPostMap);
-		System.out.println("followingPost");
+		List<PostVO> rePostList = new ArrayList<>();
 		for (PostVO pvo : postList) {
 			// 파일 선택
-			pvo.setFilename(mser.getAttach(pvo.getNo()));
+			pvo.setFileName(mser.getAttach(pvo.getNo()));
 			// 현재 출력 된 게시물 번호 미리 저장. 추후 추천 게시물에서는 출력되지 않도록 하기 위함.
 			selectedPostNoList.add((Integer)pvo.getNo());
-			System.out.println(pvo.toString());
+			if (pvo.getRe_no() != 0) {
+				rePostList.add(mser.takePostVO(pvo.getRe_no()));
+			}
+		}
+		List<ProfileVO> reProfList = new ArrayList<>();
+		for (PostVO repvo : rePostList) {
+			repvo.setFileName(mser.getAttach(repvo.getNo()));
+			reProfList.add(pser.select(repvo.getId()));
 		}
 		for(PostVO pvo : postList) {
 			int ccnt = mser.takeCommCnt(pvo.getNo());
@@ -229,9 +249,10 @@ public class MainController {
 		model.addAttribute("fList", followIdList);
 		model.addAttribute("aList", postList);
 		model.addAttribute("profilelist",pser.allprofileList());
+		model.addAttribute("profileimglist",pser.profileimgList());
+		model.addAttribute("repList", rePostList);
+		model.addAttribute("reproList", reProfList);
 		
-		
-		System.out.println("new following page is ready");
 		return "main";
 	}
 	
@@ -241,15 +262,25 @@ public class MainController {
 
 		String sessionId = (String)session.getAttribute("userid");
 		
+		followIdList = fser.getFollowingsId(sessionId);
+		
 		HashMap<String, Object> recomMap = new HashMap<>();
 		recomMap.put("exList", selectedPostNoList);
 		recomMap.put("pageNo", pageNo);
 		recomMap.put("sessionId", sessionId);
 		
 		List<PostVO> postList = mser.getRecommendPostList(recomMap);
+		List<PostVO> rePostList = new ArrayList<>();
 		for(PostVO pvo : postList) {
-			pvo.setFilename(mser.getAttach(pvo.getNo()));
-			System.out.println(pvo.toString());
+			pvo.setFileName(mser.getAttach(pvo.getNo()));
+			if (pvo.getRe_no() != 0) {
+				rePostList.add(mser.takePostVO(pvo.getRe_no()));
+			}
+		}
+		List<ProfileVO> reProfList = new ArrayList<>();
+		for (PostVO repvo : rePostList) {
+			repvo.setFileName(mser.getAttach(repvo.getNo()));
+			reProfList.add(pser.select(repvo.getId()));
 		}
 		for(PostVO pvo : postList) {
 			int ccnt = mser.takeCommCnt(pvo.getNo());
@@ -265,8 +296,11 @@ public class MainController {
 		model.addAttribute("fList", followIdList);
 		model.addAttribute("aList", postList);
 		model.addAttribute("profilelist",pser.allprofileList());
+		model.addAttribute("profileimglist",pser.profileimgList());
+		model.addAttribute("repList", rePostList);
+		model.addAttribute("reproList", reProfList);
 		
-		System.out.println("new recom page is ready");
+
 		return "main";
 	}
 	

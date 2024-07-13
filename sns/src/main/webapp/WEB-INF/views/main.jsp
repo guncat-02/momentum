@@ -34,44 +34,38 @@ pageContext.setAttribute("curId", curId);
 		<div id="main">
 		<div class="myPost">
 			<c:forEach items="${aList}" var="mp">
-				<c:set var="filenameLength" value="${fn:length(mp.filename)}" />
+				<c:set var="filenameLength" value="${fn:length(mp.fileName)}" />
 				<div class="p_inf">
 				<input type = "hidden" value="${mp.id }">
 					<a href="userprofile?id=${mp.id}" class="userprofilealink">
 						<div class="proimg">
-						<img class="profileImg" src="./resources/img/프로필.png">
-							<c:forEach items="${profileimglist }" var="pr">
-								<c:if test="${mp.id eq pr.id }">
-									<img class="profileImg" src="download?filename=${pr.photo }">
-								</c:if>
-							</c:forEach>
-						</div> 
-					</a>
-						<c:forEach items="${profilelist }" var="ap">
-							<c:if test="${mp.id eq ap.id}">
-								<span class="p_id">${ap.nickName }</span>
-							</c:if>
-						</c:forEach>
-					 <span class="p_date">${mp.p_date} </span>
-						<!-- 해당 게시물 게시 유저를 내가 팔로우 하고 있는 지 여부 true, false -->
-						<c:if test="${mp.id ne curId}">
-							<c:set var="containFlag" value="${fn:contains(fList, mp.id) }" />
 							<c:choose>
-								<c:when test="${containFlag == true }">
-									<button type="button" class="theme main-po-follow-btn" value="1">FOLLOWING</button>
+								<c:when test="${not empty mp.photo }">
+									<img class="profileImg" src="download?filename=${mp.photo }">
 								</c:when>
 								<c:otherwise>
-									<button type="button" class="theme main-po-follow-btn" value="0">FOLLOW</button>
+									<img class="profileImg" src="./resources/img/프로필.png">		
 								</c:otherwise>
 							</c:choose>
+						</div> 
+					</a>
+						<span class="p_id">${mp.id }</span>
+
+					<span class="p_date">${mp.p_date} </span>
+					<!-- 해당 게시물 게시 유저를 내가 팔로우 하고 있는 지 여부 true, false -->
+					<c:if test="${mp.id ne curId}">
+						<c:set var="containFlag" value="${fn:contains(fList, mp.id) }" />
+						<c:if test="${containFlag == false }">
+							<button type="button" class="theme main-po-follow-btn" value="0">FOLLOW</button>
 						</c:if>
+					</c:if>
 				</div>
 
 				<a href="myPost?no=${mp.no}" style="cursor: pointer;" class="p_alink" onclick="p_show(${mp.no})"> <!-- 프로필 아이디 -->
 					<div class="p_cont theme">${mp.cont }</div> <c:choose>
 						<c:when test="${filenameLength eq 0}">
 							<div class="p_files" style="display: none">
-								<c:forEach items="${mp.filename }" var="file" varStatus="status">
+								<c:forEach items="${mp.fileName }" var="file" varStatus="status">
 									<div class="item">
 										<img src="download?filename=${status.current}">
 									</div>
@@ -80,7 +74,7 @@ pageContext.setAttribute("curId", curId);
 						</c:when>
 						<c:when test="${filenameLength eq 1}">
 							<div class="p_files">
-								<c:forEach items="${mp.filename }" var="file" varStatus="status">
+								<c:forEach items="${mp.fileName }" var="file" varStatus="status">
 									<div class="item">
 										<img src="download?filename=${status.current}">
 									</div>
@@ -89,7 +83,7 @@ pageContext.setAttribute("curId", curId);
 						</c:when>
 						<c:when test="${filenameLength eq 2}">
 							<div class="p_files" style="display: grid; grid-template-columns: 1fr 1fr">
-								<c:forEach items="${mp.filename }" var="file" varStatus="status">
+								<c:forEach items="${mp.fileName }" var="file" varStatus="status">
 									<div class="item" style="">
 										<img src="download?filename=${status.current}">
 									</div>
@@ -98,7 +92,7 @@ pageContext.setAttribute("curId", curId);
 						</c:when>
 						<c:when test="${filenameLength eq 3}">
 							<div class="p_files" style="display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr">
-								<c:forEach items="${mp.filename }" var="file" varStatus="status">
+								<c:forEach items="${mp.fileName }" var="file" varStatus="status">
 									<c:choose>
 										<c:when test="${status.index eq 0}">
 											<div class="item" style="grid-row: 1/3">
@@ -117,7 +111,7 @@ pageContext.setAttribute("curId", curId);
 						</c:when>
 						<c:when test="${filenameLength eq 4}">
 							<div class="p_files" style="display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr;">
-								<c:forEach items="${mp.filename }" var="file" varStatus="status">
+								<c:forEach items="${mp.fileName }" var="file" varStatus="status">
 									<div class="item">
 										<img src="download?filename=${status.current}">
 									</div>
@@ -126,7 +120,7 @@ pageContext.setAttribute("curId", curId);
 						</c:when>
 						<c:when test="${filenameLength eq 5}">
 							<div class="p_files" style="display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr">
-								<c:forEach items="${mp.filename }" var="file" varStatus="status">
+								<c:forEach items="${mp.fileName }" var="file" varStatus="status">
 									<c:choose>
 										<c:when test="${status.index eq 3}">
 											<div class="item">
@@ -147,6 +141,61 @@ pageContext.setAttribute("curId", curId);
 						</c:when>
 					</c:choose>
 				</a>
+								
+				<c:if test="${mp.re_no != 0 }">
+					<span class="reposted-mark-span">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-share" viewBox="0 0 16 16">
+                   			<path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.5 2.5 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5m-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3m11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3" />
+               			</svg> REPOSTED
+					</span>
+					<div class="repost-container theme">
+						<input type="hidden" value="${mp.re_no }">
+						<c:set var="repFlag" value="false" />
+						<c:forEach items="${repList }" var="repost">
+							<c:if test="${not repFlag }">
+								<c:if test="${repost.no == mp.re_no }">
+									<c:set var="repFlag" value="true" />
+									<div class="repost-attach-div">
+										<c:if test="${not empty repost.fileName}">
+											<div class="repost-attach-img-div">
+												<img src="download?filename=${repost.fileName[0] }">
+											</div>
+										</c:if>
+									</div>					
+									<div class="repost-profile-div">
+										<c:set var="flag" value="false" />
+										<c:forEach items="${reproList }" var="reprof">
+											<c:if test="${not flag }">
+												<c:if test="${repost.id eq reprof.id }">
+													<div class="repost-profile-img-div">
+														<c:choose>
+															<c:when test="${not empty reprof.photo }">
+																<img src="download?filename=${reprof.photo }">
+															</c:when>
+															<c:otherwise>
+																<img src="/sns/resources/img/프로필.png">
+															</c:otherwise>
+														</c:choose>
+													</div>
+													<div class="repost-names-div">
+														<input type="hidden" value="${reprof.id }">
+														<span class="repost-nickname-span">${reprof.nickName }</span>
+													</div>																							
+													<c:set var="flag" value="true" /> 
+												</c:if>
+											</c:if>
+										</c:forEach>
+									</div>
+									<div class="repost-cont-div">
+										<span class="repost-cont-span">
+											${repost.cont }
+										</span>
+									</div>
+								</c:if>
+							</c:if>
+						</c:forEach>
+					</div>
+				</c:if>
 
 				<input type="hidden" value="0" class="p_lovehid${mp.no}">
 				<input type="hidden" value="${mp.no}" id="p_lovehid${mp.no}">
@@ -168,8 +217,10 @@ pageContext.setAttribute("curId", curId);
 						</button>
 					</div>
 					<div>
-						<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16"> <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z" /> <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0" /> </svg>
-						<span class="footspan">${mp.show}</span>
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-index-thumb" viewBox="0 0 16 16">
+		                    <path d="M6.75 1a.75.75 0 0 1 .75.75V8a.5.5 0 0 0 1 0V5.467l.086-.004c.317-.012.637-.008.816.027.134.027.294.096.448.182.077.042.15.147.15.314V8a.5.5 0 0 0 1 0V6.435l.106-.01c.316-.024.584-.01.708.04.118.046.3.207.486.43.081.096.15.19.2.259V8.5a.5.5 0 1 0 1 0v-1h.342a1 1 0 0 1 .995 1.1l-.271 2.715a2.5 2.5 0 0 1-.317.991l-1.395 2.442a.5.5 0 0 1-.434.252H6.118a.5.5 0 0 1-.447-.276l-1.232-2.465-2.512-4.185a.517.517 0 0 1 .809-.631l2.41 2.41A.5.5 0 0 0 6 9.5V1.75A.75.75 0 0 1 6.75 1M8.5 4.466V1.75a1.75 1.75 0 1 0-3.5 0v6.543L3.443 6.736A1.517 1.517 0 0 0 1.07 8.588l2.491 4.153 1.215 2.43A1.5 1.5 0 0 0 6.118 16h6.302a1.5 1.5 0 0 0 1.302-.756l1.395-2.441a3.5 3.5 0 0 0 .444-1.389l.271-2.715a2 2 0 0 0-1.99-2.199h-.581a5 5 0 0 0-.195-.248c-.191-.229-.51-.568-.88-.716-.364-.146-.846-.132-1.158-.108l-.132.012a1.26 1.26 0 0 0-.56-.642 2.6 2.6 0 0 0-.738-.288c-.31-.062-.739-.058-1.05-.046zm2.094 2.025" />
+		                </svg> <span class="show-cnt-span">
+						<span class="footspan">${mp.shows}</span>
 					</div>
 				</div>
 			</c:forEach>
@@ -183,8 +234,23 @@ pageContext.setAttribute("curId", curId);
 	</div>
 </body>
 <script>
+	
+	$('body').on('click', '.repost-attach-div, .repost-cont-div', function() {		
+		let no = $(this).closest('.repost-container').find('input[type="hidden"]').val();
+		location.href = `/sns/myPost?no=\${no}`;
+	});
+	
+	$('body').on('click', '.repost-profile-div', function() {
+		let id = $(this).find('input[type="hidden"]').val();
+		location.href = `/sns/userprofile?id=\${id}`;
+	});
+	
+
+
 	$(document).ready(function(){
 		setting();
+		// 리포스트 된 이미지 css 조정
+		adjustRepostImgs();
 	})
 	// 좋아요 누른거 확인
 	function setting() {
@@ -198,7 +264,6 @@ pageContext.setAttribute("curId", curId);
 			cache : false,
 			success:function(data) {
 				$.each(data, function(index, no) {
-					console.log(no);
 					if($("#p_lovehid"+no).val() == no ) {
 						$(".p_lovehid"+no).val(1)
 						$(".p_lovebut"+no).html(`<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="red" class="bi bi-heart-fill" viewBox="0 0 16 16">
@@ -206,7 +271,7 @@ pageContext.setAttribute("curId", curId);
 						</svg>`);	
 					}
 				})
-				},
+			}
 		 });
 	}
 	// 게시물 좋아요 누르기
@@ -234,10 +299,7 @@ pageContext.setAttribute("curId", curId);
 		$.ajax({
 			type:"POST",
 			url:"p_love",
-			data: {"no" : no},
-			success:function() {
-				alert("성공")
-			}
+			data: {"no" : no}
 		})
 	}
 	// 좋아요 취소 ajax
@@ -245,10 +307,7 @@ pageContext.setAttribute("curId", curId);
 		$.ajax({
 			type:"POST",
 			url:"p_loveCancel",
-			data: {"no" : no},
-			success:function() {
-				alert("성공")
-			}
+			data: {"no" : no}
 		})
 	}
 	
@@ -258,22 +317,20 @@ pageContext.setAttribute("curId", curId);
 			type:"GET",
 			url:"p_show",
 			data: {"no" : no},
-			cache : false,
-			success:function() {
-				}
-		 })  
+			cache : false
+		})  
 	}
 	function repost(no) {
 		location.href = `/sns/reposting?no=\${no}`;
 	}
    	
     
-    // 로그인 유저의 팔로우 유저가 작성한 게시물 중 가장 최신 게시물의 rownum.
-    const maxNum = ${maxNum};
+    // 팔로우 한 사람 있는 여부 true/false
+    let fListFlag = ${fListFlag};
     // 로그인 유저의 팔로우 유저가 작성한 게시물 다음 페이지 시작 번호.
-    let curFollowPage = maxNum - 10;
+    let curFollowPage = 10;
     // 추천 게시물 시작 번호
-    let curRecomPage = 1;
+    let curRecomPage = 0;
     // 이미 로딩된 기존 컨텐츠
     let prevCont;
 	function scrollEventHandler() {
@@ -283,26 +340,31 @@ pageContext.setAttribute("curId", curId);
         	document.removeEventListener('scroll', scrollEventHandler);
         	// 이미 로딩된 기존 컨텐츠의 html 객체 저장.
     		prevCont = $('.myPost').html();
-        	console.log(curFollowPage);
-        	console.log(maxNum);
+        	console.log(fListFlag);
        		// 게시물 로딩되는 부분 새로 고침.
-       		if (curFollowPage > 0 && maxNum != -1) { // 팔로우 한 유저의 최근 게시물이 남아 있거나, 팔로우한 유저가 있을 경우
-       			console.log('followpage loading');
+       		if (fListFlag) { // 팔로우 한 유저의 최근 게시물이 남아 있거나, 팔로우한 유저가 있을 경우
            		$('#main').load(`newFollowingPost?pageNo=\${curFollowPage} .myPost`, function() {
            			// 새로 고침 성공 시 실행.
+           			console.log($('.p_inf').length);
+           			if ($('.p_inf').length == 0) { // 새롭게 로딩된 게시물 없었을 경우
+           				fListFlag = false;
+           			}
+       				// 다음 페이지 시작 번호 갱신.
+           			curFollowPage += 10;
+        			// 리포스트 된 이미지 css 조정
+        			adjustRepostImgs();
            			// 기존 게시물을 새로 로딩된 게시물 위에 추가.
            			$('.myPost').prepend(prevCont);
-           			// 다음 페이지 시작 번호 갱신.
-           			curFollowPage -= 10;
            			// 제거했던 이벤트 다시 생성.
            			document.addEventListener('scroll', scrollEventHandler);
            		});
        		} else { // 팔로우 한 유저의 최근 게시물을 전부 출력 했거나, 팔로우한 유저가 없을 경우
-       			console.log('recompage loading');
        			$('#main').load(`newRecomPost?pageNo=\${curRecomPage} .myPost`, function() {
            			// 새로 고침 성공 시 실행.
            			console.log($('.p_inf').length);
            			if ($('.p_inf').length != 0) { // 새로운 게시물이 로딩될 때
+           				// 리포스트 된 이미지 css 조정
+           				adjustRepostImgs();
                			// 다음 페이지 시작 번호 갱신.
                			curRecomPage += 10;
                			// 제거했던 이벤트 다시 생성.
@@ -321,7 +383,6 @@ pageContext.setAttribute("curId", curId);
 	let curId = "${curId}";
     // 게시자 아이디 옆 follow-following 버튼 클릭 시
     $('body').on('click', '.main-po-follow-btn', function() {
-    	console.log('clicked')
     	let btn = $(this);
     	btn.css('pointer-events', 'none');
     	if (btn.val() == 0) {
@@ -334,8 +395,8 @@ pageContext.setAttribute("curId", curId);
 		btn.val(1);
 		btn.text('FOLLOWING');
 
-		// 추후 수정 필요.
-		let fId = $.trim(btn.closest('.p_inf').find('.p_id').text());
+		
+		let fId = $.trim(btn.prevAll('input[type="hidden"]').val());
 		
 		$.ajax({
 			url : '/sns/follow',
@@ -369,9 +430,9 @@ pageContext.setAttribute("curId", curId);
 		btn.val(0);
 		btn.text('FOLLOW');
 		
-		// 추후 수정 필요.
-		let fId = $.trim(btn.closest('.p_inf').find('.p_id').text());
-
+		
+		let fId = $.trim(btn.prevAll('input[type="hidden"]').val());
+		
 		$.ajax({
 			url : '/sns/followcancel',
 			type : 'get',
@@ -395,7 +456,7 @@ pageContext.setAttribute("curId", curId);
 		let allPosts = $('.p_inf');
 		let pId;
 		$.each(allPosts, function(idx) {
-			pId = $.trim(allPosts.eq(idx).find('.p_id').text());
+			pId = $.trim(allPosts.eq(idx).find('input[type="hidden"]').val());
 			if (pId == fId) {
 				let curBtn = allPosts.eq(idx).find('.main-po-follow-btn')
 				if (btnVal == 0) { // 팔로우 취소 한 뒤
@@ -407,6 +468,28 @@ pageContext.setAttribute("curId", curId);
 				}
 			}
 		});
+	}
+	
+	//게시물 사진 css 적용
+	function adjustRepostImgs() {
+		let allImg = $('.repost-attach-img-div img');
+	    if (allImg.length != 0) {
+	        for (let one of allImg) {
+	            let imgObj = new Image();
+	            imgObj.src = one.getAttribute('src');
+	            imgObj.onload = function() {
+	                let width = this.width;
+	                let height = this.height;
+	                if (width <= height) {
+	                    one.style.width = '100%';
+	                    one.style.height = 'auto';
+	                } else {
+	                    one.style.width = 'auto';
+	                    one.style.height = '100%';
+	                }
+	            }
+	        }
+	    }
 	}
 
 </script>

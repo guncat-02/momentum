@@ -109,3 +109,19 @@
 .searUser {
 	cursor: pointer;
 }
+.userFollowBtn button {
+	display: block;
+	width: 75%;
+	height: 48px;
+	border: 1px solid #00f7ff;
+	border-radius: 15px;
+	margin: 25px auto;
+	font-size: 20px;
+}
+.userFollowBtn button[value="0"] {
+	background-color: #00f7ff;
+	color: black;
+}
+.userFollowBtn button:hover {
+	cursor: pointer;
+}

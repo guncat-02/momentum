@@ -8,18 +8,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="report" parameterType="vo.ReportVO">
 	<choose>
 		<when test='st_type== "curse"'>
-			insert into reporttest values (#{no}, #{id}, #{reportId}, default, #{r_loc}, #{st_type}, '욕설', #{r_cont})
+			insert into report values (#{no}, #{id}, #{reportId}, default, #{r_loc}, #{st_type}, '욕설', #{r_cont})
 		</when>
 		<otherwise>
-			insert into reporttest values (#{no}, #{id}, #{reportId}, default, #{r_loc}, #{st_type}, #{nd_type}, #{r_cont})
+			insert into report values (#{no}, #{id}, #{reportId}, default, #{r_loc}, #{st_type}, #{nd_type}, #{r_cont})
 		</otherwise>
 	</choose>	
 	</insert>
 	<insert id = "banmember" parameterType="vo.BanVO">
-		insert into bantest values(#{id},default,#{f_date},TO_DATE(#{f_date},'YY-MM-DD') - TO_DATE(sysdate,'YY-MM-DD'))
+		insert into ban values (#{id}, SYSDATE(), #{f_date}, DATEDIFF(#{f_date}, curdate()))
 	</insert>
 	<delete id ="innocence" parameterType="hashmap">
-		delete from reporttest where reportId =#{id} and r_cont = #{r_cont} 
+		delete from report where reportId =#{id} and r_cont = #{r_cont} 
 	</delete>
 	
 </mapper>

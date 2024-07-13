@@ -46,7 +46,6 @@ public class CommCotroller {
 			cvo.setId(String.valueOf(session.getAttribute("userid")));
 			cser.cancelcommlike(cvo);
 		}
-		System.out.println(cser.takelikecnt(c_no) + "댓글 수");
 
 		HashMap<String, Integer> params = new HashMap<>();
 		params.put("c_no", c_no);

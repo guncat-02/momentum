@@ -6,34 +6,43 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="dao.IF_PostingDao">
 
 	<insert id="insertPost" parameterType="vo.PostVO">
-		insert into postTest values (seTest.nextval, null, #{id}, #{cont}, 0, #{privacy}, default, default)
+		insert into post values (nextval(post_no), null, #{id}, #{cont}, 0, #{privacy}, default, default)
 	</insert>
 	
 	<insert id="insertRePost" parameterType="vo.PostVO">
-		insert into postTest values (seTest.nextval, #{re_no}, #{id}, #{cont}, 0, #{privacy}, default, default)
+		insert into post values (nextval(post_no), #{re_no}, #{id}, #{cont}, 0, #{privacy}, default, default)
 	</insert>
 	
 	<insert id="insertAttach" parameterType="map">
-		insert into attachTest values ((select max(no) from postTest where id = #{id}), #{filename})
+		insert into attach values ((select max(no) from post where id = #{id}), #{fileName})
 	</insert>
 	
 	<select id="selectOnePost" parameterType="_int" resultType="vo.PostVO">
-		select * from postTest where no = #{no}
+		select * 
+		from post 
+		where no = #{no}
 	</select>
 	
 	<select id="selectAttach" parameterType="_int" resultType="String">
-		select filename from attachTest where no = #{no}
+		select fileName 
+		from attach 
+		where no = #{no}
 	</select>
 	
 	<update id="updatePost" parameterType="hashmap">
-		update postTest set cont = #{cont} where no = #{no}
+		update post 
+		set cont = #{cont} 
+		where no = #{no}
 	</update>
 	
 	<delete id="deletePost" parameterType="_int">
-		delete from postTest where no = #{no}
+		delete from post 
+		where no = #{no}
 	</delete>
 	
 	<select id="selectPosts" parameterType="String" resultType="int">
-		select count(*) from postTest where cont like '%'||#{keyWord}||'%'
+		select count(*) 
+		from post 
+		where cont like '%'||#{keyWord}||'%'
 	</select>
 </mapper>

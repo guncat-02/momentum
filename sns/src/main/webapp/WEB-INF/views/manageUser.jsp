@@ -33,6 +33,7 @@
                     <span id="cur-date-span"></span>
                     <span id="cur-adminId-span">Admin : ${curId }</span>
                 </div>
+                <!-- 
                 <div id="search-type">
                 	<input type="hidden" name="searchArea" value="User">
                 	<input type="hidden" name="searchLoc" value="">
@@ -51,6 +52,7 @@
                 <div id="search-result">
                 	<span id="result-span">총 조회 결과 : ${cnt }건.</span>
                 </div>
+                 -->
                 <div id="menu-user-member">
                     <button type="button" value="1" id="member-btn">MEMBER</button>
                 </div>
@@ -146,7 +148,7 @@
 		                                <th style="width: 5%;">RE_NO</th>
 		                                <th style ="width: 10%">ID</th>
 		                                <th style="width: 50%;">CONT</th>
-		                                <th>SHOW</th>
+		                                <th>SHOWS</th>
 		                                <th style="width: 5%;">PRIV.</th>
 		                                <th style="width: 5%;">C_BLOCK</th>
 		                                <th>P_DATE</th>
@@ -163,7 +165,7 @@
 			                                </td>
 			                                <td>${one.id }</td>
 			                                <td>${one.cont }</td>
-			                                <td class="tac">${one.show }</td>
+			                                <td class="tac">${one.shows }</td>
 			                                <td class="tac">${one.privacy }</td>
 			                                <td class="tac">${one.c_block }</td>
 			                                <td class="tac">${one.p_date }</td>
@@ -220,25 +222,6 @@
                         </c:choose>
                     </table>
                 </div>
-                <div id="paging">
-                	<c:if test="${pagevo.prev }">
-                		<button type="button">[prev]</button>
-					</c:if> 
-					<c:forEach begin="${pagevo.startPage }" end="${pagevo.endPage }" var="idx">
-						<c:choose>
-							<c:when test="${idx == pagevo.page }">
-								<!-- 현재 페이지 굵은 글씨 -->
-								<button type="button"><b>${idx }</b></button>
-							</c:when>
-							<c:otherwise>
-							<button type="button">${idx }</button>
-							</c:otherwise>
-						</c:choose>
-					</c:forEach> 
-					<c:if test="${pagevo.next }">
-						<button type="button">[next]</button>
-					</c:if>
-                </div>
                 <div id="reset">
                 	<button type="button"><a href="/sns/manager/user/">reset</a></button>
                 </div>
@@ -277,7 +260,7 @@
         $('input[name=searchLoc]').val(curList);
        	let result = searchFlag();
        	searchTypeChange(); // 검색 타입 지정
-       	searchPaging(result);
+       	// searchPaging(result);
     });
     
     function searchFlag() {
@@ -305,6 +288,7 @@
     	return null;
     }
     
+    /*
     function searchPaging(result) {
 		$('#paging').on('click', 'button', function() {
 			let idx = $.trim($(this).text());
@@ -331,6 +315,7 @@
 
 		});
     }
+    */
     
     
     // 선택한 검색 유형에 따라 검색어 input display 변환
@@ -366,7 +351,6 @@
     		$('div[id^=menu-] button').removeAttr('disabled');
     		$('div[id^=menu-] button').val(1);
     	}
-    	console.log($('button[value=0]').text().toLowerCase().indexOf('${pagevo.searchLoc}'));
     	if ($('button[value=0]').text().toLowerCase().indexOf('${pagevo.searchLoc}') != -1) {
     		$('#searchBtn').attr('disabled', '');
     		$('#searchBtn').val(0);
@@ -392,7 +376,6 @@
     // table 영역 새로고침 및 리턴 결과 개수 갱신
     function updateTable(flag) {
 		let searchFlag = window.location.href;
-		console.log(searchFlag);
 		if (searchFlag.indexOf('search') == -1) {
 			location.href = `/sns/manager/user/\${flag}`;
 		} else {

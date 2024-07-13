@@ -20,7 +20,6 @@ public class PostingDao implements IF_PostingDao{
 	
 	@Override
 	public void insertPost(PostVO pvo) throws Exception {
-		System.out.println("dao postInsert"+pvo.toString());
 		sql.insert(mapperQuery+".insertPost", pvo);
 	}
 

@@ -17,12 +17,13 @@
         <div id="chatMenu">
             <ul>
                 <li class="proMainMenu"><a href="main">SNS</a></li>
+                <li class="proMainMenu"><a href="selProfile">CHAT</a></li>
                 <li id="profileSub" class="proMainMenu">
                     <a href="profileList">PROFILE</a>
                     <ul id="profileSubDiv">
                         <li class="proSubMenu"><a href="profileList">SHOW</a></li>
                         <li class="proSubMenu"><a href="profileUpdate">EDIT</a></li>
-                        <li class="proSubMenu">DELETE</li>
+                        <li class="proSubMenu"><a href="profileDelete">DELETE</a></li>
                     </ul>
                 </li>
             </ul>
@@ -177,7 +178,6 @@
     
     //submit
     $('#chatAll').on('click', '#createProfile', function() {
-    	console.log($('#formChk').css('color'))
     	if($('#formChk').css('color') == 'rgb(255, 0, 191)') {
     		const form = $('form')[0];
         	const formData = new FormData(form);

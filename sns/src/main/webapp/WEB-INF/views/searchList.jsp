@@ -55,20 +55,31 @@
 							<c:choose>
 							<c:when test='${key.keyType ne "사용자"}'>
 								<c:forEach items="${info}" var="mp">
-								<c:set var="filenameLength" value="${fn:length(mp.filename)}" />
+								<c:set var="filenameLength" value="${fn:length(mp.fileName)}" />
 								<div class="p_inf">
 									<a href="userprofile?id=${mp.id}" class="userprofilealink">
 										<div class="proimg">
 											<img class="profileImg" src="./resources/img/프로필.png">
 											<c:forEach items="${profile}" var="pr">
 												<c:if test="${mp.id eq pr.id }">
-													<img class="profileImg"
-														src="download?filename=${pr.photo }">
+													<c:choose>
+														<c:when test="${pr.photo != null}">
+															<img class="profileImg" src="download?filename=${pr.photo }">
+														</c:when>
+														<c:when test="${pr.photo == null}">
+															<img class="profileImg" src="./resources/img/프로필.png">
+														</c:when>
+													</c:choose>
 												</c:if>
 											</c:forEach>
-										</div> <span class="p_id">${mp.id }</span>
-									</a> <span class="p_date">${mp.p_date} </span>
-
+										</div>
+									</a> 
+									<c:forEach items="${profile }" var="ap">
+										<c:if test="${mp.id eq ap.id}">
+											<span class="p_id">${ap.nickName }</span>
+										</c:if>
+									</c:forEach>
+									<span class="p_date">${mp.p_date} </span>
 								</div>
 
 								<a href="myPost?no=${mp.no}" style="cursor: pointer;"
@@ -76,7 +87,7 @@
 									<div class="p_cont theme">${mp.cont }</div> <c:choose>
 										<c:when test="${filenameLength eq 0}">
 											<div class="p_files" style="display: none">
-												<c:forEach items="${mp.filename }" var="file"
+												<c:forEach items="${mp.fileName }" var="file"
 													varStatus="status">
 													<div class="item">
 														<img src="download?filename=${status.current}">
@@ -86,7 +97,7 @@
 										</c:when>
 										<c:when test="${filenameLength eq 1}">
 											<div class="p_files">
-												<c:forEach items="${mp.filename }" var="file"
+												<c:forEach items="${mp.fileName }" var="file"
 													varStatus="status">
 													<div class="item">
 														<img src="download?filename=${status.current}">
@@ -97,7 +108,7 @@
 										<c:when test="${filenameLength eq 2}">
 											<div class="p_files"
 												style="display: grid; grid-template-columns: 1fr 1fr">
-												<c:forEach items="${mp.filename }" var="file"
+												<c:forEach items="${mp.fileName }" var="file"
 													varStatus="status">
 													<div class="item" style="">
 														<img src="download?filename=${status.current}">
@@ -108,7 +119,7 @@
 										<c:when test="${filenameLength eq 3}">
 											<div class="p_files"
 												style="display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr">
-												<c:forEach items="${mp.filename }" var="file"
+												<c:forEach items="${mp.fileName }" var="file"
 													varStatus="status">
 													<c:choose>
 														<c:when test="${status.index eq 0}">
@@ -129,7 +140,7 @@
 										<c:when test="${filenameLength eq 4}">
 											<div class="p_files"
 												style="display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr;">
-												<c:forEach items="${mp.filename }" var="file"
+												<c:forEach items="${mp.fileName }" var="file"
 													varStatus="status">
 													<div class="item">
 														<img src="download?filename=${status.current}">
@@ -140,7 +151,7 @@
 										<c:when test="${filenameLength eq 5}">
 											<div class="p_files"
 												style="display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr">
-												<c:forEach items="${mp.filename }" var="file"
+												<c:forEach items="${mp.fileName }" var="file"
 													varStatus="status">
 													<c:choose>
 														<c:when test="${status.index eq 3}">
@@ -202,7 +213,7 @@
 											fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16"> <path
 												d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z" /> <path
 												d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0" /> </svg>
-										<span class="footspan">${mp.show}</span>
+										<span class="footspan">${mp.shows}</span>
 									</div>
 								</div>
 							</c:forEach>
@@ -250,7 +261,16 @@
                 				</c:when>
                 				</c:choose>
                 				<div class="userFollowBtn" style="grid-column: 3 / 4; grid-row: 1 / 3;">
-                    
+                					<input type="hidden" value="${user.id }">              					
+                					<c:set var="followFlag" value="${fn:contains(fList, user.id) }" />
+                					<c:choose>
+                						<c:when test="${followFlag == true }">
+                							<button type="button" value="1" class="theme">FOLLOWING</button>		
+                						</c:when>
+                						<c:otherwise>
+                							<button type="button" value="0" class="theme">FOLLOW</button>
+                						</c:otherwise>
+                					</c:choose>
                 				</div>
            					</div>
            					</c:forEach>
@@ -383,10 +403,9 @@
     	}
     })
     
-    	$(document).ready(function(){
+    $(document).ready(function(){
 		setting();
-		console.log('no : ${aList[0].no}');
-	})
+    })
 	
 	// 좋아요 누른거 확인
 	function setting() {
@@ -400,7 +419,6 @@
 			cache : false,
 			success:function(data) {
 				$.each(data, function(index, no) {
-					console.log(no);
 					if($("#p_lovehid"+no).val() == no ) {
 						$(".p_lovehid"+no).val(1)
 						$(".p_lovebut"+no).html(`<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="red" class="bi bi-heart-fill" viewBox="0 0 16 16">
@@ -436,10 +454,7 @@
 		$.ajax({
 			type:"POST",
 			url:"p_love",
-			data: {"no" : no},
-			success:function() {
-				alert("성공")
-			}
+			data: {"no" : no}
 		})
 	}
 	// 좋아요 취소 ajax
@@ -447,10 +462,7 @@
 		$.ajax({
 			type:"POST",
 			url:"p_loveCancel",
-			data: {"no" : no},
-			success:function() {
-				alert("성공")
-			}
+			data: {"no" : no}
 		})
 	}
 	
@@ -460,44 +472,45 @@
 			type:"GET",
 			url:"p_show",
 			data: {"no" : no},
-			cache : false,
-			success:function() {
-				}
+			cache : false
 		 })  
 	}
 	function repost(no) {
 		location.href = `/sns/reposting?no=\${no}`;
 	}
 	
-    $('body').on('mousewheel', function() {
-		mousewheelEvent();
-    });
     
     // 추천 게시물 시작 번호
-    let curRecomPage = 1;
+    let curRecomPage = 10;
     // 이미 로딩된 기존 컨텐츠
     let prevCont;
-    function mousewheelEvent() {
-        if ((window.scrollY + window.innerHeight)/document.body.clientHeight > 0.85) { // 마지막까지 스크롤 했을 때.
+	function scrollEventHandler() {
+		if ((window.scrollY + window.innerHeight)/document.body.clientHeight > 0.8) { // 마지막까지 스크롤 했을 때.
         	// 이벤트 지워준다.
-        	$('body').off('mousewheel');
+        	document.removeEventListener('scroll', scrollEventHandler);
         	// 이미 로딩된 기존 컨텐츠의 html 객체 저장.
-    		prevCont = $('.myPost').html();
-        	// 0.25초 뒤 다음 코드 실행.
-        	setTimeout(() => {        		
-        		$('#searchResultAll').load(`newRecomPost?pageNo=\${curRecomPage} #searMain`, function() {
-        			// 새로 고침 성공 시 실행.
-        			// 기존 게시물을 새로 로딩된 게시물 위에 추가.
-        			$('#searMain').prepend(prevCont);
-        			// 다음 페이지 시작 번호 갱신.
-        			curRecomPage += 10;
-        			// 제거했던 이벤트 다시 생성.
-        			$('body').on('mousewheel', function() { mousewheelEvent(); });
-        		});
-        		// 두 경우 모두에 속하지 않는 경우 스크롤 페이징 중단.
-        	}, '250');
+    		prevCont = $('#searchResultAll').html();
+       		// 게시물 로딩되는 부분 새로 고침.
+       		// 팔로우 한 유저의 최근 게시물을 전부 출력 했거나, 팔로우한 유저가 없을 경우
+  			$('#searResult').load(`newSearchList?pageNo=\${curRecomPage}&keyWord=${key.keyWord}&keyType=${key.keyType} #searchResultAll`, function() {
+  				// 새로 고침 성공 시 실행.           		
+      			if ($('.p_inf').length != 0) { // 새로운 게시물이 로딩될 때
+          			// 다음 페이지 시작 번호 갱신.
+          			curRecomPage += 10;
+          			// 제거했던 이벤트 다시 생성.
+          			document.addEventListener('scroll', scrollEventHandler);
+      			} else {
+      				$('#searchNone').remove();
+      			}
+      			// 기존 게시물을 새로 로딩된 게시물 위에 추가.
+      			$('#searchResultAll').prepend(prevCont);
+      		});
         }
-    }
+	}
+	// 최초 검색 결과가 존재 할 경우
+	if ($('.p_inf').length != 0) {
+		document.addEventListener('scroll', scrollEventHandler);
+	}
     
     //검색어마다 결과 가져오기
     $('.keyType').click(function() {
@@ -513,5 +526,77 @@
     $('#searResult').on('click', '.searUser', function() {
     	location.href = "profileShow?id="+$('.searUser').closest('.searchResultUser').find('span').eq(1).text().trim().split(" ")[1];
     })
+    
+    const curId = '<%=(String)session.getAttribute("userid") %>';
+    //버튼 클릭 시 언팔로우-팔로우 작업
+	$('body').on('click', '.userFollowBtn button', function() {
+		let btn = $(this);
+		btn.css('pointer-events', 'none');
+		if (btn.val() == 0) { // (팔로우 취소 후 다시) 팔로우 할 때
+			follow(btn);
+		} else { // 팔로우 취소 할 때
+			followCancel(btn);
+		}
+	});
+    
+	function follow(btn) {
+		// 버튼 값 변경
+		btn.val(1);
+		btn.text('FOLLOWING');
+		
+		let fId = $.trim(btn.prev('input[type="hidden"]').val());
+		
+		$.ajax({
+			url : '/sns/follow',
+			type : 'get',
+			data : {
+				'id' : curId,
+				'followId' : fId,
+			},
+			success : function(result) {
+				if (result == 1) {
+					btn.css('pointer-events', 'auto');
+					$('#menuall').load('<c:url value="menuReload" />');
+					return;
+				} else if (result == -1) {
+					alert('차단한 유저는 팔로우 할 수 없습니다.\n차단 해제 후 다시 시도해주세요.');
+				} else {
+					alert('잠시 후 다시 시도해주세요.');
+				}
+				btn.val(0);
+				btn.text('FOLLOW');
+			},
+			error : function() {
+				alert('잠시 후 다시 시도해주세요.');
+				btn.val(0);
+				btn.text('FOLLOW');
+			}
+		});
+	}
+	function followCancel(btn) {
+		
+		btn.val(0);
+		btn.text('FOLLOW');
+		
+		let fId = $.trim(btn.prev('input[type="hidden"]').val());
+
+		$.ajax({
+			url : '/sns/followcancel',
+			type : 'get',
+			data : {
+				'id' : curId,
+				'followId' : fId
+			},
+			success : function(result) {
+				btn.css('pointer-events', 'auto');
+				$('#menuall').load('<c:url value="menuReload" />');
+			},
+			error : function() {
+				alert('잠시 후 다시 시도해주세요.');
+				btn.val(1);
+				btn.text('FOLLOWING');
+			}
+		})
+	}
 </script>
 </html>

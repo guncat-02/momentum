@@ -46,7 +46,7 @@ public class PostingController {
 	@PostMapping("/postingSave")
 	public String postingSave(@ModelAttribute PostVO pvo, MultipartFile[] file, HttpSession session) throws Exception {
 		String[] fileName = fileDataUtil.fileUpload(file);
-		pvo.setFilename(fileName);
+		pvo.setFileName(fileName);
 		pservice.insertPost(pvo);
 		return "redirect:main";
 	}
@@ -67,7 +67,7 @@ public class PostingController {
 	@PostMapping("/repostingSave")
 	public String repostingSave(@ModelAttribute PostVO pvo, MultipartFile[] file) throws Exception {
 		String[] fileName = fileDataUtil.fileUpload(file);
-		pvo.setFilename(fileName);
+		pvo.setFileName(fileName);
 		pservice.insertRePost(pvo);
 		return "redirect:main";
 	}

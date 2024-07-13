@@ -5,95 +5,134 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="dao.IF_MainDAO">
 	
 	<select id="mainList" resultType="vo.PostVO" parameterType="String">
-		select * from posttest where privacy = 1 order by p_date desc
+		select * 
+		from post 
+		where privacy = 1 
+		order by p_date desc
 	</select>
 	<select id="myPost" resultType="vo.PostVO" parameterType="String">
-		select * from posttest where id = #{id} order by no desc
+		select * 
+		from post 
+		where id = #{id} 
+		order by no desc
 	</select>
 	<!-- 좋아요 누른 글 리스트 -->
 	<select id="lovePostList" resultType="vo.PostVO" parameterType="String">
-		select posttest.* from posttest left join p_lovetest on posttest.no = p_lovetest.no where p_lovetest.id = #{id} order by p_date desc
+		select post.* 
+		from post 
+		left join p_love 
+		on post.no = p_love.no 
+		where p_love.id = #{id} 
+		order by p_date desc
 	</select>
 	<select id="takePostVO" resultType="vo.PostVO" parameterType="int">
-		select * from posttest where no = #{no} order by p_date desc
+		select * 
+		from post 
+		where no = #{no} 
+		order by p_date desc
 	</select>
 	<select id="attachList" resultType="vo.PostVO">
-		select * from attachtest
+		select * 
+		from attach
 	</select>
 	<select id="postAttach" resultType="String">
-		select filename from attachtest where no = #{no}
+		select fileName 
+		from attach 
+		where no = #{no}
 	</select>
 	<select id="postLength" resultType="int" parameterType="String">
-		select count(*) from posttest where id = #{id}
+		select count(*) 
+		from post 
+		where id = #{id}
 	</select>
 	<!-- 글의 댓글 개수 -->
 	<select id= "takeCommCnt" parameterType = "int" resultType= "int">
-		select count(*) from commtest where no = #{no}
+		select count(*) 
+		from comm 
+		where no = #{no}
 	</select>
 	<!-- 글의 좋아요 개수 -->
 	<select id= "takeP_loveCnt" parameterType = "int" resultType= "int">
-		select count(*) from p_lovetest where no = #{no}
+		select count(*) 
+		from p_love 
+		where no = #{no}
 	</select>
 	<!-- 글의 리포스트 개수 -->
 	<select id= "takeReCnt" parameterType = "int" resultType= "int">
-		select count(*) from posttest where re_no = #{no}
+		select count(*) 
+		from post 
+		where re_no = #{no}
 	</select>
 	<select id = "chklove" parameterType = "String" resultType="int">
-		select no from p_lovetest where id = #{id}
+		select no 
+		from p_love 
+		where id = #{id}
 	</select>
 	<update id = "p_show" parameterType="int">
-		update posttest set show = show+1 where no = #{no} 
+		update post 
+		set shows = shows+1 
+		where no = #{no} 
 	</update>
 	<insert id = "p_love" parameterType="hashmap">
-		insert into p_lovetest values(#{id},#{no}) 
+		insert into p_love values(#{id},#{no}) 
 	</insert>
 	<delete id = "p_loveCancel" parameterType="hashmap">
-		delete from p_lovetest where id= #{id} and no = #{no}
+		delete from p_love 
+		where id= #{id} and no = #{no}
 	</delete>
 	<select id="selectAttachWhere" parameterType="_int" resultType="String">
-		select filename from attachTest where no = #{no}
+		select fileName 
+		from attach 
+		where no = #{no}
 	</select>
 	
 	<select id="selectMaxWhere" parameterType="java.util.List" resultType="_int">
-		select max(rn) from
-		(select o.*, rownum as rn from
-		(select * from postTest where id in
-		<foreach collection="list" item="one" open="(" separator="," close=")">
-			#{one}
-		</foreach>
-		and p_date between localtimestamp - (interval '10' day) and localtimestamp
-		order by p_date) o)
+		select max(rn) 
+		from (
+			select o.*, rownum as rn 
+			from (
+				select * 
+				from post 
+				where id in
+					<foreach collection="list" item="one" open="(" separator="," close=")">
+						#{one}
+					</foreach>
+				and p_date between localtimestamp - (interval '10' day) and localtimestamp
+				order by p_date
+			) o
+		)
 	</select>
 	
 	<select id="selectFollowingPostRN" parameterType="hashmap" resultType="vo.PostVO">
-		select * from
-		(select o.*, rownum as rn from
-		(select * from postTest where id in
-		<foreach collection="fList" item="one" open="(" separator="," close=")">
-			#{one}
-		</foreach>
-		and p_date between localtimestamp - (interval '10' day) and localtimestamp
-		order by p_date) o)
-		where rn between #{pageNo}-9 and #{pageNo}
-		order by rn desc
+		select * from post where id in
+			<foreach collection="fList" item="one" open="(" separator="," close=")">
+				#{one}
+			</foreach>
+		and p_date between localtimestamp - interval 10 day and localtimestamp
+		order by p_date desc limit #{pageNo}, 10
 	</select>
 	
 	<select id="selectRecomPostRN" parameterType="hashmap" resultType="vo.PostVO">
-		select * from
-		(select rownum as rn, o.* from
-		(select * from postTest where
-		<if test="exList != null and exList.size() != 0">
-			no not in
-			<foreach collection="exList" item="one" open="(" separator="," close=")">
-				#{one}
-			</foreach>
-			and
-		</if>
-		id not in
-		(select blockId from blockTest where id = #{sessionId})
-		and p_date between localtimestamp - (interval '31' day) and localtimestamp
-		order by p_date desc)o
+		select * from post where
+			<if test="exList != null and exList.size() != 0">
+				no not in
+				<foreach collection="exList" item="one" open="(" separator="," close=")">
+					#{one}
+				</foreach>
+				and
+			</if>
+		id not in (
+			select blockId 
+			from block 
+			where id = #{sessionId}
 		)
-		where rn between #{pageNo} and #{pageNo} +9
+		and p_date between localtimestamp - interval 31 day and localtimestamp
+		order by p_date desc limit #{pageNo}, 10
+	</select>
+	<select id="takePhoto" parameterType="String" resultType="String">
+		select photo from profile where id = #{id}
+	</select>
+	<select id="takeNick" parameterType="String" resultType="String">
+		select nickName from profile where id = #{id}
 	</select>
 </mapper>

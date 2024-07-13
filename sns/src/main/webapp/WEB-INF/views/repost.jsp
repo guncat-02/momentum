@@ -46,13 +46,13 @@
                     <div id="repost-grid-cont">
                         <div class="repost-grid-item">
                         	<input type="hidden" name="re_no" value="${map.rePVO.no }">
-                        	<c:set var="rpFileLength" value="${fn:length(map.rePVO.filename) }" />
+                        	<c:set var="rpFileLength" value="${fn:length(map.rePVO.fileName) }" />
                             <div id="reposted-photo">
                             	<c:if test="${rpFileLength gt 1 }">
                                 	<div id="left-arrow">&lang;</div>
                                 </c:if>
-                                <c:if test="${not empty map.rePVO.filename }">
-                                	<c:forEach items="${map.rePVO.filename }" var="file">
+                                <c:if test="${not empty map.rePVO.fileName }">
+                                	<c:forEach items="${map.rePVO.fileName }" var="file">
                                 		<img src="download?filename=${file }">
                                 	</c:forEach>
                                 </c:if>
@@ -130,7 +130,6 @@
 
     function imgTest() {
         allImg.css('display', 'none');
-        console.log(allImg);
         if (allImg.length == 0) { // 리포스트 글에 사진 없을 경우
             $('.repost-grid-item:nth-child(1)').css('display', 'none');
             $('#repost-grid-cont').css('grid-template-columns', 'none');

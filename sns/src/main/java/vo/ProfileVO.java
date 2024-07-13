@@ -10,11 +10,6 @@ public class ProfileVO {
 	private int p_main; //메인 프로필 여부
 	private String email; //이메일
 
-	@Override
-	public String toString() {
-		return "ProfileVO [id=" + id + ", nickName=" + nickName + ", photo=" + photo + ", tel=" + tel + ", bio=" + bio
-				+ ", privacy=" + privacy + ", p_main=" + p_main + ", email=" + email + "]";
-	}
 	//getter
 	public String getId() {
 		return id;

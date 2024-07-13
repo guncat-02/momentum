@@ -1,6 +1,5 @@
 package dao;
 
-import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -8,8 +7,8 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import vo.BanVO;
 import vo.CommVO;
-import vo.ManagerVO;
 import vo.MemberVO;
 import vo.PageVO;
 import vo.PostVO;
@@ -23,30 +22,35 @@ public class ManagerDao implements IF_ManagerDao{
 	
 	@Inject
 	SqlSession sql;
-	
+
 	@Override
-	public List<MemberVO> getAllMembers(PageVO pvo) throws Exception {
-		return sql.selectList(mapperQuery+".selectAllMembers", pvo);
+	public List<MemberVO> getAllMembers() throws Exception {
+		return sql.selectList(mapperQuery+".selectAllMembers");
 	}
 
 	@Override
-	public List<ProfileVO> getAllProfiles(PageVO pvo) throws Exception {
-		return sql.selectList(mapperQuery+".selectAllProfiles", pvo);
+	public List<ProfileVO> getAllProfiles() throws Exception {
+		return sql.selectList(mapperQuery+".selectAllProfiles");
 	}
 
 	@Override
-	public List<PostVO> getAllPosts(PageVO pvo) throws Exception {
-		return sql.selectList(mapperQuery+".selectAllPosts", pvo);
+	public List<PostVO> getAllPosts() throws Exception {
+		return sql.selectList(mapperQuery+".selectAllPosts");
 	}
 
 	@Override
-	public List<CommVO> getAllComms(PageVO pvo) throws Exception {
-		return sql.selectList(mapperQuery+".selectAllComms", pvo);
+	public List<CommVO> getAllComms() throws Exception {
+		return sql.selectList(mapperQuery+".selectAllComms");
 	}
 
 	@Override
-	public List<MemberVO> getAllAdmins(PageVO pvo) throws Exception {
-		return sql.selectList(mapperQuery+".selectAllAdmins", pvo);
+	public List<MemberVO> getAllAdmins() throws Exception {
+		return sql.selectList(mapperQuery+".selectAllAdmins");
+	}
+
+	@Override
+	public List<BanVO> getAllBanned() throws Exception {
+		return sql.selectList(mapperQuery+".selectAllBanned");
 	}
 
 	@Override
@@ -135,7 +139,7 @@ public class ManagerDao implements IF_ManagerDao{
 
 	@Override
 	public int getCurBannedCount() throws Exception {
-		return sql.selectOne(mapperQuery+".selectBannedCountWhere");
+		return sql.selectOne(mapperQuery+".selectSysdateBannedCount");
 	}
 
 	@Override
@@ -143,6 +147,21 @@ public class ManagerDao implements IF_ManagerDao{
 		return sql.delete(mapperQuery+".deleteKeyWordWhere");
 	}
 
+	@Override
+	public List<BanVO> searchBanned(PageVO pvo) throws Exception {
+		return sql.selectList(mapperQuery+".selectBannedWhere", pvo);
+	}
+
+	@Override
+	public int getBannedSearchCount(PageVO pvo) throws Exception {
+		return sql.selectOne(mapperQuery+".selectBannedCountWhere", pvo);
+	}
+
+	@Override
+	public String chkmanager(String id) throws Exception {
+		// TODO Auto-generated method stub
+		return sql.selectOne(mapperQuery+".chkmanager", id);
+	}
 
 
 }

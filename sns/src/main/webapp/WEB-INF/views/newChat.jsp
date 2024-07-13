@@ -219,10 +219,7 @@
                 	   	async: false,
                 	  	data: {nicks: nick,
                 		   	ids: id,
-                		   	chat: result},
-                		success: function() {
-                			console.log('성공')
-                		}
+                		   	chat: result}
                    })
                 },
                 error: function() {

@@ -10,4 +10,6 @@ public interface IF_ChatContDao {
 	public void insert(ChatContVO ccVO) throws Exception;
 	public void insertAttach(Map<String, Object> attach) throws Exception;
 	public List<ChatContVO> selectAttach(String chatNum) throws Exception;
+	public ChatContVO selectContOne(ChatContVO ccVO) throws Exception;
+	public List<ChatContVO> selectAttachList(ChatContVO ccVO) throws Exception;
 }

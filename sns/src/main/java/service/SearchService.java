@@ -1,5 +1,6 @@
 package service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import dao.IF_MainDAO;
 import dao.IF_SearchDao;
 import vo.PostVO;
+import vo.SearchVO;
 
 @Service
 public class SearchService implements IF_SearchService {
@@ -27,7 +29,12 @@ public class SearchService implements IF_SearchService {
 	//keyWord를 가져오기 위한 메서드
 	@Override
 	public List<String> selectKeyWord() throws Exception {
-		return sDao.selectKeyWord();
+		List<String> keyWord = new ArrayList<>();
+		List<SearchVO> searchList = sDao.selectKeyWord();
+		for(SearchVO s : searchList) {
+			keyWord.add(s.getKeyWord());
+		}
+		return keyWord;
 	}
 
 	//검색 결과를 가져오기 위한 메서드
@@ -36,7 +43,7 @@ public class SearchService implements IF_SearchService {
 		List<PostVO> pVO = sDao.selectSearchList(map);
 		for(PostVO p : pVO) {
 			List<String> file = mDao.postAttach(p.getNo());
-			p.setFilename(file.toArray(new String[file.size()]));
+			p.setFileName(file.toArray(new String[file.size()]));
 		}
 		return pVO;
 	}
