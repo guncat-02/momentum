@@ -3,6 +3,8 @@
 ## 프로젝트 소개
 *M PROJECT (momentum)* 은 기존의 대중성, 공개성을 중시하는 SNS가 아닌 팔로우를 중심으로 한 소수 그룹간의 소통을 중심으로 한 SNS 입니다.
 
+<br>
+
 ## 팀원 구성
 <div align="left">
 
@@ -12,8 +14,45 @@
 
 </div>
 
+<br>
+
 ## 개발 기간
 *2024.06.05 ~ 2024.07.18*
+
+<br>
+
+## 개발 환경
+### Environment
+
+<div>
+<img src="https://img.shields.io/badge/Visual Studio Code-007ACC?style=flat&logo=visualstudiocode&logoColor=white"/>
+<img src="https://img.shields.io/badge/IntelliJ-FE315D?style=flat&logo=intellijidea&logoColor=white"/>
+<img src="https://img.shields.io/badge/DBeaver-382923?style=flat&logo=dbeaver&logoColor=white"/>
+<img src="https://img.shields.io/badge/Git-F05032?style=flat&logo=git&logoColor=white"/>
+<img src="https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white"/>
+</div>
+
+### Development
+
+<div>
+<img src="https://img.shields.io/badge/HTML-E34F26?style=flat&logo=html5&logoColor=white"/>
+<img src="https://img.shields.io/badge/CSS-1572B6?style=flat&logo=css3&logoColor=white"/>
+<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=white"/>
+<img src="https://img.shields.io/badge/Java-5382A1?style=flat"/>
+<img src="https://img.shields.io/badge/Thymeleaf-005F0F?style=flat&logo=thymeleaf&logoColor=white"/>
+<img src="https://img.shields.io/badge/Springboot-6DB33F?style=flat&logo=springboot&logoColor=white"/>
+<img src="https://img.shields.io/badge/Oracle-F80000?style=flat&logo=oracle&logoColor=white"/>
+<img src="https://img.shields.io/badge/MyBatis-362929?style=flat"/>
+</div>
+
+### API
+
+<div>
+<img src="https://img.shields.io/badge/COOLSMS-0288D1?style=flat&logo=twilio&logoColor=white"/>
+<img src="https://img.shields.io/badge/KakaoLogin-FFCD00?style=flat&logo=kakao&logoColor=white"/>
+</div>
+
+<br>
 
 ## 주요 기능
 **팔로우 간의 게시물 공유**
@@ -30,4 +69,7 @@
 - 사용자는 최대 프로필 3개를 사용하여 독립적으로 채팅 할 수 있습니다.
 
 <br>
+
+## ERD
+
 
