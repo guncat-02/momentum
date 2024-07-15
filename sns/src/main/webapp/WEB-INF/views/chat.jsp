@@ -166,8 +166,10 @@
 	function connect() {
 		sock = new SockJS("chat");
 
+		//메세지를 받았을 떄
 		sock.onmessage = function (e) {
 			const data = JSON.parse(e.data);
+			console.log(data);
 			if(chatNum == data.chatNum) {
 				let allDate = data.chatTime.split(' ');
 				let day = allDate[0];
@@ -204,6 +206,11 @@
 				}
 				$('#nowChat').scrollTop($('#nowChat')[0].scrollHeight);
 			}
+		}
+		
+		//소켓 연결이 종료 되었을 때
+		socket.onclose = function() {
+			sock = new SockJS("chat")
 		}
 	}
 

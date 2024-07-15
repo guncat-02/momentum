@@ -234,7 +234,7 @@
                     					</div>
                 					</div>
                 					<c:choose>
-                				<c:when test="${user.bio ne null}">
+                				<c:when test="${user.bio != null && user.bio != ''}">
                 				<div class="searUser" style="grid-column: 2 / 3; grid-row: 1 / 2;">
                     				<span class="userNick">
                         				${user.nickName}
@@ -249,7 +249,7 @@
                     				</span>
                 				</div>
                 				</c:when>
-                				<c:when test="${user.bio eq null}">
+                				<c:when test="${user.bio == null || user.bio == ''}">
                 					<div class="searUser" style="grid-column: 2 / 3; grid-row: 1 / 3; padding-top: 4%;">
                     				<span class="userNick">
                         				${user.nickName}

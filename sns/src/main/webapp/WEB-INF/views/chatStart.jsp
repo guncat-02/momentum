@@ -16,8 +16,25 @@
         <span>기존 M 이 존재하지 않습니다.</span>
     </div>
     <div id="chatStartMain">
-        <a href="selProfile"><input type="button" value="CREATE M" id="chatstartBtn"></a>
+        <a id="goProfile" href="selProfile"><input type="button" value="CREATE M" id="chatstartBtn"></a>
         <a href="main"><input type="button" value="CANCLE" id="chatStartCancle"></a>
     </div>
 </body>
+<script>
+	$('#chatstartBtn').click(function() {
+		let cnt;
+		$.ajax({
+			url: "followSelect",
+			type: "post",
+			async: false,
+			success: function(result) {
+				cnt = result;
+			}
+		})
+		if(cnt == 0) {
+			alert('팔로우가 존재하지 않습니다.');
+			$('#goProfile').attr("href", "main")
+		}
+	})
+</script>
 </html>
