@@ -21,11 +21,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertAttach" parameterType="hashmap">
 		<choose>
 			<when test="check != null">
-				insert into chatAttach values ((select max(no) from chatAttach), #{vo.chatNum}, #{vo.nickName}, #{file}, default)
+				insert into chatAttach(no, chatNum, nickName, file, chatTime)
+				select max(no) from chatAttach where chatNum = #{vo.chatNum}, #{vo.chatNum}, #{vo.nickName}, #{file}, default)
 			</when>
-			<when test ="check == null">
+			<otherwise>
 				insert into chatAttach values (nextval(chat_no), #{vo.chatNum}, #{vo.nickName}, #{file}, default)
-			</when>
+			</otherwise>
 		</choose>
 	</insert>
 	<select id="selectContOne" parameterType="vo.ChatContVO" resultType="vo.ChatContVO">

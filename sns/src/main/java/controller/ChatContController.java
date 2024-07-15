@@ -63,6 +63,9 @@ public class ChatContController {
 	@PostMapping("chat/chatting")
 	public void insert(@ModelAttribute ChatContVO ccVO, MultipartFile[] chatFile) throws Exception {
 		String[] files = upload.fileUpload(chatFile);
+		for(String f : files) {
+			System.out.println(f);
+		}
 		if(files[0] != null) {
 			ccVO.setAttachList(files);
 			ccServe.insertAttach(ccVO);
