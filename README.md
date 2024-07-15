@@ -8,7 +8,7 @@
 
 | **장채윤** | **문형욱** | **우승훈** |
 | :------: |  :------: | :------: |
-| [<img src="https://avatars.githubusercontent.com/u/106502312?v=4" height=150 width=150> <br/> @guncat-02](https://github.com/guncat-02) | [<img src="https://avatars.githubusercontent.com/u/112460466?v=4" height=150 width=150> <br/> @ssamjagod](https://github.com/ssamjagod) | [<img src="https://avatars.githubusercontent.com/u/112460506?v=4" height=150 width=150> <br/> @bluewhale36](https://github.com/bluewhale36)
+| [<img src="https://github.com/user-attachments/assets/f9c7b711-ec87-4dbf-b7a1-cbb498976efe" height=150 width=150> <br/> @guncat-02](https://github.com/guncat-02) | [<img src="https://github.com/user-attachments/assets/2863a83b-d7c6-45e4-abde-180a5b31b2d7" height=150 width=150> <br/> @ssamjagod](https://github.com/ssamjagod) | [<img src="https://github.com/user-attachments/assets/e0c3fb39-9c3e-4844-aeb1-24d1de848db1" height=150 width=150> <br/> @bluewhale36](https://github.com/bluewhale36)
 
 </div>
 
