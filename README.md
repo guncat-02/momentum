@@ -1,4 +1,9 @@
 # M PROJECT (momentum)
+<div align="center">
+<img src="https://github.com/user-attachments/assets/ccd17ccd-9384-4eb0-be8a-40bbf85ff093" height=500>
+</div>
+<br>
+
 - 배포사이트 : http://34.47.102.45:8080/sns
 - 테스트 아이디 : test123
 - 테스트 비밀번호 : test123@
