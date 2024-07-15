@@ -1,3 +1,2 @@
-<div style="text-align: center; width: 100%; height: 20px;">
-    <span style="font-size: 40px;">FINAL PROJECT</span>
-</div>
+<span style="font-size: 50;">SNS M PROJECT</span>
+<hr>
