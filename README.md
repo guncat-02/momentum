@@ -1,6 +1,6 @@
 # M PROJECT (momentum)
 <div align="center">
-<img src="https://github.com/user-attachments/assets/ccd17ccd-9384-4eb0-be8a-40bbf85ff093" height=500>
+<img src="https://github.com/user-attachments/assets/ccd17ccd-9384-4eb0-be8a-40bbf85ff093">
 </div>
 <br>
 
