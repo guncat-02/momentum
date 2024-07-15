@@ -128,7 +128,22 @@ public class MainDAOImpl implements IF_MainDAO{
 	public List<PostVO> getRecommendPostList(HashMap<String, Object> recomMap) throws Exception {
 		return sqlsession.selectList(mapperQuery+".selectRecomPostRN", recomMap);
 	}
-	
+
+	@Override
+	public String takePhoto(String id) throws Exception {
+		// TODO Auto-generated method stub
+		System.out.println(id+"dao");
+		return sqlsession.selectOne(mapperQuery+".takePhoto", id);
+	}
+
+	@Override
+	public String takeNick(String id) throws Exception {
+		// TODO Auto-generated method stub
+		
+		String nick = sqlsession.selectOne(mapperQuery+".takeNick", id);
+		System.out.println(nick+"dao");
+		return nick;
+	}
 
 	
 

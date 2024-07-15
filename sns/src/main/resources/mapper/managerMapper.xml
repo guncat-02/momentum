@@ -235,5 +235,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</choose>
 		order by s_date desc
 	</select>
-	
+	<select id="chkmanager" parameterType="String" resultType="String">
+		select admin from member where id = #{id}
+	</select>
 </mapper>

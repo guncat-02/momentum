@@ -129,4 +129,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		and p_date between localtimestamp - interval 31 day and localtimestamp
 		order by p_date desc limit #{pageNo}, 10
 	</select>
+	<select id="takePhoto" parameterType="String" resultType="String">
+		select photo from profile where id = #{id}
+	</select>
+	<select id="takeNick" parameterType="String" resultType="String">
+		select nickName from profile where id = #{id}
+	</select>
 </mapper>

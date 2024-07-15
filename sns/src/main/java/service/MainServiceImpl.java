@@ -165,6 +165,19 @@ public class MainServiceImpl implements IF_MainService{
 		return maindao.getRecommendPostList(recomMap);
 	}
 
+	@Override
+	public String takePhoto(String id) throws Exception {
+		// TODO Auto-generated method stub
+		return maindao.takePhoto(id);
+	}
+
+	@Override
+	public String takeNick(String id) throws Exception {
+		// TODO Auto-generated method stub
+		System.out.println(id+"ser");
+		return maindao.takeNick(id);
+	}
+
 
 
 }

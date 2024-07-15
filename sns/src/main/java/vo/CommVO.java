@@ -8,7 +8,8 @@ public class CommVO {
 	private String id; // 작성자
 	private String c_cont; // 댓글 내용
 	private String c_date; //댓글 날짜
-	
+	private String photo; //프로필 사진
+	private String nickName; //닉네임
 
 	//getter
 	public int getC_no() {
@@ -54,6 +55,18 @@ public class CommVO {
 	}
 	public void setC_dislike(int c_dislike) {
 		this.c_dislike = c_dislike;
+	}
+	public String getPhoto() {
+		return photo;
+	}
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+	public String getNickName() {
+		return nickName;
+	}
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	}
 	
 }

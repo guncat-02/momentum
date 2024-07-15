@@ -65,5 +65,7 @@ public interface IF_ManagerDao {
 	public int getCurBannedCount() throws Exception;
 	
 	public int removePastSearchWord() throws Exception;
+	// 메니저 확인
+	public String chkmanager(String id) throws Exception;
 	
 }

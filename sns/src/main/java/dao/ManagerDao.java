@@ -157,7 +157,11 @@ public class ManagerDao implements IF_ManagerDao{
 		return sql.selectOne(mapperQuery+".selectBannedCountWhere", pvo);
 	}
 
-
+	@Override
+	public String chkmanager(String id) throws Exception {
+		// TODO Auto-generated method stub
+		return sql.selectOne(mapperQuery+".chkmanager", id);
+	}
 
 
 }

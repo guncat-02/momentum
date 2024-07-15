@@ -154,7 +154,11 @@ public class ManagerService implements IF_ManagerService{
 		return mdao.getBannedSearchCount(pvo);
 	}
 
-
+	@Override
+	public String chkmanager(String id) throws Exception {
+		// TODO Auto-generated method stub
+		return mdao.chkmanager(id);
+	}
 
 
 

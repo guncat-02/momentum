@@ -65,5 +65,7 @@ public interface IF_ManagerService {
 	public int getCurBannedCount() throws Exception;
 	
 	public int removePastSearchWord() throws Exception;
+	// 관리자 체크
+	public String chkmanager(String id) throws Exception;
 	
 }

@@ -39,19 +39,18 @@ pageContext.setAttribute("curId", curId);
 				<input type = "hidden" value="${mp.id }">
 					<a href="userprofile?id=${mp.id}" class="userprofilealink">
 						<div class="proimg">
-							<img class="profileImg" src="./resources/img/프로필.png">
-							<c:forEach items="${profileimglist }" var="pr">
-								<c:if test="${mp.id eq pr.id }">
-									<img class="profileImg" src="download?filename=${pr.photo }">
-								</c:if>
-							</c:forEach>
+							<c:choose>
+								<c:when test="${not empty mp.photo }">
+									<img class="profileImg" src="download?filename=${mp.photo }">
+								</c:when>
+								<c:otherwise>
+									<img class="profileImg" src="./resources/img/프로필.png">		
+								</c:otherwise>
+							</c:choose>
 						</div> 
 					</a>
-						<c:forEach items="${profilelist }" var="ap">
-							<c:if test="${mp.id eq ap.id}">
-								<span class="p_id">${ap.nickName }</span>
-							</c:if>
-						</c:forEach>
+						<span class="p_id">${mp.id }</span>
+
 					<span class="p_date">${mp.p_date} </span>
 					<!-- 해당 게시물 게시 유저를 내가 팔로우 하고 있는 지 여부 true, false -->
 					<c:if test="${mp.id ne curId}">
@@ -220,7 +219,9 @@ pageContext.setAttribute("curId", curId);
 						</button>
 					</div>
 					<div>
-						<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16"> <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z" /> <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0" /> </svg>
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-index-thumb" viewBox="0 0 16 16">
+		                    <path d="M6.75 1a.75.75 0 0 1 .75.75V8a.5.5 0 0 0 1 0V5.467l.086-.004c.317-.012.637-.008.816.027.134.027.294.096.448.182.077.042.15.147.15.314V8a.5.5 0 0 0 1 0V6.435l.106-.01c.316-.024.584-.01.708.04.118.046.3.207.486.43.081.096.15.19.2.259V8.5a.5.5 0 1 0 1 0v-1h.342a1 1 0 0 1 .995 1.1l-.271 2.715a2.5 2.5 0 0 1-.317.991l-1.395 2.442a.5.5 0 0 1-.434.252H6.118a.5.5 0 0 1-.447-.276l-1.232-2.465-2.512-4.185a.517.517 0 0 1 .809-.631l2.41 2.41A.5.5 0 0 0 6 9.5V1.75A.75.75 0 0 1 6.75 1M8.5 4.466V1.75a1.75 1.75 0 1 0-3.5 0v6.543L3.443 6.736A1.517 1.517 0 0 0 1.07 8.588l2.491 4.153 1.215 2.43A1.5 1.5 0 0 0 6.118 16h6.302a1.5 1.5 0 0 0 1.302-.756l1.395-2.441a3.5 3.5 0 0 0 .444-1.389l.271-2.715a2 2 0 0 0-1.99-2.199h-.581a5 5 0 0 0-.195-.248c-.191-.229-.51-.568-.88-.716-.364-.146-.846-.132-1.158-.108l-.132.012a1.26 1.26 0 0 0-.56-.642 2.6 2.6 0 0 0-.738-.288c-.31-.062-.739-.058-1.05-.046zm2.094 2.025" />
+		                </svg> <span class="show-cnt-span">
 						<span class="footspan">${mp.shows}</span>
 					</div>
 				</div>

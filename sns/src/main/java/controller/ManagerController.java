@@ -2,6 +2,7 @@ package controller;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -24,7 +25,11 @@ public class ManagerController {
 	IF_ManagerService mservice;
 	
 	@GetMapping("manager") 
-	public String managePage(HttpSession session, Model model) throws Exception {
+	public String managePage(HttpSession session, Model model,HttpServletRequest request,HttpServletResponse response) throws Exception {
+		String nowId = String.valueOf(session.getAttribute("userid"));
+		if(!(mservice.chkmanager(nowId)=="관리자")) {
+			response.sendRedirect(request.getContextPath()+"/loginpage"); // 처음 화면으로 돌아가
+		}
 		model.addAttribute("curId", session.getAttribute("userid"));
 		
 		model.addAttribute("memberCnt", mservice.getAllMemberCount());
