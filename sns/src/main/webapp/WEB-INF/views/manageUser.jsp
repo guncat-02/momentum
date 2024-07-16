@@ -108,7 +108,7 @@
 			                                	<div>
 				                                	<c:choose>
 				                                		<c:when test="${not empty one.photo }">
-				                                			<img src="/download?filename=${one.photo }">
+				                                			<img src="/sns/download?filename=${one.photo }">
 				                                		</c:when>
 				                                		<c:otherwise>
 				                                			<img src="/sns/resources/img/프로필.png">
