@@ -49,7 +49,7 @@ pageContext.setAttribute("curId", curId);
 							</c:choose>
 						</div> 
 					</a>
-						<span class="p_id">${mp.id }</span>
+						<span class="p_id">${mp.nickName }</span>
 
 					<span class="p_date">${mp.p_date} </span>
 					<!-- 해당 게시물 게시 유저를 내가 팔로우 하고 있는 지 여부 true, false -->
