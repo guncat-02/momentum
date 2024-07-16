@@ -169,7 +169,6 @@
 		//메세지를 받았을 떄
 		sock.onmessage = function (e) {
 			const data = JSON.parse(e.data);
-			console.log(data);
 			if(chatNum == data.chatNum) {
 				let allDate = data.chatTime.split(' ');
 				let day = allDate[0];
@@ -472,7 +471,6 @@
 	function chatInsert(chatCont, usersProfile, user) {
 		userList(chatIndex, usersProfile);
 		if (chatCont != null && chatCont.length != 0) {
-			console.log(chatCont)
 			const l_date = chatCont[chatCont.length-1].chatTime.split(' ')
 			lastDay = l_date[0];
 			let spDate = chatCont[0].chatTime.split(' ');
