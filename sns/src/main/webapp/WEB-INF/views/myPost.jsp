@@ -230,7 +230,7 @@
 							<tr>
 								<td class="commpro_radius">
 								<c:choose>
-									<c:when test="${comm.photo ne null }">
+									<c:when test="${not empty comm.photo}">
 										<img class="profileImg" src="download?filename=${comm.photo}">
 									</c:when>
 									<c:otherwise>
@@ -769,7 +769,7 @@
 		                html += '<tr>';
 		                html += '<td class="commpro_radius">';
 		                if (comm.photo) {
-		                    html += '<img src="' + comm.photo + '">';
+		                    html += '<img src=/sns/download?filename=' + comm.photo + '>';
 		                } else {
 		                    html += '<img src="./resources/img/프로필.png">';
 		                }

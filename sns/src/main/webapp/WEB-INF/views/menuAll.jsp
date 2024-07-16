@@ -152,7 +152,7 @@
 					let proText;
 					let proPhoto;
 					for (let pvo of result) {
-						if (pvo.photo == null) {
+						if (pvo.photo == null || $.trim(pvo.photo) == '') {
 							proPhoto = '/sns/resources/img/프로필.png';
 						} else {
 							proPhoto = `/sns/download?filename=\${pvo.photo}`;

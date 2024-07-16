@@ -109,6 +109,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				#{one}
 			</foreach>
 		and p_date between localtimestamp - interval 10 day and localtimestamp
+		and privacy = 1
 		order by p_date desc limit #{pageNo}, 10
 	</select>
 	
