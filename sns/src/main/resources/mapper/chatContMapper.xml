@@ -21,8 +21,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertAttach" parameterType="hashmap">
 		<choose>
 			<when test="check != null">
-				insert into chatAttach(no, chatNum, nickName, file, chatTime)
-				select max(no) from chatAttach where chatNum = #{vo.chatNum}, #{vo.chatNum}, #{vo.nickName}, #{file}, default)
+				insert into chatAttach(no, chatNum, nickName, chatAttach, chatTime)
+				select max(no), #{vo.chatNum}, #{vo.nickName}, #{file}, now() from chatAttach where chatNum = #{vo.chatNum}
 			</when>
 			<otherwise>
 				insert into chatAttach values (nextval(chat_no), #{vo.chatNum}, #{vo.nickName}, #{file}, default)
