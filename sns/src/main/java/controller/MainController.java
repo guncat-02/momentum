@@ -84,7 +84,6 @@ public class MainController {
 		for (PostVO pvo : postList) {
 			// 파일 추가
 			pvo.setFileName(mser.getAttach(pvo.getNo()));
-			System.out.println(pvo.toString());
 			// 현재 출력 된 게시물 번호 미리 저장. 추후 추천 게시물에서는 출력되지 않도록 하기 위함.
 			selectedPostNoList.add((Integer)pvo.getNo());
 			
@@ -257,6 +256,25 @@ public class MainController {
 			// 해당 글의 리포스트 수
 			pvo.setReCnt(reCnt);
 		}
+		// 여기부분 넣음 채윤아 pvo에 nickname이랑 photo 넣을라고
+		for(PostVO pvo : postList) {
+			int ccnt = mser.takeCommCnt(pvo.getNo());
+			int p_love = mser.takeP_loveCnt(pvo.getNo());
+			int reCnt = mser.takeReCnt(pvo.getNo());
+			String nickName = mser.takeNick(pvo.getId());
+			String photo = mser.takePhoto(pvo.getId());
+			
+			// 해당 글의 댓글 수
+			pvo.setCommCnt(ccnt);
+			// 해당 글의 좋아요 수
+			pvo.setP_love(p_love);
+			// 해당 글의 리포스트 수
+			pvo.setReCnt(reCnt);
+			// 해당 글의 닉네임
+			pvo.setNickName(nickName);
+			// 해당 글의 프로필 사진
+			pvo.setPhoto(photo);
+		}
 	
 		model.addAttribute("fList", followIdList);
 		model.addAttribute("aList", postList);
@@ -312,6 +330,26 @@ public class MainController {
 			// 해당 글의 리포스트 수
 			pvo.setReCnt(reCnt);
 		}
+		// 여기부분 넣음 채윤아 pvo에 nickname이랑 photo 넣을라고
+		for(PostVO pvo : postList) {
+			int ccnt = mser.takeCommCnt(pvo.getNo());
+			int p_love = mser.takeP_loveCnt(pvo.getNo());
+			int reCnt = mser.takeReCnt(pvo.getNo());
+			String nickName = mser.takeNick(pvo.getId());
+			String photo = mser.takePhoto(pvo.getId());
+			
+			// 해당 글의 댓글 수
+			pvo.setCommCnt(ccnt);
+			// 해당 글의 좋아요 수
+			pvo.setP_love(p_love);
+			// 해당 글의 리포스트 수
+			pvo.setReCnt(reCnt);
+			// 해당 글의 닉네임
+			pvo.setNickName(nickName);
+			// 해당 글의 프로필 사진
+			pvo.setPhoto(photo);
+		}
+				
 		model.addAttribute("fList", followIdList);
 		model.addAttribute("aList", postList);
 		model.addAttribute("profilelist",pser.allprofileList());

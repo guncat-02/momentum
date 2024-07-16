@@ -212,8 +212,8 @@
 					$('#nowChat').scrollTop($('#nowChat')[0].scrollHeight);
 				} else {
 					for (let i = 0; i < usersProfile.length; i++) {
-						if (data.nickName == usersProfile.nickName) {
-							if (usersProfile.photo != null) {
+						if (data.nickName == usersProfile[i].nickName) {
+							if (usersProfile[i].photo != null) {
 								if (data.cont != null && data.cont.trim() != "") {
 									$('#nowChatting').append("<tr><td class='chatProfile'><div class='userNick'><span>" + usersProfile[i].nickName + "</span></div><div class='chatProfileYou'><img src='download?filename=" + usersProfile[i].photo + "'></div></td><td class='chatCont'><div class='chatting yourChatting'><div class='userChat'>" + data.cont + "</div><div class='chatUserDate'><span>" + time + "</span></div><div class='chatNum'><span>"+num+"</span></div></div></td></tr>")
 								} else {
@@ -606,7 +606,7 @@
 					for(let i = 0; i < following.length; i++) {
 						for(let j = 0; j < profile.length; j++) {
 							if(following[i].nickName == profile[j].nickName) {
-								following.splice(following[i]);
+								following.splice(i, 1);
 								break;
 							}
 						}	
@@ -622,7 +622,7 @@
 					for(let i = 0; i < follower.length; i++) {
 						for(let j = 0; j < profile.length; j++) {
 							if(follower[i].nickName == profile[j].nickName) {
-								follower.splice(follower[i]);
+								follower.splice(i, 1);
 								break;
 							}
 						}	

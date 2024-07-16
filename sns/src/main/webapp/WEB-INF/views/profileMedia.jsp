@@ -188,7 +188,74 @@
 	$(".closeModal").click(function() {
 		$(".modal").css("display","none");
 	});
-     
+    
+	let curId = '<%=(String)session.getAttribute("userid") %>';
+	$('#userFollowBtn button').on('click', function() {
+		let btn = $(this);
+		if (btn.val() == 0) {
+			follow(btn);
+		} else {
+			followCancel(btn);
+		}
+	})
+	function follow(btn) {
+		// 버튼 값 변경
+		btn.val(1);
+		// 버튼 텍스트 변경
+		btn.text('FOLLOWING');
+
+		let fId = $.trim("${profile.id}");
+		
+		$.ajax({
+			url : '/sns/follow',
+			type : 'get',
+			data : {
+				'id' : curId,
+				'followId' : fId,
+			},
+			success : function(result) {
+				if (result == 1) {
+					btn.css('pointer-events', 'auto');		
+					return;
+				} else if (result == -1) {
+					alert('차단한 유저는 팔로우 할 수 없습니다.\n차단 해제 후 다시 시도해주세요.');
+				} else {
+					alert('잠시 후 다시 시도해주세요.');
+				}
+				btn.val(0);
+				btn.text('FOLLOW');
+			},
+			error : function() {
+				alert('잠시 후 다시 시도해주세요.');
+				btn.val(0);
+				btn.text('FOLLOW');
+			}
+		});
+	}
+	function followCancel(btn) {
+
+		let fId = $.trim("${profile.id}");
+
+		btn.val(0);
+		btn.text('FOLLOW');
+
+		$.ajax({
+			url : '/sns/followcancel',
+			type : 'get',
+			data : {
+				'id' : curId,
+				'followId' : fId
+			},
+			success : function(result) {
+				btn.css('pointer-events', 'auto');
+			},
+			error : function() {
+				alert('잠시 후 다시 시도해주세요.');
+				btn.val(1);
+				btn.text('FOLLOWING');
+			}
+		});
+	}
     
 </script>
 </html>

@@ -108,7 +108,7 @@
 			                                	<div>
 				                                	<c:choose>
 				                                		<c:when test="${not empty one.photo }">
-				                                			<img src="/download?filename=${one.photo }">
+				                                			<img src="/sns/download?filename=${one.photo }">
 				                                		</c:when>
 				                                		<c:otherwise>
 				                                			<img src="/sns/resources/img/프로필.png">
@@ -214,118 +214,12 @@
 </body>
 
 <script>
-	
-	function validation() {
-		let selected = $('#searchType').val();
-		if (selected != 'period') {
-			if ($.trim($('#searchWord').val()) == '') {
-				alert('유효한 값을 입력하세요.');
-				return false;
-			} else {
-				return true;
-			}
-		} else {
-			if ($.trim($('#stDate').val()) == '' || $.trim($('#ndDate').val()) == '') {
-				alert('유효한 값을 입력하세요.');
-				return false;
-			} else {
-				return true;
-			}
-		}
-	}
 
     $(document).ready(function () {
         connTime(); // 접속 시간 갱신
-        // getResultCnt(); // 조회 튜플 개수 갱신
         
         let curList = '${pagevo.searchLoc}';
         $(`div[id$=\${curList}] button`).css('filter', 'invert(100%)');
-        $('input[name=searchLoc]').val(curList);
-       	let result = searchFlag();
-       	searchTypeChange(); // 검색 타입 지정
-       	// searchPaging(result);
-    });
-    
-    function searchFlag() {
-    	let sType = '${pagevo.searchType}';
-    	if (sType.trim() != '') {
-        	let sWord = '${pagevo.searchWord}';
-        	let stDate = '${pagevo.stDate}';
-        	let ndDate = '${pagevo.ndDate}';
-    		$('option[value=id]').removeAttr('selected');
-    		$(`option[value=${pagevo.searchType}]`).attr('selected', '');
-        	if (sWord != null && stDate != null && ndDate != null) {
-				$('#searchWord').val(sWord);
-        		$('#stDate').val(stDate);
-        		$('#ndDate').val(ndDate);
-        	}
-        	return {
-        		'searchLoc' : '${pagevo.searchLoc}',
-        		'sType' : sType,
-        		'sWord' : sWord,
-        		'stDate' : stDate,
-        		'ndDate' : ndDate,
-        	};
-    	}
-    	return null;
-    }
-	
-	function scrollEventHandler () {
-		console.log('ssssssssss');
-	}
-	
-	document.addEventListener('scroll', scrollEventHandler);
-    
-    
-    // 선택한 검색 유형에 따라 검색어 input display 변환
-    $('#searchType').on('change', function () { searchTypeChange(); });
-    function searchTypeChange() {
-		$('#search-cont input').val('');
-        let selected = $('#searchType').val();
-        if (selected != 'period') { // userid, contents
-            $('#searchWord').css('display', '');
-            $('input[type=date]').css('display', 'none');
-            $('input[type=date]').attr('disabled', '');
-        } else { // period
-            $('#searchWord').css('display', 'none');
-            $('input[type=date]').css('display', '');
-            $('#stDate').removeAttr('disabled');
-        }
-        limitAction(selected);
-    }
-    // 선택된 검색 유형에 따라 볼 수 있는 데이터 유형 제한.
-    function limitAction(selected) {
-    	$('div[id^=menu-] button').attr('disabled','');
-    	$('div[id^=menu-] button').val(0);
-    	if (selected == 'cont') {
-    		$('#profile-btn').removeAttr('disabled');
-    		$('#post-btn').removeAttr('disabled');
-    		$('#comm-btn').removeAttr('disabled');
-    		$('#profile-btn').val(1);
-    		$('#post-btn').val(1);
-    		$('#comm-btn').val(1);
-    	} else if (selected == 'period') {
-    		$('button:not([id^=profile-])').removeAttr('disabled');
-    		$('button:not([id^=profile-])').val(1);
-    	} else {
-    		$('div[id^=menu-] button').removeAttr('disabled');
-    		$('div[id^=menu-] button').val(1);
-    	}
-    	if ($('button[value=0]').text().toLowerCase().indexOf('${pagevo.searchLoc}') != -1) {
-    		$('#searchBtn').attr('disabled', '');
-    		$('#searchBtn').val(0);
-    	} else {
-    		$('#searchBtn').removeAttr('disabled');
-    		$('#searchBtn').val(1);
-    	}
-    }
-    
-    
-    // 기간 검색에서, 첫번째 날짜 선택 시 두번째 날짜는 이후의 날짜만 선택 가능하도록 변경
-    $('#stDate').on('change', function () {
-        $('#ndDate').removeAttr('disabled');
-        $('#ndDate').val('');
-        $('#ndDate').attr('min', $(this).val());
     });
     
     // table 위 버튼 클릭 시 버튼 디자인 변경 및 table 영역 새로고침
@@ -355,7 +249,7 @@
     	$('#cur-date-span').text(dtStr);	
     }
 
-	// 무한 스크롤 페이징 (검색 X)
+	// 무한 스크롤 페이징
 	let pageNo = 20;
 	let prevCont;
 	function scrollEventHandler() {
@@ -376,7 +270,9 @@
 			})
 		}
 	}
-	document.querySelector('#admin-table').addEventListener('scroll', scrollEventHandler);
+	if (${cnt} >= 20) {
+		document.querySelector('#admin-table').addEventListener('scroll', scrollEventHandler);
+	}
     
 </script>
 </html>
