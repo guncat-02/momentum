@@ -169,7 +169,7 @@
 		//메세지를 받았을 떄
 		sock.onmessage = function (e) {
 			const data = JSON.parse(e.data);
-			console.log(data)
+			console.log(data);
 			if(chatNum == data.chatNum) {
 				let allDate = data.chatTime.split(' ');
 				let day = allDate[0];
@@ -196,7 +196,7 @@
 									$('#nowChatting').append("<tr><td class='chatProfile'><div class='chatProfileYou'><img src='download?filename=" + usersProfile[i].photo + "'></div></td><td class='chatCont'><div class='chatting yourChatting'><div class='userNick'>" + usersProfile[i].nickName + "</div><div class='userChat'><img src=download?filename=" + data.chatAttach + " class='chattingImg'></div><div class='chatUserDate'><span>" + time + "</span></div></div></td></tr>")
 								}
 							} else {
-								if (data.cont != null && ddata.cont.trim() != "") {
+								if (data.cont != null && data.cont.trim() != "") {
 									$('#nowChatting').append("<tr><td class='chatProfile'><div class='chatProfileYou'><img src='./resources/img/프로필.png'></div></td><td class='chatCont'><div class='chatting yourChatting'><div class='userNick'>" + usersProfile[i].nickName + "</div><div class='userChat'>" + data.cont + "</div><div class='chatUserDate'><span>" + time + "</span></div></div></td></tr>")
 								} else {
 									$('#nowChatting').append("<tr><td class='chatProfile'><div class='chatProfileYou'><img src='./resources/img/프로필.png'></div></td><td class='chatCont'><div class='chatting yourChatting'><div class='userNick'>" + usersProfile[i].nickName + "</div><div class='userChat'><img src=download?filename=" + data.chatAttach + " class='chattingImg'></div><div class='chatUserDate'><span>" + time + "</span></div></div></td></tr>")
@@ -472,6 +472,7 @@
 	function chatInsert(chatCont, usersProfile, user) {
 		userList(chatIndex, usersProfile);
 		if (chatCont != null && chatCont.length != 0) {
+			console.log(chatCont)
 			const l_date = chatCont[chatCont.length-1].chatTime.split(' ')
 			lastDay = l_date[0];
 			let spDate = chatCont[0].chatTime.split(' ');

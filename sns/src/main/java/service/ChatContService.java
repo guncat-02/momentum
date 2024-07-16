@@ -37,6 +37,7 @@ public class ChatContService implements IF_ChatContService {
 			for(int j = 0; j < cont.size(); j++) {
 				if(num[i] == cont.get(j).getNo()) {
 					arrayCont.add(cont.get(j));
+					cont.remove(j);
 					break;
 				}
 			}
