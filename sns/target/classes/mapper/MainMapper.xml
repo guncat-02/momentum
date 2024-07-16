@@ -128,6 +128,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			where id = #{sessionId}
 		)
 		and p_date between localtimestamp - interval 31 day and localtimestamp
+		and privacy = 1
 		order by p_date desc limit #{pageNo}, 10
 	</select>
 	<select id="takePhoto" parameterType="String" resultType="String">
