@@ -129,7 +129,7 @@
 			type: 'get',
 			success: function(result) {
 				let photo = result.photo;
-				if (photo == null) {
+				if (photo == null || $.trim(photo) == '') {
 					photo = '/sns/resources/img/프로필.png';
 				} else {
 					photo = `/sns/download?filename=\${photo}`;
@@ -152,7 +152,7 @@
 					let proText;
 					let proPhoto;
 					for (let pvo of result) {
-						if (pvo.photo == null) {
+						if (pvo.photo == null || $.trim(pvo.photo) == '') {
 							proPhoto = '/sns/resources/img/프로필.png';
 						} else {
 							proPhoto = `/sns/download?filename=\${pvo.photo}`;

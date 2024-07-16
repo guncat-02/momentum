@@ -229,30 +229,17 @@
 						<table class="ctable${comm.c_no}" style="word-break: break-all" id="commtablelist">
 							<tr>
 								<td class="commpro_radius">
-								<c:set var="p_proimg" value="" />
-								<c:forEach items="${profileimglist}" var="pr">
-									<c:choose>
-										<c:when test="${comm.id eq pr.id}">
-											<img class="profileImg" src="download?filename=${pr.photo}">
-											<c:set var="p_proimg" value="true" />
-										</c:when>
-									</c:choose>
-								</c:forEach>
-
 								<c:choose>
-									<c:when test="${p_proimg ne 'true'}">
-										<img class="profileImg" src="./resources/img/프로필.png">
-										<c:set var="p_proimg" value="flase" />
+									<c:when test="${not empty comm.photo}">
+										<img class="profileImg" src="download?filename=${comm.photo}">
 									</c:when>
+									<c:otherwise>
+										<img class="profileImg" src="/sns/resources/img/프로필.png">
+									</c:otherwise>
 								</c:choose>
-
-								<c:forEach items="${profilelist }" var="ap">
-									<c:if test="${comm.id eq ap.id}">
-										<b>${ap.nickName }</b>
-									</c:if>
-								</c:forEach>
+										<b>${comm.nickName }</b>
 									<p class="comm_date">${comm.c_date}</p></td>
-
+								
 								<td width="5%">
 									<button type="button" class="delete${comm.c_no} postcommbut" onclick="delcomm(${comm.c_no})">삭제</button>
 									<button type="button" class="report${comm.c_no} postcommbut" onclick="openreportmodal('${comm.c_no}','${comm.id }','${comm.c_cont }')">신고</button>
@@ -778,12 +765,20 @@
 			        var commlist = data.commlist;
 		            var html = '';    
 		            $.each(commlist, function(index, comm) {
-		            	html += '<table class="ctable' + comm.c_no + '" style="word-break: break-all" id="commtablelist">';
+		                html += '<table class="ctable' + comm.c_no + '" style="word-break: break-all" id="commtablelist">';
 		                html += '<tr>';
-		                html += '<td class="commpro_radius"><img src="./resources/img/프로필.png"><b>' + comm.id + '</b>';
+		                html += '<td class="commpro_radius">';
+		                if (comm.photo) {
+		                    html += '<img src=/sns/download?filename=' + comm.photo + '>';
+		                } else {
+		                    html += '<img src="./resources/img/프로필.png">';
+		                }
+		                html += '<b>' + comm.nickName + '</b>';
 		                html += '<br><p class="comm_date">' + comm.c_date + '</p></td>';
-		                html += '<td width="5%"><button type="button" class="delete' + comm.c_no + ' postcommbut" onclick="delcomm(' + comm.c_no + ')">삭제</button>';
-		                html += '<button type="button" class="report' + comm.c_no + ' postcommbut" onclick="alert(\'report\')">신고</button></td>';
+		                html += '<td width="5%">';
+		                html += '<button type="button" class="delete' + comm.c_no + ' postcommbut" onclick="delcomm(' + comm.c_no + ')">삭제</button>';
+		                html += '<button type="button" class="report' + comm.c_no + ' postcommbut" onclick="alert(\'report\')">신고</button>';
+		                html += '</td>';
 		                html += '</tr>';
 		                html += '<tr>';
 		                html += '<td class="commcontents" width="1500px">' + comm.c_cont + '</td>';
@@ -810,7 +805,7 @@
 		                html += '</tr>';
 		                html += '</table>';
 		            });
-			        $('#ctablediv').html(html);
+		            $('#ctablediv').html(html);
 			        },
 			        error: function(xhr, status, error) {
 			            // AJAX 요청이 실패한 경우 처리할 코드

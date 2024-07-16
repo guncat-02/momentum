@@ -15,6 +15,8 @@ public class PostVO {
 	private int commCnt; // 글의 댓글 수
 	private int p_love; // 글의 좋아요 수
 	private int reCnt; // 글의 좋아요 수
+	private String photo; //프로필 사진
+	private String nickName; //닉네임
 	//getter
 	public int getNo() {
 		return no;
@@ -51,6 +53,9 @@ public class PostVO {
 	}
 	public int getReCnt() {
 		return reCnt;
+	}
+	public String getPhoto() {
+		return photo;
 	}
 	//setter
 	public void setNo(int no) {
@@ -89,11 +94,14 @@ public class PostVO {
 	public void setReCnt(int reCnt) {
 		this.reCnt = reCnt;
 	}
-	@Override
-	public String toString() {
-		return "PostVO [no=" + no + ", re_no=" + re_no + ", cont=" + cont + ", shows=" + shows + ", fileName="
-				+ Arrays.toString(fileName) + ", privacy=" + privacy + ", c_block=" + c_block + ", id=" + id
-				+ ", p_date=" + p_date + ", commCnt=" + commCnt + ", p_love=" + p_love + ", reCnt=" + reCnt + "]";
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+	public String getNickName() {
+		return nickName;
+	}
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	}
 	
 }

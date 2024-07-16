@@ -215,9 +215,11 @@
 		const backHref = document.referrer;
     	const backArray = backHref.split('?')
     	const backChk = backArray[0].split('/')
-    	const backWord = backChk[1].split('=')
-    	keyWord = backWord[1];
-    	back = backChk[backChk.length-1];
+    	back = backChk[backChk.length-1];	
+    	if(back == "searchList" || back == "myPost") {
+    		const backWord = backArray[1].split('=')
+        	keyWord = backWord[1];
+    	}
     	
     	const img = document.querySelector('.proImg');
     	const photo = document.querySelector('#photo');
@@ -316,8 +318,10 @@
     	} else {
     		if(back == "searchList") {
     			location.href = back+"?keyWord="+keyWord;
+    		} else if(back == "myPost"){
+    			location.href = back+"?no="+keyWord;
     		} else {
-    			location.href = back;	
+    			location.href = back;
     		}
     	}
     })

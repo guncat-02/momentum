@@ -33,7 +33,7 @@
                     <span id="cur-date-span"></span>
                     <span id="cur-adminId-span">Admin : ${curId }</span>
                 </div>
-                <!-- 
+				<!--
                 <div id="search-type">
                 	<input type="hidden" name="searchArea" value="User">
                 	<input type="hidden" name="searchLoc" value="">
@@ -49,10 +49,10 @@
                     <input type="date" id="ndDate" name="ndDate">
                     <button value="1" id="searchBtn">Search</button>
                 </div>
+				-->
                 <div id="search-result">
                 	<span id="result-span">총 조회 결과 : ${cnt }건.</span>
                 </div>
-                 -->
                 <div id="menu-user-member">
                     <button type="button" value="1" id="member-btn">MEMBER</button>
                 </div>
@@ -265,7 +265,6 @@
     
     function searchFlag() {
     	let sType = '${pagevo.searchType}';
-    	
     	if (sType.trim() != '') {
         	let sWord = '${pagevo.searchWord}';
         	let stDate = '${pagevo.stDate}';
@@ -287,6 +286,14 @@
     	}
     	return null;
     }
+	
+	function scrollEventHandler () {
+		console.log('ssssssssss');
+	}
+	
+	document.addEventListener('scroll', scrollEventHandler);
+	
+	
     
     /*
     function searchPaging(result) {
@@ -321,7 +328,8 @@
     // 선택한 검색 유형에 따라 검색어 input display 변환
     $('#searchType').on('change', function () { searchTypeChange(); });
     function searchTypeChange() {
-        let selected = $('#searchType').val();        
+		$('#search-cont input').val('');
+        let selected = $('#searchType').val();
         if (selected != 'period') { // userid, contents
             $('#searchWord').css('display', '');
             $('input[type=date]').css('display', 'none');
@@ -395,12 +403,28 @@
     	$('#cur-date-span').text(dtStr);	
     }
 
-
-    
-
-
-    $('#export-Excel').on('click', function() {
-    });
+	// 무한 스크롤 페이징 (검색 X)
+	let pageNo = 20;
+	let prevCont;
+	function scrollEventHandler() {
+		let viewTop = document.querySelector('#admin-table').getBoundingClientRect().y;
+		let tableTop = document.querySelector('#admin-table table').getBoundingClientRect().y;
+		let tableHeight = document.querySelector('#admin-table table').clientHeight;
+		let restScroll = tableHeight - (viewTop - tableTop + 500);
+		if (restScroll <= 150) {
+			let searchLoc = "${pagevo.searchLoc}";
+			document.querySelector('#admin-table').removeEventListener('scroll', scrollEventHandler);
+			prevCont = $('#admin-table table tbody').html();
+			$('#admin-table').load(`/sns/manager/paging/user/\${searchLoc}?pageNo=\${pageNo} #admin-table table`, function() {
+				pageNo += 20;
+				if ($('#admin-table table tbody tr').length >= 20) {
+					document.querySelector('#admin-table').addEventListener('scroll', scrollEventHandler);				
+				}
+				$('#admin-table table tbody').prepend(prevCont);
+			})
+		}
+	}
+	document.querySelector('#admin-table').addEventListener('scroll', scrollEventHandler);
     
 </script>
 </html>

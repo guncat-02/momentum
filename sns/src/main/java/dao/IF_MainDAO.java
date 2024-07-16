@@ -48,5 +48,9 @@ public interface IF_MainDAO {
 	public List<PostVO> getFollowingPostList(HashMap<String, Object> fPostMap) throws Exception;
 	// 내가 팔로우하지 않은 사람의 게시물 출력
 	public List<PostVO> getRecommendPostList(HashMap<String, Object> recomMap) throws Exception;
+	// 프로필vo에 닉네임 포토 가져오기
+	public String takePhoto(String id) throws Exception;
+	// 프로필vo에 닉네임 닉네임 가져오기
+	public String takeNick(String id) throws Exception;
 	
 }

@@ -22,33 +22,33 @@ public class ManagerService implements IF_ManagerService{
 	IF_ManagerDao mdao;
 	
 	@Override
-	public List<MemberVO> getAllMembers() throws Exception {
-		return mdao.getAllMembers();
+	public List<MemberVO> getAllMembers(int pageNo) throws Exception {
+		return mdao.getAllMembers(pageNo);
 	}
 
 	@Override
-	public List<ProfileVO> getAllProfiles() throws Exception {
-		return mdao.getAllProfiles();
+	public List<ProfileVO> getAllProfiles(int pageNo) throws Exception {
+		return mdao.getAllProfiles(pageNo);
 	}
 
 	@Override
-	public List<PostVO> getAllPosts() throws Exception {
-		return mdao.getAllPosts();
+	public List<PostVO> getAllPosts(int pageNo) throws Exception {
+		return mdao.getAllPosts(pageNo);
 	}
 
 	@Override
-	public List<CommVO> getAllComms() throws Exception {
-		return mdao.getAllComms();
+	public List<CommVO> getAllComms(int pageNo) throws Exception {
+		return mdao.getAllComms(pageNo);
 	}
 
 	@Override
-	public List<MemberVO> getAllAdmins() throws Exception {
-		return mdao.getAllAdmins();
+	public List<MemberVO> getAllAdmins(int pageNo) throws Exception {
+		return mdao.getAllAdmins(pageNo);
 	}
 
 	@Override
-	public List<BanVO> getAllBanned() throws Exception {
-		return mdao.getAllBanned();
+	public List<BanVO> getAllBanned(int pageNo) throws Exception {
+		return mdao.getAllBanned(pageNo);
 	}
 
 	@Override
@@ -152,6 +152,12 @@ public class ManagerService implements IF_ManagerService{
 	@Override
 	public int getBannedSearchCount(PageVO pvo) throws Exception {
 		return mdao.getBannedSearchCount(pvo);
+	}
+
+	@Override
+	public String chkmanager(String id) throws Exception {
+		// TODO Auto-generated method stub
+		return mdao.chkmanager(id);
 	}
 
 

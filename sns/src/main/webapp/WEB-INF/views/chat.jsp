@@ -166,6 +166,7 @@
 	function connect() {
 		sock = new SockJS("chat");
 
+		//메세지를 받았을 떄
 		sock.onmessage = function (e) {
 			const data = JSON.parse(e.data);
 			if(chatNum == data.chatNum) {
@@ -183,10 +184,11 @@
 					} else {
 						$('#nowChatting').append("<tr><td class='chatCont'><div class='chatting myChatting'><div class='chatUserDate myChatDate'><span>" + time + "</span></div><div class='userChat myChat'><img src=download?filename=" + data.chatAttach + " class='chattingImg'></div></div></td></tr>");
 					}
+					$('#nowChat').scrollTop($('#nowChat')[0].scrollHeight);
 				} else {
 					for (let i = 0; i < usersProfile.length; i++) {
-						if (data.nickName == usersProfile[i].nickName) {
-							if (usersProfile[i].photo != null) {
+						if (data.nickName == usersProfile.nickName) {
+							if (usersProfile.photo != null) {
 								if (data.cont != null && data.cont.trim() != "") {
 									$('#nowChatting').append("<tr><td class='chatProfile'><div class='chatProfileYou'><img src='download?filename=" + usersProfile[i].photo + "'></div></td><td class='chatCont'><div class='chatting yourChatting'><div class='userNick'>" + usersProfile[i].nickName + "</div><div class='userChat'>" + data.cont + "</div><div class='chatUserDate'><span>" + time + "</span></div></div></td></tr>")
 								} else {
@@ -202,8 +204,12 @@
 						}
 					}
 				}
-				$('#nowChat').scrollTop($('#nowChat')[0].scrollHeight);
 			}
+		}
+		
+		//소켓 연결이 종료 되었을 때
+		sock.onclose = function() {
+			sock = new SockJS("chat")
 		}
 	}
 
@@ -356,6 +362,7 @@
                 		url: "/sns/chat/chatting",
                 		type: "post",
                 		enctype: "multipart/form_data",
+                		traditional: true,
                 		data: formData,
                 		async: false,
                 		processData: false,
@@ -363,7 +370,7 @@
                 	})
     			}
     			sock.send(JSON.stringify(data));
-    			resetChat();	
+    			resetChat();
             }
 		}
 	})
