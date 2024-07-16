@@ -83,20 +83,17 @@
 			</div>
 			<div id="chatSetting" class="chatItem">
 				<div id="chatSet">
-					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-						class="bi bi-telephone" viewBox="0 0 16 16">
-						<path
-							d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z" />
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus" viewBox="0 0 16 16" id="popOpen">
+  						<path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
+  						<path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5"/>
 					</svg>
-					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-						class="bi bi-archive" viewBox="0 0 16 16" id="storageIcon">
-						<path
-							d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5zm13-3H1v2h14zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5" />
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16"  id="goEdit">
+  						<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+  						<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
 					</svg>
-					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-						class="bi bi-three-dots" viewBox="0 0 16 16">
-						<path
-							d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3" />
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-door-open" viewBox="0 0 16 16" id="chatOut">
+  						<path d="M8.5 10c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1"/>
+  						<path d="M10.828.122A.5.5 0 0 1 11 .5V1h.5A1.5 1.5 0 0 1 13 2.5V15h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V1.5a.5.5 0 0 1 .43-.495l7-1a.5.5 0 0 1 .398.117M11.5 2H11v13h1V2.5a.5.5 0 0 0-.5-.5M4 1.934V15h6V1.077z"/>
 					</svg>
 				</div>
 			</div>
@@ -127,14 +124,12 @@
 								d="M4.285 9.567a.5.5 0 0 1 .683.183A3.5 3.5 0 0 0 8 11.5a3.5 3.5 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683M7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5m4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5" />
 						</svg>
 					</div>
-					<div id="chatImc">
+					<div id="chatStorageBox">
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-							class="bi bi-mic" viewBox="0 0 16 16" id="chatImcBtn">
-							<path
-								d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5" />
-							<path
-								d="M10 8a2 2 0 1 1-4 0V3a2 2 0 1 1 4 0zM8 0a3 3 0 0 0-3 3v5a3 3 0 0 0 6 0V3a3 3 0 0 0-3-3" />
-						</svg>
+						class="bi bi-archive" viewBox="0 0 16 16" id="storageIcon">
+						<path
+							d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5zm13-3H1v2h14zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5" />
+					</svg>
 					</div>
 				</div>
 			</div>
@@ -156,12 +151,42 @@
 			<div id="chatImgList"></div>
 		</div>
 	</form>
+	<div id="chatFollowDiv" class="theme">
+		<div id="followPop">
+			<div id="followPopTitle">
+				<span>
+					PLUS M FRIENDS
+				</span>
+				<input type="button" value="X" id="popCancle">
+			</div>
+			<div id="followPopMenu">
+				<input type="button" value="FOLLWER" id="followerBtn" class="folloBtn">
+				<input type="button" value="FOLLOWING" id="followingBtn" class="folloBtn">
+			</div>
+			<div id="followList">
+				<div id="followerList" class="follList">
+					
+				</div>
+				<div id="followingList" class="follList">
+					
+				</div>
+			</div>
+			<div id="plusList">
+			</div>
+			<div id="plusBtnDiv">
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16" id="plusBtn">
+  					<path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+				</svg>
+			</div>
+		</div>
+	</div>
 </body>
 <script>
 	let chatNum;
 	let lastNum;
 	let sock;
 	let lastDay;
+	let num = 0;
 
 	function connect() {
 		sock = new SockJS("chat");
@@ -180,9 +205,9 @@
 				lastDay = day;
 				if(data.nickName == $('#user').val()) {
 					if (data.cont != null && data.cont.trim() != "") {
-						$('#nowChatting').append("<tr><td class='chatCont'><div class='chatting myChatting'><div class='chatUserDate myChatDate'><span>" + time + "</span></div><div class='userChat myChat'>" + data.cont + "</div></div></td></tr>");
+						$('#nowChatting').append("<tr><td class='chatCont'><div class='chatting myChatting'><div class='chatNum'><span>"+num+"</span></div><div class='chatUserDate myChatDate'><span>" + time + "</span></div><div class='userChat myChat'>" + data.cont + "</div></div></td></tr>");
 					} else {
-						$('#nowChatting').append("<tr><td class='chatCont'><div class='chatting myChatting'><div class='chatUserDate myChatDate'><span>" + time + "</span></div><div class='userChat myChat'><img src=download?filename=" + data.chatAttach + " class='chattingImg'></div></div></td></tr>");
+						$('#nowChatting').append("<tr><td class='chatCont'><div class='chatting myChatting'><div class='chatNum'><span>"+num+"</span></div><div class='chatUserDate myChatDate'><span>" + time + "</span></div><div class='userChat myChat'><img src=download?filename=" + data.chatAttach + " class='chattingImg'></div></div></td></tr>");
 					}
 					$('#nowChat').scrollTop($('#nowChat')[0].scrollHeight);
 				} else {
@@ -190,15 +215,15 @@
 						if (data.nickName == usersProfile.nickName) {
 							if (usersProfile.photo != null) {
 								if (data.cont != null && data.cont.trim() != "") {
-									$('#nowChatting').append("<tr><td class='chatProfile'><div class='chatProfileYou'><img src='download?filename=" + usersProfile[i].photo + "'></div></td><td class='chatCont'><div class='chatting yourChatting'><div class='userNick'>" + usersProfile[i].nickName + "</div><div class='userChat'>" + data.cont + "</div><div class='chatUserDate'><span>" + time + "</span></div></div></td></tr>")
+									$('#nowChatting').append("<tr><td class='chatProfile'><div class='userNick'><span>" + usersProfile[i].nickName + "</span></div><div class='chatProfileYou'><img src='download?filename=" + usersProfile[i].photo + "'></div></td><td class='chatCont'><div class='chatting yourChatting'><div class='userChat'>" + data.cont + "</div><div class='chatUserDate'><span>" + time + "</span></div><div class='chatNum'><span>"+num+"</span></div></div></td></tr>")
 								} else {
-									$('#nowChatting').append("<tr><td class='chatProfile'><div class='chatProfileYou'><img src='download?filename=" + usersProfile[i].photo + "'></div></td><td class='chatCont'><div class='chatting yourChatting'><div class='userNick'>" + usersProfile[i].nickName + "</div><div class='userChat'><img src=download?filename=" + data.chatAttach + " class='chattingImg'></div><div class='chatUserDate'><span>" + time + "</span></div></div></td></tr>")
+									$('#nowChatting').append("<tr><td class='chatProfile'><div class='userNick'><span>" + usersProfile[i].nickName + "</span></div><div class='chatProfileYou'><img src='download?filename=" + usersProfile[i].photo + "'></div></td><td class='chatCont'><div class='chatting yourChatting'><div class='userChat'><img src=download?filename=" + data.chatAttach + " class='chattingImg'></div><div class='chatUserDate'><span>" + time + "</span></div><div class='chatNum'><span>"+num+"</span></div></div></td></tr>")
 								}
 							} else {
 								if (data.cont != null && data.cont.trim() != "") {
-									$('#nowChatting').append("<tr><td class='chatProfile'><div class='chatProfileYou'><img src='./resources/img/프로필.png'></div></td><td class='chatCont'><div class='chatting yourChatting'><div class='userNick'>" + usersProfile[i].nickName + "</div><div class='userChat'>" + data.cont + "</div><div class='chatUserDate'><span>" + time + "</span></div></div></td></tr>")
+									$('#nowChatting').append("<tr><td class='chatProfile'><div class='userNick'><span>" + usersProfile[i].nickName + "</span></div><div class='chatProfileYou'><img src='./resources/img/프로필.png'></div></td><td class='chatCont'><div class='chatting yourChatting'><div class='userChat'>" + data.cont + "</div><div class='chatUserDate'><span>" + time + "</span></div><div class='chatNum'><span>"+num+"</span></div></div></td></tr>")
 								} else {
-									$('#nowChatting').append("<tr><td class='chatProfile'><div class='chatProfileYou'><img src='./resources/img/프로필.png'></div></td><td class='chatCont'><div class='chatting yourChatting'><div class='userNick'>" + usersProfile[i].nickName + "</div><div class='userChat'><img src=download?filename=" + data.chatAttach + " class='chattingImg'></div><div class='chatUserDate'><span>" + time + "</span></div></div></td></tr>")
+									$('#nowChatting').append("<tr><td class='chatProfile'><div class='userNick'><span>" + usersProfile[i].nickName + "</span></div><div class='chatProfileYou'><img src='./resources/img/프로필.png'></div></td><td class='chatCont'><div class='chatting yourChatting'><div class='userChat'><img src=download?filename=" + data.chatAttach + " class='chattingImg'></div><div class='chatUserDate'><span>" + time + "</span></div><div class='chatNum'><span>"+num+"</span></div></div></td></tr>");
 								}
 							}
 						}
@@ -209,7 +234,7 @@
 		
 		//소켓 연결이 종료 되었을 때
 		sock.onclose = function() {
-			sock = new SockJS("chat")
+			sock = new SockJS("chat");
 		}
 	}
 
@@ -448,6 +473,7 @@
 			async: false,
 			success: function (result) {
 				usersProfile = result;
+				num = usersProfile.length-1;
 			}
 		})
 		return usersProfile;
@@ -486,9 +512,9 @@
 				}
 				if (chatCont[i].nickName == user) {
 					if (chatCont[i].cont != null && chatCont[i].cont.trim() != "") {
-						$('#nowChatting').append("<tr><td class='chatCont'><div class='chatting myChatting'><div class='chatUserDate myChatDate'><span>" + time + "</span></div><div class='userChat myChat'>" + chatCont[i].cont + "</div></div></td></tr>");
+						$('#nowChatting').append("<tr><td class='chatCont'><div class='chatting myChatting'><div class='chatNum'><span>"+num+"</span></div><div class='chatUserDate myChatDate'><span>" + time + "</span></div><div class='userChat myChat'>" + chatCont[i].cont + "</div></div></td></tr>");
 					} else {
-						$('#nowChatting').append("<tr><td class='chatCont'><div class='chatting myChatting'><div class='chatUserDate myChatDate'><span>" + time + "</span></div><div class='userChat myChat'><img src=download?filename=" + chatCont[i].chatAttach + " class='chattingImg'></div></div></td></tr>");
+						$('#nowChatting').append("<tr><td class='chatCont'><div class='chatting myChatting'><div class='chatNum'><span>"+num+"</span></div><div class='chatUserDate myChatDate'><span>" + time + "</span></div><div class='userChat myChat'><img src=download?filename=" + chatCont[i].chatAttach + " class='chattingImg'></div></div></td></tr>");
 					}
 					$('#nowChat').scrollTop($('#nowChat')[0].scrollHeight)
 				} else if (chatCont[i].nickName != user) {
@@ -496,18 +522,18 @@
 						if (chatCont[i].nickName == usersProfile[j].nickName) {
 							if (usersProfile[j].photo != null) {
 								if (chatCont[i].cont != null && chatCont[i].cont.trim() != "") {
-									$('#nowChatting').append("<tr><td class='chatProfile'><div class='chatProfileYou'><img src='download?filename=" + usersProfile[j].photo + "'></div></td><td class='chatCont'><div class='chatting yourChatting'><div class='userNick'>" + usersProfile[j].nickName + "</div><div class='userChat'>" + chatCont[i].cont + "</div><div class='chatUserDate'><span>" + time + "</span></div></div></td></tr>")
+									$('#nowChatting').append("<tr><td class='chatProfile'><div class='userNick'><span>" + usersProfile[j].nickName + "</span></div><div class='chatProfileYou'><img src='download?filename=" + usersProfile[j].photo + "'></div></td><td class='chatCont'><div class='chatting yourChatting'><div class='userChat'>" + chatCont[i].cont + "</div><div class='chatUserDate'><span>" + time + "</span></div><div class='chatNum'><span>"+num+"</span></div></div></td></tr>")
 									break;
 								} else {
-									$('#nowChatting').append("<tr><td class='chatProfile'><div class='chatProfileYou'><img src='download?filename=" + usersProfile[j].photo + "'></div></td><td class='chatCont'><div class='chatting yourChatting'><div class='userNick'>" + usersProfile[j].nickName + "</div><div class='userChat'><img src=download?filename=" + chatCont[i].chatAttach + " class='chattingImg'></div><div class='chatUserDate'><span>" + time + "</span></div></div></td></tr>")
+									$('#nowChatting').append("<tr><td class='chatProfile'><div class='userNick'><span>" + usersProfile[j].nickName + "</span></div><div class='chatProfileYou'><img src='download?filename=" + usersProfile[j].photo + "'></div></td><td class='chatCont'><div class='chatting yourChatting'><div class='userChat'><img src=download?filename=" + chatCont[i].chatAttach + " class='chattingImg'></div><div class='chatUserDate'><span>" + time + "</span></div><div class='chatNum'><span>"+num+"</span></div></div></td></tr>")
 									break;
 								}
 							} else {
 								if (chatCont[i].cont != null && chatCont[i].cont.trim() != "") {
-									$('#nowChatting').append("<tr><td class='chatProfile'><div class='chatProfileYou'><img src='./resources/img/프로필.png'></div></td><td class='chatCont'><div class='chatting yourChatting'><div class='userNick'>" + usersProfile[j].nickName + "</div><div class='userChat'>" + chatCont[i].cont + "</div><div class='chatUserDate'><span>" + time + "</span></div></div></td></tr>")
+									$('#nowChatting').append("<tr><td class='chatProfile'><div class='userNick'><span>" + usersProfile[j].nickName + "</span></div><div class='chatProfileYou'><img src='./resources/img/프로필.png'></div></td><td class='chatCont'><div class='chatting yourChatting'><div class='userChat'>" + chatCont[i].cont + "</div><div class='chatUserDate'><span>" + time + "</span></div><div class='chatNum'><span>"+num+"</span></div></div></td></tr>")
 									break;
 								} else {
-									$('#nowChatting').append("<tr><td class='chatProfile'><div class='chatProfileYou'><img src='./resources/img/프로필.png'></div></td><td class='chatCont'><div class='chatting yourChatting'><div class='userNick'>" + usersProfile[j].nickName + "</div><div class='userChat'><img src=download?filename=" + chatCont[i].chatAttach + " class='chattingImg'></div><div class='chatUserDate'><span>" + time + "</span></div></div></td></tr>")
+									$('#nowChatting').append("<tr><td class='chatProfile'><div class='userNick'><span>" + usersProfile[j].nickName + "</span></div><div class='chatProfileYou'><img src='./resources/img/프로필.png'></div></td><td class='chatCont'><div class='chatting yourChatting'><div class='userChat'><img src=download?filename=" + chatCont[i].chatAttach + " class='chattingImg'></div><div class='chatUserDate'><span>" + time + "</span></div><div class='chatNum'><span>"+num+"</span></div></div></td></tr>")
 									break;
 								}
 							}
@@ -552,6 +578,140 @@
 	//보관함으로 이동
 	$('#storageIcon').click(function () {
 		location.href = "chatImg?chatName=" + $('#nowUserName').text() + "&chatNum=" + $('#nowUserChat').val();
+	})
+	
+	$('#goEdit').click(function() {
+		location.href="chatEdit?chatNum="+chatNum+"&nickName="+$('#user').val()
+	})
+	
+	$('#chatOut').click(function() {
+		if(confirm('정말 M을 나가시겠습니까? \n( M 기록은 복구 하실 수 없습니다 )')) {
+			location.href="chatDel?nickName="+$('#user').val()+"&chatNum="+chatNum;
+		}
+	})
+	
+	$('#popOpen').click(function() {
+		$('#followingList').empty();
+		$('#followerList').empty();
+		$.ajax({
+			url: "chatFollowList",
+			type: "post",
+			success: function (result) {
+				const profile = proAjax(chatNum);
+				let following = result.following;
+				let follower = result.follower;
+				let followingFlag = false;
+				let followerFlag = false;
+				if(following.length != 0 && following != null) {
+					for(let i = 0; i < following.length; i++) {
+						for(let j = 0; j < profile.length; j++) {
+							if(following[i].nickName == profile[j].nickName) {
+								following.splice(following[i]);
+								break;
+							}
+						}	
+					}
+					if(following.length != 0 && following != null) {
+						followingFlag = true;
+						for(let i = 0; i < following.length; i++) {
+							$('#followingList').append("<div class='followings'><div class='followingsText'><span>"+following[i].nickName+"</span><span class='folloId'>"+following[i].id+"</span></div></div>")	
+						}	
+					}
+				}
+				if(follower.length != 0 && follower != null) {
+					for(let i = 0; i < follower.length; i++) {
+						for(let j = 0; j < profile.length; j++) {
+							if(follower[i].nickName == profile[j].nickName) {
+								follower.splice(follower[i]);
+								break;
+							}
+						}	
+					}
+					if(follower.length != 0 && follower != null) {
+						followerFlag = true;
+						for(let i = 0; i < follower.length; i++) {
+							$('#followerList').append("<div class='followers'><div class='followersText'><span>"+follower[i].nickName+"</span><span class='folloId'>"+follower[i].id+"</span></div></div>")
+						}
+					}
+				}
+				if(followerFlag || followingFlag) {
+					$('#chatFollowDiv').css('display', 'flex');
+				} else {
+					alert('추가할 following / follower 가 존재하지 않습니다.')
+				}
+			}
+		})
+	})
+	
+	$('#popCancle').click(function() {
+		$('#chatFollowDiv').css('display', 'none');
+		$('.selFollowsDiv').removeAttr('class');
+		$('#plusList').empty();
+	})
+	
+	$('#followerList').on('click', '.followers', function() {
+		if($(this).children('div').attr('class') != "selFollowsDiv") {
+			$(this).children('div').attr('class', 'selFollowsDiv')
+			$('#plusList').append("<div class='plusFollos'><div class='selFollows'><span>"+$(this).find('span').eq(0).text()+"</span> <span class='plusId'>"+$(this).find('.folloId').text()+"</span></div>")
+		}
+	})
+	
+	$('#followingList').on('click', '.followings', function() {
+		if($(this).children('div').attr('class') != "selFollowsDiv") {
+			$(this).children('div').attr('class', 'selFollowsDiv')
+			$('#plusList').append("<div class='plusFollos'><div class='selFollows'><span>"+$(this).find('span').eq(0).text()+"</span> <span class='plusId'>"+$(this).find('.folloId').text()+"</span></div></div>")	
+		}
+	})
+	
+	$('#plusList').on('click', '.plusFollos', function() {
+		const selDiv = $('.selFollowsDiv');
+		for(let i = 0; i < selDiv.length; i++) {
+			if(selDiv.eq(i).children('span').eq(0).text().trim() == $(this).find('span').eq(0).text().trim()) {
+				selDiv.eq(i).removeAttr('class');
+				break;
+			}
+		}
+		$(this).remove();
+	})
+	
+	$('#followingBtn').click(function() {
+		$('#followingBtn').css('color', '#ff00bf');
+		$('#followerBtn').css('color', '#00f7ff');
+		$('#followingList').css('display', 'block');
+		$('#followerList').css('display', 'none');
+	})
+	
+	$('#followerBtn').click(function() {
+		$('#followerBtn').css('color', '#ff00bf');
+		$('#followingBtn').css('color', '#00f7ff');
+		$('#followerList').css('display', 'block');
+		$('#followingList').css('display', 'none');
+	})
+	
+	$('#plusBtn').click(function() {
+		const list = $('.selFollows');
+		if(list.length != 0 && list != null) {
+			let id = new Array();
+			let nick = new Array();
+			for(let i = 0; i < list.length; i++) {
+				id.push(list.eq(i).children('span').eq(1).text())
+				nick.push(list.eq(i).children('span').eq(0).text())
+			}
+			$.ajax({
+				url: "newChatMember",
+				type: "post",
+				data: {
+					ids: id,
+					nicks: nick,
+					chat: chatNum
+				},
+				async: false,
+				traditional: true,
+			})
+			location.href = "chat?nickName="+$('#user').val();
+		} else {
+			alert('친구를 추가해주세요.')
+		}
 	})
 </script>
 

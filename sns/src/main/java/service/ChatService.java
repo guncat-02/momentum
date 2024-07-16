@@ -50,4 +50,20 @@ public class ChatService implements IF_ChatService{
 		return cDao.chatMemberList(chatNum);
 	}
 
+	//채팅방 update
+	@Override
+	public void chatRoomUpdate(ChatRoomVO cVO) throws Exception {
+		cDao.chatRoomUpdate(cVO);
+	}
+
+	//채팅 맴버 삭제
+	@Override
+	public void chatDel(ChatRoomVO cVO) throws Exception {
+		cDao.chatDel(cVO);
+		int chk = cDao.chatMemberCnt(cVO.getChatNum());
+		if(chk == 0) {
+			cDao.chatRoomDel(cVO.getChatNum());
+		}
+	}
+
 }

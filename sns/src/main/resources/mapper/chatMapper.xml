@@ -42,4 +42,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from chatMember 
 		where chatNum = #{chatNum}
 	</select>
+	<update id="chatRoomUpdate" parameterType="vo.ChatRoomVO">
+		update chatRoom
+		set chatName = #{chatName}
+		<if test='chatImg != "MY IMG"'>
+			, chatImg = #{chatImg, jdbcType=VARCHAR}
+		</if>
+		where chatNum = #{chatNum}
+	</update>
+	<delete id="chatDel" parameterType="vo.ChatRoomVO">
+		delete from chatMember where chatNum = #{chatNum} and nickName = #{nickName}
+	</delete>
+	<select id="chatMemberCnt" parameterType="String" resultType="int">
+		select count(*) from chatMember where chatNum = #{chatNum}
+	</select>
+	<delete id="chatRoomDel" parameterType="String">
+		delete from chatRoom where chatNum = #{chatNum}
+	</delete>
 </mapper>

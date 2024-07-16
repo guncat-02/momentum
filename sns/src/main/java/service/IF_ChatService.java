@@ -11,4 +11,6 @@ public interface IF_ChatService {
 	public List<String> select(String id) throws Exception;
 	public List<ChatRoomVO> chatList(String nickName) throws Exception;
 	public List<ChatRoomVO> chatMemberList(String chatNum) throws Exception;
+	public void chatRoomUpdate(ChatRoomVO cVO) throws Exception;
+	public void chatDel(ChatRoomVO cVO) throws Exception;
 }
