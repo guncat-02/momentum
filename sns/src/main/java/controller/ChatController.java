@@ -1,7 +1,9 @@
 package controller;
 
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -149,5 +151,46 @@ public class ChatController {
 		}
 		model.addAttribute("profile", pVO);
 		return "profileDelete";
+	}
+	
+	@GetMapping("chatEdit")
+	public String chatEdit(@ModelAttribute ChatRoomVO cVO, Model model) throws Exception {
+		model.addAttribute("chatRoom", cServe.chatList(cVO.getNickName()));
+		return "chatEdit";
+	}
+	
+	@PostMapping("chatRoomEdit")
+	public String chatRoomEdit(@ModelAttribute ChatRoomVO cVO, MultipartFile[] editFile) throws Exception {
+		System.out.println("chatRoomEdit 성공");
+		System.out.println(editFile);
+		String file = upload.fileUpload(editFile)[0];
+		if(file != null) {
+			cVO.setChatImg(file);
+		} else {
+			if(cVO.getChatImg().equals("REMOVE IMG")) {
+				cVO.setChatImg(null);
+			}
+		}
+		System.out.println(cVO.toString());
+		cServe.chatRoomUpdate(cVO);
+ 		return "redirect:selProfile";
+	}
+	
+	@GetMapping("chatDel")
+	public String chatDel(@ModelAttribute ChatRoomVO cVO) throws Exception {
+		cServe.chatDel(cVO);
+		return "redirect:selProfile";
+	}
+	
+	@ResponseBody
+	@PostMapping("chatFollowList")
+	public Map chatFollowList(HttpSession session) throws Exception {
+		String id = String.valueOf(session.getAttribute("userid"));
+		List<ProfileVO> following = fServe.followingList(id);
+		List<ProfileVO> follower = fServe.followerList(id);
+		Map<String, Object> map = new HashMap<>();
+		map.put("following", following);
+		map.put("follower", follower);
+		return map;
 	}
 }

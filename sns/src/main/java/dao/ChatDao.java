@@ -51,5 +51,29 @@ public class ChatDao implements IF_ChatDao {
 	public List<ChatRoomVO> chatMemberList(String chatNum) throws Exception {
 		return sql.selectList(mapperQuery+".chatMemberList", chatNum);
 	}
+
+	//채팅방 수정
+	@Override
+	public void chatRoomUpdate(ChatRoomVO cVO) throws Exception {
+		sql.update(mapperQuery+".chatRoomUpdate", cVO);
+	}
+
+	//채팅맴버 삭제
+	@Override
+	public void chatDel(ChatRoomVO cVO) throws Exception {
+		sql.delete(mapperQuery+".chatDel", cVO);
+	}
+
+	//남은 맴버 수 확인
+	@Override
+	public int chatMemberCnt(String chatNum) throws Exception {
+		return sql.selectOne(mapperQuery+".chatMemberCnt", chatNum);
+	}
+
+	//채팅방 삭제
+	@Override
+	public void chatRoomDel(String chatNum) throws Exception {
+		sql.delete(mapperQuery+".chatRoomDel", chatNum);
+	}
 	
 }

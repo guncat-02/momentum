@@ -60,6 +60,7 @@
 			<exclude-mapping path="/chkid" />
 			<exclude-mapping path="/sendJoinMail.do" />
 			<exclude-mapping path="/profile*" />
+			<exclude-mapping path="/manager*" />
 			<beans:ref bean="interceptor" />
 		</interceptor>
 	</interceptors>

@@ -27,7 +27,7 @@ public class ManagerController {
 	@GetMapping("manager") 
 	public String managePage(HttpSession session, Model model,HttpServletRequest request,HttpServletResponse response) throws Exception {
 		String nowId = String.valueOf(session.getAttribute("userid"));
-		if(!(mservice.chkmanager(nowId)=="관리자")) {
+		if(!(mservice.chkmanager(nowId).equals("관리자"))) {
 			response.sendRedirect(request.getContextPath()+"/loginpage"); // 처음 화면으로 돌아가
 		}
 		model.addAttribute("curId", session.getAttribute("userid"));

@@ -33,23 +33,6 @@
                     <span id="cur-date-span"></span>
                     <span id="cur-adminId-span">Admin : ${curId }</span>
                 </div>
-				<!--
-                <div id="search-type">
-                	<input type="hidden" name="searchArea" value="User">
-                	<input type="hidden" name="searchLoc" value="">
-                    <select id="searchType" name="searchType">
-                        <option value="id" selected>user-Id</option>
-                        <option value="cont">contents</option>
-                        <option value="period">period</option>
-                    </select>
-                </div>
-                <div id="search-cont">
-                    <input type="text" id="searchWord" name="searchWord">
-                    <input type="date" id="stDate" name="stDate">
-                    <input type="date" id="ndDate" name="ndDate">
-                    <button value="1" id="searchBtn">Search</button>
-                </div>
-				-->
                 <div id="search-result">
                 	<span id="result-span">총 조회 결과 : ${cnt }건.</span>
                 </div>
@@ -292,37 +275,6 @@
 	}
 	
 	document.addEventListener('scroll', scrollEventHandler);
-	
-	
-    
-    /*
-    function searchPaging(result) {
-		$('#paging').on('click', 'button', function() {
-			let idx = $.trim($(this).text());
-			let link;
-			if (result != null) {
-				link = `/sns/manager/search?searchArea=User&searchLoc=\${result.searchLoc}&searchType=\${result.sType}&searchWord=\${result.sWord}&stDate=\${result.stDate}&ndDate=\${result.ndDate}`
-				if (idx  == '[prev]') {
-					location.href = `\${link}&page=${pagevo.startPage -1}`;
-				} else if (idx == '[next]') {
-					location.href = `\${link}&page=${pagevo.endPage +1}`;				
-				} else {
-					location.href = `\${link}&page=\${idx}`;
-				}
-			} else {
-				link = `/sns/manager/user/${pagevo.searchLoc}`;
-				if (idx  == '[prev]') {
-					location.href = `\${link}?page=${pagevo.startPage -1}`;
-				} else if (idx == '[next]') {
-					location.href = `\${link}?page=${pagevo.endPage +1}`;				
-				} else {
-					location.href = `\${link}?page=\${idx}`;
-				}
-			}
-
-		});
-    }
-    */
     
     
     // 선택한 검색 유형에 따라 검색어 input display 변환
