@@ -606,7 +606,7 @@
 					for(let i = 0; i < following.length; i++) {
 						for(let j = 0; j < profile.length; j++) {
 							if(following[i].nickName == profile[j].nickName) {
-								following.splice(following[i]);
+								following.splice(i, 1);
 								break;
 							}
 						}	
@@ -622,7 +622,7 @@
 					for(let i = 0; i < follower.length; i++) {
 						for(let j = 0; j < profile.length; j++) {
 							if(follower[i].nickName == profile[j].nickName) {
-								follower.splice(follower[i]);
+								follower.splice(i, 1);
 								break;
 							}
 						}	
