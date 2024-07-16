@@ -216,7 +216,7 @@
     	const backArray = backHref.split('?')
     	const backChk = backArray[0].split('/')
     	back = backChk[backChk.length-1];	
-    	if(back == "searchList") {
+    	if(back == "searchList" || back == "myPost") {
     		const backWord = backArray[1].split('=')
         	keyWord = backWord[1];
     	}
@@ -318,6 +318,8 @@
     	} else {
     		if(back == "searchList") {
     			location.href = back+"?keyWord="+keyWord;
+    		} else if(back == "myPost"){
+    			location.href = back+"?no="+keyWord;
     		} else {
     			location.href = back;
     		}
