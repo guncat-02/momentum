@@ -36,4 +36,10 @@ public class SearchDao implements IF_SearchDao {
 		return sql.selectList(mapperQuery+".selectSearchList", map);
 	}
 
+	//리포스트 가져오기
+	@Override
+	public List<PostVO> searchRepost(List<Integer> no) throws Exception {
+		return sql.selectList(mapperQuery+".searchRepost", no);
+	}
+
 }

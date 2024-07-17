@@ -17,22 +17,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<when test='key.keyType.equals("인기")'>
 				select c.*, d.reCnt, coalesce(c.shows, 0)+coalesce(c.p_love, 0)+coalesce(d.reCnt, 0) cnt
 			</when>
-			<when test='key.keyType.equals("최신")'>
+			<otherwise>
 				select c.*, d.reCnt
-			</when>
-			<when test='key.keyType.equals("마음")'>
-				select c.*, d.reCnt
-			</when>
-			<when test='key.keyType.equals("리포스트")'>
-				select c.*, d.reCnt
-			</when>
+			</otherwise>
 		</choose>
 				from (
 					select a.*, b.p_love, b.commCnt 
 					from  (
 						select * 
 						from post 
-						where cont like concat('%',#{key.keyWord},'%') and id != #{id} and privacy = 1
+						where id != #{id} and privacy = 1 and cont like concat('%',#{key.keyWord},'%') 
 					) a left outer join (
 						select dd1.*, bb1.commCnt 
 						from (
@@ -85,5 +79,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					</choose>
 				desc
 				limit #{pageNo}, 10
+	</select>
+	<select id="searchRepost" parameterType="java.util.List" resultType="vo.PostVO">
+		select a.*, b.nickName, b.photo from post a
+		inner join profile b
+		on a.id = b.id
+		where a.no in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
 	</select>
 </mapper>

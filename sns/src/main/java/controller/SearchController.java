@@ -61,12 +61,18 @@ public class SearchController {
 			List<PostVO> pVO = sServe.selectSearchList(map);
 			if(pVO != null && pVO.size() != 0) {
 				List<String> idList = new ArrayList<>();
+				List<Integer> no = new ArrayList<>();
 				for(int i = 0; i < pVO.size(); i++) {
 					idList.add(pVO.get(i).getId());
+					if(pVO.get(i).getRe_no() != 0) {
+						no.add(pVO.get(i).getRe_no());
+					}
 				}
 				List<ProfileVO> ppVO = proServe.searchProfile(idList);
+				List<PostVO> reList = sServe.searchRepost(no);
 				model.addAttribute("info", pVO);
 				model.addAttribute("profile", ppVO);
+				model.addAttribute("rePost", reList);
 			}
 		} else {
 			List<ProfileVO> proVO = proServe.searchUser(map);
