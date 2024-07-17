@@ -47,4 +47,14 @@ public class SearchService implements IF_SearchService {
 		}
 		return pVO;
 	}
+
+	@Override
+	public List<PostVO> searchRepost(List<Integer> no) throws Exception {
+		List<PostVO> pVO = sDao.searchRepost(no);
+		for(PostVO p : pVO) {
+			List<String> file = mDao.postAttach(p.getNo());
+			p.setFileName(file.toArray(new String[file.size()]));
+		}
+		return pVO;
+	}
 }

@@ -9,4 +9,5 @@ public interface IF_SearchService {
 	public void insertKeyWord(String keyWord) throws Exception;
 	public List<String> selectKeyWord() throws Exception;
 	public List<PostVO> selectSearchList(Map map) throws Exception;
+	public List<PostVO> searchRepost(List<Integer> no) throws Exception;
 }
