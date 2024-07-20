@@ -1,4 +1,8 @@
+<div align="center">
+
 # 💌 M PROJECT (momentum)
+
+</div>
 <div align="center">
 <img src="https://github.com/user-attachments/assets/ccd17ccd-9384-4eb0-be8a-40bbf85ff093">
 </div>
@@ -12,6 +16,11 @@
 
 ## 프로젝트 소개
 *M PROJECT (momentum)* 은 기존의 대중성, 공개성을 중시하는 SNS가 아닌 팔로우를 중심으로 한 소수 그룹간의 소통을 중심으로 한 SNS 입니다.
+
+<br>
+
+## 개발 동기
+ 인터넷의 발달로 정보의 홍수가 일상이 된 현재 2030 세대의 새로운 소셜 네트워킹 트랜드는 바로 그룹입니다. 기존의 SNS가 대중성과 공개성을 중시하는 반면, 소수 그룹 간의 안락함과 불필요한 사회적 피로감을 줄일 수 있는 현대인들이 원하는 소통의 방식과 안전한 공간에 대한 필요를 충족시킬 수 있는 SNS 플랫폼을 만들고자 하였습니다.
 
 <br>
 
@@ -82,8 +91,16 @@
 
 <br>
 
+**관리자 페이지**
+- 관리자는 사용자의 정보를 확인할 수 있습니다.
+- 관리자는 신고 당한 게시물 등의 정보를 확인할 수 있습니다.
+- 관리자는 사용자의 계정을 정지 처리할 수 있습니다.
+
+<br>
+
 ## ERD
 <div>
   <img src="https://github.com/user-attachments/assets/a3d905be-60b2-459f-85c4-c816bd3c8983">
 </div>
+- 테이블 : 16개 사용
 
