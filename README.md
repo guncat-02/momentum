@@ -1,6 +1,6 @@
 <div align="center">
 
-# 💌 M PROJECT (momentum)
+# 💌 Momentum Group (momentum)
 
 </div>
 <div align="center">
