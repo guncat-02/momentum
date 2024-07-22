@@ -15,7 +15,7 @@
 <br>
 
 ## 프로젝트 소개
-*M PROJECT (momentum)* 은 기존의 대중성, 공개성을 중시하는 SNS가 아닌 ${\textsf{\color{orange}팔로우를 중심으로 한 소수 그룹간의 소통을 중심으로 한 SNS}}$ 입니다.
+*Momentum Group (momentum)* 은 기존의 대중성, 공개성을 중시하는 SNS가 아닌 ${\textsf{\color{orange}팔로우를 중심으로 한 소수 그룹간의 소통을 중심으로 한 SNS}}$ 입니다.
 
 <br>
 
