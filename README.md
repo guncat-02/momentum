@@ -114,3 +114,5 @@
 
 ## 주요 기능 소개
 ### 채팅
+![제목 없는 디자인](https://github.com/user-attachments/assets/68d20bf6-a882-4e87-b523-90550ba11142)
+web socket 및 ajax를 이용해 비동기 방식으로 채팅 구현
