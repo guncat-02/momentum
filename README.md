@@ -4,7 +4,7 @@
 
 </div>
 <div align="center">
-<img src="https://github.com/user-attachments/assets/ccd17ccd-9384-4eb0-be8a-40bbf85ff093" height=100 width=500>
+<img src="https://github.com/user-attachments/assets/ccd17ccd-9384-4eb0-be8a-40bbf85ff093">
 </div>
 <br>
 
@@ -113,6 +113,13 @@
 <br>
 
 ## 주요 기능 소개
-### 채팅
+### 실시간 채팅 기능
 ![제목 없는 디자인](https://github.com/user-attachments/assets/68d20bf6-a882-4e87-b523-90550ba11142)
-web socket 및 ajax를 이용해 비동기 방식으로 채팅 구현
+web socket 및 ajax를 이용해 비동기 방식으로 구현
+
+### 글 자세히 보기 및 댓글, 좋아요 기능
+![자세히보기 및 댓글 - AJAX 이용 비동기 방식으로 좋아요 및 댓글 구현](https://github.com/user-attachments/assets/4c5a56b6-19b9-47fb-aa46-bdb180fe62ea)
+ajax를 이용해 비동기 방식으로 좋아요 및 댓글 구현
+
+### 관리자 화면
+![관리자 화면 녹화](https://github.com/user-attachments/assets/194eefc1-efff-4d16-a649-c27b41da1d5a)
