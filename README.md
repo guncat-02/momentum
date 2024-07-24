@@ -122,4 +122,4 @@
 ### 관리자 화면
 <img src="https://github.com/user-attachments/assets/194eefc1-efff-4d16-a649-c27b41da1d5a" width=70%>
 
-<strong></strong>
+<strong>ajax를 이용해 비동기 방식으로 페이징 기능 구현</strong>
