@@ -68,11 +68,13 @@ public class SearchController {
 						no.add(pVO.get(i).getRe_no());
 					}
 				}
+				if(no != null && no.size() != 0) {
+					List<PostVO> reList = sServe.searchRepost(no);
+					model.addAttribute("rePost", reList);
+				}
 				List<ProfileVO> ppVO = proServe.searchProfile(idList);
-				List<PostVO> reList = sServe.searchRepost(no);
 				model.addAttribute("info", pVO);
 				model.addAttribute("profile", ppVO);
-				model.addAttribute("rePost", reList);
 			}
 		} else {
 			List<ProfileVO> proVO = proServe.searchUser(map);
